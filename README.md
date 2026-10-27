@@ -28,7 +28,7 @@ python3 tools/prepare_workspace.py
 - 已读取源码内的文档、解析器、规则和三个 3.6.7 官方示例，并生成 21 类控制器的参数参考。
 - 三个 `ASE-Remake.part*.rar` 分卷已完整校验并解压：182 个文件，约 122 MiB。已从 Unity 元数据确认播放器版本为 `3.7.12`，本体文件保持原样。
 - [语雀教程](https://www.yuque.com/tsingyayin/aser)访问已恢复，已阅读导航中 17 篇文章正文，学习笔记见 [语雀学习记录](docs/yuque-study-notes.md)。
-- 尚未运行 YSS GUI、上游 C++ 解析器或 Windows ASER 播放；完整官方素材名单尚未取得，播放器包中没有包含这些名单。
+- 云端尚未运行 YSS GUI、上游 C++ 解析器或 Windows ASER 播放；完整官方素材名单尚未取得，播放器包中没有包含这些名单。
 
 先读 [AStoryX 工作说明](docs/astoryx-guide.md)及[参数参考](docs/astoryx-controller-reference.md)。资料和下载明细见 [docs/reference-status.md](docs/reference-status.md)，更新流程见 [docs/workflow.md](docs/workflow.md)。
 
@@ -43,11 +43,17 @@ python3 tools/check_toolchain.py --tool aser --candidate /tmp/新版ASER解压�
 
 比较命令只报告差异，不覆盖文件。更换版本并更新清单后，用 `python3 tools/build_astoryx_reference.py` 重新生成参数参考。
 
+## 接收你的 TXT 剧本
+
+你可以直接提供格式不统一的 TXT，无须预先整理。我会结合上下文区分对白、旁白、动作和作者备注，保留你的内容与顺序，转换成 `story-code/` 中的 `.astoryx` 文件。影响剧情含义或素材选择的问题会集中确认；可确定的部分继续编写。
+
+成功经验和后续约定已记在 [TXT 剧本转换与编写经验](docs/txt-to-astoryx.md)。原稿按需保存在 `story-input/`，技术说明放在 `docs/story-notes/`，代码目录仍只存放剧情代码。
+
 ## 本地全功能验收
 
 [下载验收项目包](artifacts/ASER_YSS_acceptance.zip)，完整解压后在 ASER 中打开其中的 `ASER_YSS_Acceptance` 剧本集，先播放 `00_all_features`。它自带所需素材，不依赖官方素材名单。
 
-主剧本包含 21 个场景；主剧本和 BaseRule 复核分别覆盖 21 类控制器及 101 项主要／可选参数。另有 9 个独立兼容性探针，用于核实文档和版本差异。具体预期现象见 [验收说明](docs/acceptance-checklist.md)。当前完成的是自有静态检查与素材检查，Windows 播放结果待本地验收。
+主剧本包含 21 个场景；主剧本和 BaseRule 复核分别覆盖 21 类控制器及 101 项主要／可选参数。另有 9 个独立兼容性探针，用于核实文档和版本差异。具体预期现象见 [验收说明](docs/acceptance-checklist.md)。用户已反馈认可前次通过测试的格式，后续沿用该基线；云端完成的是自有静态检查与素材检查，边界探针的逐项本地结果尚未记录。
 
 源文件在 `story-code/`；构建目录受忽略，文档与资源不会放进代码专用目录。重新构建和检查：
 
