@@ -1,0 +1,303 @@
+校验室来信：21 类控制器与全参数主验收
+#useRule:AdvanceRule
+#version:2
+
+// 检查编号与预期现象见项目根目录的验收说明。
+#aliases
+mon3tr(amb2026)->Mon3tr/？？？/校验员
+阿米娅(furnace_finale)->阿米娅/访客
+#endaliases
+
+#block 提示(text)
+校验员	$(text),@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+#endblock
+
+#block 镜头(bg,seconds)
+背景：$(bg),@FadeInTime=$(seconds),@StartPosition=0,0,10,@EndPosition=0,0,10,@MoveTime=0,@MoveCurve=Linear,@IsBlocker=true
+#endblock
+
+#block 嵌套镜头(bg)
+#use 镜头($(bg),0.25)
+#use 提示([M18] 内层提示块已展开；这不是运行时函数调用。)
+#endblock
+
+#block 曲线演示(curve)
+自由文本：曲线：$(curve),@Immediate=true,@SlotIndex=3,@Position=0,3.2,10,@RenderOrder=1000,@StayTime=0,@FadeOutTime=0,@IsBlocker=false
+背景：grid_A,@FadeInTime=0,@StartPosition=-2,0,12,@EndPosition=2,0,10,@MoveTime=0.55,@MoveCurve=$(curve),@IsBlocker=true
+#endblock
+
+// [M01] 头、规则、版本、注释、动态文本与初始对白
+遮罩：false
+背景：bg_amb2026,@FadeInTime=0.5
+动态文本：校验室,罗德岛标准时 14:00,@Type=0,@IsBlocker=true
+--mon3tr(amb2026):normal,@SlotIndex=1,@FadeInTime=0.3,@StayTime=0,@FadeOutTime=0,@StartPosition=-2.15,0,10,@EndPosition=-2.15,0,10
+--阿米娅(furnace_finale):no,@SlotIndex=2,@FadeInTime=0.3,@StayTime=0,@FadeOutTime=0,@StartPosition=2.15,0,10,0,@EndPosition=2.15,0,10,0
+遮罩：true
+Mon3tr	[M01] 博士，校验室准备好了。这次每一幕都有检查编号。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+阿米娅	我负责对照画面，你负责记下实际结果。请从头正常播放。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+没有说话人名称的这一行，是会显示在画面里的旁白。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+
+// [M02] 一对多别名、多人发言与高亮开关
+？？？	[M02] 同一份 Mon3tr 立绘，现在用问号作为发言名。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+校验员	换成校验员，仍应关联同一份立绘。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+Mon3tr&阿米娅	这句同时关联两位发言者。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+访客	我的发言别名是访客，应关联阿米娅。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+Mon3tr	这一句关闭明暗联动，两位都应恢复正常亮度。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015,@ModifyCharacters=false
+
+// [M03] 保护文段、富文本、换行、正文前缀冲突与追加
+Mon3tr	&{[M03] 原样显示：10/2=5；,@Volume=0.7；这些都属于台词。},@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+阿米娅	&{<color=#66CCFF><i><u>蓝色、斜体、下划线</u></i></color>}<br>这是第二行。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+Mon3tr	&{<size=120%>较大的字</size>}，随后恢复正常大小。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+阿米娅	&{<b>这是保留的抖动标签测试</b>}，不把它理解为普通加粗。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+Mon3tr	追加测试：甲,@BasicStayTime=0.2,@Interval=0.015,@ExtraStayTime=0.015,@IsAdditional=false
+Mon3tr	＋乙,@BasicStayTime=0.3,@Interval=0.12,@ExtraStayTime=0.015,@IsAdditional=true
+Mon3tr	＋丙。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.08,@IsAdditional=true
+
+// [M04] 遮罩隐藏、旧文本保留和显式清空
+Mon3tr	[M04] 记住这句话；遮罩重开后它应再次出现。,@BasicStayTime=0.4,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
++0.7
+遮罩：true
++1
+遮罩：false
+<br>
+遮罩：true
++0.7
+阿米娅	刚才最后一次开遮罩，应当已经没有旧台词。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+
+// [M05] 背景主项拼接、两种方向、网格限制、向量与非阻塞运动
+Mon3tr	[M05] 接下来依次看横向、纵向和四块网格拼接。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+--无,@SlotIndex=1
+--无,@SlotIndex=2
+背景：grid_A+grid_B,@StitchVertically=false,@StitchColumnCount=2,@FadeInTime=0.25,@StartPosition=0,0,10,@EndPosition=0,0,10,@MoveTime=0
++0.7
+背景：grid_A+grid_B,@StitchVertically=true,@StitchColumnCount=2,@FadeInTime=0.25
++0.7
+背景：grid_A+grid_B+grid_C+grid_D,@StitchColumnCount=2,@StitchVertically=false,@IsBlocker=true,@FadeInTime=0.25
++0.8
+背景：grid_A,@IsBlocker=false,@MoveCurve=InSine,Linear,OutCubic,@MoveTime=2.0,@EndPosition=0.5,0,8,@StartPosition=-0.5,0,12,@FadeInTime=0.2
+遮罩：true
+Mon3tr	这句对白应在背景移动时出现，测试非阻塞与三轴曲线。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
++1
+
+// [M06] 31 种有定义的曲线；Unset 保留值在独立文件
+Mon3tr	[M06] 背景将按标出的曲线依次移动；每条约半秒。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+#use 曲线演示(Linear)
+#use 曲线演示(InSine)
+#use 曲线演示(OutSine)
+#use 曲线演示(InOutSine)
+#use 曲线演示(InQuad)
+#use 曲线演示(OutQuad)
+#use 曲线演示(InOutQuad)
+#use 曲线演示(InCubic)
+#use 曲线演示(OutCubic)
+#use 曲线演示(InOutCubic)
+#use 曲线演示(InQuart)
+#use 曲线演示(OutQuart)
+#use 曲线演示(InOutQuart)
+#use 曲线演示(InQuint)
+#use 曲线演示(OutQuint)
+#use 曲线演示(InOutQuint)
+#use 曲线演示(InExpo)
+#use 曲线演示(OutExpo)
+#use 曲线演示(InOutExpo)
+#use 曲线演示(InCirc)
+#use 曲线演示(OutCirc)
+#use 曲线演示(InOutCirc)
+#use 曲线演示(InElastic)
+#use 曲线演示(OutElastic)
+#use 曲线演示(InOutElastic)
+#use 曲线演示(InBack)
+#use 曲线演示(OutBack)
+#use 曲线演示(InOutBack)
+#use 曲线演示(InBounce)
+#use 曲线演示(OutBounce)
+#use 曲线演示(InOutBounce)
+自由文本：<br>,@SlotIndex=3,@Immediate=true
+#use 镜头(bg_amb2026,0.3)
+遮罩：true
+
+// [M07] 角色全部参数、差分、位效果、透明度、顺序和旋转
+Mon3tr	[M07] 检查左右槽位、四维坐标与角色效果。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+--mon3tr(amb2026):normal,@MoveCurve=OutQuad,@MoveTime=0.8,@EndPosition=-2.15,0,10,0,@StartPosition=-2.15,-1,12,0,@RenderOrder=0,@Alpha=1,@Effects=0,@FadeOutTime=0,@StayTime=0,@FadeInTime=0.25,@IsBlocker=false,@SlotIndex=1
+--阿米娅(furnace_finale):no,@SlotIndex=2,@IsBlocker=false,@FadeInTime=0.25,@StayTime=0,@FadeOutTime=0,@Effects=0,@Alpha=1,@RenderOrder=0,@StartPosition=2.15,-1,12,0,@EndPosition=2.15,0,10,0,@MoveTime=0.8,@MoveCurve=OutQuad
++0.8
+遮罩：true
+--mon3tr(amb2026):normal,@SlotIndex=1,@Effects=1,@StayTime=0
+Mon3tr	[M07] 半黑剪影。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+--mon3tr(amb2026):normal,@SlotIndex=1,@Effects=2,@StayTime=0
+Mon3tr	[M07] 全黑剪影。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+--mon3tr(amb2026):normal,@SlotIndex=1,@Effects=4,@StayTime=0
+Mon3tr	[M07] 幻像。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+--mon3tr(amb2026):normal,@SlotIndex=1,@Effects=8,@StayTime=0
+Mon3tr	[M07] 镜像。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+--mon3tr(amb2026):normal,@SlotIndex=1,@Effects=halfsilhouette|glitch,@StayTime=0
+Mon3tr	[M07] 竖线组合：半黑剪影与幻像。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+--mon3tr(amb2026):normal,@SlotIndex=1,@Effects=mirror,halfsilhouette,@StayTime=0
+Mon3tr	[M07] 逗号组合：镜像与半黑剪影。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+--mon3tr(amb2026):normal,@SlotIndex=1,@Effects=0,@StayTime=0
+Mon3tr	[M07] 恢复普通效果。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+--mon3tr(amb2026):normal,@SlotIndex=1,@Alpha=0.35,@StayTime=0
+Mon3tr	当前我应半透明。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+--mon3tr(amb2026):normal,@SlotIndex=1,@Alpha=1,@StayTime=0,@StartPosition=-2.15,0,10,0,@EndPosition=-1.2,0,10,0,@MoveTime=2,@MoveCurve=Linear,@IsBlocker=false
+Mon3tr	[M07D] 本句不等待角色移动完成。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015,@IsBlocker=false
++1
+--mon3tr(amb2026):normal,@SlotIndex=1,@Alpha=1,@StayTime=0,@StartPosition=-0.5,0,10,0,@EndPosition=-0.5,0,10,0,@RenderOrder=101
+--阿米娅(furnace_finale):pc,@SlotIndex=2,@StayTime=0,@StartPosition=0.5,0,10,0,@EndPosition=0.5,0,10,0,@RenderOrder=0
+阿米娅	即使我发言，层级 101 的 Mon3tr 变暗后仍应能遮住我。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+--mon3tr(amb2026):normal,@SlotIndex=1,@RenderOrder=0,@StartPosition=-2.15,0,10,-10,@EndPosition=-2.15,0,10,10,@MoveTime=1,@MoveCurve=InOutSine,@StayTime=0
+--mon3tr(amb2026):normal,@SlotIndex=1,@StartPosition=-2.15,0,10,10,@EndPosition=-2.15,0,10,0,@MoveTime=0.5,@MoveCurve=Linear,@StayTime=0
+--阿米娅(furnace_finale):nc,@SlotIndex=2,@StayTime=0,@StartPosition=2.15,0,10,0,@EndPosition=2.15,0,10,0
+
+// [M08] 插播两种类型及完整参数
+阿米娅	[M08] Mon3tr 将从立绘转为两种通讯插播。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+--无,@SlotIndex=1
+遮罩：false
+插播：mon3tr(amb2026):normal,@SlotIndex=0,@IsOn=true,@Type=0,@IsBlocker=true,@Effects=0,@RenderOrder=0,@Position=0,0,10,0
+遮罩：true
+Mon3tr	当前插播类型是 0。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+插播：mon3tr(amb2026):normal,@SlotIndex=0,@IsOn=false,@Type=0,@IsBlocker=true
+插播：mon3tr(amb2026):normal,@SlotIndex=0,@IsOn=true,@Type=1,@IsBlocker=true,@Effects=0,@RenderOrder=0,@Position=0,0,10,0
+遮罩：true
+Mon3tr	当前插播类型是 1。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+插播：mon3tr(amb2026):normal,@SlotIndex=0,@IsOn=false,@Type=1,@IsBlocker=true
+--mon3tr(amb2026):normal,@SlotIndex=1,@StayTime=0
+遮罩：true
+
+// [M09] 色层、震屏与场景对象和 UI 对象区别
+Mon3tr	[M09] 两段自由文本同时出现；场景文本应随震屏移动，UI 文本应保持稳定。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+自由文本：UI TEXT,@SlotIndex=0,@Immediate=true,@AsSceneObject=false,@Position=-3,2,10,@RenderOrder=1000,@StayTime=0,@FadeOutTime=0,@IsBlocker=false
+自由文本：SCENE TEXT,@SlotIndex=1,@Immediate=true,@AsSceneObject=true,@Position=3,2,10,@RenderOrder=1000,@StayTime=0,@FadeOutTime=0,@IsBlocker=false
+色层：0.15,0.5,0.7,0.18,@FadeInTime=0.3,@StayTime=0.5,@FadeOutTime=0.3,@IsBlocker=false
+抖动：0.06,0.04,@FadeInTime=0.3,@StayTime=0.7,@FadeOutTime=0.3,@IsBlocker=true
++0.4
+自由文本：<br>,@SlotIndex=0,@Immediate=true
+自由文本：<br>,@SlotIndex=1,@Immediate=true
+遮罩：true
+
+// [M10] 自由文本全部参数、追加、立即显示、对齐
+阿米娅	[M10] 接着检查逐字、追加和三种对齐。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+自由文本：&{<color=#66CCFF>自由文本逐字显示</color>}<br>含受保护的结束标签。,@IsAdditional=false,@Immediate=false,@Alignment=left,@IsBlocker=true,@FadeInTime=0.2,@StayTime=0.7,@FadeOutTime=0.3,@SlotIndex=0,@AsSceneObject=true,@Position=-2,1,10,@RenderOrder=1000,@Interval=0.04,@ExtraStayTime=0.02
+自由文本：甲,@SlotIndex=1,@Immediate=true,@StayTime=0,@FadeOutTime=0,@IsBlocker=false
+自由文本：＋乙,@SlotIndex=1,@IsAdditional=true,@Immediate=true,@Alignment=center,@StayTime=0,@FadeOutTime=0,@IsBlocker=false
++0.8
+自由文本：RIGHT,@SlotIndex=1,@IsAdditional=false,@Immediate=true,@Alignment=right,@StayTime=0.6,@FadeOutTime=0.2,@IsBlocker=true
+遮罩：true
+
+// [M11] 裁切全部参数、两个独立槽位
+Mon3tr	[M11] 上下边缘应出现裁切，然后各自撤去。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+裁切：0.18,@Angle=0,@SlotIndex=0,@IsBlocker=false,@FadeInTime=0.3,@StayTime=0,@FadeOutTime=0,@RenderOrder=700
+裁切：0.18,@Angle=180,@SlotIndex=1,@IsBlocker=false,@FadeInTime=0.3,@StayTime=0,@FadeOutTime=0,@RenderOrder=700
++1
+裁切：0.18,@Angle=0,@SlotIndex=0,@FadeInTime=0,@StayTime=0,@FadeOutTime=0.3,@IsBlocker=false
+裁切：0.18,@Angle=180,@SlotIndex=1,@FadeInTime=0,@StayTime=0,@FadeOutTime=0.3,@IsBlocker=false
++0.4
+遮罩：true
+
+// [M12] 四种滤镜及复位
+阿米娅	[M12] 滤镜按 0、1、2、3 依次开启并复位。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+滤镜：0:0.45,@FadeInTime=0.3,@IsBlocker=true
++0.6
+滤镜：0:0,@FadeInTime=0.2,@IsBlocker=true
+滤镜：1:0.45,@FadeInTime=0.3,@IsBlocker=true
++0.6
+滤镜：1:0,@FadeInTime=0.2,@IsBlocker=true
+滤镜：2:0.45,@FadeInTime=0.3,@IsBlocker=true
++0.6
+滤镜：2:0,@FadeInTime=0.2,@IsBlocker=true
+滤镜：3:0.45,@FadeInTime=0.3,@IsBlocker=true
++0.6
+滤镜：3:0,@FadeInTime=0.2,@IsBlocker=true
+遮罩：true
+
+// [M13] 音乐全部参数、前奏与循环、多槽及左右声道
+Mon3tr	[M13] 左侧先响四个上行音，再进入循环；右侧随后加入高音。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+音乐：验收序曲,@Volume=0.18,@FadeInTime=0,@SlotIndex=0,@Position=-1
++2
+音乐：验收右声道,@Position=1,@SlotIndex=1,@Volume=0.16,@FadeInTime=0
++2
+音乐：none,@SlotIndex=0,@FadeInTime=0.4
+阿米娅	左侧应已静音，右侧仍在播放。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+音乐：none,@SlotIndex=1,@FadeInTime=0.4
+
+// [M14] 音效一次播放、按控制器计数循环和配音同步
+Mon3tr	[M14] 先响一次短音，再循环两条等待控制器。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+音效：验收短音,@Volume=0.3,@Position=-1,@Steps=0,@AsVoice=false
++0.6
+音效：验收短音,@Volume=0.25,@Position=1,@Steps=2,@AsVoice=false
++1
++1
+阿米娅	循环短音应已停止。下一句与三秒长的检测音同步。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+音效：验收配音标记,@Volume=0.25,@Position=0,@Steps=0,@AsVoice=true
+Mon3tr	[M14V] 这一句应大致与三秒检测音等长。,@BasicStayTime=0,@Interval=0.005,@ExtraStayTime=0
+
+// [M15] 外部特效及 Steps 生命周期
+阿米娅	[M15] 特效在两人背后出现，经过三个等待控制器后回收。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+特效：furnace_finale_back,@Steps=3,@Position=0,0,10,@RenderOrder=-300
++0.6
++0.6
++0.6
+遮罩：true
+Mon3tr	现在该特效应已消失；背景和两位角色仍应正常。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+
+// [M16] Narration 仅进入阅读记录
+Mon3tr	[M16] 下一条是日志旁白，正常播放不应显示它。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+*[M16_LOG_ONLY] 这条文字仅供日志或阅读模式核对。
+阿米娅	如果刚才没有凭空多出一句台词，就是预期的播放表现。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+
+// [M17] 四则运算、随机数、变量显示和多条件位标记
+变量：验收A=3+4*2/10
+变量：验收B=(3+4)*2/10
+变量：验收和=验收A+验收B
+变量：验收随机=4~8
+判断：验收位标志,@Expressions=1;0;3-1;0-1
+Mon3tr	[M17] 应为 3.8、1.4、5.2；实际：$[验收A]、$[验收B]、$[验收和]。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+阿米娅	随机结果应在 4 到 7：$[验收随机]；位标记应为 5：$[验收位标志]。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+
+// [M18] 宏参数、复用与嵌套展开
+#use 嵌套镜头(bg_amb2026)
+#use 提示([M18] 同一提示块再次复用成功。)
+
+// [M19] 交互选项、自定义输出变量和互斥汇合
+Mon3tr	[M19] 任选一项。之后只能出现你所选项目的回执。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+选项：选择甲`选择乙`选择丙,@OutputVariable=验收选择
+分支：验收选择,@Branches=选择甲回执,选择乙回执,选择丙回执
+标记：选择甲回执
+阿米娅	你选择了甲，保存的编号应是 0；实际 $[验收选择]。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+分支：_,@Branches=选择汇合
+标记：选择乙回执
+阿米娅	你选择了乙，保存的编号应是 1；实际 $[验收选择]。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+分支：_,@Branches=选择汇合
+标记：选择丙回执
+阿米娅	你选择了丙，保存的编号应是 2；实际 $[验收选择]。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+分支：_,@Branches=选择汇合
+标记：选择汇合
+Mon3tr	[M19_JOIN] 已汇合；不应串播其他选项的回执。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+
+// [M20] 带终止条件的循环与运行时判断
+变量：验收计数=0
+标记：计数循环
+变量：验收计数=验收计数+1
+校验员	[M20] 计数：$[验收计数]。应只出现 1、2、3。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+判断：是否继续,@Expressions=3-验收计数
+分支：是否继续,@Branches=计数完成,计数循环
+标记：计数完成
+
+// [M21] 收尾、清理与完成标记
+阿米娅	[M21_DONE] 主验收已到达终点。请再检查 BaseRule 和独立边界文件。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+--mon3tr(amb2026):normal,@SlotIndex=1,@FadeInTime=0,@StayTime=0,@FadeOutTime=0.4,@IsBlocker=false
+--阿米娅(furnace_finale):no,@SlotIndex=2,@FadeInTime=0,@StayTime=0,@FadeOutTime=0.4,@IsBlocker=false
++0.5
+背景：none,@FadeInTime=0.5
++0.3

@@ -1,0 +1,64 @@
+浮点分支边界：记录实际落点，不预设取整规则
+#useRule:AdvanceRule
+#version:2
+
+// 检查编号与预期现象见项目根目录的验收说明。
+#aliases
+mon3tr(amb2026)->Mon3tr/？？？/校验员
+阿米娅(furnace_finale)->阿米娅/访客
+#endaliases
+
+背景：bg_amb2026,@FadeInTime=0.2
+遮罩：true
+校验员	浮点分支边界：记录实际落点，不预设取整规则,@BasicStayTime=1,@Interval=0.015,@ExtraStayTime=0.015
+// 调度序号始终偏离整点，避免探针自身依赖正在检查的整点边界行为。
+变量：采样序号=0.25
+标记：选择采样值
+分支：采样序号,@Branches=采样0,采样1,采样2,采样3,采样4,采样5,采样6,采样7,采样8,采样结束
+标记：采样0
+变量：边界输入=0.25
+分支：_,@Branches=执行边界跳转
+标记：采样1
+变量：边界输入=1
+分支：_,@Branches=执行边界跳转
+标记：采样2
+变量：边界输入=1.25
+分支：_,@Branches=执行边界跳转
+标记：采样3
+变量：边界输入=2
+分支：_,@Branches=执行边界跳转
+标记：采样4
+变量：边界输入=2.25
+分支：_,@Branches=执行边界跳转
+标记：采样5
+变量：边界输入=0.999
+分支：_,@Branches=执行边界跳转
+标记：采样6
+变量：边界输入=1.999
+分支：_,@Branches=执行边界跳转
+标记：采样7
+变量：边界输入=-0.25
+分支：_,@Branches=执行边界跳转
+标记：采样8
+变量：边界输入=99
+分支：_,@Branches=执行边界跳转
+标记：执行边界跳转
+分支：边界输入,@Branches=落点零,落点一,落点二
+标记：落点零
+校验员	[F] 输入 $[边界输入] 落在分支 0。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+分支：_,@Branches=边界汇合
+标记：落点一
+校验员	[F] 输入 $[边界输入] 落在分支 1。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+分支：_,@Branches=边界汇合
+标记：落点二
+校验员	[F] 输入 $[边界输入] 落在分支 2。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+分支：_,@Branches=边界汇合
+标记：边界汇合
+变量：采样序号=采样序号+1
+分支：_,@Branches=选择采样值
+标记：采样结束
+校验员	本文件检查结束。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+音乐：none,@SlotIndex=0,@FadeInTime=0.2
+背景：none,@FadeInTime=0.3
++0.3

@@ -1,0 +1,41 @@
+默认值对照：记录实际行为，不预设哪份文档正确
+#useRule:AdvanceRule
+#version:2
+
+// 检查编号与预期现象见项目根目录的验收说明。
+#aliases
+mon3tr(amb2026)->Mon3tr/？？？/校验员
+阿米娅(furnace_finale)->阿米娅/访客
+#endaliases
+
+背景：bg_amb2026,@FadeInTime=0.2
+遮罩：true
+校验员	默认值对照：记录实际行为，不预设哪份文档正确,@BasicStayTime=1,@Interval=0.015,@ExtraStayTime=0.015
+校验员	[D01] 首先是不写拼接列数，再显式写 2；请比较网格排布。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+背景：grid_A+grid_B+grid_C+grid_D,@StitchVertically=false
++1.5
+背景：grid_A+grid_B+grid_C+grid_D,@StitchVertically=false,@StitchColumnCount=2
++1.5
+遮罩：true
+校验员	[D02] 两次角色淡出：先省略 StayTime，再显式设置为 0。比较停留时间。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+--mon3tr(amb2026):normal,@SlotIndex=0,@FadeInTime=0.2,@FadeOutTime=0.3
+--mon3tr(amb2026):normal,@SlotIndex=0,@FadeInTime=0.2,@StayTime=0,@FadeOutTime=0.3
+校验员	[D03] 先显示三行，再加裁切。记录 DEFAULT 与显式 1000、0 的前后关系。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+背景：grid_A
+自由文本：DEFAULT,@Immediate=true,@SlotIndex=0,@AsSceneObject=true,@Position=0,1,10,@StayTime=0,@FadeOutTime=0,@IsBlocker=false
+自由文本：ORDER 1000,@Immediate=true,@SlotIndex=1,@AsSceneObject=true,@Position=0,0,10,@RenderOrder=1000,@StayTime=0,@FadeOutTime=0,@IsBlocker=false
+自由文本：ORDER 0,@Immediate=true,@SlotIndex=2,@AsSceneObject=true,@Position=0,-1,10,@RenderOrder=0,@StayTime=0,@FadeOutTime=0,@IsBlocker=false
+裁切：0.65,@Angle=0,@SlotIndex=0,@RenderOrder=700,@FadeInTime=0.3,@StayTime=0,@FadeOutTime=0
++2
+裁切：0.65,@Angle=0,@SlotIndex=0,@RenderOrder=700,@FadeInTime=0,@StayTime=0,@FadeOutTime=0.3
+自由文本：<br>,@SlotIndex=0,@Immediate=true
+自由文本：<br>,@SlotIndex=1,@Immediate=true
+自由文本：<br>,@SlotIndex=2,@Immediate=true
+遮罩：true
+校验员	本文件检查结束。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+音乐：none,@SlotIndex=0,@FadeInTime=0.2
+背景：none,@FadeInTime=0.3
++0.3

@@ -1,0 +1,18 @@
+{
+  "inspection": "Actual skeleton decoded with official @esotericsoftware/spine-core 4.2.120; npm tarball integrity verified before use; no rendering or ASER execution.",
+  "skeleton_sha256": "3e5070214a2f323e04b53ea274168dfcbbcf8ab479547bc212ddfa8c493c9298",
+  "skeleton_version": "4.2.36",
+  "skins": [
+    "default"
+  ],
+  "animations": [
+    "#1",
+    "#2",
+    "#3",
+    "#4",
+    "Idle"
+  ],
+  "atlas_pages": [
+    "阿米娅(furnace_finale).png"
+  ]
+}

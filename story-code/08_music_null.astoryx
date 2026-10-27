@@ -1,0 +1,23 @@
+音乐 null 停止标记兼容性探针
+#useRule:AdvanceRule
+#version:2
+
+// 检查编号与预期现象见项目根目录的验收说明。
+#aliases
+mon3tr(amb2026)->Mon3tr/？？？/校验员
+阿米娅(furnace_finale)->阿米娅/访客
+#endaliases
+
+背景：bg_amb2026,@FadeInTime=0.2
+遮罩：true
+校验员	音乐 null 停止标记兼容性探针,@BasicStayTime=1,@Interval=0.015,@ExtraStayTime=0.015
+校验员	[N01] 音乐响起后使用 null；如果兼容，它应停止。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+音乐：验收右声道,@Volume=0.2,@SlotIndex=0
++1
+音乐：null,@FadeInTime=0.3,@SlotIndex=0
++1
+校验员	本文件检查结束。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+音乐：none,@SlotIndex=0,@FadeInTime=0.2
+背景：none,@FadeInTime=0.3
++0.3

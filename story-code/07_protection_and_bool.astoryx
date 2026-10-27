@@ -1,0 +1,27 @@
+文本保护与运行时变量、数字布尔值探针
+#useRule:AdvanceRule
+#version:2
+
+// 检查编号与预期现象见项目根目录的验收说明。
+#aliases
+mon3tr(amb2026)->Mon3tr/？？？/校验员
+阿米娅(furnace_finale)->阿米娅/访客
+#endaliases
+
+背景：bg_amb2026,@FadeInTime=0.2
+遮罩：true
+校验员	文本保护与运行时变量、数字布尔值探针,@BasicStayTime=1,@Interval=0.015,@ExtraStayTime=0.015
+变量：保护测试值=7
+校验员	[P01] 不加保护：变量为 $[保护测试值]。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+校验员	&{[P02] 加保护：变量为 $[保护测试值]；10/2=5；,@Volume=0.5。},@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+校验员	[P03] 接下来分别以数字 0 和 1 设置遮罩；记录是否正常隐藏和恢复。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：0
++0.6
+遮罩：1
++0.6
+校验员	[P03] 如果这句话正常显示，数字 1 已恢复遮罩。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+校验员	本文件检查结束。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+音乐：none,@SlotIndex=0,@FadeInTime=0.2
+背景：none,@FadeInTime=0.3
++0.3

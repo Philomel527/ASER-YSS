@@ -1,0 +1,23 @@
+角色曲线维数探针：两项：位置曲线与旋转曲线
+#useRule:AdvanceRule
+#version:2
+
+// 检查编号与预期现象见项目根目录的验收说明。
+#aliases
+mon3tr(amb2026)->Mon3tr/？？？/校验员
+阿米娅(furnace_finale)->阿米娅/访客
+#endaliases
+
+背景：bg_amb2026,@FadeInTime=0.2
+遮罩：true
+校验员	角色曲线维数探针：两项：位置曲线与旋转曲线,@BasicStayTime=1,@Interval=0.015,@ExtraStayTime=0.015
+校验员	[C3] 应从左向右、从倾斜到另一侧倾斜。记录是否报错以及旋转表现。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+--mon3tr(amb2026):normal,@SlotIndex=0,@FadeInTime=0.2,@StayTime=0,@FadeOutTime=0,@StartPosition=-2,0,10,-20,@EndPosition=2,0,10,20,@MoveTime=2,@MoveCurve=OutQuad,InSine
++0.5
+遮罩：true
+校验员	本文件检查结束。,@BasicStayTime=0.6,@Interval=0.015,@ExtraStayTime=0.015
+遮罩：false
+音乐：none,@SlotIndex=0,@FadeInTime=0.2
+背景：none,@FadeInTime=0.3
++0.3

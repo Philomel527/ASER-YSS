@@ -1,0 +1,1426 @@
+{
+  "status": "core_static_passed_probes_pending",
+  "core_static_status": "passed",
+  "compatibility_probe_status": "awaiting_local_playback",
+  "scope": "Own static checker using pinned rules, metadata and packaged resources; not the upstream parser or ASER runtime.",
+  "windows_runtime": "not_run",
+  "stories": [
+    {
+      "file": "00_all_features.astoryx",
+      "rule": "AdvanceRule",
+      "source_lines": 303,
+      "validation_status": "core_static_check_passed",
+      "expanded_controllers": {
+        "AnimatedText": 1,
+        "Background": 39,
+        "Branch": 5,
+        "Character": 24,
+        "Choice": 1,
+        "ColorMask": 1,
+        "Cut": 4,
+        "Delay": 27,
+        "Dialog": 59,
+        "Filter": 8,
+        "FreeText": 40,
+        "Interlude": 4,
+        "Judge": 2,
+        "Mask": 29,
+        "Music": 4,
+        "Narration": 1,
+        "Shake": 1,
+        "Sign": 6,
+        "SoundEffect": 3,
+        "Variable": 6,
+        "VisualEffect": 1
+      },
+      "macro_count": 4,
+      "alias_count": 2,
+      "actual_tab_count": 56,
+      "explicit_parameter_count": 101,
+      "missing_parameters": {},
+      "curve_names": [
+        "InBack",
+        "InBounce",
+        "InCirc",
+        "InCubic",
+        "InElastic",
+        "InExpo",
+        "InOutBack",
+        "InOutBounce",
+        "InOutCirc",
+        "InOutCubic",
+        "InOutElastic",
+        "InOutExpo",
+        "InOutQuad",
+        "InOutQuart",
+        "InOutQuint",
+        "InOutSine",
+        "InQuad",
+        "InQuart",
+        "InQuint",
+        "InSine",
+        "Linear",
+        "OutBack",
+        "OutBounce",
+        "OutCirc",
+        "OutCubic",
+        "OutElastic",
+        "OutExpo",
+        "OutQuad",
+        "OutQuart",
+        "OutQuint",
+        "OutSine"
+      ],
+      "compatibility_notes": []
+    },
+    {
+      "file": "01_base_rule.astoryx",
+      "rule": "BaseRule",
+      "source_lines": 54,
+      "validation_status": "core_static_check_passed",
+      "expanded_controllers": {
+        "AnimatedText": 1,
+        "Background": 4,
+        "Branch": 3,
+        "Character": 2,
+        "Choice": 2,
+        "ColorMask": 1,
+        "Cut": 1,
+        "Delay": 4,
+        "Dialog": 8,
+        "Filter": 2,
+        "FreeText": 1,
+        "Interlude": 2,
+        "Judge": 1,
+        "Mask": 2,
+        "Music": 2,
+        "Narration": 1,
+        "Shake": 1,
+        "Sign": 3,
+        "SoundEffect": 1,
+        "Variable": 1,
+        "VisualEffect": 1
+      },
+      "macro_count": 0,
+      "alias_count": 2,
+      "actual_tab_count": 8,
+      "explicit_parameter_count": 101,
+      "missing_parameters": {},
+      "curve_names": [
+        "Linear"
+      ],
+      "compatibility_notes": []
+    },
+    {
+      "file": "02_default_values.astoryx",
+      "rule": "AdvanceRule",
+      "source_lines": 41,
+      "validation_status": "structural_check_done_runtime_pending",
+      "expanded_controllers": {
+        "Background": 5,
+        "Character": 2,
+        "Cut": 2,
+        "Delay": 4,
+        "Dialog": 5,
+        "FreeText": 6,
+        "Mask": 6,
+        "Music": 1
+      },
+      "macro_count": 0,
+      "alias_count": 2,
+      "actual_tab_count": 5,
+      "explicit_parameter_count": 34,
+      "missing_parameters": {
+        "Background": [
+          "EndPosition",
+          "IsBlocker",
+          "MoveCurve",
+          "MoveTime",
+          "StartPosition"
+        ],
+        "Music": [
+          "Position",
+          "Volume"
+        ],
+        "SoundEffect": [
+          "AsVoice",
+          "AudioName",
+          "Position",
+          "Steps",
+          "Volume"
+        ],
+        "Character": [
+          "Alpha",
+          "Effects",
+          "EndPosition",
+          "IsBlocker",
+          "MoveCurve",
+          "MoveTime",
+          "RenderOrder",
+          "StartPosition"
+        ],
+        "Choice": [
+          "ChoiceContent",
+          "OutputVariable"
+        ],
+        "VisualEffect": [
+          "Position",
+          "RenderOrder",
+          "Steps",
+          "VisualEffectName"
+        ],
+        "Interlude": [
+          "Character&Variant",
+          "Effects",
+          "IsBlocker",
+          "IsOn",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "Type"
+        ],
+        "ColorMask": [
+          "Color",
+          "FadeInTime",
+          "FadeOutTime",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "Shake": [
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "FreeText": [
+          "Alignment",
+          "ExtraStayTime",
+          "FadeInTime",
+          "Interval",
+          "IsAdditional"
+        ],
+        "Cut": [
+          "IsBlocker"
+        ],
+        "Filter": [
+          "FadeInTime",
+          "IsBlocker",
+          "Type&Intensity"
+        ],
+        "AnimatedText": [
+          "Content",
+          "IsBlocker",
+          "Type"
+        ],
+        "Sign": [
+          "Name"
+        ],
+        "Variable": [
+          "Expression",
+          "Name"
+        ],
+        "Judge": [
+          "Expressions",
+          "Name"
+        ],
+        "Branch": [
+          "Branches",
+          "Name"
+        ],
+        "Narration": [
+          "Content"
+        ],
+        "Dialog": [
+          "IsAdditional",
+          "IsBlocker",
+          "ModifyCharacters"
+        ]
+      },
+      "curve_names": [],
+      "compatibility_notes": []
+    },
+    {
+      "file": "03_character_curve_2.astoryx",
+      "rule": "AdvanceRule",
+      "source_lines": 23,
+      "validation_status": "structural_check_done_runtime_pending",
+      "expanded_controllers": {
+        "Background": 2,
+        "Character": 1,
+        "Delay": 2,
+        "Dialog": 3,
+        "Mask": 4,
+        "Music": 1
+      },
+      "macro_count": 0,
+      "alias_count": 2,
+      "actual_tab_count": 3,
+      "explicit_parameter_count": 20,
+      "missing_parameters": {
+        "Background": [
+          "EndPosition",
+          "IsBlocker",
+          "MoveCurve",
+          "MoveTime",
+          "StartPosition",
+          "StitchColumnCount",
+          "StitchVertically"
+        ],
+        "Music": [
+          "Position",
+          "Volume"
+        ],
+        "SoundEffect": [
+          "AsVoice",
+          "AudioName",
+          "Position",
+          "Steps",
+          "Volume"
+        ],
+        "Character": [
+          "Alpha",
+          "Effects",
+          "IsBlocker",
+          "RenderOrder"
+        ],
+        "Choice": [
+          "ChoiceContent",
+          "OutputVariable"
+        ],
+        "VisualEffect": [
+          "Position",
+          "RenderOrder",
+          "Steps",
+          "VisualEffectName"
+        ],
+        "Interlude": [
+          "Character&Variant",
+          "Effects",
+          "IsBlocker",
+          "IsOn",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "Type"
+        ],
+        "ColorMask": [
+          "Color",
+          "FadeInTime",
+          "FadeOutTime",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "Shake": [
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "FreeText": [
+          "Alignment",
+          "AsSceneObject",
+          "Content",
+          "ExtraStayTime",
+          "FadeInTime",
+          "FadeOutTime",
+          "Immediate",
+          "Interval",
+          "IsAdditional",
+          "IsBlocker",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Cut": [
+          "Angle",
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Filter": [
+          "FadeInTime",
+          "IsBlocker",
+          "Type&Intensity"
+        ],
+        "AnimatedText": [
+          "Content",
+          "IsBlocker",
+          "Type"
+        ],
+        "Sign": [
+          "Name"
+        ],
+        "Variable": [
+          "Expression",
+          "Name"
+        ],
+        "Judge": [
+          "Expressions",
+          "Name"
+        ],
+        "Branch": [
+          "Branches",
+          "Name"
+        ],
+        "Narration": [
+          "Content"
+        ],
+        "Dialog": [
+          "IsAdditional",
+          "IsBlocker",
+          "ModifyCharacters"
+        ]
+      },
+      "curve_names": [
+        "InSine",
+        "OutQuad"
+      ],
+      "compatibility_notes": [
+        "语雀描述该曲线维数，但固定 YSS 元数据不接受；留待目标播放器验收"
+      ]
+    },
+    {
+      "file": "04_character_curve_4.astoryx",
+      "rule": "AdvanceRule",
+      "source_lines": 23,
+      "validation_status": "structural_check_done_runtime_pending",
+      "expanded_controllers": {
+        "Background": 2,
+        "Character": 1,
+        "Delay": 2,
+        "Dialog": 3,
+        "Mask": 4,
+        "Music": 1
+      },
+      "macro_count": 0,
+      "alias_count": 2,
+      "actual_tab_count": 3,
+      "explicit_parameter_count": 20,
+      "missing_parameters": {
+        "Background": [
+          "EndPosition",
+          "IsBlocker",
+          "MoveCurve",
+          "MoveTime",
+          "StartPosition",
+          "StitchColumnCount",
+          "StitchVertically"
+        ],
+        "Music": [
+          "Position",
+          "Volume"
+        ],
+        "SoundEffect": [
+          "AsVoice",
+          "AudioName",
+          "Position",
+          "Steps",
+          "Volume"
+        ],
+        "Character": [
+          "Alpha",
+          "Effects",
+          "IsBlocker",
+          "RenderOrder"
+        ],
+        "Choice": [
+          "ChoiceContent",
+          "OutputVariable"
+        ],
+        "VisualEffect": [
+          "Position",
+          "RenderOrder",
+          "Steps",
+          "VisualEffectName"
+        ],
+        "Interlude": [
+          "Character&Variant",
+          "Effects",
+          "IsBlocker",
+          "IsOn",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "Type"
+        ],
+        "ColorMask": [
+          "Color",
+          "FadeInTime",
+          "FadeOutTime",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "Shake": [
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "FreeText": [
+          "Alignment",
+          "AsSceneObject",
+          "Content",
+          "ExtraStayTime",
+          "FadeInTime",
+          "FadeOutTime",
+          "Immediate",
+          "Interval",
+          "IsAdditional",
+          "IsBlocker",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Cut": [
+          "Angle",
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Filter": [
+          "FadeInTime",
+          "IsBlocker",
+          "Type&Intensity"
+        ],
+        "AnimatedText": [
+          "Content",
+          "IsBlocker",
+          "Type"
+        ],
+        "Sign": [
+          "Name"
+        ],
+        "Variable": [
+          "Expression",
+          "Name"
+        ],
+        "Judge": [
+          "Expressions",
+          "Name"
+        ],
+        "Branch": [
+          "Branches",
+          "Name"
+        ],
+        "Narration": [
+          "Content"
+        ],
+        "Dialog": [
+          "IsAdditional",
+          "IsBlocker",
+          "ModifyCharacters"
+        ]
+      },
+      "curve_names": [
+        "InOutCubic",
+        "InSine",
+        "Linear",
+        "OutQuad"
+      ],
+      "compatibility_notes": [
+        "语雀描述该曲线维数，但固定 YSS 元数据不接受；留待目标播放器验收"
+      ]
+    },
+    {
+      "file": "05_character_curve_3.astoryx",
+      "rule": "AdvanceRule",
+      "source_lines": 23,
+      "validation_status": "structural_check_done_runtime_pending",
+      "expanded_controllers": {
+        "Background": 2,
+        "Character": 1,
+        "Delay": 2,
+        "Dialog": 3,
+        "Mask": 4,
+        "Music": 1
+      },
+      "macro_count": 0,
+      "alias_count": 2,
+      "actual_tab_count": 3,
+      "explicit_parameter_count": 20,
+      "missing_parameters": {
+        "Background": [
+          "EndPosition",
+          "IsBlocker",
+          "MoveCurve",
+          "MoveTime",
+          "StartPosition",
+          "StitchColumnCount",
+          "StitchVertically"
+        ],
+        "Music": [
+          "Position",
+          "Volume"
+        ],
+        "SoundEffect": [
+          "AsVoice",
+          "AudioName",
+          "Position",
+          "Steps",
+          "Volume"
+        ],
+        "Character": [
+          "Alpha",
+          "Effects",
+          "IsBlocker",
+          "RenderOrder"
+        ],
+        "Choice": [
+          "ChoiceContent",
+          "OutputVariable"
+        ],
+        "VisualEffect": [
+          "Position",
+          "RenderOrder",
+          "Steps",
+          "VisualEffectName"
+        ],
+        "Interlude": [
+          "Character&Variant",
+          "Effects",
+          "IsBlocker",
+          "IsOn",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "Type"
+        ],
+        "ColorMask": [
+          "Color",
+          "FadeInTime",
+          "FadeOutTime",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "Shake": [
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "FreeText": [
+          "Alignment",
+          "AsSceneObject",
+          "Content",
+          "ExtraStayTime",
+          "FadeInTime",
+          "FadeOutTime",
+          "Immediate",
+          "Interval",
+          "IsAdditional",
+          "IsBlocker",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Cut": [
+          "Angle",
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Filter": [
+          "FadeInTime",
+          "IsBlocker",
+          "Type&Intensity"
+        ],
+        "AnimatedText": [
+          "Content",
+          "IsBlocker",
+          "Type"
+        ],
+        "Sign": [
+          "Name"
+        ],
+        "Variable": [
+          "Expression",
+          "Name"
+        ],
+        "Judge": [
+          "Expressions",
+          "Name"
+        ],
+        "Branch": [
+          "Branches",
+          "Name"
+        ],
+        "Narration": [
+          "Content"
+        ],
+        "Dialog": [
+          "IsAdditional",
+          "IsBlocker",
+          "ModifyCharacters"
+        ]
+      },
+      "curve_names": [
+        "InSine",
+        "Linear",
+        "OutQuad"
+      ],
+      "compatibility_notes": []
+    },
+    {
+      "file": "06_float_branch.astoryx",
+      "rule": "AdvanceRule",
+      "source_lines": 64,
+      "validation_status": "structural_check_done_runtime_pending",
+      "expanded_controllers": {
+        "Background": 2,
+        "Branch": 15,
+        "Delay": 1,
+        "Dialog": 5,
+        "Mask": 2,
+        "Music": 1,
+        "Sign": 16,
+        "Variable": 11
+      },
+      "macro_count": 0,
+      "alias_count": 2,
+      "actual_tab_count": 5,
+      "explicit_parameter_count": 16,
+      "missing_parameters": {
+        "Background": [
+          "EndPosition",
+          "IsBlocker",
+          "MoveCurve",
+          "MoveTime",
+          "StartPosition",
+          "StitchColumnCount",
+          "StitchVertically"
+        ],
+        "Music": [
+          "Position",
+          "Volume"
+        ],
+        "SoundEffect": [
+          "AsVoice",
+          "AudioName",
+          "Position",
+          "Steps",
+          "Volume"
+        ],
+        "Character": [
+          "Alpha",
+          "Character&Variant",
+          "Effects",
+          "EndPosition",
+          "FadeInTime",
+          "FadeOutTime",
+          "IsBlocker",
+          "MoveCurve",
+          "MoveTime",
+          "RenderOrder",
+          "SlotIndex",
+          "StartPosition",
+          "StayTime"
+        ],
+        "Choice": [
+          "ChoiceContent",
+          "OutputVariable"
+        ],
+        "VisualEffect": [
+          "Position",
+          "RenderOrder",
+          "Steps",
+          "VisualEffectName"
+        ],
+        "Interlude": [
+          "Character&Variant",
+          "Effects",
+          "IsBlocker",
+          "IsOn",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "Type"
+        ],
+        "ColorMask": [
+          "Color",
+          "FadeInTime",
+          "FadeOutTime",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "Shake": [
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "FreeText": [
+          "Alignment",
+          "AsSceneObject",
+          "Content",
+          "ExtraStayTime",
+          "FadeInTime",
+          "FadeOutTime",
+          "Immediate",
+          "Interval",
+          "IsAdditional",
+          "IsBlocker",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Cut": [
+          "Angle",
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Filter": [
+          "FadeInTime",
+          "IsBlocker",
+          "Type&Intensity"
+        ],
+        "AnimatedText": [
+          "Content",
+          "IsBlocker",
+          "Type"
+        ],
+        "Judge": [
+          "Expressions",
+          "Name"
+        ],
+        "Narration": [
+          "Content"
+        ],
+        "Dialog": [
+          "IsAdditional",
+          "IsBlocker",
+          "ModifyCharacters"
+        ]
+      },
+      "curve_names": [],
+      "compatibility_notes": []
+    },
+    {
+      "file": "07_protection_and_bool.astoryx",
+      "rule": "AdvanceRule",
+      "source_lines": 27,
+      "validation_status": "structural_check_done_runtime_pending",
+      "expanded_controllers": {
+        "Background": 2,
+        "Delay": 3,
+        "Dialog": 6,
+        "Mask": 4,
+        "Music": 1,
+        "Variable": 1
+      },
+      "macro_count": 0,
+      "alias_count": 2,
+      "actual_tab_count": 6,
+      "explicit_parameter_count": 13,
+      "missing_parameters": {
+        "Background": [
+          "EndPosition",
+          "IsBlocker",
+          "MoveCurve",
+          "MoveTime",
+          "StartPosition",
+          "StitchColumnCount",
+          "StitchVertically"
+        ],
+        "Music": [
+          "Position",
+          "Volume"
+        ],
+        "SoundEffect": [
+          "AsVoice",
+          "AudioName",
+          "Position",
+          "Steps",
+          "Volume"
+        ],
+        "Character": [
+          "Alpha",
+          "Character&Variant",
+          "Effects",
+          "EndPosition",
+          "FadeInTime",
+          "FadeOutTime",
+          "IsBlocker",
+          "MoveCurve",
+          "MoveTime",
+          "RenderOrder",
+          "SlotIndex",
+          "StartPosition",
+          "StayTime"
+        ],
+        "Choice": [
+          "ChoiceContent",
+          "OutputVariable"
+        ],
+        "VisualEffect": [
+          "Position",
+          "RenderOrder",
+          "Steps",
+          "VisualEffectName"
+        ],
+        "Interlude": [
+          "Character&Variant",
+          "Effects",
+          "IsBlocker",
+          "IsOn",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "Type"
+        ],
+        "ColorMask": [
+          "Color",
+          "FadeInTime",
+          "FadeOutTime",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "Shake": [
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "FreeText": [
+          "Alignment",
+          "AsSceneObject",
+          "Content",
+          "ExtraStayTime",
+          "FadeInTime",
+          "FadeOutTime",
+          "Immediate",
+          "Interval",
+          "IsAdditional",
+          "IsBlocker",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Cut": [
+          "Angle",
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Filter": [
+          "FadeInTime",
+          "IsBlocker",
+          "Type&Intensity"
+        ],
+        "AnimatedText": [
+          "Content",
+          "IsBlocker",
+          "Type"
+        ],
+        "Sign": [
+          "Name"
+        ],
+        "Judge": [
+          "Expressions",
+          "Name"
+        ],
+        "Branch": [
+          "Branches",
+          "Name"
+        ],
+        "Narration": [
+          "Content"
+        ],
+        "Dialog": [
+          "IsAdditional",
+          "IsBlocker",
+          "ModifyCharacters"
+        ]
+      },
+      "curve_names": [],
+      "compatibility_notes": []
+    },
+    {
+      "file": "08_music_null.astoryx",
+      "rule": "AdvanceRule",
+      "source_lines": 23,
+      "validation_status": "structural_check_done_runtime_pending",
+      "expanded_controllers": {
+        "Background": 2,
+        "Delay": 3,
+        "Dialog": 3,
+        "Mask": 2,
+        "Music": 3
+      },
+      "macro_count": 0,
+      "alias_count": 2,
+      "actual_tab_count": 3,
+      "explicit_parameter_count": 12,
+      "missing_parameters": {
+        "Background": [
+          "EndPosition",
+          "IsBlocker",
+          "MoveCurve",
+          "MoveTime",
+          "StartPosition",
+          "StitchColumnCount",
+          "StitchVertically"
+        ],
+        "Music": [
+          "Position"
+        ],
+        "SoundEffect": [
+          "AsVoice",
+          "AudioName",
+          "Position",
+          "Steps",
+          "Volume"
+        ],
+        "Character": [
+          "Alpha",
+          "Character&Variant",
+          "Effects",
+          "EndPosition",
+          "FadeInTime",
+          "FadeOutTime",
+          "IsBlocker",
+          "MoveCurve",
+          "MoveTime",
+          "RenderOrder",
+          "SlotIndex",
+          "StartPosition",
+          "StayTime"
+        ],
+        "Choice": [
+          "ChoiceContent",
+          "OutputVariable"
+        ],
+        "VisualEffect": [
+          "Position",
+          "RenderOrder",
+          "Steps",
+          "VisualEffectName"
+        ],
+        "Interlude": [
+          "Character&Variant",
+          "Effects",
+          "IsBlocker",
+          "IsOn",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "Type"
+        ],
+        "ColorMask": [
+          "Color",
+          "FadeInTime",
+          "FadeOutTime",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "Shake": [
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "FreeText": [
+          "Alignment",
+          "AsSceneObject",
+          "Content",
+          "ExtraStayTime",
+          "FadeInTime",
+          "FadeOutTime",
+          "Immediate",
+          "Interval",
+          "IsAdditional",
+          "IsBlocker",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Cut": [
+          "Angle",
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Filter": [
+          "FadeInTime",
+          "IsBlocker",
+          "Type&Intensity"
+        ],
+        "AnimatedText": [
+          "Content",
+          "IsBlocker",
+          "Type"
+        ],
+        "Sign": [
+          "Name"
+        ],
+        "Variable": [
+          "Expression",
+          "Name"
+        ],
+        "Judge": [
+          "Expressions",
+          "Name"
+        ],
+        "Branch": [
+          "Branches",
+          "Name"
+        ],
+        "Narration": [
+          "Content"
+        ],
+        "Dialog": [
+          "IsAdditional",
+          "IsBlocker",
+          "ModifyCharacters"
+        ]
+      },
+      "curve_names": [],
+      "compatibility_notes": [
+        "null 为上游示例出现的兼容性停止标记，尚未运行验证"
+      ]
+    },
+    {
+      "file": "09_curve_unset.astoryx",
+      "rule": "AdvanceRule",
+      "source_lines": 23,
+      "validation_status": "structural_check_done_runtime_pending",
+      "expanded_controllers": {
+        "Background": 3,
+        "Delay": 2,
+        "Dialog": 3,
+        "Mask": 4,
+        "Music": 1
+      },
+      "macro_count": 0,
+      "alias_count": 2,
+      "actual_tab_count": 3,
+      "explicit_parameter_count": 15,
+      "missing_parameters": {
+        "Background": [
+          "IsBlocker",
+          "StitchColumnCount",
+          "StitchVertically"
+        ],
+        "Music": [
+          "Position",
+          "Volume"
+        ],
+        "SoundEffect": [
+          "AsVoice",
+          "AudioName",
+          "Position",
+          "Steps",
+          "Volume"
+        ],
+        "Character": [
+          "Alpha",
+          "Character&Variant",
+          "Effects",
+          "EndPosition",
+          "FadeInTime",
+          "FadeOutTime",
+          "IsBlocker",
+          "MoveCurve",
+          "MoveTime",
+          "RenderOrder",
+          "SlotIndex",
+          "StartPosition",
+          "StayTime"
+        ],
+        "Choice": [
+          "ChoiceContent",
+          "OutputVariable"
+        ],
+        "VisualEffect": [
+          "Position",
+          "RenderOrder",
+          "Steps",
+          "VisualEffectName"
+        ],
+        "Interlude": [
+          "Character&Variant",
+          "Effects",
+          "IsBlocker",
+          "IsOn",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "Type"
+        ],
+        "ColorMask": [
+          "Color",
+          "FadeInTime",
+          "FadeOutTime",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "Shake": [
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "FreeText": [
+          "Alignment",
+          "AsSceneObject",
+          "Content",
+          "ExtraStayTime",
+          "FadeInTime",
+          "FadeOutTime",
+          "Immediate",
+          "Interval",
+          "IsAdditional",
+          "IsBlocker",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Cut": [
+          "Angle",
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Filter": [
+          "FadeInTime",
+          "IsBlocker",
+          "Type&Intensity"
+        ],
+        "AnimatedText": [
+          "Content",
+          "IsBlocker",
+          "Type"
+        ],
+        "Sign": [
+          "Name"
+        ],
+        "Variable": [
+          "Expression",
+          "Name"
+        ],
+        "Judge": [
+          "Expressions",
+          "Name"
+        ],
+        "Branch": [
+          "Branches",
+          "Name"
+        ],
+        "Narration": [
+          "Content"
+        ],
+        "Dialog": [
+          "IsAdditional",
+          "IsBlocker",
+          "ModifyCharacters"
+        ]
+      },
+      "curve_names": [
+        "Unset"
+      ],
+      "compatibility_notes": []
+    },
+    {
+      "file": "10_spine_skin.astoryx",
+      "rule": "AdvanceRule",
+      "source_lines": 21,
+      "validation_status": "structural_check_done_runtime_pending",
+      "expanded_controllers": {
+        "Background": 2,
+        "Character": 1,
+        "Delay": 1,
+        "Dialog": 4,
+        "Mask": 2,
+        "Music": 1
+      },
+      "macro_count": 0,
+      "alias_count": 2,
+      "actual_tab_count": 4,
+      "explicit_parameter_count": 16,
+      "missing_parameters": {
+        "Background": [
+          "EndPosition",
+          "IsBlocker",
+          "MoveCurve",
+          "MoveTime",
+          "StartPosition",
+          "StitchColumnCount",
+          "StitchVertically"
+        ],
+        "Music": [
+          "Position",
+          "Volume"
+        ],
+        "SoundEffect": [
+          "AsVoice",
+          "AudioName",
+          "Position",
+          "Steps",
+          "Volume"
+        ],
+        "Character": [
+          "Alpha",
+          "Effects",
+          "EndPosition",
+          "IsBlocker",
+          "MoveCurve",
+          "MoveTime",
+          "RenderOrder",
+          "StartPosition"
+        ],
+        "Choice": [
+          "ChoiceContent",
+          "OutputVariable"
+        ],
+        "VisualEffect": [
+          "Position",
+          "RenderOrder",
+          "Steps",
+          "VisualEffectName"
+        ],
+        "Interlude": [
+          "Character&Variant",
+          "Effects",
+          "IsBlocker",
+          "IsOn",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "Type"
+        ],
+        "ColorMask": [
+          "Color",
+          "FadeInTime",
+          "FadeOutTime",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "Shake": [
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "StayTime"
+        ],
+        "FreeText": [
+          "Alignment",
+          "AsSceneObject",
+          "Content",
+          "ExtraStayTime",
+          "FadeInTime",
+          "FadeOutTime",
+          "Immediate",
+          "Interval",
+          "IsAdditional",
+          "IsBlocker",
+          "Position",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Cut": [
+          "Angle",
+          "FadeInTime",
+          "FadeOutTime",
+          "Intensity",
+          "IsBlocker",
+          "RenderOrder",
+          "SlotIndex",
+          "StayTime"
+        ],
+        "Filter": [
+          "FadeInTime",
+          "IsBlocker",
+          "Type&Intensity"
+        ],
+        "AnimatedText": [
+          "Content",
+          "IsBlocker",
+          "Type"
+        ],
+        "Sign": [
+          "Name"
+        ],
+        "Variable": [
+          "Expression",
+          "Name"
+        ],
+        "Judge": [
+          "Expressions",
+          "Name"
+        ],
+        "Branch": [
+          "Branches",
+          "Name"
+        ],
+        "Narration": [
+          "Content"
+        ],
+        "Dialog": [
+          "IsAdditional",
+          "IsBlocker",
+          "ModifyCharacters"
+        ]
+      },
+      "curve_names": [],
+      "compatibility_notes": []
+    }
+  ],
+  "errors": [],
+  "source_sha256": {
+    "00_all_features.astoryx": "77367b1047a6d248792f1ba1c9a17087e65fb036526baeff6f48a9e49fb4f3d7",
+    "01_base_rule.astoryx": "60bd84004da72d02e7cba1c946e472ae5910ca7c59438261fca2dbf94ec91a84",
+    "02_default_values.astoryx": "61b0f40330d2936f3372b13f96f858356f39ceed5ea5179856edb226e23c2129",
+    "03_character_curve_2.astoryx": "f602ba29009770d4318053dc99741033dcfc8ceeabbac6108154bafeec5a4cae",
+    "04_character_curve_4.astoryx": "f77646288e2578471fd7f3d20ef5400e4cd594648178d54e7c09cd6ea50f4fe0",
+    "05_character_curve_3.astoryx": "3b15b1fe0d0d42c9d519ab7486ae2edcee06f68feca2b50ccbbc379bb2bd1a22",
+    "06_float_branch.astoryx": "c4e80ff1f5b488e26ff9540661aa8acced1035f8849b8de61d3580db8135e60a",
+    "07_protection_and_bool.astoryx": "2a2aaffe500c4ba6d9014efa377cbf40af53df88905d7f225b3400d57bcb2c43",
+    "08_music_null.astoryx": "058d899a8e07c25e523bb24ed191a1c2e87fd9f0dc5f36839bc6a66e6979f07a",
+    "09_curve_unset.astoryx": "d6b0726988122258fb38beec5d81b60f9689285709a76c8a30f076b9173aaec7",
+    "10_spine_skin.astoryx": "333269d56b52ff99e25c3966e65390a3a61592450fad2959e9082a4844164499"
+  }
+}

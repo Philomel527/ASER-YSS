@@ -1,0 +1,162 @@
+{
+  "target_aser_version": "3.7.12",
+  "yss_source_commit": "49e2528c42809779d046664373946378a8e04ac6",
+  "template_version": "3.6.7",
+  "main_story": "00_all_features.astoryx",
+  "stories": [
+    {
+      "file": "00_all_features.astoryx",
+      "purpose": "主验收：21 类控制器、全部可选参数与 31 种常规曲线",
+      "tags": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15",
+        "M16",
+        "M17",
+        "M18",
+        "M19",
+        "M20",
+        "M21"
+      ]
+    },
+    {
+      "file": "01_base_rule.astoryx",
+      "purpose": "BaseRule：全部控制器、完整位置参数、中间省略和尾项省略",
+      "tags": [
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B_DONE"
+      ]
+    },
+    {
+      "file": "02_default_values.astoryx",
+      "purpose": "比较三处默认值资料差异，记录实际排布、停留和遮挡",
+      "tags": [
+        "D01",
+        "D02",
+        "D03"
+      ]
+    },
+    {
+      "file": "03_character_curve_2.astoryx",
+      "purpose": "两项：位置曲线与旋转曲线，独立于主剧本检查",
+      "tags": [
+        "C3"
+      ]
+    },
+    {
+      "file": "04_character_curve_4.astoryx",
+      "purpose": "四项：各轴曲线，独立于主剧本检查",
+      "tags": [
+        "C4"
+      ]
+    },
+    {
+      "file": "05_character_curve_3.astoryx",
+      "purpose": "三项：固定 YSS 元数据格式，独立于主剧本检查",
+      "tags": [
+        "C5"
+      ]
+    },
+    {
+      "file": "06_float_branch.astoryx",
+      "purpose": "测试整数边界两侧、负数与越界大值的分支落点",
+      "tags": [
+        "F"
+      ]
+    },
+    {
+      "file": "07_protection_and_bool.astoryx",
+      "purpose": "保护文段中的变量引用及数字布尔格式，独立记录结果",
+      "tags": [
+        "P01",
+        "P02",
+        "P03"
+      ]
+    },
+    {
+      "file": "08_music_null.astoryx",
+      "purpose": "复核上游第三个示例中的 null 停止写法",
+      "tags": [
+        "N01"
+      ]
+    },
+    {
+      "file": "09_curve_unset.astoryx",
+      "purpose": "将保留曲线 Unset 与普通曲线分开验收",
+      "tags": [
+        "U01"
+      ]
+    },
+    {
+      "file": "10_spine_skin.astoryx",
+      "purpose": "复核皮肤名与差分名使用分号的组合语法",
+      "tags": [
+        "S01"
+      ]
+    }
+  ],
+  "compatibility_probes": [
+    "02_default_values.astoryx",
+    "03_character_curve_2.astoryx",
+    "04_character_curve_4.astoryx",
+    "05_character_curve_3.astoryx",
+    "06_float_branch.astoryx",
+    "07_protection_and_bool.astoryx",
+    "08_music_null.astoryx",
+    "09_curve_unset.astoryx",
+    "10_spine_skin.astoryx"
+  ],
+  "expected_controller_count": 21,
+  "expected_curve_names": [
+    "Unset",
+    "Linear",
+    "InSine",
+    "OutSine",
+    "InOutSine",
+    "InQuad",
+    "OutQuad",
+    "InOutQuad",
+    "InCubic",
+    "OutCubic",
+    "InOutCubic",
+    "InQuart",
+    "OutQuart",
+    "InOutQuart",
+    "InQuint",
+    "OutQuint",
+    "InOutQuint",
+    "InExpo",
+    "OutExpo",
+    "InOutExpo",
+    "InCirc",
+    "OutCirc",
+    "InOutCirc",
+    "InElastic",
+    "OutElastic",
+    "InOutElastic",
+    "InBack",
+    "OutBack",
+    "InOutBack",
+    "InBounce",
+    "OutBounce",
+    "InOutBounce"
+  ],
+  "runtime_status": "not_run_on_windows"
+}

@@ -42,3 +42,17 @@ python3 tools/check_toolchain.py --tool aser --candidate /tmp/新版ASER解压�
 ```
 
 比较命令只报告差异，不覆盖文件。更换版本并更新清单后，用 `python3 tools/build_astoryx_reference.py` 重新生成参数参考。
+
+## 本地全功能验收
+
+[下载验收项目包](artifacts/ASER_YSS_acceptance.zip)，完整解压后在 ASER 中打开其中的 `ASER_YSS_Acceptance` 剧本集，先播放 `00_all_features`。它自带所需素材，不依赖官方素材名单。
+
+主剧本包含 21 个场景；主剧本和 BaseRule 复核分别覆盖 21 类控制器及 101 项主要／可选参数。另有 9 个独立兼容性探针，用于核实文档和版本差异。具体预期现象见 [验收说明](docs/acceptance-checklist.md)。当前完成的是自有静态检查与素材检查，Windows 播放结果待本地验收。
+
+源文件在 `story-code/`；构建目录受忽略，文档与资源不会放进代码专用目录。重新构建和检查：
+
+```bash
+python3 tools/build_acceptance_project.py
+python3 tools/check_acceptance.py
+python3 -m unittest discover -s tests -v
+```
