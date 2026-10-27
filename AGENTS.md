@@ -19,6 +19,7 @@
 
 - 每个云任务已有隔离环境，使用现有检出；除非用户明确要求，不创建 Git worktree。
 - 先检查工作区改动、`docs/reference-status.md`、`docs/astoryx-guide.md`、实际工具版本及当前资源目录名单。运行 `python3 tools/check_toolchain.py` 核对固定版本的源码；若不一致，先解释变化，不能静默改写基线。
+- 用户 2026-10-27 提供的正式名册、别名及差分配置在 `resource-catalog/Configs/`，接稿时先读 `docs/resource-catalog.md`；使用 `python3 tools/query_resource_catalog.py 名称 --exact` 查准确映射，不再把这些配置列为尚未取得。背景名 `35_i10` 有两种候选，不自行决定同名解析优先级；未提供的差分含义不能猜测。
 - 工具包导入后，保持其目录结构和文件内容；不要执行压缩包中的脚本来猜测安装方法。先阅读说明，确认平台和必要步骤。
 
 ## 剧本转换与验证
@@ -42,5 +43,6 @@
 - 用独立 Git 提交记录工具更新，与剧情代码修改分开。旧版本通过 Git 历史保留；检查大文件能否由 GitHub 接收，必要时使用 Git LFS。
 - 对比新增、删除、重命名的资源及语法变化；资源重命名不得凭近似名字自动替换。
 - 更新资料记录，重新解析受影响的剧情代码；可播放时复验受影响场景。
+- 新名册使用 `python3 tools/query_resource_catalog.py --compare <新版Configs目录>` 比较资源增删、别名修改和差分变化；此命令不覆盖文件。保留原始配置字节，更新 `resource-catalog/source-manifest.json`、审查结果及资料说明；用户给定的别名不要自行纠错或改写。
 - 更新规则后运行 `python3 tools/build_astoryx_reference.py` 重新生成参数参考；生成文档不等于脚本解析或播放验证。
 - 在验证完成前，不把旧版经验当成新版已经支持的功能。

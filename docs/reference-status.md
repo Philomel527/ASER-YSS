@@ -23,6 +23,13 @@ ASER 本体已从用户上传的三个 RAR5 分卷完整导入：
 - 从 `ASE-Remake_Data/globalgamemanagers` 的 Unity `PlayerSettings.bundleVersion` 读取版本 **3.7.12**；程序为 Windows x86-64 Unity Mono。
 - 分卷及逐文件 SHA-256 见 [aser-source-manifest.json](aser-source-manifest.json)。已核对 182 个 Git 提交文件与原始解压内容逐字节相同。
 
+用户补充的 `Configs.rar` 已完整校验并导入：
+
+- 原压缩包 78,576 字节，RAR5，7-Zip 26.05 检查结果为 `Everything is Ok`；三个 JSON 原样保存在 `resource-catalog/Configs/`，共 844,955 字节。
+- 名册含 13,512 项资源：普通立绘 1,808、动态立绘 100、背景 2,799、BGM 582、音效 7,949、特效 274。
+- 已读取 100 个别名及 10 份立绘差分配置；其目标均存在于本次名册。背景名 `35_i10` 同时匹配原名与另一资源的别名，分别保留候选，未假定播放器的解析优先级。
+- 来源哈希见 [source-manifest.json](../resource-catalog/source-manifest.json)，数量和冲突检查见 [audit.json](../resource-catalog/audit.json)，可读对应表见 [资源名册与别名](resource-catalog.md)。配置中未声明名册对应的游戏版本；游戏素材文件本身没有包含在本次配置包中。
+
 ## 资料核验状态
 
 | 资料／能力 | 已核实情况 | 尚未完成 |
@@ -31,7 +38,7 @@ ASER 本体已从用户上传的三个 RAR5 分卷完整导入：
 | ASER 模板 | 有 3.0 和 3.6.7 两套模板；本体元数据版本另外确认为 3.7.12。 | 模板与实际本体的运行兼容性尚需播放验证。 |
 | AStoryX 规则 | 两套 3.6.7 规则各含 21 类控制器；已对照参数元数据和中文说明生成参考。 | 未运行上游 C++ 解析器；未执行 ASER 播放。 |
 | 官方示例 | 已读三个 3.6.7 示例，涵盖主要演出、别名、块、变量和分支。 | 部分示例需要完整官方素材连接；并非当前云环境已能播放。 |
-| 资源目录名单 | 已确认源码中的监视路径、索引结构和模板资源。 | 完整 `officialAssets_collections.json`、`officialAssets_aliases.json`、`officialAssets_userConfigs.json` 尚未取得。 |
+| 资源目录名单 | 已取得本次 `officialAssets_collections.json`、`officialAssets_aliases.json`、`officialAssets_userConfigs.json`，可查询资源、别名及已提供的差分。 | 尚未检查用户本地游戏文件能否实际加载；未配置的差分含义和后续游戏更新不能从此快照推断。 |
 | ASER 本体 | 三个分卷已完整校验并导入 `vendor/ASER/`；版本为 3.7.12。 | 当前 Linux 环境未运行 Windows 播放器，不把文件导入当作播放验证。 |
 | ASER 教程 | 网络策略已改为 unrestricted，首页和公开正文请求均成功；已读导航中的 17 篇文章正文。 | 图片未逐张视觉核验；资料中的默认值和语法边界差异已记录，仍需结合目标本体测试。 |
 | YSS 教程 | 上游 README 另指向 https://www.yuque.com/tsingyayin/yss ；同域网络阻碍已解除。 | 本轮优先学习用户指定的 ASER 知识库，未系统阅读另一本 YSS 使用手册。 |
@@ -45,6 +52,7 @@ ASER 本体已从用户上传的三个 RAR5 分卷完整导入：
 - 当前模板规则、元数据与中文参数说明读取和参考生成：通过。
 - 更新比较工具对新增、删除、修改及符号链接的识别：通过。
 - ASER 语雀知识库 17 篇文章正文请求与阅读：完成，来源和更新日期见 [yuque-reference-index.json](yuque-reference-index.json)，学习与差异记录见 [yuque-study-notes.md](yuque-study-notes.md)。
+- Configs.rar 完整性、三个 JSON 的结构与原始字节、别名和立绘配置目标存在性：通过；一处背景名称冲突已记录。查询工具支持精确查询、完整候选和新版比较。
 - YSS GUI、上游 C++ 解析和 ASER 播放：未运行。
 
-目前已对照源码和 ASER 教程正文整理核心编写方法、演出控制及分支逻辑；没有声称已验证完整播放。网络和压缩包传输问题已解决，后续需按用户当前素材名单核对引用，并在 Windows 本体上验证实际效果。
+目前已对照源码和 ASER 教程正文整理核心编写方法、演出控制及分支逻辑，并取得用户当前名册快照。后续按该快照核对引用并接收新版；Windows 本地实际加载与播放仍分别验证。

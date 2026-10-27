@@ -1,0 +1,31 @@
+{
+  "source": "用户上传的 Configs.rar（ASER 本地配置快照）",
+  "imported_on": "2026-10-27",
+  "archive": {
+    "name": "Configs.rar",
+    "size_bytes": 78576,
+    "sha256": "6dcad05eaaec929220efd0c7e3ae6b8aab6b0df2c870004ee98f45e428342c5d",
+    "format": "RAR5",
+    "integrity_check": "7-Zip 26.05: Everything is Ok"
+  },
+  "target_aser_version": "3.7.12",
+  "catalog_game_version": null,
+  "files": [
+    {
+      "path": "Configs/officialAssets_collections.json",
+      "size_bytes": 832645,
+      "sha256": "72725248db6df0ee876fa87f6ad0591c42b8f2c0fce4ba02d2047954e543faf2"
+    },
+    {
+      "path": "Configs/officialAssets_aliases.json",
+      "size_bytes": 4476,
+      "sha256": "b08c835323b2df78ea0985c99784fe41354c146a3682d91c20cddb1091a202d5"
+    },
+    {
+      "path": "Configs/officialAssets_userConfigs.json",
+      "size_bytes": 7834,
+      "sha256": "24f6e0ffff9dc879da0e25e9df13f98f7cde8080ccfcc1f86eec1d754baa2705"
+    }
+  ],
+  "note": "保留原始配置字节；名册是资源索引，不包含游戏素材文件，游戏资源在用户本地的可读取状态尚未检查。"
+}

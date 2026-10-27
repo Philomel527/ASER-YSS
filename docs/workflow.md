@@ -27,6 +27,8 @@ YSS 源码已放在 `vendor/YayinStoryStudio/`，ASER 本体放在 `vendor/ASER/
 
 用户提供剧本与创作要求后，先提取技术需求，再从当前资源名单核对素材。对不影响创作的实现细节沿用验收基线；影响节奏或画面的参数明确填写。涉及缺失素材、台词歧义或表达变化时，集中提出具体问题，同时继续处理不受影响的部分。不得擅自扩写或用占位内容补成正式剧情。
 
+当前名册在 `resource-catalog/Configs/`，对应说明见 [资源名册与别名](resource-catalog.md)。用 `python3 tools/query_resource_catalog.py 名称 --exact` 查询原名、别名、资源包与已提供的差分配置；重名时保留候选，不自动选取。用户未提供某角色的差分配置不表示该角色没有表情，不能自行补出差分名称。
+
 代码以 UTF-8 `.astoryx` 文本交付到 `story-code/`。该目录只放根据用户剧本编写的代码，不放模板占位文件、工具包原带示例和说明。使用时复制到已配置的 ASER 项目的 `Stories/`；规则和资源必须使用该项目的当前版本。
 
 ## 4. 检查与交付
@@ -43,4 +45,6 @@ YSS 源码已放在 `vendor/YayinStoryStudio/`，ASER 本体放在 `vendor/ASER/
 4. 查找已有剧情代码中受影响的引用，提出需要用户决定的素材替换。
 5. 更新清单中的提交、下载来源和逐文件哈希，再运行 `python3 tools/build_astoryx_reference.py` 重新生成参数表；重新检查受影响文件和场景，更新兼容性记录。
 
-目前 YSS 源码、ASER 本体和 ASER 语雀教程正文均已取得。静态资料核对已经完成的部分和仍需实际解析、播放验证的部分应分别报告；官方素材名单还需按用户本地素材库补充。
+仅更新名册时，用 `python3 tools/query_resource_catalog.py --compare <新版Configs目录>` 比较三份配置中的资源增删、别名改动及角色配置变化，命令不覆盖原文件。核验后原样导入并更新 `resource-catalog/source-manifest.json`、`resource-catalog/audit.json` 与可读对应表；仅名册更新不需要重新生成规则参数表。
+
+目前 YSS 源码、ASER 本体、ASER 语雀教程正文以及用户补充的三份资源配置均已取得。静态资料核对已经完成的部分和仍需实际解析、播放验证的部分应分别报告；后续接收名册更新并核对其与用户实际素材库的对应。

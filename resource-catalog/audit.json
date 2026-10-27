@@ -1,0 +1,51 @@
+{
+  "scope": "用户上传名册中的名称映射；未验证游戏文件加载，也不推断 ASER 的同名解析优先级。",
+  "counts": {
+    "characterTachies": {
+      "resources": 1808,
+      "aliases": 25,
+      "character_configs": 10
+    },
+    "characterDynamics": {
+      "resources": 100,
+      "aliases": 0,
+      "character_configs": 0
+    },
+    "backgrounds": {
+      "resources": 2799,
+      "aliases": 45,
+      "character_configs": 0
+    },
+    "musics": {
+      "resources": 582,
+      "aliases": 22,
+      "character_configs": 0
+    },
+    "soundEffects": {
+      "resources": 7949,
+      "aliases": 7,
+      "character_configs": 0
+    },
+    "visualEffects": {
+      "resources": 274,
+      "aliases": 1,
+      "character_configs": 0
+    }
+  },
+  "resource_count": 13512,
+  "alias_count": 100,
+  "character_config_count": 10,
+  "aliases_missing_from_collections": [],
+  "configs_missing_from_collections": [],
+  "name_collisions": [
+    {
+      "kind": "backgrounds",
+      "name": "35_i10",
+      "raw_names": [
+        "35_i10",
+        "36_g4_redleafcliff"
+      ]
+    }
+  ],
+  "variation_name_collisions": []
+}
