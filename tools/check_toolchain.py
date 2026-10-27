@@ -1,4 +1,4 @@
-"""核对导入的 YSS 文件；比较新版目录时只报告差异，不覆盖任何文件。"""
+"""核对导入的 YSS 或 ASER 文件；比较新版目录时只报告差异，不覆盖文件。"""
 
 import argparse
 import hashlib
@@ -7,7 +7,10 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = ROOT / "docs/yss-source-manifest.json"
+MANIFESTS = {
+    "yss": ROOT / "docs/yss-source-manifest.json",
+    "aser": ROOT / "docs/aser-source-manifest.json",
+}
 
 
 def inventory(directory: Path) -> dict[str, str]:
@@ -38,13 +41,14 @@ def compare(expected: dict[str, str], current: dict[str, str]) -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--tool", choices=MANIFESTS, default="yss", help="选择要核对的工具，默认 yss")
     parser.add_argument(
         "--candidate", type=Path,
         help="对比另一份完整解压目录；仅报告新增、删除、改动，不自动更新清单",
     )
     args = parser.parse_args()
     try:
-        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        manifest = json.loads(MANIFESTS[args.tool].read_text(encoding="utf-8"))
         expected = {item["path"]: item["sha256"] for item in manifest["files"]}
         directory = args.candidate if args.candidate is not None else ROOT / manifest["directory"]
         current = inventory(directory)
@@ -52,7 +56,10 @@ def main() -> int:
     except (OSError, ValueError, KeyError) as error:
         parser.exit(2, f"检查失败：{error}\n")
     print(json.dumps({
-        "baseline_commit": manifest["commit"],
+        "tool": args.tool,
+        **({"baseline_commit": manifest["commit"]} if args.tool == "yss" else {
+            "baseline_version": manifest["application_version"]
+        }),
         "checked_files": len(current),
         **differences,
     }, ensure_ascii=False, indent=2))

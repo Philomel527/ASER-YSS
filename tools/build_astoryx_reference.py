@@ -35,6 +35,7 @@ def main() -> None:
         "# AStoryX 控制器参数参考", "",
         f"来源提交：`{manifest['commit']}`。规则来自上游 `template/3.6.7/Rules/`，类型、默认值和约束来自 `astoryxMeta/default.json`，说明来自 `i18n/zh_CN.json`。", "",
         "由 `python3 tools/build_astoryx_reference.py` 生成。这里记录的是源码内的规则和元数据；不是已经通过 ASER 播放测试的运行时保证。实际 ASER 版本及项目自定义规则优先。", "",
+        "当前导入的 ASER 本体为 3.7.12。已发现本表的部分默认元数据与语雀参数文档不同；差异及处理方法见 [语雀学习记录](yuque-study-notes.md)。", "",
         "`BaseRule` 依靠位置和前缀，`AdvanceRule` 的大多数参数使用具名的 `,@参数名=` 前缀。变量赋值仍使用 `=`，必须以每一行表中的前缀为准。", "",
     ]
     for entry in advanced:

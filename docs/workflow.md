@@ -6,11 +6,11 @@
 
 YSS 源码已放在 `vendor/YayinStoryStudio/`，ASER 本体放在 `vendor/ASER/`，保留原始层级；若其说明要求固定路径，以检查结果调整。导入前检查 GitHub 文件大小限制；若存在需要 Git LFS 的文件，先确认 LFS 支持，再提交，不能仅为成功上传而静默遗漏工具文件。
 
-检查实际编辑器、目录名单、示例和说明，记录工具文件的 SHA-256。当前 YSS 基线见 `docs/yss-source-manifest.json`，可用 `python3 tools/check_toolchain.py` 核对。ASER 本体尚未取得，不根据 YSS 模板推断其真实版本。
+检查实际编辑器、目录名单、示例和说明，记录工具文件的 SHA-256。YSS 基线见 `docs/yss-source-manifest.json`，可用 `python3 tools/check_toolchain.py` 核对；ASER 基线见 `docs/aser-source-manifest.json`，使用 `python3 tools/check_toolchain.py --tool aser` 核对。当前 ASER 本体版本是从内置元数据读取的 3.7.12，不根据 YSS 模板推断版本。
 
 ## 2. 教程学习和工作原理核验
 
-已从源码确认的流程见 [astoryx-guide.md](astoryx-guide.md)，已生成的参数表见 [astoryx-controller-reference.md](astoryx-controller-reference.md)。继续对照教程与实际工具确认：
+源码流程见 [astoryx-guide.md](astoryx-guide.md)，参数表见 [astoryx-controller-reference.md](astoryx-controller-reference.md)，语雀教程的校正和兼容性差异见 [yuque-study-notes.md](yuque-study-notes.md)。继续对照教程与实际工具确认：
 
 - YSS 与 ASER 分别承担编辑、解析、转换、导入、播放中的哪些步骤；两者交换的文件格式是什么。
 - 剧情代码文本的文件后缀、编码、换行、注释、转义和参数规则。
@@ -36,9 +36,9 @@ YSS 源码已放在 `vendor/YayinStoryStudio/`，ASER 本体放在 `vendor/ASER/
 接收新编辑器或目录名单后：
 
 1. 记录来源、版本、日期、哈希和变化说明。
-2. 对 YSS 新的完整解压目录运行 `python3 tools/check_toolchain.py --candidate <目录>`，对比指令或参数变化，以及资源的新增、删除和重命名。该命令不覆盖文件。
+2. 对新的完整解压目录运行 `python3 tools/check_toolchain.py --tool yss --candidate <目录>` 或 `--tool aser --candidate <目录>`，对比指令或参数变化，以及资源的新增、删除和重命名。该命令不覆盖文件。
 3. 单独提交工具或名单更新，保留可追溯的 Git 历史。
 4. 查找已有剧情代码中受影响的引用，提出需要用户决定的素材替换。
 5. 更新清单中的提交、下载来源和逐文件哈希，再运行 `python3 tools/build_astoryx_reference.py` 重新生成参数表；重新检查受影响文件和场景，更新兼容性记录。
 
-目前 YSS 源码、规则和示例已可读，ASER 本体与语雀教程全文仍未取得。静态资料核对已经完成的部分和仍需实际解析、播放验证的部分应分别报告。
+目前 YSS 源码、ASER 本体和 ASER 语雀教程正文均已取得。静态资料核对已经完成的部分和仍需实际解析、播放验证的部分应分别报告；官方素材名单还需按用户本地素材库补充。
