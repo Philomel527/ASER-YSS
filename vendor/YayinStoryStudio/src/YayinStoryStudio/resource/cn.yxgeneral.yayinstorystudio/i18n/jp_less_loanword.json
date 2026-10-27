@@ -1,0 +1,471 @@
+﻿{
+	"config": {
+		"title": "Yayin Story Studio 設定",
+		"general": {
+			"title": "全般",
+			"text": "プログラムの全般的な設定",
+			"language": {
+				"title": "言語",
+				"text": "アプリケーションの言語を選択",
+				"zh_CN": "簡体中国語",
+				"zh_TW": "繁体中国語",
+				"en": "英語",
+				"ja": "日本語",
+				"jp_less_loanword": "日本語（外来語控えめ）",
+				"ko": "韓国語",
+				"ru": "ロシア語",
+				"de": "ドイツ語",
+				"fr": "フランス語"
+			},
+			"theme": {
+				"title": "配色テーマ",
+				"text": "アプリケーションの配色テーマを選択",
+				"dark": "暗色",
+				"light": "明色",
+				"auto": "自動（システム設定に従う）"
+			},
+			"updateChannel": {
+				"title": "更新経路",
+				"text": "アプリケーションが使用する更新経路を選択します。正式版は正式版の更新のお知らせのみを受け取り、β版は正式版とβ版の更新のお知らせの両方を受け取り、技術プレビュー版は3つの版のすべての更新のお知らせを受け取ります。",
+				"release": "正式版",
+				"beta": "β版",
+				"tp": "技術プレビュー"
+			}
+		},
+		"editor": {
+			"title": "エディター",
+			"text": "エディター関連の設定",
+			"reloadtab": {
+				"title": "TABキーの動作",
+				"text": "行頭でTABキーが押されたときにスペースに置き換えるかどうかを制御します（このオプションは現在のところ無効です）"
+			}
+		}
+	},
+	"update": {
+		"newVersionAvailable": "新しいバージョンが利用可能です！",
+		"newVersionAvailableDesc": "バージョン%1が公開されました。現在使用しているバージョンは%2です。\n公開の記録で新バージョンの更新内容をご確認のうえ、公式サイトから最新版をダウンロードしてください。",
+		"newsLoadFailed": "サーバーからお知らせを取得できませんでした。通信環境を確認して、後でもう一度お試しください。",
+		"installerUpdating": "YSSインストーラーを更新しています",
+		"installerUpdatingDesc": "新しいバージョンのYSSインストーラーを検出しました。更新して再接続しています。しばらくお待ちください..."
+	},
+	"tooltips": {
+		"projectWin": {
+			"project": "クリックで詳細を表示、ダブルクリックでプロジェクトを開く",
+			"showInBrowser": "エクスプローラーでプロジェクトの場所を開く",
+			"delete": "一覧からプロジェクトを削除",
+			"createNewProject": "プロジェクトの雛形から新しいプロジェクトを作成",
+			"openFolder": "Yayin Story Studioプロジェクトを開く",
+			"cloneFromGit": "指定したGitリポジトリのURLからプロジェクトを複製"
+		}
+	},
+	"project": {
+		"author": "作者",
+		"description": "説明",
+		"debugServer": "デバッグサーバー",
+		"projectManager": "プロジェクト管理",
+		"selectToShow": "詳細を表示するプロジェクトを選択...",
+		"noCover": "表紙なし",
+		"lastModifiedTime": "最終更新日時",
+		"createTime": "作成日時",
+		"size": "容量",
+		"calculating": "計算中...",
+		"showInBrowser": "エクスプローラーで表示",
+		"delete": "プロジェクトを削除",
+		"deleteConfirm": "Yayin Story Studioは現在、プロジェクトをごみ箱へ安全に削除する機能に対応していません。\nそのため、安全のため、OKを押してもプロジェクトは一覧から削除されるだけです。\n後でエクスプローラーでプロジェクトを手動で削除できます。\n\n続行しますか？",
+		"removeFromList": "一覧から削除",
+		"createNewProject": "新しいプロジェクトを作成",
+		"createNewFile": "新しいファイルを作成",
+		"openFolder": "プロジェクトを開く",
+		"openYSSProject": "YSSプロジェクトを開く",
+		"cloneFromGit": "Gitから複製",
+		"createFromTemplate": "雛形から作成",
+		"searchWithTags": "タグで雛形を検索",
+		"projectVersionTooNew": {
+			"title": "プロジェクトが新しすぎます",
+			"message": "プロジェクト「%1」は未知の新しいバージョンのプロジェクトです。現在のバージョンで開くと、データが失われたり正常に使用できなくなったりする可能性があります。プロジェクトのデータの控えを取ってあることをご確認ください。\n\nプロジェクトを開く操作を続けますか？"
+		},
+		"projectVersionTooOld": {
+			"title": "プロジェクトの更新が必要です",
+			"message": "プロジェクト「%1」は古い互換バージョンのプロジェクトです（プロジェクトバージョン %2、互換 %3 ～ %4）。新しいバージョンで開くと恒久的に新しいバージョンへ更新され、古いバージョンでは開けなくなります。プロジェクトのデータの控えを取ってあることをご確認ください。\n\nプロジェクトを開く操作を続けますか？"
+		},
+		"recentUsed": "最近使用",
+		"openProjectFailed": {
+			"message": "プロジェクトを開けませんでした",
+			"ParseError": "プロジェクトの情報を読み取れませんでした。書式に誤りがあるか、破損している可能性があります。",
+			"InvaildConfig": "プロジェクト構成が無効です。必須の項目がないか、項目の型が正しくありません。",
+			"UnknownError": "不明なエラーが発生し、プロジェクトを開けませんでした。"
+		},
+		"requiredPluginsNotAvailable": {
+			"title": "必要なプラグインが不足しています",
+			"message": "プロジェクト「%1」を正常に動作させるには、以下の ID のプラグインが必要です。これらのプラグインを揃えてからプロジェクトを開くことをおすすめします。強制的に開くこともできますが、データが失われる可能性があります。\n\n強制的にプロジェクトを開きますか？"
+		},
+		"saveQuestion": {
+			"title": "プログラムを終了しますか？",
+			"text": "プロジェクト「%1」は変更されていますが、まだ保存されていません。プロジェクトを保存しますか？"
+		}
+	},
+	"menu": {
+		"file": {
+			"title": "ファイル",
+			"new": "新しいファイル",
+			"newFile": "新しいファイル",
+			"newFolder": "新しいフォルダー",
+			"open": "開く",
+			"save": "保存",
+			"saveAll": "すべて保存",
+			"saveAs": "名前を付けて保存",
+			"backToHome": "ホームに戻る",
+			"terminal": "ターミナル",
+			"pluginAndPreferences": "プラグインと設定",
+			"colorThemeSettings": "コード構文の色設定",
+			"exit": "終了",
+			"documentation": "文書",
+			"about": "Yayin Story Studioについて",
+			"projectConfig": "プロジェクト設定",
+			"showInExplorer": "エクスプローラーで表示",
+			"closeAll": "すべて閉じる",
+			"closeSaved": "保存済みを閉じる"
+		},
+		"edit": {
+			"title": "編集",
+			"undo": "元に戻す",
+			"redo": "やり直す",
+			"cut": "切り取り",
+			"copy": "コピー",
+			"copyPath": "場所をコピー",
+			"copyName": "名前をコピー",
+			"paste": "貼り付け",
+			"selectAll": "すべて選択",
+			"findAndReplace": "検索と置換"
+		},
+		"run": {
+			"title": "実行",
+			"run": "実行（デバッグなし）",
+			"debug": "実行（デバッグ）",
+			"stop": "停止",
+			"restart": "再起動",
+			"build": "プロジェクトをビルド",
+			"rebuild": "強制的に作り直す",
+			"clean": "ビルド結果を消去",
+			"stepInto": "中へ入る",
+			"stepOver": "またいで進む",
+			"suspend": "一時停止",
+			"resume": "再開"
+		},
+		"view": {
+			"title": "表示",
+			"resourceBrowser": "資源参照",
+			"messageViewer": "お知らせ表示",
+			"pluginTools": "プラグインツール",
+			"fullScreenToggle": "全画面切り替え",
+			"noTools": "表示できるツールがありません"
+		}
+	},
+	"editor": {
+		"messageViewer": {
+			"title": "お知らせ表示",
+			"error": "エラー",
+			"warning": "警告",
+			"info": "情報",
+			"code": "コード",
+			"message": "説明",
+			"file": "ファイル",
+			"line": "行",
+			"column": "列"
+		},
+		"multiTerminal": {
+			"title": "ターミナル",
+			"newTerminal": "新しいターミナル",
+			"closeTerminal": "ターミナルを閉じる",
+			"closeOtherTerminals": "他のターミナルを閉じる",
+			"closeAllTerminals": "すべてのターミナルを閉じる",
+			"terminalName": "ターミナル %1"
+		},
+		"far": {
+			"title": "検索と置換",
+			"find": "検索",
+			"findNext": "次を検索",
+			"replace": "置換",
+			"replaceNext": "次を置換",
+			"replaceAll": "すべて置換",
+			"matchCase": "大文字と小文字を区別",
+			"wholeWord": "単語単位",
+			"useRegExp": "正規表現",
+			"notFound": "これ以上見つかりません",
+			"notFoundDesc": "対象の文字列「%1」が見つかりません",
+			"replaced": "置換が完了しました",
+			"replacedDesc": "%1件を置換しました",
+			"matchCount": "合計 %1"
+		},
+		"stackWidgetArea": {
+			"noFileOpened": "何も開かれていません",
+			"dragInFile": "札を離してここへ移動します"
+		},
+		"toolWidgetArea": {
+			"noToolWidget": "表示できるツールがありません"
+		},
+		"bottomInfoWidget": {
+			"debugMessage": {
+				"prepared": "準備完了"
+			},
+			"cursorInfo_s": "行 %1、列 %2（選択 %3）",
+			"cursorInfo": "行 %1、列 %2",
+			"totalLines": "総行数 %1",
+			"statistic": {
+				"tooltip": "クリックして詳細な統計を表示",
+				"title": "文書統計",
+				"titleWithName": "文書統計 - %1",
+				"wordCount": "字数：%1",
+				"charCountIncludeWhitespace": "文字数（空白含む）：%1",
+				"charCountExcludeWhitespace": "文字数（空白除く）：%1",
+				"cjkvCharCount": "CJKV 文字数：%1",
+				"nonCJKVCharCount": "非 CJKV 文字数：%1",
+				"paragraphCount": "段落数：%1",
+				"noEditor": "現在開いているエディターがありません"
+			}
+		},
+		"textEdit": {
+			"readOnly": {
+				"title": "読み取り専用です",
+				"message": "保存しようとしている %1 は読み取り専用です。上書き保存はできません。権限を確認するか、「名前を付けて保存」で別の場所に保存してください。"
+			},
+			"unsupportedEncoding": {
+				"title": "元の文字コードでは保存できません",
+				"message": "%1 は UTF-8 または UTF-16 ではありません。YSS は内容を読み出して表示することしかできず、現在の文字コードで書き戻すと中身が壊れるため、上書き保存は中止しました。今回の変更を残したい場合は「名前を付けて保存」で別の場所に保存してください。"
+			},
+			"notSuitable": {
+				"title": "この形式に対応する機能が見つかりません",
+				"message": "拡張子 %1 に適した開く機能が見つかりませんでした。YSS は組み込みのテキストエディターで開くこともできますが、一部のバイナリデータが破損する可能性があります。組み込みのテキストエディターで開き続けますか？（強く推奨しません）"
+			},
+			"ready": "準備完了",
+			"tabCompleter": {
+				"top": "%1 プラグインが文脈に基づいて推奨する優先表示の候補",
+				"viewDescription": "(補完項目をクリックまたはカーソルを重ねると説明を表示します)",
+				"value": "値 型",
+				"const": "定数 型",
+				"enum": "列挙 型",
+				"function": "関数 型",
+				"object": "オブジェクト 型",
+				"operator": "演算子 型"
+			},
+			"tabCompleterLevel": {
+				"none": "候補なし",
+				"few": "候補が少ない",
+				"some": "候補が適度",
+				"many": "候補が多い",
+				"all": "すべての候補"
+			},
+			"suggestion":{
+				"inlineEdit": "行全体入れ替えの提案",
+				"pureAdd": "内容追加の提案",
+				"multiLineEdit": "複数行挿入の提案",
+				"blockRemove": "行削除の提案",
+				"scrollUp": "行 %1 へ上へ送る",
+				"scrollDown": "行 %1 へ下へ送る",
+				"accept": "受け入れる",
+				"reject": "断る"
+			},
+			"inlayHintVisible": "行内の手掛かり",
+			"hintSettings": "ヒント設定",
+			"completerLevel": "補完の段階"
+		},
+		"debug": {
+			"notFound": {
+				"title": "おや！デバッガーが見つかりません",
+				"message": "このプロジェクトで指定されたデバッガー%1が見つかりません。このデバッガーを提供するプラグインを無効化または削除しましたか？プラグインを再度有効化または追加して、プログラムを再起動してからもう一度お試しください。"
+			},
+			"notSelect": {
+				"title": "デバッガーが設定されていません！",
+				"message": "このプロジェクトにはデバッガーが設定されていません。プロジェクト設定を開き、デバッガーの項目でデバッガーを選択してから再試行してください。"
+			}
+		},
+		"saveWarning": {
+			"title": "変更が保存されていません",
+			"message": "%1 が変更されています。変更を保存しますか？"
+		},
+		"saveAsConflict": {
+			"title": "上書き先が開かれており、未保存の変更があります",
+			"message": "先に %1 を保存または閉じてから、「名前を付けて保存」による上書き操作を再試行してください。"
+		},
+		"reloadWarning": {
+			"title": "今すぐ再読み込みしますか？",
+			"message": "%1 が変更されています。今すぐ再読み込みすると、この変更は失われます。再読み込みしますか？"
+		},
+		"renameDialog": {
+			"title": "名前の変更",
+			"rename": "%1 の名前を変更しています",
+			"request": "新しい名前を入力してください",
+			"warning": {
+				"empty": "名前を空にすることはできません。名前を入力してください。",
+				"same": "新しい名前が古い名前と同じです。別の名前を入力してください。",
+				"exists": "同じ場所に同じ名前が既に使われています。別の名前を選んでください。",
+				"invalid": "名前に次の文字は使えません：\\ / : * ? \" < > |",
+				"extNotSame": {
+					"normal": "新しい名前の拡張子が元のものと異なります。問題が発生する可能性があります。",
+					"title": "拡張子を変更してもよろしいですか？",
+					"message": "新しい名前で指定された拡張子%1は元の拡張子%2と異なります。正しく認識・開かれないなどの問題が発生する可能性があります。名前の変更を続行しますか？"
+				}
+			}
+		},
+		"newFolderDialog": {
+			"title": "新しいフォルダー",
+			"desc": "%1 の中に新しいフォルダーを作成します。名前を入力してください：",
+			"warning": {
+				"empty": "名前を空にすることはできません。名前を入力してください。",
+				"exists": "同じ場所に同じ名前のフォルダーが既にあります。別の名前を選んでください。",
+				"invalid": "名前に次の文字は使えません：\\ / : * ? \" < > |"
+			}
+		},
+		"about": {
+			"title": "Yayin Story Studioについて",
+			"message": "バージョン%1、Tsing Yayinの作品です。Yayin Story StudioはProject Visindigoの一部であり、Yayin Story Playerから発展した新しいプロジェクトで、ASEユーザーに使いやすい開発環境を提供することを目的としています。"
+		},
+		"deleteProjectFile": {
+			"title": "プロジェクトのメタ情報は削除できません",
+			"message": "現在開いているプロジェクトのメタ情報は削除できません。プロジェクトを削除する場合は、プロジェクト選択ページに戻り、プロジェクトの削除を選択してください。"
+		},
+		"fileOperation": {
+			"failed": {
+				"title": "操作に失敗しました",
+				"message": "%1 への操作を完了できませんでした。他のソフトが使用中でないか、権限があるか、空きがあるかを確認してください。"
+			}
+		},
+		"deleteFile": {
+			"title": "削除の確認",
+			"message": "ファイルまたはフォルダー %1 を削除してもよろしいですか？削除された項目はシステムのごみ箱に移動されるため、ごみ箱から復元できます。"
+		}
+	},
+	"colorThemeSettings": {
+		"langServer": "言語サーバー",
+		"theme": "配色",
+		"duplicate": "複製",
+		"delete": "削除",
+		"duplicateDialog": {
+			"title": "配色の複製",
+			"desc": "配色「%1」を複製しています。新しい配色の名前を入力してください：",
+			"warning": {
+				"empty": "名前を空にすることはできません。名前を入力してください。",
+				"same": "新しい名前が元の配色と同じです。別の名前を入力してください。",
+				"exists": "同じ名前の配色が既に存在します。別の名前を入力してください。"
+			}
+		},
+		"deleteConfirm": {
+			"title": "配色の削除",
+			"message": "配色「%1」を削除してもよろしいですか？この操作は元に戻せません。"
+		},
+		"font": "書体",
+		"preview": "試し表示",
+		"textColor": "文字の色",
+		"bgColor": "背景色",
+		"bgColorEnabled": "背景色を使用",
+		"lineColor": "線の色",
+		"lineType": "線の種類",
+		"bold": "太字",
+		"italic": "斜体",
+		"save": "保存",
+		"reset": "初期化",
+		"underlineType": {
+			"NoUnderline": "なし",
+			"SingleUnderline": "実線",
+			"DashUnderline": "破線",
+			"DotLine": "点線",
+			"DashDotLine": "一点鎖線",
+			"DashDotDotLine": "二点鎖線",
+			"WaveUnderline": "波線",
+			"SpellCheckUnderline": "綴り検査線"
+		},
+		"unsavedChanges": {
+			"title": "未保存の変更があります",
+			"message": "未保存の変更があります。保存しますか？保存しない場合、すべての変更が失われます。"
+		},
+		"staticThemeWarning": "！注意：これは組み込みの配色です。この配色への変更は反映されません。複製してから編集してください。"
+	},
+	"agent": {
+		"title": "Visindigo Agent 会話",
+		"placeholder": "文を書き入れ、Enter で送り、Shift+Enter で改行",
+		"send": "送る",
+		"ready": "使える状態です。いまの機種：%1",
+		"generating": "生成中…",
+		"reasoning": "考えの道筋",
+		"runError": "実行に失敗しました：%1",
+		"configError": "机の上（デスクトップ）の機種設定を読めませんでした：%1"
+	},
+	"pluginLoadFaultDialog": {
+		"title": "プラグインの読み込みに失敗しました",
+		"message": "以下のプラグインを正しく読み込めませんでした。ID と失敗の原因を以下に示します。プログラムの使用を続けますか？",
+		"pluginID": "プラグイン ID",
+		"reason": "失敗の原因",
+		"continue": "使用を続ける",
+		"quit": "プログラムを終了"
+	},
+	"pluginLoadResult": {
+		"Unknown": {
+			"title": "不明なエラー",
+			"message": "プラグインの読み込み中に予期しないエラーが発生しました。プログラムを起動し直してみてください。問題が続く場合はプラグインの作者に連絡してください。"
+		},
+		"Success": {
+			"title": "読み込み成功",
+			"message": "プラグインは正しく読み込まれました。"
+		},
+		"Deactivated": {
+			"title": "無効にされています",
+			"message": "このプラグインはプラグイン設定で無効にされているため、読み込まれません。使用するにはプラグイン設定で再び有効にしてください。"
+		},
+		"PlatformNotSupported": {
+			"title": "対応していない環境です",
+			"message": "このプラグインは現在の基本ソフトウェアまたは CPU の種類に対応していません。プラグインの作者に現在の環境向けのものを依頼してください。"
+		},
+		"InvalidPluginBinary": {
+			"title": "プラグイン本体が無効です",
+			"message": "プラグインの本体を Visindigo プラグインとして正しく見分けられません。古すぎてまったく読み込めないか、別の原因で壊れている可能性があります。このプラグインを入れ直してください。"
+		},
+		"InvalidDependLib": {
+			"title": "依存ライブラリが無効です",
+			"message": "このプラグインに必要な依存ライブラリが無いか、壊れています。プラグインとその依存関係を入れ直してください。"
+		},
+		"DependLibConflict": {
+			"title": "依存ライブラリの衝突",
+			"message": "このプラグインに必要な依存ライブラリが、既に読み込まれている別の版と衝突しています。衝突するプラグインを外すか更新してください。"
+		},
+		"EntryPointNotFound": {
+			"title": "入口が見つかりません",
+			"message": "プラグインに正しい入口の関数が見つかりません。有効な Visindigo プラグインではない可能性があります。"
+		},
+		"ConstructorError": {
+			"title": "生成時のエラー",
+			"message": "プラグインの生成時に例外が発生したか、空のオブジェクトが返されました。プラグインの作者に連絡してください。"
+		},
+		"IncompatibleABI": {
+			"title": "ABI が合いません",
+			"message": "プラグインは現在のプログラムの核心部の ABI 版と合いません。プラグインまたはプログラムを更新してください。"
+		},
+		"IncompatibleAPI": {
+			"title": "API が合いません",
+			"message": "プラグインは現在のプログラムの API 版と合いません。プラグインまたはプログラムを更新してください。"
+		},
+		"AlreadyLoaded": {
+			"title": "重複して読み込まれています",
+			"message": "同じ ID のプラグインが既に読み込まれているため、この読み込みは行いませんでした。重複したプラグインが無いか確認してください。"
+		},
+		"DependencyNotFound": {
+			"title": "依存プラグインが見つかりません",
+			"message": "このプラグインが依存する他のプラグインがありません。不足しているプラグインを入れてから再試行してください。"
+		},
+		"DependencyLoadFailed": {
+			"title": "依存プラグインの読み込みに失敗しました",
+			"message": "このプラグインが依存する他のプラグインの読み込みに失敗しました。先にそのプラグインの読み込みの問題を解決してください。"
+		},
+		"DependencyDeactivated": {
+			"title": "依存プラグインが無効にされています",
+			"message": "このプラグインが依存する他のプラグインが無効にされています。依存するプラグインを有効にするか、このプラグインも無効にしてください。"
+		},
+		"MetadataNotFound": {
+			"title": "メタデータが見つかりません",
+			"message": "プラグインのメタデータが見つからず、プラグインを見分けられません。プラグインを入れ直してください。"
+		},
+		"MetadataNotSame": {
+			"title": "メタデータが一致しません",
+			"message": "プラグインのメタデータが実際の本体と一致しません。プラグインを入れ直してください。"
+		}
+	}
+}

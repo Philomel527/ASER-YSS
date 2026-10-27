@@ -1,0 +1,62 @@
+#include <QtGui/qevent.h>
+#include <QtGui/qpainter.h>
+#include <QtWidgets/qstyle.h>
+#include <QtWidgets/qstyleoption.h>
+#include "General/Log.h"
+#include "Widgets/BorderFrame.h"
+namespace Visindigo::Widgets {
+	/*!
+		\class Visindigo::Widgets::BorderFrame
+		\brief 这是个神奇的类，在Windows上的某些情况下特别有用.
+		\since Visindigo 0.14.0
+		\inmodule Visindigo
+
+		这是个神奇的类：它本质是QFrame，未提供任何其他功能，它只做一件事，
+		默认画一个现代边框（在Windows11上看起来像WinUI3中的边框）。
+
+		这在Windows（尤其是Windows11）上特别有用，因为在Qt中缺少一种能够模仿
+		WinUI3中现代边框的组件，而Qt在Windows11上代理绘制的某些窗口实际上
+		正好与这种边框类似，因此这个类就被设计出来了，以满足在Windows11上实现现代边框的需求。
+
+		你可以如同使用QFrame一样使用它，但如果你也需要重载paintEvent，记得先
+		调用Visindigo::Widgets::BorderFrame::paintEvent来绘制边框，否则你就只能得到一个普通的QFrame了。
+	*/
+
+	/*!
+		\since Visindigo 0.14.0
+		\a parent 父窗口
+
+		BorderFrame的构造函数。
+	*/
+	BorderFrame::BorderFrame(QWidget* parent) : QFrame(parent) {
+		setFrameStyle(QFrame::Box);
+	}
+
+	/*!
+		\since Visindigo 0.14.0
+		BorderFrame的析构函数。
+	*/
+	BorderFrame::~BorderFrame() {}
+
+	/*!
+		\since Visindigo 0.14.0
+		\a event paint事件
+
+		由BorderFrame重载的paintEvent函数。任何继承此类并重载paintEvent
+		的子类在重载的paintEvent中都应该调用此函数来绘制边框，否则就只能得到一个普通的QFrame了。
+	*/
+	void BorderFrame::paintEvent(QPaintEvent* event) {
+		QPainter painter(this);
+		QStyleOptionFrame opFrame;
+		opFrame.initFrom(this);
+		opFrame.features = QStyleOptionFrame::Rounded;
+		opFrame.frameShape = QFrame::Box;
+
+		this->style()->drawPrimitive(QStyle::PE_Frame, &opFrame, &painter, this);
+		if (this->style()->name() == "fusion") {
+			// fusion style does not have background, so we need to fill it manually
+			QColor bgColor = this->palette().color(QPalette::Window);
+			painter.fillRect(this->rect(), bgColor);
+		}
+	}
+}

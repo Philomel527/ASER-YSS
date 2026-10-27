@@ -1,0 +1,495 @@
+﻿{
+	"config": {
+		"title": "Yayin Story Studio Preferences",
+		"general": {
+			"title": "General",
+			"text": "General application settings",
+			"language": {
+				"title": "Language",
+				"text": "Select application language",
+				"zh_CN": "Simplified Chinese",
+				"zh_TW": "Traditional Chinese",
+				"en": "English",
+				"ja": "Japanese",
+				"jp_less_loanword": "Japanese (Less Loanwords)",
+				"ko": "Korean",
+				"ru": "Russian",
+				"de": "German",
+				"fr": "French"
+			},
+			"theme": {
+				"title": "Color Theme",
+				"text": "Select application color theme",
+				"dark": "Dark",
+				"light": "Light",
+				"auto": "Auto (Follow System)"
+			},
+			"updateChannel": {
+				"title": "Update Channel",
+				"text": "Select the update channel used by the application. The Release channel only accepts release update messages; the Beta channel accepts both release and beta update messages; the Technical Preview channel accepts all update messages of the three versions.",
+				"release": "Release",
+				"beta": "Beta",
+				"tp": "Technical Preview"
+			}
+		},
+		"editor": {
+			"title": "Editor",
+			"text": "Editor related settings",
+			"reloadtab": {
+				"title": "Reload TAB Behavior",
+				"text": "Controls whether the editor should replace TAB with spaces when it appears at the beginning of a line (this option is temporarily ineffective)"
+			}
+		}
+	},
+	"update": {
+		"newVersionAvailable": "A new version is available!",
+		"newVersionAvailableDesc": "Version %1 has been released, and you are currently using version %2.\nPlease refer to the release notes for details about the new version, and visit the official website to download the latest version.",
+		"newsLoadFailed": "Failed to sync news from the server. Please check your network connection and try again later.",
+		"installerUpdating": "Updating YSS Installer",
+		"installerUpdatingDesc": "A new version of YSS Installer was detected. It is being updated and reconnected. Please wait..."
+	},
+	"tooltips": {
+		"projectWin": {
+			"project": "Click to view details, double-click to open the project",
+			"showInBrowser": "Open the project folder in system file explorer",
+			"delete": "Remove project from list",
+			"createNewProject": "Create a new project from template",
+			"openFolder": "Open a Yayin Story Studio project",
+			"cloneFromGit": "Clone a project from a given Git repository URL"
+		}
+	},
+	"project": {
+		"author": "Author",
+		"description": "Description",
+		"debugServer": "Debug Server",
+		"projectManager": "Project Manager",
+		"selectToShow": "Select a project to view details...",
+		"noCover": "No Cover",
+		"lastModifiedTime": "Last Modified",
+		"createTime": "Created",
+		"size": "Size",
+		"calculating": "Calculating...",
+		"showInBrowser": "Show in File Explorer",
+		"delete": "Delete Project",
+		"deleteConfirm": "Yayin Story Studio currently does not support safe deletion of projects to the Recycle Bin.\nTherefore, for safety, pressing OK will only remove the project from the list.\nYou may later delete the project manually in the file explorer.\n\nContinue?",
+		"removeFromList": "Remove from List",
+		"createNewProject": "Create New Project",
+		"createNewFile": "Create New File",
+		"openFolder": "Open Project",
+		"openYSSProject": "Open YSS Project",
+		"cloneFromGit": "Clone from Git",
+		"createFromTemplate": "Create from Template",
+		"searchWithTags": "Search Templates by Tags",
+		"projectVersionTooNew": {
+			"title": "Project is too new",
+			"message": "The project \"%1\" comes from an unknown newer version. Opening it in the current version may cause data loss or prevent it from working correctly. Please make sure you have backed up your project data.\n\nDo you want to continue opening the project?"
+		},
+		"projectVersionTooOld": {
+			"title": "Project needs an upgrade",
+			"message": "The project \"%1\" comes from an older compatible version (project version %2, compatible with %3 to %4). Opening it in this version will upgrade it permanently, and it can no longer be opened in older versions. Please make sure you have backed up your project data.\n\nDo you want to continue opening the project?"
+		},
+		"recentUsed": "Recently Used",
+		"openProjectFailed": {
+			"message": "Failed to Open Project",
+			"NotFound": "The project configuration file could not be found. It may have been moved or deleted.",
+			"ReadFailed": "The project configuration file could not be read. Check the access permissions or the remote connection.",
+			"ParseError": "Failed to parse project file, possibly due to syntax errors or corruption.",
+			"InvalidConfig": "Invalid project configuration, missing required fields or incorrect field types.",
+			"InvaildConfig": "Invalid project configuration, missing required fields or incorrect field types.",
+			"UnknownError": "An unknown error occurred and the project could not be opened."
+		},
+		"requiredPluginsNotAvailable": {
+			"title": "Required plugins are missing",
+			"message": "The project \"%1\" needs the plugins with the following IDs to work correctly. We recommend installing and enabling them before opening the project. You can still force the project open, but that may cause data loss.\n\nDo you want to force open the project?"
+		},
+		"saveQuestion": {
+			"title": "Close application?",
+			"text": "Your project %1 has unsaved changes. Do you want to save the project?"
+		}
+	},
+	"menu": {
+		"file": {
+			"title": "File",
+			"new": "New File",
+			"newFile": "New File",
+			"newFolder": "New Folder",
+			"open": "Open",
+			"save": "Save",
+			"saveAll": "Save All",
+			"saveAs": "Save As",
+			"backToHome": "Back to Home",
+			"terminal": "Terminal",
+			"pluginAndPreferences": "Plugins & Preferences",
+			"colorThemeSettings": "Color Theme Settings",
+			"exit": "Exit",
+			"documentation": "Documentation",
+			"about": "About Yayin Story Studio",
+			"projectConfig": "Project Settings",
+			"showInExplorer": "Show in File Explorer",
+			"closeAll": "Close All",
+			"closeSaved": "Close Saved",
+			"compareAsOld": "Compare as Old File",
+			"compareAsNew": "Compare as New File"
+		},
+		"edit": {
+			"title": "Edit",
+			"undo": "Undo",
+			"redo": "Redo",
+			"cut": "Cut",
+			"copy": "Copy",
+			"copyPath": "Copy File Path",
+			"copyName": "Copy File Name",
+			"paste": "Paste",
+			"selectAll": "Select All",
+			"findAndReplace": "Find and Replace"
+		},
+		"run": {
+			"title": "Run",
+			"run": "Start (No Debug)",
+			"debug": "Start (Debug)",
+			"stop": "Stop",
+			"restart": "Restart",
+			"build": "Build Project",
+			"rebuild": "Force Rebuild",
+			"clean": "Clean Build",
+			"stepInto": "Step Into",
+			"stepOver": "Step Over",
+			"suspend": "Suspend",
+			"resume": "Resume"
+		},
+		"view": {
+			"title": "View",
+			"resourceBrowser": "Resource Browser",
+			"messageViewer": "Message Viewer",
+			"pluginTools": "Plugin Tools",
+			"fullScreenToggle": "Toggle Full Screen",
+			"noTools": "No tools to display"
+		}
+	},
+	"editor": {
+		"messageViewer": {
+			"title": "Message Viewer",
+			"error": "Error",
+			"warning": "Warning",
+			"info": "Info",
+			"code": "Code",
+			"message": "Description",
+			"file": "File",
+			"line": "Line",
+			"column": "Column"
+		},
+		"multiTerminal": {
+			"title": "Terminal",
+			"newTerminal": "New Terminal",
+			"closeTerminal": "Close Terminal",
+			"closeOtherTerminals": "Close Other Terminals",
+			"closeAllTerminals": "Close All Terminals",
+			"terminalName": "Terminal %1"
+		},
+		"codeDiff": {
+			"takeOld": "Take Left",
+			"takeNew": "Take Right",
+			"progress": "Difference %1 of %2 (%3 resolved)",
+			"progressSimple": "%1 of %2 differences resolved",
+			"allResolved": "All %1 differences resolved",
+			"noDifference": "Both sides are identical",
+			"loading": "Reading files...",
+			"readFailed": "Failed to read file: %1"
+		},
+		"far": {
+			"title": "Find and Replace",
+			"find": "Find",
+			"findNext": "Find Next",
+			"replace": "Replace",
+			"replaceNext": "Replace Next",
+			"replaceAll": "Replace All",
+			"matchCase": "Match Case",
+			"wholeWord": "Match Whole Word",
+			"useRegExp": "Regular Expression",
+			"notFound": "No more items found",
+			"notFoundDesc": "Target text \"%1\" not found",
+			"replaced": "Replacement complete",
+			"replacedDesc": "Replaced %1 occurrence(s)",
+			"matchCount": "Total %1"
+		},
+		"stackWidgetArea": {
+			"noFileOpened": "No files open",
+			"dragInFile": "Release the tab to move here"
+		},
+		"toolWidgetArea": {
+			"noToolWidget": "No tools to display"
+		},
+		"bottomInfoWidget": {
+			"debugMessage": {
+				"prepared": "Ready"
+			},
+			"transfer": {
+				"title": "Total",
+				"tooltip": "Unified filesystem transfer statistics (↑ written / ↓ read)",
+				"local": "Local",
+				"current": "Working on %1 (%2)",
+				"idle": "No operation in progress",
+				"queued": "%1 task(s) queued",
+				"queuedNone": "No queued tasks"
+			},
+			"cursorInfo_s": "Line %1, Column %2 (Selected %3)",
+			"cursorInfo": "Line %1, Column %2",
+			"totalLines": "Total lines: %1",
+			"statistic": {
+				"tooltip": "Click to view detailed statistics",
+				"title": "Document Statistics",
+				"titleWithName": "Document Statistics - %1",
+				"wordCount": "Words: %1",
+				"charCountIncludeWhitespace": "Characters (with whitespace): %1",
+				"charCountExcludeWhitespace": "Characters (without whitespace): %1",
+				"cjkvCharCount": "CJKV characters: %1",
+				"nonCJKVCharCount": "Non-CJKV characters: %1",
+				"paragraphCount": "Paragraphs: %1",
+				"noEditor": "No editor is currently open"
+			}
+		},
+		"textEdit": {
+			"readOnly": {
+				"title": "File is read-only",
+				"message": "The file %1 you wish to save is read-only. You cannot save to this file. Please check file permissions or use Save As to save to a different location."
+			},
+			"unsupportedEncoding": {
+				"title": "Cannot save with the original encoding",
+				"message": "The file %1 is not UTF-8 or UTF-16 encoded. YSS can only read it for display, and writing it back with the current encoding would destroy the content that is really in the file, so saving over the original file has been blocked. If you want to keep your changes, use Save As to write them to another file."
+			},
+			"notSuitable": {
+				"title": "No service found to support this file",
+				"message": "No suitable opening service found for file extension %1. YSS can still attempt to open the file using the default built-in text editor, but this may corrupt binary data. Are you sure you want to continue with the built-in text editor? (Strongly not recommended)"
+			},
+			"ready": "Ready",
+			"tabCompleter": {
+				"top": "Top items recommended by the %1 plugin based on context",
+				"viewDescription": "(Click or hover over a completion item to view its description)",
+				"value": "Value Type",
+				"const": "Constant Type",
+				"enum": "Enum Type",
+				"function": "Function Type",
+				"object": "Object Type",
+				"operator": "Operator Type"
+			},
+			"tabCompleterLevel": {
+				"none": "No Suggestions",
+				"few": "Few Suggestions",
+				"some": "Some Suggestions",
+				"many": "Many Suggestions",
+				"all": "All Suggestions"
+			},
+			"suggestion":{
+				"inlineEdit": "Replace line suggestion",
+				"pureAdd": "Append content suggestion",
+				"multiLineEdit": "Multi-line insertion suggestion",
+				"blockRemove": "Line removal suggestion",
+				"scrollUp": "Scroll up to line %1",
+				"scrollDown": "Scroll down to line %1",
+				"accept": "Accept",
+				"reject": "Reject"
+			},
+			"inlayHintVisible": "Inlay hints",
+			"hintSettings": "Hint settings",
+			"completerLevel": "Completion level"
+		},
+		"debug": {
+			"notFound": {
+				"title": "Oops! Debugger not found",
+				"message": "The debugger %1 specified for this project was not found. Have you disabled or removed the plugin that provides this debugger? Please re-enable or add them, then restart the application and try again."
+			},
+			"notSelect": {
+				"title": "Debugger not configured!",
+				"message": "This project does not have a debugger configured. Please open project settings, select a debugger, and try again."
+			}
+		},
+		"saveWarning": {
+			"title": "File Modified",
+			"message": "The file %1 has been modified. Do you want to save the changes?"
+		},
+		"saveAsConflict": {
+			"title": "The file to be overwritten is open and has unsaved changes",
+			"message": "Please save or close file %1 first, then try the Save As overwrite operation again."
+		},
+		"reloadWarning": {
+			"title": "Reload now?",
+			"message": "The file %1 has been modified. If you reload now, any changes you made to this file will be lost. Do you want to reload?"
+		},
+		"renameDialog": {
+			"title": "Rename",
+			"rename": "Renaming file %1",
+			"request": "Please enter a new name",
+			"warning": {
+				"empty": "Name cannot be empty. Please enter a name.",
+				"same": "New name is the same as the old name. Please enter a different name.",
+				"exists": "A file with this name already exists in the same directory. Please choose a different name.",
+				"invalid": "Invalid file name. It cannot contain the following characters: \\ / : * ? \" < > |",
+				"extNotSame": {
+					"normal": "The extension of the new name differs from the original, which may cause issues.",
+					"title": "Are you sure you want to change the extension?",
+					"message": "The extension %1 given in the new name differs from the original extension %2. This may cause problems, such as the file not being recognized or opened correctly. Are you sure you want to continue with the rename?"
+				}
+			}
+		},
+		"newFolderDialog": {
+			"title": "New Folder",
+			"desc": "Creating a new folder in folder %1. Please enter a name for the new folder:",
+			"warning": {
+				"empty": "Name cannot be empty. Please enter a name.",
+				"exists": "A folder with this name already exists in the same directory. Please choose a different name.",
+				"invalid": "Invalid folder name. It cannot contain the following characters: \\ / : * ? \" < > |"
+			}
+		},
+		"about": {
+			"title": "About Yayin Story Studio",
+			"message": "Version %1, a Tsing Yayin work. Yayin Story Studio is part of Project Visindigo, a brand new project evolved from Yayin Story Player, aiming to provide an easy-to-use development environment for ASE users."
+		},
+		"deleteProjectFile": {
+			"title": "Project Metadata File Cannot Be Deleted",
+			"message": "You cannot delete the metadata file of a project that is currently open. If you want to delete the project, return to the project selection page and choose to delete the project."
+		},
+		"fileOperation": {
+			"failed": {
+				"title": "Operation failed",
+				"message": "The operation on %1 could not be completed. Make sure the file is not in use by another program, that you have permission, and that there is free space left on the disk."
+			}
+		},
+		"deleteFile": {
+			"title": "Delete Confirmation",
+			"message": "Are you sure you want to delete the file or folder %1? It will be moved to the system recycle bin, from which you can restore it."
+		}
+	},
+	"colorThemeSettings": {
+		"langServer": "Language Server",
+		"theme": "Theme",
+		"duplicate": "Duplicate",
+		"delete": "Delete",
+		"duplicateDialog": {
+			"title": "Duplicate Theme",
+			"desc": "Duplicating theme \"%1\". Please enter a name for the new theme:",
+			"warning": {
+				"empty": "The name cannot be empty. Please enter a name.",
+				"same": "The new name is the same as the source theme. Please enter a different name.",
+				"exists": "A theme with this name already exists. Please choose another name."
+			}
+		},
+		"deleteConfirm": {
+			"title": "Delete Theme",
+			"message": "Are you sure you want to delete theme \"%1\"? This action cannot be undone."
+		},
+		"font": "Font",
+		"preview": "Preview",
+		"textColor": "Text Color",
+		"bgColor": "Background Color",
+		"bgColorEnabled": "Use Background Color",
+		"lineColor": "Line Color",
+		"lineType": "Line Type",
+		"bold": "Bold",
+		"italic": "Italic",
+		"save": "Save",
+		"reset": "Reset",
+		"underlineType": {
+			"NoUnderline": "None",
+			"SingleUnderline": "Solid",
+			"DashUnderline": "Dashed",
+			"DotLine": "Dotted",
+			"DashDotLine": "Dash-Dot",
+			"DashDotDotLine": "Dash-Dot-Dot",
+			"WaveUnderline": "Wave",
+			"SpellCheckUnderline": "Spell Check"
+		},
+		"unsavedChanges": {
+			"title": "Unsaved Changes",
+			"message": "You have unsaved changes. Do you want to save them? If you do not save, all changes will be lost."
+		},
+		"staticThemeWarning": "! Note: This is a built-in theme. Changes to it will never take effect. Please duplicate it before modifying."
+	},
+	"agent": {
+		"title": "Visindigo Agent Chat",
+		"placeholder": "Type a message. Enter to send, Shift+Enter for a new line",
+		"send": "Send",
+		"ready": "Ready. Current model: %1",
+		"generating": "Generating…",
+		"reasoning": "Reasoning",
+		"runError": "Run failed: %1",
+		"configError": "Failed to load the model config on your desktop: %1"
+	},
+	"pluginLoadFaultDialog": {
+		"title": "Plugin load failure",
+		"message": "The following plugins could not be loaded correctly. Their IDs and the reasons are listed below. Do you want to continue using the program?",
+		"pluginID": "Plugin ID",
+		"reason": "Reason",
+		"continue": "Continue",
+		"quit": "Exit"
+	},
+	"pluginLoadResult": {
+		"Unknown": {
+			"title": "Unknown error",
+			"message": "An unexpected error occurred while loading the plugin. Try restarting the program; if the problem persists, contact the plugin author."
+		},
+		"Success": {
+			"title": "Loaded successfully",
+			"message": "The plugin was loaded successfully."
+		},
+		"Deactivated": {
+			"title": "Deactivated",
+			"message": "This plugin was disabled in your plugin settings and was therefore not loaded. Enable it again in the plugin settings to use it."
+		},
+		"PlatformNotSupported": {
+			"title": "Unsupported platform",
+			"message": "This plugin does not support the current operating system or CPU architecture. Ask the plugin author for a build for this platform."
+		},
+		"InvalidPluginBinary": {
+			"title": "Invalid plugin binary",
+			"message": "The plugin file cannot be recognized as a Visindigo plugin; it may be too old to load at all, or corrupted for other reasons. Reinstall this plugin."
+		},
+		"InvalidDependLib": {
+			"title": "Invalid dependency library",
+			"message": "A library required by this plugin is missing or corrupted. Reinstall the plugin together with its dependencies."
+		},
+		"DependLibConflict": {
+			"title": "Dependency library conflict",
+			"message": "A library required by this plugin conflicts with a different version that is already loaded. Remove or update the conflicting plugin."
+		},
+		"EntryPointNotFound": {
+			"title": "Entry point not found",
+			"message": "The plugin does not contain a valid entry function and may not be a valid Visindigo plugin."
+		},
+		"ConstructorError": {
+			"title": "Constructor error",
+			"message": "The plugin threw an exception while being created or returned a null object. Contact the plugin author."
+		},
+		"IncompatibleABI": {
+			"title": "Incompatible ABI",
+			"message": "The plugin is not compatible with the core binary interface version of this program. Update the plugin or the program."
+		},
+		"IncompatibleAPI": {
+			"title": "Incompatible API",
+			"message": "The plugin is not compatible with the interface version of this program. Update the plugin or the program."
+		},
+		"AlreadyLoaded": {
+			"title": "Already loaded",
+			"message": "A plugin with the same ID is already loaded, so this one was skipped. Check for duplicate plugin files."
+		},
+		"DependencyNotFound": {
+			"title": "Dependency not found",
+			"message": "Another plugin that this plugin depends on does not exist. Install the missing plugin and try again."
+		},
+		"DependencyLoadFailed": {
+			"title": "Dependency failed to load",
+			"message": "Another plugin that this plugin depends on failed to load. Resolve that plugin's loading problem first."
+		},
+		"DependencyDeactivated": {
+			"title": "Dependency deactivated",
+			"message": "A plugin that this plugin depends on is deactivated. Enable the dependency, or disable this plugin as well."
+		},
+		"MetadataNotFound": {
+			"title": "Metadata not found",
+			"message": "The plugin's metadata file was not found, so the plugin cannot be recognized. Reinstall the plugin."
+		},
+		"MetadataNotSame": {
+			"title": "Metadata mismatch",
+			"message": "The plugin's metadata does not match the actual binary file. Reinstall the plugin."
+		}
+	}
+}

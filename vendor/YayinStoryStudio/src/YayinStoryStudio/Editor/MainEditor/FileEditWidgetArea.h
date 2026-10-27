@@ -1,0 +1,60 @@
+#ifndef YayinStoryStudio_Editor_MainEditor_FileEditWidgetArea_h
+#define YayinStoryStudio_Editor_MainEditor_FileEditWidgetArea_h
+#include <QtWidgets/qframe.h>
+#include <QtGui/qtextcursor.h>
+#include <Editor/FileEditWidget.h>
+#include <Widgets/BorderFrame.h>
+namespace YSS::Editor {
+	class FileEditWidgetAreaPrivate;
+	class FileEditWidgetArea :public Visindigo::Widgets::BorderFrame {
+		Q_OBJECT;
+	signals:
+		void renameRequested(const YSSCore::General::YSSURI& oldUri);
+		void saveAsRequested(const YSSCore::General::YSSURI& uri);
+		void currentFileChanged(const YSSCore::General::YSSURI& uri);
+		void textEditCursorPositionChanged(const YSSCore::General::YSSURI& uri, const QTextCursor& cursor);
+		void areaFocusd(const QString& areaID);
+		void allFileClosed();
+		void areaClosed(const QString& areaID);
+	public:
+		static FileEditWidgetArea* getAreaByID(const QString& areaID);
+		static FileEditWidgetArea* getMainArea();
+		static QList<FileEditWidgetArea*> getAllAreas();
+		static void changeMainArea(FileEditWidgetArea* newMainArea);
+		static void compressAreaID();
+		static FileEditWidgetArea* getCurrentArea();
+		static YSSCore::Editor::FileEditWidget* getCurrentFocusedWidget();
+		static void setCurrentFocusedWidget(FileEditWidgetArea* area, YSSCore::Editor::FileEditWidget* widget);
+	public:
+		FileEditWidgetArea(QWidget* parent = nullptr, const QString& requestedID = QString());
+		virtual ~FileEditWidgetArea();
+	public:
+		void setAreaID(const QString& areaID);
+		QString getAreaID() const;
+		void setCloseSilently(bool silent);
+		void addWidget(YSSCore::Editor::FileEditWidget* widget);
+		bool containsWidget(const YSSCore::General::YSSURI& uri) const;
+		void closeAll(bool autoGiveup = false);
+		void closeSaved();
+		bool closeAllWidgetsWithConfirm();
+		void closeWidget(YSSCore::Editor::FileEditWidget* widget);
+		void closeWidget(const YSSCore::General::YSSURI& uri);
+		void setCurrentWidget(YSSCore::Editor::FileEditWidget* widget);
+		void setCurrentWidget(const YSSCore::General::YSSURI& uri);
+		void setCurrentWidget(YSSCore::Editor::FileEditWidget* widget, qint32 lineNumber, qint32 column = 0);
+		void setCurrentWidget(const YSSCore::General::YSSURI& uri, qint32 lineNumber, qint32 column);
+		YSSCore::Editor::FileEditWidget* getCurrentWidget() const;
+		YSSCore::General::YSSURI getCurrentWidgetUri() const;
+		void moveWidgetTo(const YSSCore::General::YSSURI& uri, FileEditWidgetArea* otherArea);
+	protected:
+		virtual void dragEnterEvent(QDragEnterEvent* event) override;
+		virtual void dragLeaveEvent(QDragLeaveEvent* event) override;
+		virtual void dragMoveEvent(QDragMoveEvent* event) override;
+		virtual void dropEvent(QDropEvent* event) override;
+	public:
+		virtual void resizeEvent(QResizeEvent* event) override;
+	private:
+		FileEditWidgetAreaPrivate* d;
+	};
+}
+#endif // YayinStoryStudio_Editor_MainEditor_FileEditWidgetArea_h

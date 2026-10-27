@@ -1,0 +1,211 @@
+{
+    "menu": [
+        {
+            "ID": "file",
+            "Name": "i18n:YSS::menu.file.title",
+            "Actions": [
+                {
+                    "ID": "fileOptions",
+                    "Actions": [
+                        {
+                            "ID": "newfile",
+                            "Name": "i18n:YSS::menu.file.newfile"
+                        },
+                        {
+                            "ID": "open",
+                            "Name": "i18n:YSS::menu.file.open",
+                            "Shortcut": [
+                                "Ctrl", "O"
+                            ]
+                        },
+                        {
+                            "ID": "save",
+                            "Name": "i18n:YSS::menu.file.save",
+                            "Shortcut": [
+                                "Ctrl", "S"
+                            ]
+                        },
+                        {
+                            "ID": "saveAs",
+                            "Name": "i18n:YSS::menu.file.saveAs",
+                            "Shortcut": [
+                                "Ctrl", "Alt", "S"
+                            ]
+                        },
+                        {
+                            "ID": "saveAll",
+                            "Name": "i18n:YSS::menu.file.saveAll",
+                            "Shortcut": [
+                                "Ctrl", "Shift", "S"
+                            ]
+                        },
+                        {
+                            "ID": "projectConfig",
+                            "Name": "i18n:YSS::menu.file.projectConfig"
+                        },
+                        {
+                            "ID": "showInExplorer",
+                            "Name": "i18n:YSS::menu.file.showInExplorer"
+                        }
+                    ]
+                },
+                {
+                    "ID": "programOptions",
+                    "Actions": [
+                        {
+                            "ID": "backToHome",
+                            "Name": "i18n:YSS::menu.file.backToHome"
+                        },
+                        {
+                            "ID": "pluginAndPreferences",
+                            "Name": "i18n:YSS::menu.file.pluginAndPreferences"
+                        },
+                        {
+                            "ID": "terminal",
+                            "Name": "i18n:YSS::menu.file.terminal"
+                        },
+                        {
+                            "ID": "about",
+                            "Name": "i18n:YSS::menu.file.about"
+                        },
+                        {
+                            "ID": "documentation",
+                            "Name": "i18n:YSS::menu.file.documentation",
+                            "Shortcut": [
+                                "F1"
+                            ]
+                        },
+                        {
+                            "ID": "exit",
+                            "Name": "i18n:YSS::menu.file.exit",
+                            "Shortcut": [
+                                "Alt", "F4"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "ID": "edit",
+            "Name": "i18n:YSS::menu.edit.title",
+            "Actions": [
+                {
+                    "ID": "editOptions",
+                    "Actions": [
+                        {
+                            "ID": "undo",
+                            "Name": "i18n:YSS::menu.edit.undo",
+                            "Shortcut": [
+                                "Ctrl", "Z"
+                            ]
+                        },
+                        {
+                            "ID": "redo",
+                            "Name": "i18n:YSS::menu.edit.redo",
+                            "Shortcut": [
+                                "Ctrl", "Y"
+                            ]
+                        },
+                        {
+                            "ID": "cut",
+                            "Name": "i18n:YSS::menu.edit.cut",
+                            "Shortcut": [
+                                "Ctrl", "X"
+                            ]
+                        },
+                        {
+                            "ID": "copy",
+                            "Name": "i18n:YSS::menu.edit.copy",
+                            "Shortcut": [
+                                "Ctrl", "C"
+                            ]
+                        },
+                        {
+                            "ID": "paste",
+                            "Name": "i18n:YSS::menu.edit.paste",
+                            "Shortcut": [
+                                "Ctrl", "V"
+                            ]
+                        },
+                        {
+                            "ID": "selectAll",
+                            "Name": "i18n:YSS::menu.edit.selectAll",
+                            "Shortcut": [
+                                "Ctrl", "A"
+                            ]
+                        },
+                        {
+                            "ID": "findAndReplace",
+                            "Name": "i18n:YSS::menu.edit.findAndReplace",
+                            "Shortcut": [
+                                "Ctrl", "F"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "ID": "run",
+            "Name": "i18n:YSS::menu.run.title",
+            "Actions": [
+                {
+                    "ID": "runOptions",
+                    "Actions": [
+                        {
+                            "ID": "run",
+                            "Name": "i18n:YSS::menu.run.run"
+                        },
+                        {
+                            "ID": "debug",
+                            "Name": "i18n:YSS::menu.run.debug"
+                        },
+                        {
+                            "ID": "stop",
+                            "Name": "i18n:YSS::menu.run.stop"
+                        },
+                        {
+                            "ID": "restart",
+                            "Name": "i18n:YSS::menu.run.restart"
+                        }
+                    ]
+                },
+                {
+                    "ID": "buildActions",
+                    "Actions": [
+                        {
+                            "ID": "buildProject",
+                            "Name": "i18n:YSS::menu.run.buildProject"
+                        },
+                        {
+                            "ID": "cleanProject",
+                            "Name": "i18n:YSS::menu.run.cleanProject"
+                        }
+                    ]
+                },
+                {
+                    "ID": "debugActions",
+                    "Actions": [
+                        {
+                            "ID": "nextStep",
+                            "Name": "i18n:YSS::menu.run.nextStep"
+                        },
+                        {
+                            "ID": "nextProcess",
+                            "Name": "i18n:YSS::menu.run.nextProcess"
+                        },
+                        {
+                            "ID": "pause",
+                            "Name": "i18n:YSS::menu.run.pause"
+                        },
+                        {
+                            "ID": "continue_",
+                            "Name": "i18n:YSS::menu.run.continue_"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

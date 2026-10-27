@@ -1,0 +1,3623 @@
+{
+  "repository": "https://github.com/tsingyayin/YayinStoryStudio",
+  "commit": "49e2528c42809779d046664373946378a8e04ac6",
+  "archive_url": "https://codeload.github.com/tsingyayin/YayinStoryStudio/zip/49e2528c42809779d046664373946378a8e04ac6",
+  "archive_sha256": "d12fc0a1122e934cf7a6b782296e26cf6c971a640829dda94883f5c08a4d163d",
+  "archive_bytes": 30399964,
+  "imported_on": "2026-10-27",
+  "directory": "vendor/YayinStoryStudio",
+  "file_count": 722,
+  "total_bytes": 39369914,
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 2518,
+      "sha256": "45a7cbb7d9942ba7ffce0b20bc8dbe2d1196533bc6e4bd245871d77fb1eedfdc"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 6742,
+      "sha256": "f2ea563611b4354da57f55f22eed2ef454bb6a73cd11c4db880eb2330254bcfb"
+    },
+    {
+      "path": ".vscode/c_cpp_properties.json",
+      "bytes": 992,
+      "sha256": "a0990e2533aeb93b6255eb8eb278274620488cd0ad861e6c9b9cc691161a83f1"
+    },
+    {
+      "path": ".vscode/settings.json",
+      "bytes": 1388,
+      "sha256": "e77e1e0088c2373d370a7533dc519631d13bd13ace2ee950c23bb458938a31b0"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 245,
+      "sha256": "b94b0c31c6d7d60dffc725208a7ad06a1d8df4983a430890639f1e2ee269d231"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "bytes": 16784,
+      "sha256": "ab7bfaadbb6018b6a57c25d5875777cf204096be57c9607642e1b1bf4d165e0d"
+    },
+    {
+      "path": "LICENSE.txt",
+      "bytes": 26526,
+      "sha256": "20c17d8b8c48a600800dfd14f95d5cb9ff47066a9641ddeab48dc54aec96e331"
+    },
+    {
+      "path": "README.md",
+      "bytes": 13104,
+      "sha256": "5986a8e0c41fdaa3d15ca5b1f88cbaceec291791c1f9cbc42a0a932f637b35b4"
+    },
+    {
+      "path": "YayinStoryStudio.sln",
+      "bytes": 7498,
+      "sha256": "4d24318446b413a96cc1814c0d55e7a04ed71199cb666261ac5d0bf512c87007"
+    },
+    {
+      "path": "config/deriveConfig.json",
+      "bytes": 1279,
+      "sha256": "26334df4d7bb3fa37499dd95ef6fd308d20468533286779364ec23bc09de7a6c"
+    },
+    {
+      "path": "config/para.yml",
+      "bytes": 307,
+      "sha256": "d6a7e7219bb1dce2b0bcd777fd0aeaff5a6f6c2b02d6d1574ef40b5771928a8b"
+    },
+    {
+      "path": "design/bluemap.ybm.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "design/logTest.txt",
+      "bytes": 6593,
+      "sha256": "ffcda53e370708829ea08b0d96181f270d73b04203d8f12c9322c4dafc4e7c89"
+    },
+    {
+      "path": "design/spol2.txt",
+      "bytes": 806,
+      "sha256": "bed862b12d2b2d30a26762c4056eae3fd0c86e9804de67cb2141a7e3b31fdfb0"
+    },
+    {
+      "path": "design/update_log_0.17.md",
+      "bytes": 12659,
+      "sha256": "9a04a5cf1d96cf9823c4b3085c591407c2068e05e6d2c466cdc5c3e4593ee9f2"
+    },
+    {
+      "path": "doc/scripts/QDoc.py",
+      "bytes": 5506,
+      "sha256": "6ffbdadc93a07f5fb372ca3e2b4e0a869acbc6d269dbc37b757112875939194b"
+    },
+    {
+      "path": "doc/scripts/QDocToCN.py",
+      "bytes": 5297,
+      "sha256": "7f2805481e7b573c97cb5d9d6ab78d8bf0c085eaa24e74b5b2b5cf6ee8d39341"
+    },
+    {
+      "path": "doc/scripts/startHttpserver.bat",
+      "bytes": 279,
+      "sha256": "4c19bbc741f20978f084d252db5d80a59313a87a7ddd21c24a02d23836da5aee"
+    },
+    {
+      "path": "doc/src/YSSPluginDev.qdoc",
+      "bytes": 4018,
+      "sha256": "32fa3a31d64f11f9d9f93fb35be4764c9b4cee4565c267e481374bbd9e8b8468"
+    },
+    {
+      "path": "doc/src/aserstudio-astoryx-diagnostic.qdoc",
+      "bytes": 9389,
+      "sha256": "23785134051fc6ef9eabc107d676cd19e08462da14602f2e48ce80e4a0f13e90"
+    },
+    {
+      "path": "doc/src/config.qdocconf",
+      "bytes": 1597,
+      "sha256": "08b49a31ac6856e9f14dbad1b7a0f4ae34464f9c92824a7dd690c5719be9d5f0"
+    },
+    {
+      "path": "doc/src/general_log.qdoc",
+      "bytes": 410,
+      "sha256": "5297b53d0ca964fd640a83b7a4b8b217ffa4f1c09e94204eb99c46c380159380"
+    },
+    {
+      "path": "doc/src/groups.qdoc",
+      "bytes": 3240,
+      "sha256": "b879c695e137c8342333fbd2f6a341ecfdd7418a6481fecd36174b2065808b62"
+    },
+    {
+      "path": "doc/src/html-footer-online.qdocconf",
+      "bytes": 1237,
+      "sha256": "de8c81d6a81f4df9e8427a773494ded216cad736656d2653fcfe4c102ef76a26"
+    },
+    {
+      "path": "doc/src/html-header-online.qdocconf",
+      "bytes": 5010,
+      "sha256": "241455c14091099f8c6d3dc0df0fe1372fe7f807e326475542c133d81fe6aa26"
+    },
+    {
+      "path": "doc/src/includes-online/search.qdoc",
+      "bytes": 470,
+      "sha256": "6213911a1e525f8d6348a4456e1bde07524e4fa37a430682b315dfb4fe84f224"
+    },
+    {
+      "path": "doc/src/includes/cli-build-cmake.qdocinc",
+      "bytes": 1407,
+      "sha256": "a2e11f1a95ed1363f76212aee0259f21a1936fe0a35f8d4518998981d54db8c0"
+    },
+    {
+      "path": "doc/src/includes/corelib/port-from-qregexp.qdocinc",
+      "bytes": 7904,
+      "sha256": "9c290d0830817c00da425184e295070a962015766c0bc9bc658609eb417be980"
+    },
+    {
+      "path": "doc/src/includes/examples-run.qdocinc",
+      "bytes": 232,
+      "sha256": "d6a389e33e731059befa7c302e427bfb58c911bb0667547b5276b59f55758add"
+    },
+    {
+      "path": "doc/src/includes/module-use.qdocinc",
+      "bytes": 1899,
+      "sha256": "eac6d18a5b4e1519bb8d39ab3e4bb1c1af3a20bc2af2e76f621a719c4cf9daed"
+    },
+    {
+      "path": "doc/src/includes/standardpath/functiondocs.qdocinc",
+      "bytes": 3759,
+      "sha256": "4b6ea03e1df6d7950597491da7838dedc4e37b93bcadedbf7df7235f930c9c52"
+    },
+    {
+      "path": "doc/src/index.qdoc",
+      "bytes": 2796,
+      "sha256": "67a62b6a4a124121951c433361566aac3738d4a9c98b92c447fa6a255728213a"
+    },
+    {
+      "path": "doc/src/module.qdoc",
+      "bytes": 3936,
+      "sha256": "6adf8f3fed9b52f47c2bf6eac2f5da085a81ebb6685b08afe7e4111812348c21"
+    },
+    {
+      "path": "doc/src/namespace.qdoc",
+      "bytes": 2818,
+      "sha256": "09a39ef1910872148b8d2494456a23bbb7fe9d1f1cafc3275e79dcfa476f7129"
+    },
+    {
+      "path": "doc/src/pytools.qdoc",
+      "bytes": 5032,
+      "sha256": "a590f3d404c40892dea5fc796121cba8faab18c0596ce428d645a81bd49d80b8"
+    },
+    {
+      "path": "doc/src/qt-html-templates-online.qdocconf",
+      "bytes": 365,
+      "sha256": "c8b6a08f06803369059a233d73a4225550caea0364c11e1d35cf55c9b23a92d3"
+    },
+    {
+      "path": "doc/src/template/images/logo.png",
+      "bytes": 35000,
+      "sha256": "3ddd1fd3931e9deb51d8215707419a398f04db3ab7afb36a734ce48eddd59b87"
+    },
+    {
+      "path": "doc/src/template/scripts/yss.js",
+      "bytes": 80829,
+      "sha256": "0f9517a6ccdb938d03a8dc995841ad8e38403c27da1eca8bb5ed4191578f2468"
+    },
+    {
+      "path": "doc/src/template/style/yss.css",
+      "bytes": 58847,
+      "sha256": "a15ea986ccb06ca6293dd668bed0e1caa80241cad1fc5548dc8db62882e03825"
+    },
+    {
+      "path": "doc/src/v_pimpl.qdoc",
+      "bytes": 2660,
+      "sha256": "2f7170adace17351f807976917128d3656d23a37befa01f6a9e63ee21cd56f24"
+    },
+    {
+      "path": "doc/src/vimacro.qdoc",
+      "bytes": 9033,
+      "sha256": "b4369205eb99399e69c95fbd95acfa7190a60fb8399a68e6b7be5e7ad1e93666"
+    },
+    {
+      "path": "pytools/AutoPack.py",
+      "bytes": 12679,
+      "sha256": "fdcd6413ec7552375ac1705f1827e1e9c93d3a404da417d1ebd20f3efb9891ce"
+    },
+    {
+      "path": "pytools/deployLib.py",
+      "bytes": 2501,
+      "sha256": "83c2eb9421d7c3b390532443ef094d8645532f0cd05345eabd505b8710bd4c3e"
+    },
+    {
+      "path": "pytools/deriveLib.py",
+      "bytes": 5441,
+      "sha256": "de62361811aa4f229f34da46e5b7d06e402456d89e0727a4d9995ee28948b1e7"
+    },
+    {
+      "path": "pytools/segoe-fluent.py",
+      "bytes": 3781,
+      "sha256": "e0cce877783902e6f6834dff04932bfbff8c76d3c503990b3fb88a3a3d611d60"
+    },
+    {
+      "path": "pytools/statistic.py",
+      "bytes": 923,
+      "sha256": "84ffcf9a5df07243ce79c39cf8922cb098d291ee3e1c2082efdd51db252d26e3"
+    },
+    {
+      "path": "qt_creator/.gitignore",
+      "bytes": 271,
+      "sha256": "18eea1df28a45ad64fc5a0eb3aa36cd4fe35622c9fa5b91aa73f12ec3e7b0ade"
+    },
+    {
+      "path": "qt_creator/CMakeLists.txt",
+      "bytes": 2811,
+      "sha256": "c6f1d5b20c41994114df119c3526a9bcb203f25fe4431f1b393b5d3c744d3f9e"
+    },
+    {
+      "path": "qt_creator/README.md",
+      "bytes": 13677,
+      "sha256": "dea385e1d14262086c02197cf367623bd881d3b74154dbce72be88033962a429"
+    },
+    {
+      "path": "qt_creator/app/YayinStoryStudio/CMakeLists.txt",
+      "bytes": 3423,
+      "sha256": "dd9b204879e739c022a09ffcd428152a4c9c13ba8e9fff944496a6ba6411e55f"
+    },
+    {
+      "path": "qt_creator/app/YayinStoryStudio/android/AndroidManifest.xml",
+      "bytes": 3817,
+      "sha256": "4e1e2fcc5a97dac3bef25ce2436aea5a2419c467b3fcaa401ba14bbfdc459b80"
+    },
+    {
+      "path": "qt_creator/app/YayinStoryStudio/android/res/drawable/icon.png",
+      "bytes": 122522,
+      "sha256": "b6811fa4a92ab4c501128814192e3df99e9504b933025bdca7e59f9b57c1b42a"
+    },
+    {
+      "path": "qt_creator/cmake/YSSModule.cmake",
+      "bytes": 2878,
+      "sha256": "b64a2586900bac93ea3e9028c77ea599a88c5c30bda8f88c1ab11681d94cc58c"
+    },
+    {
+      "path": "qt_creator/modules/Visindigo/CMakeLists.txt",
+      "bytes": 2410,
+      "sha256": "a6efa6824552bc0cfc035ac97ad676b75e1a4005ff14018fd2e2a21c2234196a"
+    },
+    {
+      "path": "qt_creator/modules/YSSCore/CMakeLists.txt",
+      "bytes": 1147,
+      "sha256": "d178b1f34d9c9f660b3326cd0ea235306ad088478b1ba20524d81e2886828406"
+    },
+    {
+      "path": "qt_creator/plugins/Plugin_ASERStudio/CMakeLists.txt",
+      "bytes": 2052,
+      "sha256": "5d8e47e65f1a98821f124e35746d2e632f2268d83a2945dc05b66ee2735b267b"
+    },
+    {
+      "path": "qt_creator/plugins/Plugin_ASERStudio/Plugin_ASERStudio.vpl.json",
+      "bytes": 112,
+      "sha256": "d12893bcf6c2968685abf53bb5458d6ece4dae1c8bdea7e021100c7908b5d8bf"
+    },
+    {
+      "path": "qt_creator/plugins/Plugin_ImageViewer/CMakeLists.txt",
+      "bytes": 1032,
+      "sha256": "ccd56b9ad41f3aa93297db496821f40f6e41de0e87b6696d33b97c9a2a3d39b6"
+    },
+    {
+      "path": "qt_creator/plugins/Plugin_ImageViewer/Plugin_ImageViewer.vpl.json",
+      "bytes": 137,
+      "sha256": "b78618ba5b1c023c99cb359fbbc6e37102e74f2d7b7ec7f2e1e9b427ffa00bae"
+    },
+    {
+      "path": "qt_creator/plugins/Plugin_YSSFileExt/CMakeLists.txt",
+      "bytes": 1257,
+      "sha256": "72cea36c68e6286ee2a4b0bb1521f4301f60f117a0bba5dc1c1ea2d5f304f5c9"
+    },
+    {
+      "path": "qt_creator/plugins/Plugin_YSSFileExt/Plugin_YSSFileExt.vpl.json",
+      "bytes": 61,
+      "sha256": "7adcb57c8d03412217b4dffed17dac4c6bbea53d0f6153b25141a34f2db33af8"
+    },
+    {
+      "path": "qt_creator/plugins/Plugin_YSSMediaPlayer/Plugin_YSSMediaPlayer.vpl.json",
+      "bytes": 65,
+      "sha256": "16d3dee5ae3c8264a0612039a533559d2b275e8a00fc8605e5dd8d0e8e12d79d"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/ASEREnv/ASERDebugIO.h",
+      "bytes": 1491,
+      "sha256": "878a9a48a1df109b0a1d567fafcfd60d965e9c96adbcf69c14ba717fc825f60b"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/ASEREnv/ASERProgram.h",
+      "bytes": 2088,
+      "sha256": "7828fe139886bb54f9536cb335866d0a74336bc56b6b577dd11bd189c81f33c9"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/ASEREnv/ASERResourceMoniter.h",
+      "bytes": 1267,
+      "sha256": "a9ed8a7e08d2291c048517a5097ce1ca5aa8fbf2ced776f0f358b76c09238858"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/ASEREnv/ASERWarpper.h",
+      "bytes": 528,
+      "sha256": "7da49585d58f145503792fb3cf0ccd5bfdd29e121a48e468ef808e70524f25e9"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/ASEREnv/cpp/ASERDebugIO.cpp",
+      "bytes": 6887,
+      "sha256": "236eba49cc4486f38139b3b4285b7f861858fb9b5191c54e8d57d5d2690e6d5a"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/ASEREnv/cpp/ASERProgram.cpp",
+      "bytes": 16657,
+      "sha256": "a17cefeba103b5a908b13fc37b18eabbe16b5f82e149b752fbc28d204516d48a"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/ASEREnv/cpp/ASERResourceMoniter.cpp",
+      "bytes": 13436,
+      "sha256": "ffbcfc89b9fd0e5474d0288776bba0c82b82ddf7dd256b0961642ed662e12dd4"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/ASEREnv/cpp/ASERWarpper.cpp",
+      "bytes": 2336,
+      "sha256": "0b6658df7affaa3b79edf63a9d860c6ffe69b3c97d14c29008f1dc1c9d5e147c"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/ASEREnv/private/ASERDebugIO_p.h",
+      "bytes": 703,
+      "sha256": "8151dae6192bddddc579d79905499f197ac4f63d33c54ba992fe4c974d2a8ac1"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/ASERStudioCompileMacro.h",
+      "bytes": 380,
+      "sha256": "8ecfed2787999219e3b8e1efc4cddc08ccffdec3ee32abfaef259835ed8eec28"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/AStoryXController.h",
+      "bytes": 1836,
+      "sha256": "d0b8bbd763ce4998b24dc22917247d75d8e99ffe8943db13a24bf6ae920741b9"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/AStoryXControllerParseData.h",
+      "bytes": 2433,
+      "sha256": "a9a6cbb270cccbedb45976877ab4b495df200f47de1c4b2e9d1ea3e12b6a656a"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/AStoryXDiagnosticData.h",
+      "bytes": 1625,
+      "sha256": "d6bf63e2ae790108b90690efbbcc644e58d66502b8bb68cf91f3357034ec325c"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/AStoryXDocument.h",
+      "bytes": 1638,
+      "sha256": "05518c7c5f7f78ffadc484d5886151cc3ccd207aa58aa567a05ecd6c2bca7e95"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/AStoryXLineData.h",
+      "bytes": 472,
+      "sha256": "0cfe7a678de039840af3cdb0885baad95fd04aca4030633d740c2d5432aac359"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/AStoryXPreprocessor.h",
+      "bytes": 858,
+      "sha256": "a1d77afed8052b58a6018e8b9a6bf9e48b6b3fed6c7d17ee7979cce38019777d"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/AStoryXRebuilder.h",
+      "bytes": 1314,
+      "sha256": "1bfc2c640622a1eca6f07e5844b0a855e7e595cf5fd964ea33d5d0c8df5cdaf0"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/AStoryXRule.h",
+      "bytes": 2310,
+      "sha256": "76487fa66e3e23d6e8bfa22563b563bc7eb658bd0a2ee221d53483fb8bc87549"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/AStoryXValueMeta.h",
+      "bytes": 2443,
+      "sha256": "ed86e6ad955162d1090e9d7f7af8571d7b9b1e83b8bd44adef36ef8dcd29931e"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/cpp/AStoryXController.cpp",
+      "bytes": 38782,
+      "sha256": "f7eda76c48e105a6e06b39eb244f5db4196db94a1ead4ba7df6fb750b5f66200"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/cpp/AStoryXControllerParseData.cpp",
+      "bytes": 14554,
+      "sha256": "4df3bb64a75796666838f6258f6a2c1749aa10819cd64c9d68ea8fb1d16ec742"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/cpp/AStoryXDiagnosticData.cpp",
+      "bytes": 5915,
+      "sha256": "a59405e0df7d52afcbee81e7d49cd9c12f1c577423ecd3b190f29a11d1c80c20"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/cpp/AStoryXDocument.cpp",
+      "bytes": 20176,
+      "sha256": "76353b388b254a6b838be6faa52dee7c59707b061da8b7d1dbee8720b3686c0a"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/cpp/AStoryXPreprocessor.cpp",
+      "bytes": 13438,
+      "sha256": "2f6f47eac06f126c415e44fec986925cc7f647e6f5e2c32d79aea9d59d2038bd"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/cpp/AStoryXRebuilder.cpp",
+      "bytes": 2905,
+      "sha256": "f38d8c2cf0b1aac94ef0a58247877aa238dc571bf4190117e3dd7cc48b5c3aa8"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/cpp/AStoryXRule.cpp",
+      "bytes": 16534,
+      "sha256": "b6c7c01552f782e988c481b05dabc6b9ce3d6ee95e8da786e321d6005361c013"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/cpp/AStoryXValueMeta.cpp",
+      "bytes": 27260,
+      "sha256": "da701b572d0d55a078ff12932a380aecc30e63bd0f332b3f6243cd1aae7238c9"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/AStorySyntax/private/AStoryXControllerParseData_p.h",
+      "bytes": 2036,
+      "sha256": "bb1f05b310027386059f073ee4e55de59ada6c3d0e28133749e92d5458ec277a"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/Plugin_ASERStudio.h",
+      "bytes": 1199,
+      "sha256": "a68ae83e90738c911bbe1b0b642fe40342ccff729e11582da91d0782267548cb"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/Plugin_ASERStudio.qrc",
+      "bytes": 1839,
+      "sha256": "2150f1607a4170539e93bc45d7851be0288959a69f8306bf2962c140ecf84d26"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/Plugin_ASERStudio.vcxproj",
+      "bytes": 10894,
+      "sha256": "d766238ded92a03ccb907bc902d12e643da717edbc121a115ec0a30db743126d"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/Plugin_ASERStudio.vcxproj.filters",
+      "bytes": 7833,
+      "sha256": "e2b739e890e215522377cf6690bea560ad59ddd3f9a2972840d01c775f2fd8f0"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/Plugin_ASERStudio_assets1.qrc",
+      "bytes": 2917,
+      "sha256": "5cb566785cbc72108fdfd887e61d41af962097f6bb28217b37bf4cad9086a857"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/ASERFIleServer.h",
+      "bytes": 1587,
+      "sha256": "294d6377d6b71f4712ecd05080322b163942cdc4e6133b5cfa96aea83537876d"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/ASERFileTemplate.h",
+      "bytes": 1313,
+      "sha256": "9ffac8f6ded44b7c7ffde9105e97d9e59fbe5189129736eac449f6a67837614b"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/ASERProjectResourceBrowser.h",
+      "bytes": 1852,
+      "sha256": "5b393caa65c35d4732cbb665ffa5637e1c6ed78fecd427a26db4fc5f48459156"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/ASERProjectTemplate.h",
+      "bytes": 2173,
+      "sha256": "812bfa4b707a81834c2825c516b1e3415f90911955ec676b4be7071401687fdb"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/DS_AStoryXDebugger.h",
+      "bytes": 657,
+      "sha256": "ed8b47101c3098349d77ba214cba9780c67178277ea168ff03895e10cd0e072f"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/ImageCacheHelper.h",
+      "bytes": 1649,
+      "sha256": "6c9e04a48a4201888f15210d3e0053717907c3a32722196914234b82538b87f1"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/InlayColorHoverWidget.h",
+      "bytes": 906,
+      "sha256": "674e22ecc8bcd6984a464225829bfd009e5b92c7abe63525845a99ae1c141d90"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/InlayColorProvider.h",
+      "bytes": 1658,
+      "sha256": "32001da58dc03b62d5edfcee9455cb8d5e4ec941c6c70027121376cf3fe904a3"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/LS_AStoryXHoverInfoProvider.h",
+      "bytes": 672,
+      "sha256": "bca5a026c155cc704bb69f787f1fb072a98a9e94ee3c6c16bc3cca5901db3e7b"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/LS_AStoryXSyntaxHighlighter.h",
+      "bytes": 1391,
+      "sha256": "191ca31889d76d349bf162c88073e49e31b82febf62e29e123ac2e88d80db02d"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/LS_AStoryXTabCompleter.h",
+      "bytes": 902,
+      "sha256": "ecc45fd3e78917759b58a77aa5d0dd624c8fa603f68aed6b7baad8ba7fd4c929"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/LangServer_AStoryX.h",
+      "bytes": 1176,
+      "sha256": "df9e3c62fd39fb915e79e21b3fc60f26265756572990862d9db23270499e3013"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/WAVViewHelper.h",
+      "bytes": 1955,
+      "sha256": "453f632219f560eae7063455ece342e1ef4f3e186973eeb3022a167b27a3855d"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/cpp/ASERFileServer.cpp",
+      "bytes": 12865,
+      "sha256": "cdf7555901823ff91ca2365f7b272ec58bcea0fcf2a49331e8af7d68794e1356"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/cpp/ASERFileTemplate.cpp",
+      "bytes": 6988,
+      "sha256": "598c50916d94713663f0fc3a995c21e2d02cbab52323b6aac096967c65aa7dba"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/cpp/ASERProjectResourceBrowser.cpp",
+      "bytes": 51594,
+      "sha256": "c4a0d4b5a95fd798db255e27f33bbc4b3384a6309ea798d994c34366b2db3db5"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/cpp/ASERProjectTemplate.cpp",
+      "bytes": 20155,
+      "sha256": "0e7b61bbd739e7c8d493c07f0d23aa1f1afabc075e589bf028beba6122218964"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/cpp/DS_AStoryXDebugger.cpp",
+      "bytes": 5893,
+      "sha256": "2b9de6684744fdca1843e7d578efdc11bf3e062e39a2a1c5bde7b331d0c428e1"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/cpp/ImageCacheHelper.cpp",
+      "bytes": 17370,
+      "sha256": "703046861fcfcfc4bd813d075505dc3f11eaac9e2aca8a8b5150ba9529f97e9b"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/cpp/InlayColorHoverWidget.cpp",
+      "bytes": 4455,
+      "sha256": "3c1410793c010d8216e19339d41c1c709c40ead0ac7a0bb41e73ce92314e0edf"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/cpp/InlayColorProvider.cpp",
+      "bytes": 6752,
+      "sha256": "9c50f23212233a4fc76f8f0a13c712eacc9a5b05299e4b7ecea8363acaefd2d0"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/cpp/LS_AStoryXHoverInfoProvider.cpp",
+      "bytes": 2838,
+      "sha256": "add6a8922c6a2a4f22a4d78f8588f110e93064df4bcfde1c7123377cba114a85"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/cpp/LS_AStoryXSyntaxHighlighter.cpp",
+      "bytes": 15618,
+      "sha256": "722eeaab10e41008b80c71167e3ad7d465840207ee81e1b7e7b2f3b828157f13"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/cpp/LS_AStoryXTabCompleter.cpp",
+      "bytes": 8834,
+      "sha256": "d41ea0f506416e46846eacbc3501b457e95dd4d69e579a333f93b345f3f0a783"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/cpp/LangServer_AStoryX.cpp",
+      "bytes": 4888,
+      "sha256": "eea1175bb550ad0e48bd5b7d5ee6bc2b1cf43a3ae86b9252b6c2d7cf277fe942"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/cpp/WAVViewHelper.cpp",
+      "bytes": 12224,
+      "sha256": "ed94ba5e6417f3a2442594ca8ada6a8c756cc7675b805b6b00cd5fe92da93435"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/YSS/private/ASERFileServer_p.h",
+      "bytes": 718,
+      "sha256": "ad16915aa975d5d9e33653711c23680ce11fa275c812aed1db47e841541222f0"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/cpp/Plugin_ASERStudio.cpp",
+      "bytes": 7799,
+      "sha256": "643a81fb0736356605a15f75fc51454564e6380d9d3fb7d43da7f65102354a9f"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/main.cpp",
+      "bytes": 313,
+      "sha256": "3934c1ec7e1bc7789ff0a0d63d8a6c9d8ef60c1b7f0cfd44cbfc29abf3385aa4"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/astoryxMeta/default.json",
+      "bytes": 9982,
+      "sha256": "03d2bb040a3d751a9309067251d661e904f06e67c025aa2d005e386f4dc51370"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/config.json",
+      "bytes": 164,
+      "sha256": "864b0fc1182108984e8b1cc10bc49949ac089d52c20f3c8d219bd7f65071f461"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/configWidget/FTP.json",
+      "bytes": 1178,
+      "sha256": "b7827e9fa3fcb46ae2bb4023f2a3d5740385683c80e537542aa80874b93ba8fa"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/configWidget/PTP.json",
+      "bytes": 1214,
+      "sha256": "5fdca113a6ef9d076a3d1c11429e3b9274034f4b3894c2ab6a152abcbc75d0d0"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/configWidget/PTP_3_6_7.json",
+      "bytes": 822,
+      "sha256": "77a20496b59ca642cb1219a95071d6bbe01e144494affc5442d2dd9003d2a34f"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/configWidget/pluginConfig.json",
+      "bytes": 3408,
+      "sha256": "d11843b0721e7e5abb2b1ea05509fa896ddd8e43f00ba2b8002f8fe2d70cc63d"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/i18n/de.json",
+      "bytes": 36056,
+      "sha256": "ae4e0f113f62721418f4c57392eb301f8e3a8ca3eeb1a5fe4243c00787e46abd"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/i18n/en.json",
+      "bytes": 32522,
+      "sha256": "22758d1625c38a71100055fc0da232477c73cf13d130440a23a8846b3e4e1712"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/i18n/fr.json",
+      "bytes": 36294,
+      "sha256": "58051b74eebbdbc527a69c15ee2bfadeb7b4f84640c8966cda67cce6e1737e4f"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/i18n/ja.json",
+      "bytes": 39906,
+      "sha256": "1040e5b77b8dacf9345ffc6a2b00b195eea1296b9ca4a26eb73257f9f84c20b1"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/i18n/jp_less_loanword.json",
+      "bytes": 37490,
+      "sha256": "7cbc45c0d65a8e57dcf95a2175ce3e8716003e2a24089ce4f2c9c63942d8c66f"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/i18n/ko.json",
+      "bytes": 36161,
+      "sha256": "69174db2c74336314cb79dee0f2f1033b12d6ecc7a46fc072d9291892768cbd2"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/i18n/ru.json",
+      "bytes": 49852,
+      "sha256": "87f30f457e3cade3737f32c23d7c89c7ab9ddda276becdf73ffc5d3fe6a40326"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/i18n/zh_CN.json",
+      "bytes": 29399,
+      "sha256": "f606b6d41bda2b18af2b350c123ed32bce71274c49089542888325a2b41c52bb"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/i18n/zh_TW.json",
+      "bytes": 29482,
+      "sha256": "7cd2465a9a71726360daa6c2ac7863ba7b07d6e089fd5049fd7b56a3d7e5f7f7"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/icon.png",
+      "bytes": 2203,
+      "sha256": "ba54858c8a2b6bca3485186fbb4f02b761f7593a8276bad795a21d145f80dbd8"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/icon/ASEA_Dark.png",
+      "bytes": 2203,
+      "sha256": "ba54858c8a2b6bca3485186fbb4f02b761f7593a8276bad795a21d145f80dbd8"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/syntaxColorTheme/gradus_vscode_dark.json",
+      "bytes": 13834,
+      "sha256": "b1ca318185530409bf3386f544a9e6e6769139d903016ae8fad2dfd2ba3f9d00"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/syntaxColorTheme/gradus_vscode_light.json",
+      "bytes": 13835,
+      "sha256": "00fcb847d13609923a0c19e2a08f82a3f64fb673ecc6b9865bd5a5af321ff3c9"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/syntaxColorTheme/package.json",
+      "bytes": 3549,
+      "sha256": "b72742b528a49e9e67e44622a8adb8691067fd06f7652a2914359b339200cfc5"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/syntaxColorTheme/templateFile.astoryx",
+      "bytes": 3219,
+      "sha256": "34ca46ebfb54c445e1a27b591d935c63585987ecb45b5fd3ceed2f60ed96782d"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/syntaxColorTheme/visindigo_dark_2024.json",
+      "bytes": 5100,
+      "sha256": "6ce7363365053060a7a12ad2d7b5a6943cd5648e817d673115683e68e2daebdf"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/syntaxColorTheme/visindigo_light_2024.json",
+      "bytes": 5102,
+      "sha256": "23078bc643ddfdb11718789d6307c0e398c25d15efc63d498c64ec11eda692ad"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.0/AdvanceRule.json",
+      "bytes": 13667,
+      "sha256": "f280258d79f888452a824512acc3e47a0abb44e8d4fe7d7c4b2d19f2027d12c9"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.0/BaseRule.json",
+      "bytes": 12778,
+      "sha256": "37ef3100c0018e02931ea0c7bd03ffabcd489e1d79675a1290e314c016791be4"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.0/classic.png",
+      "bytes": 1037591,
+      "sha256": "b73a62a8562f4ae73f03555e96db603035ce2f1f56a26044e68300b1a2a1e62b"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.0/main.astoryx",
+      "bytes": 479,
+      "sha256": "0d9e619ae2d80534842c53dce95c94c1f0924866f1e00203af7a7cb3d5b1d42f"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.0/newFile.astoryx",
+      "bytes": 270,
+      "sha256": "8731ed6856b786b662e3f00332e55aa6c4a58cfcad363d00feae20abbabd1c9d"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.0/tianyu_0.png",
+      "bytes": 2232262,
+      "sha256": "81693f6c9331fbd18832a3abdd0992d4d6265203876a9df642e55cf900bea8d8"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.0/tianyu_1.png",
+      "bytes": 2243373,
+      "sha256": "8bc9002f3a3fb2ab23b887397473132590e2a98562f5f64edaac83325a071abe"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Configs/override_aliases.json",
+      "bytes": 172,
+      "sha256": "304f209ec06ea9a95a418ddaccff8777230d4f55259d89e1f9844fe9aa3bb5ef"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Configs/override_userConfigs.json",
+      "bytes": 81,
+      "sha256": "d718712c4bf99bfb356d9549406c348348869d9f08c062472ba4965952c962ad"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Resources/Background/bg_amb2026.png",
+      "bytes": 536483,
+      "sha256": "672a2d47a3f8dba6920c452bb67fa49927005b6e8f227b42303815b0121ebd9a"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Resources/Char_Picture/mon3tr(amb2026)/mon3tr(amb2026)_config.json",
+      "bytes": 450,
+      "sha256": "72af192873f77741beae20586607b194add171a2c31a7acd5c21be7522d522bd"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Resources/Char_Picture/mon3tr(amb2026)/normal.png",
+      "bytes": 863721,
+      "sha256": "28d59dc62acc73ec310a323cf42574a438a657a62947b753f094b83d501f965f"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Resources/Char_Spine/Amiya(furnace_finale)/Amiya(furnace_finale).atlas",
+      "bytes": 745,
+      "sha256": "9ccbda586fd1319d5a569f68a87aba3a41370654e3669c369943675e49f0882a"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Resources/Char_Spine/Amiya(furnace_finale)/Amiya(furnace_finale).png",
+      "bytes": 1632911,
+      "sha256": "1f3c08785ca4c50267b68732297e1f7a8fc2f98e4523e671bef7c5df71e9941d"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Resources/Char_Spine/Amiya(furnace_finale)/Amiya(furnace_finale).skel",
+      "bytes": 63755,
+      "sha256": "3e5070214a2f323e04b53ea274168dfcbbcf8ab479547bc212ddfa8c493c9298"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Resources/Char_Spine/Amiya(furnace_finale)/Amiya(furnace_finale)_config.json",
+      "bytes": 2238,
+      "sha256": "d08b3cef94a10726098fafc524de75018d5c3c27a5227025d8994fb12c4bc3d4"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Resources/Music/immutable_ins.wav",
+      "bytes": 10985482,
+      "sha256": "f7325af5fd8b21cbc096c4a4d108f24596d53bc00436aa7182f05b35dfeb1e18"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Resources/SoundEffect/MagneticBurst.wav",
+      "bytes": 195208,
+      "sha256": "e1f7eff55b41f41b2d59dc4aa302653fb42f2614c2997f5eed12659d5a4ee501"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Resources/VisualEffect/manifest.json",
+      "bytes": 258,
+      "sha256": "3f0481ff88295852f37152e1c82694452d638cb6b909882a4531d45ec1aa5e89"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Resources/VisualEffect/prefab/furnace_finale.ab",
+      "bytes": 60469,
+      "sha256": "164c222cdc01da335f71ed85dcd6b3311ccfe1183198bcf5deb2ce0033e1ddba"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Resources/VisualEffect/shader/shader.ab",
+      "bytes": 21176,
+      "sha256": "d6c8b5a9fd7420837de4408361652c3f60d3bc61af5701e9eb01f6747b2c58fd"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Resources/VisualEffect/texture/noise.ab",
+      "bytes": 2617622,
+      "sha256": "e6f782988deb50436aae4273969db9c973dbc710fc392058e83d825c1806131c"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Resources/VisualEffect/texture/ring.ab",
+      "bytes": 92901,
+      "sha256": "59cff6d7a1032bdd6b277430f6d115be48eeb21a51fe16b1133abc868095f784"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Rules/AdvanceRule.json",
+      "bytes": 13667,
+      "sha256": "f280258d79f888452a824512acc3e47a0abb44e8d4fe7d7c4b2d19f2027d12c9"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Rules/BaseRule.json",
+      "bytes": 12778,
+      "sha256": "37ef3100c0018e02931ea0c7bd03ffabcd489e1d79675a1290e314c016791be4"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Stories/00_BasicExample_1.astoryx",
+      "bytes": 13804,
+      "sha256": "1f3491455af3bb4cae729eea98326f4aa60a1d6e1d111cf4c3f91e6e2428cb94"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Stories/01_BasicExample_2.astoryx",
+      "bytes": 8575,
+      "sha256": "38e7d0b17ba9ac490e7d140fa390f1bd1142f3eca7d6d4e5b716eca3cba0731d"
+    },
+    {
+      "path": "src/Plugin_ASERStudio/resource/cn.yxgeneral.aserstudio/template/3.6.7/Stories/02_BasicExample_3.astoryx",
+      "bytes": 4332,
+      "sha256": "2ff92f80954b60fb844dfc22ac0524b79feff616c104e931a072c3ded8452307"
+    },
+    {
+      "path": "src/Plugin_ImageViewer/ImageViewerCompileMacro.h",
+      "bytes": 441,
+      "sha256": "dffff0cd9b564d5fa0e0bce47357a8b0d93ca591c893df012af9ca55ddcc896a"
+    },
+    {
+      "path": "src/Plugin_ImageViewer/Plugin_ImageViewer.h",
+      "bytes": 794,
+      "sha256": "33426b879953d5524efe2fb46c5d63a0bd3e5bb96f210ebc3c8e8e5db08a2c6e"
+    },
+    {
+      "path": "src/Plugin_ImageViewer/Plugin_ImageViewer.qrc",
+      "bytes": 332,
+      "sha256": "54ab3f98d89df4ac0e9a911a95f5141cbb57a2411b34bac765c69287d40d6bd5"
+    },
+    {
+      "path": "src/Plugin_ImageViewer/Plugin_ImageViewer.vcxproj",
+      "bytes": 7753,
+      "sha256": "7909cfbed83345051259eb95c6ff7ba857328a1eead3c98a48c9f2a2836d8f74"
+    },
+    {
+      "path": "src/Plugin_ImageViewer/Plugin_ImageViewer.vcxproj.filters",
+      "bytes": 2319,
+      "sha256": "0ae223b6a6648a728a35401f3fe96bed630608d853be29cfaa61d29cc2a196da"
+    },
+    {
+      "path": "src/Plugin_ImageViewer/YSS/ImageViewer.h",
+      "bytes": 1294,
+      "sha256": "dedf741074adf5388f83e6eb267b25fa3dc705b6465e6fbd4b22c892b7ee44ee"
+    },
+    {
+      "path": "src/Plugin_ImageViewer/YSS/ImageViewerFileServer.h",
+      "bytes": 518,
+      "sha256": "a2dacc2c77411a3c9211db1bf82d6108b9e48c1ad0a85fcf87d84826b97bfe22"
+    },
+    {
+      "path": "src/Plugin_ImageViewer/YSS/cpp/ImageViewer.cpp",
+      "bytes": 6700,
+      "sha256": "1e7e5fa946fdbb608b45db848c8d6255d298898e7dcabd8e580bc3415fe5d49c"
+    },
+    {
+      "path": "src/Plugin_ImageViewer/YSS/cpp/ImageViewerFileServer.cpp",
+      "bytes": 556,
+      "sha256": "c71028dfc879ed96038794e786f827e5f4a46f106a46811d45d15d3a111e1c58"
+    },
+    {
+      "path": "src/Plugin_ImageViewer/cpp/Plugin_ImageViewer.cpp",
+      "bytes": 1371,
+      "sha256": "645b085881d1f4b4445e4705bef1d6b185578edb1370a291a5e62053cb630528"
+    },
+    {
+      "path": "src/Plugin_ImageViewer/main.cpp",
+      "bytes": 336,
+      "sha256": "ca4c05aa17a959c63776b384b6399f77c555d2c8b72b703d9a8de176b446732d"
+    },
+    {
+      "path": "src/Plugin_ImageViewer/resource/cn.yxgeneral.yayinstorystudio.plugin.imageviewer/i18n/en.json",
+      "bytes": 45,
+      "sha256": "296bee292b6fa1aaddc8ad2833ec56b836848f446089be601d8de130dee82a5e"
+    },
+    {
+      "path": "src/Plugin_ImageViewer/resource/cn.yxgeneral.yayinstorystudio.plugin.imageviewer/i18n/zh_CN.json",
+      "bytes": 45,
+      "sha256": "296bee292b6fa1aaddc8ad2833ec56b836848f446089be601d8de130dee82a5e"
+    },
+    {
+      "path": "src/Plugin_ImageViewer/resource/cn.yxgeneral.yayinstorystudio.plugin.imageviewer/icon.png",
+      "bytes": 122522,
+      "sha256": "b6811fa4a92ab4c501128814192e3df99e9504b933025bdca7e59f9b57c1b42a"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/FileServer/DefaultTextEdit.h",
+      "bytes": 455,
+      "sha256": "5289cc01dca18379f71007d290aa13c046a3fa0a5ffdaf2e16b3d5012bd34a20"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/FileServer/YSSPEditor.h",
+      "bytes": 907,
+      "sha256": "31595601137a5956f43590e939e2cde0de57c7ce54e1dc16d3864d0c46f5cd1a"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/FileServer/cpp/DefaultTextEdit.cpp",
+      "bytes": 1155,
+      "sha256": "0fcf4163fe419722d3cd36e8ace06fd41e33007fe77d0c3fcdc7d46c8c88975c"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/FileServer/cpp/YSSPEditor.cpp",
+      "bytes": 4899,
+      "sha256": "57df980223cdbdcaab4b1ea6d1cb9971c8d776df6d984258d214986c23d1d31a"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/FileTemplate/SimpleFileTemplate.h",
+      "bytes": 1669,
+      "sha256": "d650f67c0623fc2e4b5d9d1eb24c9cb9520e9a4ee42ce6266f2f0bb01089bcee"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/FileTemplate/cpp/SimpleFileTemplate.cpp",
+      "bytes": 5889,
+      "sha256": "cea8ce76adeef3e19aeadff8da0a41a66b653bd09a568f3a1fdf77f0cd1d14c9"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/IniLangServer.h",
+      "bytes": 898,
+      "sha256": "8a63e36182a230579b69a81fc5bd64b78fa04876ac03b1b944be92432cd14d6f"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/JsonLang.h",
+      "bytes": 2962,
+      "sha256": "e2e2485dcba72e8a7f5eec80e1c42e5150075245bb4ae7b4b0c87147e20b6193"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/TomlLangServer.h",
+      "bytes": 903,
+      "sha256": "2281353251867b2b715ca0c92ffa35435cc486d86b6ef2c3481069648f3940fe"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/XmlLangServer.h",
+      "bytes": 898,
+      "sha256": "21b4a739a669e83610ddf8bc16b6ffabc5265d71ccb3273a5f89958838f31fce"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/YSSConfigLangDocument.h",
+      "bytes": 3138,
+      "sha256": "254f216ac6d90b829ef3a9645b7c1b748476b17b8bcb16f0f78f2a62e7d69e50"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/YSSConfigLangHighlighter.h",
+      "bytes": 2326,
+      "sha256": "f715582c15f3250d4f63266b70f59ab62ff679948395fb7a799089a107b89706"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/YSSConfigLangServer.h",
+      "bytes": 1445,
+      "sha256": "953e41f9d97dd471653f0f7cb6c80d085caee72d768c528b0a3a1281c1bb9244"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/YamlLangServer.h",
+      "bytes": 903,
+      "sha256": "581109011aab45fe0c07c4e8c71351e5133ae9fdfd2e27f20d22d4ce863477b5"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/cpp/IniLangServer.cpp",
+      "bytes": 7702,
+      "sha256": "c45b224542c67c6428a8b6eeedfb4fb7d1f63a7b55fc89590f3cb3fad513a6f4"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/cpp/JsonLang.cpp",
+      "bytes": 24332,
+      "sha256": "cb973dcdcd08e867e92c57a6d57e56e43867a718788b5a5789fcb8ab3f88041f"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/cpp/TomlLangServer.cpp",
+      "bytes": 15796,
+      "sha256": "e1d70f47e5deefaea12707d210b115a2ad3db8c741b45627bf8da0184b6334e9"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/cpp/XmlLangServer.cpp",
+      "bytes": 15945,
+      "sha256": "46c829acda8c2ef0df920386f0cf6f3b0fef9083691a07a200a8782b4185b8f0"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/cpp/YSSConfigLangDocument.cpp",
+      "bytes": 6692,
+      "sha256": "8e7e1366bc4891b8f40888d111ec40e8c5af28acdf162465fe2f8b1127b26fdc"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/cpp/YSSConfigLangHighlighter.cpp",
+      "bytes": 4393,
+      "sha256": "732ac2e039bfa9baceb80daca89f0f43eebc80cd2e01d45bd5fa1aceff098df3"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/cpp/YSSConfigLangServer.cpp",
+      "bytes": 3251,
+      "sha256": "67317aa54c87ab9d2516eb6167760f7245e0eafe575a4f75f5d414cdb50eef36"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/LangServer/cpp/YamlLangServer.cpp",
+      "bytes": 16483,
+      "sha256": "06dc823e0ba3e084c326a785203af7344a6c13965e44b561138a7ef027e7c819"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/Macro.h",
+      "bytes": 462,
+      "sha256": "541a90aaaf212eda62e1e2c9305372256b7081baa8e5b33ea16ea2837dc60b6d"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/Plugin_YSSFileExt.h",
+      "bytes": 566,
+      "sha256": "9ac008f752c81eee5d56be8ba7eac6aac8449ee54c3ea99fa673631823cd28fb"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/Plugin_YSSFileExt.qrc",
+      "bytes": 2694,
+      "sha256": "b8d91fa2e8b8fa20b4232c9de545163974a2a8b8b97f224ca70697e66abae8bb"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/Plugin_YSSFileExt.vcxproj",
+      "bytes": 8172,
+      "sha256": "6f979f6c2110a15670c41b2205689af3544cc7e0b0f06107a065c3fb6d81057d"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/Plugin_YSSFileExt.vcxproj.filters",
+      "bytes": 4165,
+      "sha256": "ee7ecd66e00548969280b733855ca147d78b2fd4f4f7d2516aac6c9885587fb5"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/cpp/Plugin_YSSFileExt.cpp",
+      "bytes": 5768,
+      "sha256": "796b5283f6f13c669b0121018f9ee19b78ea94e85c07ca57fbca34eaeb67f488"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/main.cpp",
+      "bytes": 499,
+      "sha256": "31a552dc68d9dbe3fa0ece7b7604a5c4d36dff6dfe5a6ec91bcaa0ce0566684b"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/i18n/de.json",
+      "bytes": 1882,
+      "sha256": "81f384f367a66c6adb84aaee770eb4edf2809b99adc67477809f00e1e523d32d"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/i18n/en.json",
+      "bytes": 1743,
+      "sha256": "eacd8f057f8bc2af5181c70a6fef94daacbe35fcbd7c5a0d9acdf70fa041d256"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/i18n/fr.json",
+      "bytes": 1977,
+      "sha256": "2e852d64033c7b7dc02cce1716ac79f1c97d482cb729057b0abc3d65e4095ac3"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/i18n/ja.json",
+      "bytes": 2177,
+      "sha256": "d481779d4ca60b105fc0cb0dcecdceb20ea24053ae2f2bf9a4c8886a716cf070"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/i18n/jp_less_loanword.json",
+      "bytes": 1848,
+      "sha256": "5994c6f449dafcfb8e5b568f97e624b1b1c6902fab969c39c1d03a5ab52b9b58"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/i18n/ko.json",
+      "bytes": 1907,
+      "sha256": "7b99ecc4b59fd57e6a88654f866193a6022662a7fc132fc7f83e1a7cbca27a07"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/i18n/ru.json",
+      "bytes": 2450,
+      "sha256": "5493250c3b5aa6431946d61ceab6c70b4a35879ace085ec21bf736c5cf49ca9b"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/i18n/zh_CN.json",
+      "bytes": 1717,
+      "sha256": "d28153ec6940728665d27992fa230d23a5180aaa2ed9e2ef04538e6edb007861"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/i18n/zh_TW.json",
+      "bytes": 1702,
+      "sha256": "ea80c01d80c7dcdfd415be1aa3ecab811fa548ca273763ba8697ef05b53d5673"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/icon.png",
+      "bytes": 122522,
+      "sha256": "b6811fa4a92ab4c501128814192e3df99e9504b933025bdca7e59f9b57c1b42a"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/syntaxColorTheme/ini_dark_2024.json",
+      "bytes": 1981,
+      "sha256": "482c02e2233d39a22672f2c67e7b624501b83fd70b595d10ed3302efde6a5f5a"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/syntaxColorTheme/ini_light_2024.json",
+      "bytes": 1982,
+      "sha256": "af2a9e8a13371e0ad86a5c59666559d06f7f4412f15c0d6985ab6c9585fe4ad0"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/syntaxColorTheme/json_dark_2024.json",
+      "bytes": 1979,
+      "sha256": "91601ae66e674131765c9573fac757dc0fa30d3d4d48ec97053729ebcf3d8ebe"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/syntaxColorTheme/json_light_2024.json",
+      "bytes": 1980,
+      "sha256": "8342ea92858a85dfdafd4ea0c779eb297fb4338786e1d3b856a2d50a79936026"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/syntaxColorTheme/templateFile.json",
+      "bytes": 668,
+      "sha256": "fad87abf4988e0636b95aff34e6d8d3e02539c6d36d53ab7c444be4580b55674"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/syntaxColorTheme/templateIni.ini",
+      "bytes": 218,
+      "sha256": "4375d0dd8419064152c37ed8dfef1ae06a3ba97213271f2c42706c189f95aee3"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/syntaxColorTheme/templateToml.toml",
+      "bytes": 397,
+      "sha256": "8a4fed2ccb77a20c0f840ebea4d7142f690999d48ee0a3cc426b6f0d5c174005"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/syntaxColorTheme/templateXml.xml",
+      "bytes": 442,
+      "sha256": "451cf9e8ce11589b782fb92d0940f1599a2dccde8250184e28e1fd6abd83f2e6"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/syntaxColorTheme/templateYaml.yml",
+      "bytes": 343,
+      "sha256": "cc773a0fa486a9da12574fc275d9e247ec7d9dfd057f65a335bb5b30304bd266"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/syntaxColorTheme/toml_dark_2024.json",
+      "bytes": 2746,
+      "sha256": "126605c5e44480635e6c2cffc7a5de250b33efd39779aa472bc83858c0b19dbb"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/syntaxColorTheme/toml_light_2024.json",
+      "bytes": 2747,
+      "sha256": "4160b0d83da8076c286ed32987ebcf5f418e803b17407d63a18e6506ac26a83d"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/syntaxColorTheme/xml_dark_2024.json",
+      "bytes": 3140,
+      "sha256": "558345b5cbb67d8e3b42fd9360df68a58fb62f686e0b9005c0abe420355ed410"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/syntaxColorTheme/xml_light_2024.json",
+      "bytes": 3141,
+      "sha256": "dcbeb92c47d1dcff1c3a4bd1645088f9aeffca1642d755f3e91f6f03eadcfaed"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/syntaxColorTheme/yaml_dark_2024.json",
+      "bytes": 3132,
+      "sha256": "fe117a4741480bf7285579ab4d612d1b1ce1eab6b04264a36e1cc1efbe814d21"
+    },
+    {
+      "path": "src/Plugin_YSSFileExt/resource/cn.yxgeneral.yayinstorystudio.plugin.yssfileext/syntaxColorTheme/yaml_light_2024.json",
+      "bytes": 3133,
+      "sha256": "72cf1c7342d6b64fdf8a1215cad969640cc5641a7b2c555456b60e4a529a0844"
+    },
+    {
+      "path": "src/Plugin_YSSMediaPlayer/MediaPlayerCompileMacro.h",
+      "bytes": 542,
+      "sha256": "6b71d7881b9e888240af2b7efbed776e950999fd92cf453ed37640c0d915bdd2"
+    },
+    {
+      "path": "src/Plugin_YSSMediaPlayer/Plugin_YSSMediaPlayer.h",
+      "bytes": 834,
+      "sha256": "b69149cdd1525d64a115c8574ea8cc9a62d9624777897c0a5e93261f30880efb"
+    },
+    {
+      "path": "src/Plugin_YSSMediaPlayer/Plugin_YSSMediaPlayer.qrc",
+      "bytes": 341,
+      "sha256": "fd1a482c917e7197b29fa09f327d5108562ef7c095077d57da98a9b1944072ff"
+    },
+    {
+      "path": "src/Plugin_YSSMediaPlayer/Plugin_YSSMediaPlayer.vcxproj",
+      "bytes": 7802,
+      "sha256": "1aad1dd4521946151e0ccdf886f27da819f94b0a9519f1097aca588fbbdcde53"
+    },
+    {
+      "path": "src/Plugin_YSSMediaPlayer/Plugin_YSSMediaPlayer.vcxproj.filters",
+      "bytes": 2293,
+      "sha256": "5d1a7a0807b805ad946a43ef0dde5f43c68c12433b0314dd99a488de75ca1fb1"
+    },
+    {
+      "path": "src/Plugin_YSSMediaPlayer/YSS/MediaFormats.h",
+      "bytes": 1386,
+      "sha256": "67dce1e05ea5a89888b56d4ac8b2a73d4dfae4280d7d3cccff3373b65a38e4d8"
+    },
+    {
+      "path": "src/Plugin_YSSMediaPlayer/YSS/MediaPlayerFileServer.h",
+      "bytes": 528,
+      "sha256": "6cc3d773f4a0db554ad83e77ee0be0090f075b892c665353bc6b53603e2c9aa0"
+    },
+    {
+      "path": "src/Plugin_YSSMediaPlayer/YSS/MediaPlayerWidget.h",
+      "bytes": 3253,
+      "sha256": "2f1de4e2780e6000a4c3e47f6b74126ac0bc257b79a0d704c4aa7652e185f36f"
+    },
+    {
+      "path": "src/Plugin_YSSMediaPlayer/YSS/cpp/MediaPlayerFileServer.cpp",
+      "bytes": 581,
+      "sha256": "debd2df1e0779a4cf095f81d40190153e9cd3dd73700d2328e22720be632fe9e"
+    },
+    {
+      "path": "src/Plugin_YSSMediaPlayer/YSS/cpp/MediaPlayerWidget.cpp",
+      "bytes": 34853,
+      "sha256": "ccc5c05df0ec6456325332f6df5f6aef614c22a698deb96837cdc460e870eaaa"
+    },
+    {
+      "path": "src/Plugin_YSSMediaPlayer/cpp/Plugin_YSSMediaPlayer.cpp",
+      "bytes": 1102,
+      "sha256": "0b3f4387475fdb712b7eeaa55421a8661bf0e019f79c2749618cf98f4de607b6"
+    },
+    {
+      "path": "src/Plugin_YSSMediaPlayer/main.cpp",
+      "bytes": 340,
+      "sha256": "e2834c4e57443235db968ffaf6373c2e0647d85f8d3449a84d421b679f491a89"
+    },
+    {
+      "path": "src/Plugin_YSSMediaPlayer/resource/cn.yxgeneral.yayinstorystudio.plugin.yssmediaplayer/i18n/en.json",
+      "bytes": 361,
+      "sha256": "3280037eebcbe9b70109522bb2509485028676408978eb0c445cb2119e908b63"
+    },
+    {
+      "path": "src/Plugin_YSSMediaPlayer/resource/cn.yxgeneral.yayinstorystudio.plugin.yssmediaplayer/i18n/zh_CN.json",
+      "bytes": 343,
+      "sha256": "1e2cc8857a55cd4f3f6bfe335bf392299921887f9010635a019d7f9f9223986a"
+    },
+    {
+      "path": "src/Plugin_YSSMediaPlayer/resource/cn.yxgeneral.yayinstorystudio.plugin.yssmediaplayer/icon.png",
+      "bytes": 122522,
+      "sha256": "b6811fa4a92ab4c501128814192e3df99e9504b933025bdca7e59f9b57c1b42a"
+    },
+    {
+      "path": "src/VIAgent/Agent/Center.h",
+      "bytes": 2513,
+      "sha256": "9a510e2103437e9a3548f9285e1c870aae102f08fc6747f659d76616f169316d"
+    },
+    {
+      "path": "src/VIAgent/Agent/Dialog.h",
+      "bytes": 3894,
+      "sha256": "ce13790c969c86f6c0de91611a3a82295b694ca62c5076ad6d3f2715fa040d07"
+    },
+    {
+      "path": "src/VIAgent/Agent/Function.h",
+      "bytes": 916,
+      "sha256": "91dc916d1d3f4d312a4bdea43283ff9aa3111ce196a685e807095a8bf1893658"
+    },
+    {
+      "path": "src/VIAgent/Agent/MCP.h",
+      "bytes": 1546,
+      "sha256": "0345715a5ba4e648325e5404a14ebf46540d19ac79858d8cc1e1fc54c6208439"
+    },
+    {
+      "path": "src/VIAgent/Agent/Model.h",
+      "bytes": 1731,
+      "sha256": "7e2850834d4f0a4528e6710c723743d8e9de6dcf7f6029a3f11a3d6ebe60a89f"
+    },
+    {
+      "path": "src/VIAgent/Agent/Prompt.h",
+      "bytes": 1174,
+      "sha256": "a466f87c69e35d4091b5bbc418dc5beb1d22ee77fa4bd64c58e0feea77a9acbc"
+    },
+    {
+      "path": "src/VIAgent/Agent/Provider.h",
+      "bytes": 1237,
+      "sha256": "f71fccf2e6cd488ff595f506ccbcdcfbc9a6e3a3b3fe2288d86cf663eba223c8"
+    },
+    {
+      "path": "src/VIAgent/Agent/Skill.h",
+      "bytes": 1331,
+      "sha256": "6dc1353f1358f56105f2988a4cc8b54d44acf5693eacf332f5379378c46be9f5"
+    },
+    {
+      "path": "src/VIAgent/Agent/cpp/Center.cpp",
+      "bytes": 17104,
+      "sha256": "f945e12279d14081c765e46acc3ce899dd2682dc96cf8483840054147b15e2c5"
+    },
+    {
+      "path": "src/VIAgent/Agent/cpp/Dialog.cpp",
+      "bytes": 41462,
+      "sha256": "94bfb17affcc8857ed863584ab8a617099fdd0734ae9ee948e77574367ec7f5e"
+    },
+    {
+      "path": "src/VIAgent/Agent/cpp/Function.cpp",
+      "bytes": 4473,
+      "sha256": "f98ccb55ddb550dc81e68d55cd782a2f3b74c00a3b861cecd79dc635386fa928"
+    },
+    {
+      "path": "src/VIAgent/Agent/cpp/MCP.cpp",
+      "bytes": 9769,
+      "sha256": "80372c315e7b844864ae1579019cc41548704d0a8c22c6f318e1ed57630ee222"
+    },
+    {
+      "path": "src/VIAgent/Agent/cpp/Model.cpp",
+      "bytes": 12423,
+      "sha256": "8d441a748c581d18d68c8b5266f7a46dae13606c4d79526defc7c0814450107a"
+    },
+    {
+      "path": "src/VIAgent/Agent/cpp/Prompt.cpp",
+      "bytes": 6839,
+      "sha256": "38a01fe3480a5d513554ffa2da29d56ad2dde325fd484069ab332ae2efdac3dd"
+    },
+    {
+      "path": "src/VIAgent/Agent/cpp/Provider.cpp",
+      "bytes": 10134,
+      "sha256": "b455ec8436893fca0ea9d8cee8bd0d08c389612a5a1c437bf3efd64d804ff67a"
+    },
+    {
+      "path": "src/VIAgent/Agent/cpp/Skill.cpp",
+      "bytes": 7175,
+      "sha256": "3e7fddbf863a48e5f2d728c575bc8ffd9725b7b9c3439b65d0d2141e6d46f925"
+    },
+    {
+      "path": "src/VIAgent/Agent/private/Center_p.h",
+      "bytes": 766,
+      "sha256": "67debcc5b12b70ef75d42f44c2f74a907a94f2c63cc836a01b1947d5cce8b31b"
+    },
+    {
+      "path": "src/VIAgent/Agent/private/Dialog_p.h",
+      "bytes": 2268,
+      "sha256": "09a951b154de5a4c2744d0efaf1c76edb9e7f2a6208ab72cd7e3fff4e4af499f"
+    },
+    {
+      "path": "src/VIAgent/Agent/private/MCP_p.h",
+      "bytes": 587,
+      "sha256": "429fa5adf7b5e3d0e330ce0addd0c351ef141f4ee96c2f4bcf93b6b1fc9c3482"
+    },
+    {
+      "path": "src/VIAgent/Agent/private/Model_p.h",
+      "bytes": 571,
+      "sha256": "e9e62ad5e2fe6150bd67434b3604a51ea86eb054b69d6cfb9312c4f5ff5fc5e0"
+    },
+    {
+      "path": "src/VIAgent/Agent/private/Prompt_p.h",
+      "bytes": 385,
+      "sha256": "8d39bf866dd4da10d210ab43657b4ba9c610009e0f77fe67b9bfdf8c3819a06b"
+    },
+    {
+      "path": "src/VIAgent/Agent/private/Provider_p.h",
+      "bytes": 383,
+      "sha256": "300a1b914846c31d3dc2242042a54f514c71a46dc6bfbcb904aa62f011ecbbe5"
+    },
+    {
+      "path": "src/VIAgent/Agent/private/Skill_p.h",
+      "bytes": 433,
+      "sha256": "2b8e16b2964460e6cd1c863eec78d4c2b3d5b94f193e036c8358929cbb491e32"
+    },
+    {
+      "path": "src/VIAgent/AgentPage/AgentWin.h",
+      "bytes": 1684,
+      "sha256": "347e4e1e83079eefe0c5371ae33ce98052b91c24f49e20c19d031a05f17ef2dd"
+    },
+    {
+      "path": "src/VIAgent/AgentPage/cpp/AgentWin.cpp",
+      "bytes": 11405,
+      "sha256": "168992fae7c32d4f0a31d18eb60306ad342dd0d7cc21ddec9d3788c06d0c0385"
+    },
+    {
+      "path": "src/VIAgent/VIAgent.vcxproj",
+      "bytes": 7944,
+      "sha256": "7f357b825b8fbbbd6972270888f9fb451657ff37b287281a0ec37b9bd635a78e"
+    },
+    {
+      "path": "src/VIAgent/VIAgent.vcxproj.filters",
+      "bytes": 3197,
+      "sha256": "ad62bbaf4e14f315c95b825f01527c603a67d2004f07094c0c8d89775eb707a6"
+    },
+    {
+      "path": "src/VIAgent/VIAgentCompileMacro.h",
+      "bytes": 377,
+      "sha256": "d25c735258a9e4d65a6d2d177eb7be90a5427f6588762cf6f44a6f1f3448f9b2"
+    },
+    {
+      "path": "src/Visindigo/General/CommandHandler.h",
+      "bytes": 1794,
+      "sha256": "6f30e506a3830c583f235fbf18764c51d2515a01e5207031f1baf63e6e8bf9ed"
+    },
+    {
+      "path": "src/Visindigo/General/CommandHost.h",
+      "bytes": 1699,
+      "sha256": "c686c301f8fb861a0bf831a700e74db9a601934c72e4f79199546c4c8445a59a"
+    },
+    {
+      "path": "src/Visindigo/General/CrashGateway.h",
+      "bytes": 1209,
+      "sha256": "9105a1f68dc664530677dad5c3ef5ffb9015faac7e0d71c6e07f4c8bea668467"
+    },
+    {
+      "path": "src/Visindigo/General/Exception.h",
+      "bytes": 3266,
+      "sha256": "714aacbeb2eb9419dc1d4b1a5849bd312002400713b2626bbe2a01c7105b09cf"
+    },
+    {
+      "path": "src/Visindigo/General/Log.h",
+      "bytes": 265,
+      "sha256": "cd6f5982420a8a93aa08795e9a76f9c25f5449f39777c4610955819d0113b9cf"
+    },
+    {
+      "path": "src/Visindigo/General/LogCenter.h",
+      "bytes": 1130,
+      "sha256": "e8c5033759a285b57462628438aa4e1e37e0a65931ddf6f864088c767eeaf6e6"
+    },
+    {
+      "path": "src/Visindigo/General/LogMetaData.h",
+      "bytes": 650,
+      "sha256": "de0f77e8b4f7e7a135cf903f92b43f98713acb0469e456325fdcbab26522ab42"
+    },
+    {
+      "path": "src/Visindigo/General/Logger.h",
+      "bytes": 6147,
+      "sha256": "581b9b25f723610abf2db9d82cd12ecfe019c6b27a15968860a941946a4b9dac"
+    },
+    {
+      "path": "src/Visindigo/General/LoggerMsgHandler.h",
+      "bytes": 4902,
+      "sha256": "87c4df87579fc5ba0651a5ff87aacf8e3ceab92d55da19201159cf2d226c1f01"
+    },
+    {
+      "path": "src/Visindigo/General/Package.h",
+      "bytes": 342,
+      "sha256": "33c26116f10800a1714bb7bc20d032458be5752b6c0eaffb71dbe0a21d221102"
+    },
+    {
+      "path": "src/Visindigo/General/Placeholder.h",
+      "bytes": 1294,
+      "sha256": "42e2700c09aceb21a6f03d5fa2beec854b5f1fc5b19b49c0c257e84af970395c"
+    },
+    {
+      "path": "src/Visindigo/General/Plugin.h",
+      "bytes": 3859,
+      "sha256": "1fd3221e4066e0298aee72231f381532db1a23a2f6dcdd6861b49f4ff08e5f34"
+    },
+    {
+      "path": "src/Visindigo/General/PluginBinaryHelper.h",
+      "bytes": 1759,
+      "sha256": "717ff6389119841d85e1fd42541c480913f2245bc7d9a6b63a0e50d547c30c17"
+    },
+    {
+      "path": "src/Visindigo/General/PluginManager.h",
+      "bytes": 3294,
+      "sha256": "758075e7d4f84279c0d5c52c1167bee3071d49d107ed709ae0fd73940765b109"
+    },
+    {
+      "path": "src/Visindigo/General/PluginModule.h",
+      "bytes": 1180,
+      "sha256": "daca8daa23bc205ce3ddadd85db444eb650b5e0f29ab46ce7e41c7abfe9f7dcf"
+    },
+    {
+      "path": "src/Visindigo/General/PluginPermission.h",
+      "bytes": 1613,
+      "sha256": "090523d5d16ef5bcddab76bccd77160a216a011f3dea83c5b79f9f0586c1e17c"
+    },
+    {
+      "path": "src/Visindigo/General/ProgressMonitor.h",
+      "bytes": 1451,
+      "sha256": "dbfb9dec57a8f572117318764d24e4cc76a61d8809d3c0804f8813d8dffd94be"
+    },
+    {
+      "path": "src/Visindigo/General/StacktraceHelper.h",
+      "bytes": 964,
+      "sha256": "42d783320eeb2c8e78bdf95cf68a5d1cfc4ba947cf88c88ef7f8e09cbef29768"
+    },
+    {
+      "path": "src/Visindigo/General/TickObject.h",
+      "bytes": 1964,
+      "sha256": "0485f0b0ffd7d7baf6c974fa447149782e41ad3307c885b1481251cb431ab52a"
+    },
+    {
+      "path": "src/Visindigo/General/TranslationHost.h",
+      "bytes": 1272,
+      "sha256": "bfc6a630c68626d19691e5542a840e32999cb7ff3433f3c26ea69533cb4565b0"
+    },
+    {
+      "path": "src/Visindigo/General/Translator.h",
+      "bytes": 1337,
+      "sha256": "737af8202bad75653c4446f985adef0b33152741c2083c6a26e2264a090c3574"
+    },
+    {
+      "path": "src/Visindigo/General/VIApplication.h",
+      "bytes": 3277,
+      "sha256": "1eb0972e40fdeb09ddfb3d052a695fae776104f1c131a3ad930f9fa8bc3ff39f"
+    },
+    {
+      "path": "src/Visindigo/General/Version.h",
+      "bytes": 1960,
+      "sha256": "077282c2a024a607b7631bb049aba55d405a0621d28ceae9b6a2ef6bb6cd60e2"
+    },
+    {
+      "path": "src/Visindigo/General/VirtualStorage.h",
+      "bytes": 945,
+      "sha256": "8e871585caae6200ea5cea1d484a47de40a29d4e07d7b6902a9aa6ad6fc9a365"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/CommandHandler.cpp",
+      "bytes": 10336,
+      "sha256": "3c4fb75174f9aa730b5d767864935bec99cb85825bcd7ffd42f98c6c09d095c5"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/CommandHost.cpp",
+      "bytes": 16348,
+      "sha256": "a011ba49a66dbdcba65951aa364a28c3a863dce111bdcc678ecd3712fabe6ba4"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/CrashGateway.cpp",
+      "bytes": 41358,
+      "sha256": "50f34245fcc0d0587e0a46b182fbcba02b37478d19f5642b58fe658c5cd72259"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/Exception.cpp",
+      "bytes": 7346,
+      "sha256": "3f0ae277adac96af37724de91b9f87d6f5e1076a48d619901006ef2fb247b1c2"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/Exception_StdCast.cpp",
+      "bytes": 4253,
+      "sha256": "81d77b4d4ed28674f1f2dc4172ba3237dc73582af81498f0de2f7b2f4e0ec396"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/LogCenter.cpp",
+      "bytes": 14083,
+      "sha256": "3c16e5525d9c34f8ad8669d907c2cea928d2c92c9dfd9e5be3e4c5286faa9bf7"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/LogMetaData.cpp",
+      "bytes": 4253,
+      "sha256": "fe0a278d7147c010a85a422eef26227e5b6853a4c08571fa61c75941a584ad7a"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/Logger.cpp",
+      "bytes": 5317,
+      "sha256": "385036fcace90847340ea8d51c262a08af81c4a18ea6809fb0ea1b73823c7a51"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/LoggerMsgHandler.cpp",
+      "bytes": 12949,
+      "sha256": "22350d43f2d742b360aa99a9b5f4f6c011a7c61abaa598d52dac4992489aecce"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/Placeholder.cpp",
+      "bytes": 9097,
+      "sha256": "acc5259eebe2f0ce87fa709bd0df46e8bed297ee8477889d2f72c1872f4b13f4"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/Plugin.cpp",
+      "bytes": 53156,
+      "sha256": "b43a1f30cecde9f880423bea1d68c52daa802154cea318d34b5a9b4b8f7abaf3"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/PluginBinaryHelper.cpp",
+      "bytes": 403,
+      "sha256": "710527c4abf40e97dcbd780ef2e53aa025b2eade958eee072198e2488f4684bc"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/PluginManager.cpp",
+      "bytes": 43385,
+      "sha256": "00036145705b93d47519c3f17886de9ff1a71594a907efb3b065c03bad075a77"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/PluginModule.cpp",
+      "bytes": 3692,
+      "sha256": "04f3e51395e9104a8ff621f4cd27c9ebac4b6e307cf4965d731f251e75437f3d"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/PluginPermission.cpp",
+      "bytes": 13894,
+      "sha256": "75f4c5b4f357795b1d6b2599c73575bb1f782497205337ce9ddaf3edc20c7b7f"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/StacktraceHelper.cpp",
+      "bytes": 8750,
+      "sha256": "51d2342fc30e607edea77874b9857bca4ea8253ea430ce125e0c1ab5cee57f8f"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/TickObject.cpp",
+      "bytes": 30024,
+      "sha256": "6352f9af528db7e4eb1c3b058a3185ae979ea50ec478b627b60e1ec38a9e3ff4"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/TranslationHost.cpp",
+      "bytes": 7730,
+      "sha256": "afcdc733816cf8883811fd21f781ec76b3b8f47f94044a2c67ae59a78f1e6615"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/Translator.cpp",
+      "bytes": 7650,
+      "sha256": "056b821390280c32aa76287344507885498585f4975a97e8d7a8b7fed3de3924"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/VIApplication.cpp",
+      "bytes": 40143,
+      "sha256": "04e985cf43332917fe588a0da73cae8839d2bf785d5e6a737b27dea476fb8c34"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/VIGeneral_p.cpp",
+      "bytes": 5959,
+      "sha256": "3f6554fef18589cbb986354f6432071155e327fb86709b3854afbbb7d2565e5d"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/Version.cpp",
+      "bytes": 12627,
+      "sha256": "dcb46e2c28ce24ec82a538ac85704246cefc5acde273b9e3ecb8bd84750b7b4e"
+    },
+    {
+      "path": "src/Visindigo/General/cpp/VirtualStorage.cpp",
+      "bytes": 15486,
+      "sha256": "f277d0d6730e6ad6d368b6c126c73c217ac2a18979e8453983100a0570febec1"
+    },
+    {
+      "path": "src/Visindigo/General/private/AUTO_VERSION.h",
+      "bytes": 552,
+      "sha256": "eb400c63a9659ba9d3259ed91bcde2e501059aec39852bee7f572f13b3074d7c"
+    },
+    {
+      "path": "src/Visindigo/General/private/LoggerMsgHandler_impl.hpp",
+      "bytes": 3936,
+      "sha256": "3487d8473a28171b5d92e5031887093d2bfbcf1f2b4940d8c46f051a0f99120f"
+    },
+    {
+      "path": "src/Visindigo/General/private/Plugin_p.h",
+      "bytes": 1634,
+      "sha256": "aab7c6a3f9093166977fb1a850dceb7fe8cf1e805c840f67f50cdb7762c88890"
+    },
+    {
+      "path": "src/Visindigo/General/private/Translator_p.h",
+      "bytes": 1057,
+      "sha256": "8b8cdbadb31db5cffbe323ac57cf4a06d382f17736ee91e75fa2c4e89cbe3bc4"
+    },
+    {
+      "path": "src/Visindigo/General/private/VIApplication_p.h",
+      "bytes": 1125,
+      "sha256": "9fe9aa9f94afdc84af2798bfe2a70794954bb35cb9d8e70ecdd291923318a089"
+    },
+    {
+      "path": "src/Visindigo/General/private/VIGeneral_p.h",
+      "bytes": 1765,
+      "sha256": "b968dc2579d9bfbad6810be4137749c2048b887335f39ff28d97093e8a8aee92"
+    },
+    {
+      "path": "src/Visindigo/General/private/VersionMacro.h",
+      "bytes": 824,
+      "sha256": "362672324d9140e2afcd612ab2360768b2778b4cd0ad5c7c86b578f34b335dfe"
+    },
+    {
+      "path": "src/Visindigo/Network/HttpCenter.h",
+      "bytes": 3618,
+      "sha256": "43b8e504778711e830b8d9d29448c0847dd97310df25a640afbfb5b4ece38c08"
+    },
+    {
+      "path": "src/Visindigo/Network/HttpRequest.h",
+      "bytes": 9493,
+      "sha256": "9c79e30e808504315cd2635324a8b4342e591c2a0eba60475e135d409a425a27"
+    },
+    {
+      "path": "src/Visindigo/Network/HttpTypes.h",
+      "bytes": 2170,
+      "sha256": "fe8243114c19572fe2ba8e2f1ee2f9db87b615a2abf51a126d353d4567bed471"
+    },
+    {
+      "path": "src/Visindigo/Network/SSERequest.h",
+      "bytes": 5596,
+      "sha256": "0ba87c414d355161ccb55a75b8cb66d00e225abd8a4d1dbbaba5de9d999fee7c"
+    },
+    {
+      "path": "src/Visindigo/Network/SftpRequest.h",
+      "bytes": 3729,
+      "sha256": "c6b9759a03c45c26b317d174a0ed984edc4f4969c67d3d416595ec94445fe3d5"
+    },
+    {
+      "path": "src/Visindigo/Network/SshChannel.h",
+      "bytes": 2321,
+      "sha256": "f6dd60165c381d7acaaad1c6ade3e823794b98801114621a0653fae03678568e"
+    },
+    {
+      "path": "src/Visindigo/Network/SshExecRequest.h",
+      "bytes": 2573,
+      "sha256": "f94c269ada524c1c45547c91936feb305303119748b8eee8fdf90caa428de9c8"
+    },
+    {
+      "path": "src/Visindigo/Network/SshPath.h",
+      "bytes": 1535,
+      "sha256": "9599ca1929995f72e9a2997a0bcabaf08a0d32f5d2d0d521bce5659fe97f0d88"
+    },
+    {
+      "path": "src/Visindigo/Network/SshSession.h",
+      "bytes": 2246,
+      "sha256": "40bc76c7ae9da81afdffccbfe53e150ef70311ab6472ebd28945ac4eee00090e"
+    },
+    {
+      "path": "src/Visindigo/Network/SshTypes.h",
+      "bytes": 2475,
+      "sha256": "6be5da938cd9d011aefa5ce7c71d95349bfd8854ba7b204323296f60570ef1e7"
+    },
+    {
+      "path": "src/Visindigo/Network/WebSocketRequest.h",
+      "bytes": 2379,
+      "sha256": "d43c1295275021071cb8ac1a6f23ae776dfe989483dba54fcfc37ebc017f7640"
+    },
+    {
+      "path": "src/Visindigo/Network/cpp/HttpCenter.cpp",
+      "bytes": 27039,
+      "sha256": "2cbc64617835160c096a9032d802f2a611b0cf961e9b6cf515af2b2758052958"
+    },
+    {
+      "path": "src/Visindigo/Network/cpp/HttpReply.cpp",
+      "bytes": 44645,
+      "sha256": "d8fdd9c8b6de8866b0498f04045dde7f98727f24a6427c332b5d315f08a5b9e4"
+    },
+    {
+      "path": "src/Visindigo/Network/cpp/HttpRequest.cpp",
+      "bytes": 34692,
+      "sha256": "c386cfa0d2078754c367ef6174e01e52a7b5d600072f2894eb22964c5c952a97"
+    },
+    {
+      "path": "src/Visindigo/Network/cpp/HttpTypes.cpp",
+      "bytes": 13021,
+      "sha256": "b06424d2b09dea5ae735fdc1de29d488b2f025719cb4ced3550a7a1807a25a0b"
+    },
+    {
+      "path": "src/Visindigo/Network/cpp/JsonLinesDecoder.cpp",
+      "bytes": 3933,
+      "sha256": "d920fbd5840e0e05ff3968036728a408523b1b4185c7e5918e6a700f8068ccf6"
+    },
+    {
+      "path": "src/Visindigo/Network/cpp/SSEReply.cpp",
+      "bytes": 7160,
+      "sha256": "30e621e08bb3d3f19e1eb3a6300b6ffdc31a04ffcc6c6af287ac9c5f574e657b"
+    },
+    {
+      "path": "src/Visindigo/Network/cpp/SSERequest.cpp",
+      "bytes": 16404,
+      "sha256": "8f442e4e98fe45920524679cbb0042ae05f8173854f5b9d4d0b8fcea88ee7a3d"
+    },
+    {
+      "path": "src/Visindigo/Network/cpp/SftpRequest.cpp",
+      "bytes": 11595,
+      "sha256": "adbed68dcc4b55155b980dc391454d7ab5e01742573df8edd5e48e4a0ec1207e"
+    },
+    {
+      "path": "src/Visindigo/Network/cpp/SshChannel.cpp",
+      "bytes": 7873,
+      "sha256": "1feae00024be12c360c00fc6129e124c2f384af2053781c040d9473252905d49"
+    },
+    {
+      "path": "src/Visindigo/Network/cpp/SshExecRequest.cpp",
+      "bytes": 9963,
+      "sha256": "3d759db5396f6fbd8963b183f995cd3be9557cd84f671ad2f7d299f4b5a3ec33"
+    },
+    {
+      "path": "src/Visindigo/Network/cpp/SshPath.cpp",
+      "bytes": 15880,
+      "sha256": "c462eb0291ea2bc04ddd786c76c5595734da39f58486329081fe0a2d870e879a"
+    },
+    {
+      "path": "src/Visindigo/Network/cpp/SshSession.cpp",
+      "bytes": 45267,
+      "sha256": "78b0d8edfb65510aa11c71c950f3b3f05ecbdd1f448ca34dde12e5c433b74984"
+    },
+    {
+      "path": "src/Visindigo/Network/cpp/SshSessionSftp.cpp",
+      "bytes": 10623,
+      "sha256": "3d9c4f81bba3263b95c15aa41677a07c3dac1217682785bb3b47abe0c8bc91d5"
+    },
+    {
+      "path": "src/Visindigo/Network/cpp/SshTypes.cpp",
+      "bytes": 9613,
+      "sha256": "f92a043d381f867d101df7b629098217aca98779406d699fd6a954f4ca9c6481"
+    },
+    {
+      "path": "src/Visindigo/Network/cpp/WebSocketRequest.cpp",
+      "bytes": 15373,
+      "sha256": "79dea004e5e98b2b0fbe5ad13a006fd8c05a63255f089299f57f24b77de245b9"
+    },
+    {
+      "path": "src/Visindigo/Network/private/HttpCenter_p.h",
+      "bytes": 3513,
+      "sha256": "3e3d8e73a9fbf058fbc1ca867981b849b6e1d00a7cdf659bfaf1b54d1e067cc1"
+    },
+    {
+      "path": "src/Visindigo/Network/private/HttpReply_p.h",
+      "bytes": 2869,
+      "sha256": "1c1495045831ee7a2043965928c6dbe664dc2eb5df80642b9b3a2326ae05f9dd"
+    },
+    {
+      "path": "src/Visindigo/Network/private/HttpRequest_p.h",
+      "bytes": 2564,
+      "sha256": "79db678f7ce38b8bbf44cafe8d8303dbf97c7a6d890bec02a1950696714e015d"
+    },
+    {
+      "path": "src/Visindigo/Network/private/SshSession_p.h",
+      "bytes": 7026,
+      "sha256": "d17125821c915cba04657f5ddb5dce9e95a79b940caf135ff56a9d551e714a0e"
+    },
+    {
+      "path": "src/Visindigo/Network/private/WebSocketRequest_p.h",
+      "bytes": 1092,
+      "sha256": "e1a7b7c4059cae086a8be7ec97bfb8b686471b316c5930c30b0fdc3879386adc"
+    },
+    {
+      "path": "src/Visindigo/Utility/AsyncFunction.h",
+      "bytes": 1855,
+      "sha256": "3d45af7dc70d671efd6b464ea05cf2835298ce0b9552902447dc6d6f70e346bc"
+    },
+    {
+      "path": "src/Visindigo/Utility/BenchmarkTimer.h",
+      "bytes": 741,
+      "sha256": "ad224ae6c7460d6f2ae1e73cafa46eba07fb9eba3c7a6a004e62bcfed253024e"
+    },
+    {
+      "path": "src/Visindigo/Utility/ColorTool.h",
+      "bytes": 839,
+      "sha256": "7efb89c2b69c2b5736af018d38dbf306d43059d2cd279a084426eb6ab9143e96"
+    },
+    {
+      "path": "src/Visindigo/Utility/Console.h",
+      "bytes": 1882,
+      "sha256": "ebc951ad2318025f25a511e35aa53596a8911a4b643b68b9ecbda48cb1eaad44"
+    },
+    {
+      "path": "src/Visindigo/Utility/ConsoleFormat.h",
+      "bytes": 1909,
+      "sha256": "978d0738e6eaeae648944a21bc142580523bebca31ee86c8b0c0e5309747fa9c"
+    },
+    {
+      "path": "src/Visindigo/Utility/ExtTool.h",
+      "bytes": 454,
+      "sha256": "a8fa09aa94b14940ac8c0d9b3dbac29c5ab64bf4b814ec9f7d7cff31960420cb"
+    },
+    {
+      "path": "src/Visindigo/Utility/FileOperation.h",
+      "bytes": 1748,
+      "sha256": "8058cc49fb3b2d6006a708d2964bc073b2ce82ccec0e7bba4b7f074a2d23b6d5"
+    },
+    {
+      "path": "src/Visindigo/Utility/FileUtility.h",
+      "bytes": 3076,
+      "sha256": "5558d3ca7f16d1bd38f7d1228b046ec5c9445cc4f0c17bb100cf76027474d49c"
+    },
+    {
+      "path": "src/Visindigo/Utility/GeneralConfig.h",
+      "bytes": 3197,
+      "sha256": "cb9562ab80c6fbe87a440aead5a1125e12931cc6f5b8222f97524a39b4d8db68"
+    },
+    {
+      "path": "src/Visindigo/Utility/GeneralConfigParser.h",
+      "bytes": 1228,
+      "sha256": "f32962d49dd6d099d7ab60b1a5e219b2179713d67223395e8fc85a43859784b2"
+    },
+    {
+      "path": "src/Visindigo/Utility/JsonConfig.h",
+      "bytes": 6486,
+      "sha256": "e6a10201010decc5c1cc31ffa2555ee77ea9d881acc27043d9775bd5921d63a0"
+    },
+    {
+      "path": "src/Visindigo/Utility/JsonValueRef.h",
+      "bytes": 1702,
+      "sha256": "fe684a3b03b8b5b41a3bc5b4d2fe27638d7a7e514018e5d9f05168ec1833b12e"
+    },
+    {
+      "path": "src/Visindigo/Utility/ObjectPool.h",
+      "bytes": 1974,
+      "sha256": "06d4d90973e6e7ed1b88ed25c223734d9200cf29a710acfe05f692504c5c214b"
+    },
+    {
+      "path": "src/Visindigo/Utility/QtSSHelper.h",
+      "bytes": 615,
+      "sha256": "90049594ba97944784934bb7ec2aee507e6b2d91252af73c2441c95997227eb7"
+    },
+    {
+      "path": "src/Visindigo/Utility/SevenZipBinder.h",
+      "bytes": 1439,
+      "sha256": "489dafaccf8af6848ede3fe82c52e3afe4bac000078b6152ccdd2301259a2343"
+    },
+    {
+      "path": "src/Visindigo/Utility/StringUtility.h",
+      "bytes": 1132,
+      "sha256": "04b8db9e584fe058e07fd070bd4b5cccc70ca4d71b2cce4e93897a6ddbed1c71"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/AsyncFunction.cpp",
+      "bytes": 1249,
+      "sha256": "38e9d5248bff277183e5e42723392410c35d623dc9feed9d8cde261afa4287fb"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/BenchmarkTimer.cpp",
+      "bytes": 9955,
+      "sha256": "eeb640973e11ffb9f2e064fa82c276ec0d3352385fef045871d0ebe6b952d16a"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/ColorTool.cpp",
+      "bytes": 2870,
+      "sha256": "74879fc38d825605633e3291adcbb50b90a146f94a89202bdcf3ebf034827eb0"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/Console.cpp",
+      "bytes": 13750,
+      "sha256": "b8f01a9817b133c2c38bec7ac2ebc68f13bb4dc57df5a47c34ee3f6840d96736"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/ConsoleFormat.cpp",
+      "bytes": 6096,
+      "sha256": "a0d13cc1b1f47aea6dc5e660718931a76e0d405ee25ef6cc0d015c41e352a479"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/ExtTool.cpp",
+      "bytes": 1051,
+      "sha256": "7df97b3fab58b5bee740282a083f29c64ac588cf1234458ae06b2cf4247d83ba"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/FileOperation.cpp",
+      "bytes": 20068,
+      "sha256": "7e0a08ab95e052a3a942a599bfe45e8f004be686e35bf9b7214142bc5e650bcb"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/FileUtility.cpp",
+      "bytes": 24144,
+      "sha256": "6af972432ac0731935da245523523fd5d324b6bf1f8acc6794a5715d96bf5dca"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/GeneralConfig.cpp",
+      "bytes": 39434,
+      "sha256": "233b789452cf8b5050c250706955c648da95def63d0b87448c35a86f18ab0f56"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/GeneralConfigParser_Json.cpp",
+      "bytes": 18424,
+      "sha256": "772df0bbb91fad8b535a864e7b94049cd6a165218d582018bd5b0b7876b49076"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/GeneralConfigParser_Yaml.cpp",
+      "bytes": 248,
+      "sha256": "dedae1abcf980f8605cb68bacf170f8aa12f8e85070c5fa8ee46729fbea2814e"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/JsonConfig.cpp",
+      "bytes": 25528,
+      "sha256": "cb865472f597be673893e539b9671ea5c71a82d8536a48ce395d2206c199e591"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/JsonValueRef.cpp",
+      "bytes": 2637,
+      "sha256": "a5f638c50ab72d198fbed0832a49c17f47b74027619a0a984bfe8886387dc651"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/QtSSHelper.cpp",
+      "bytes": 5687,
+      "sha256": "ed20cd740f889eb16b6413ec3a946d1b78cee912b92bcc88581b7a2309ed22ea"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/SevenZipBinder.cpp",
+      "bytes": 10060,
+      "sha256": "e1dcb3b7f4aa76303a83fdae0d94f252a3204168146e96837b10d2b389f1e20d"
+    },
+    {
+      "path": "src/Visindigo/Utility/cpp/StringUtility.cpp",
+      "bytes": 7865,
+      "sha256": "567302c1031cf6815a2c91fdc76c6667726cef1dbfc22a3ab0358816d5768169"
+    },
+    {
+      "path": "src/Visindigo/Utility/private/GeneralConfig_p.h",
+      "bytes": 1350,
+      "sha256": "cb9dcd93767d557cf5ddd40fbed8830c0d0e4b7d642be38f090384570c060211"
+    },
+    {
+      "path": "src/Visindigo/Utility/private/ObjectPool_impl.hpp",
+      "bytes": 6388,
+      "sha256": "5d8aa2075f53614a1354590ea25c590c602c7e609916b59e6d28d2eb51d50995"
+    },
+    {
+      "path": "src/Visindigo/Utility/private/qnamespace_key.h",
+      "bytes": 17287,
+      "sha256": "90006946218f8357b04f32a0fe3af6992d181235597317677d756296f4fcb739"
+    },
+    {
+      "path": "src/Visindigo/VICompileMacro.h",
+      "bytes": 436,
+      "sha256": "dbf7dd41c9b0567c4b51dbe44bfb381e5afb6a49ce4f857180b955902de1a310"
+    },
+    {
+      "path": "src/Visindigo/VIMacro.h",
+      "bytes": 3985,
+      "sha256": "1fcce204d621fa5dc12d8102d33ed73d37bc72c53945db645af5d007e3dca258"
+    },
+    {
+      "path": "src/Visindigo/Visindigo.qrc",
+      "bytes": 956,
+      "sha256": "7989a6a89ccebaf9f24fed249bda822438e845d2167f8c0890eaf2b86a0420d5"
+    },
+    {
+      "path": "src/Visindigo/Visindigo.vcxproj",
+      "bytes": 17045,
+      "sha256": "ac9fcb71b411e917c58eb54843c8ad0784794189fad2568b167c433a6188134b"
+    },
+    {
+      "path": "src/Visindigo/Visindigo.vcxproj.filters",
+      "bytes": 19409,
+      "sha256": "2cbbc97cdf2de9591e64cad19ca6dfd21678c589935719055d3de922910a79f8"
+    },
+    {
+      "path": "src/Visindigo/Widgets/BorderFrame.h",
+      "bytes": 420,
+      "sha256": "e5d55b5ef36a87de298f99baa1e27edbd0f5210c3490d2648fe0eb881e9a40e8"
+    },
+    {
+      "path": "src/Visindigo/Widgets/BorderLabel.h",
+      "bytes": 420,
+      "sha256": "704c6d8dbd94a6a72d4f12fd9c7cafe029a71d86ca3131d2462da5b6af7d9e9d"
+    },
+    {
+      "path": "src/Visindigo/Widgets/ConfigWidget.h",
+      "bytes": 1846,
+      "sha256": "6de8b76a4059d10d112f19ddbbc079395fb2d8861d4c0e00e9b6119883922ae3"
+    },
+    {
+      "path": "src/Visindigo/Widgets/DesktopHacker.h",
+      "bytes": 528,
+      "sha256": "7132c8841719673a29d2dada1b7d41b4f19675fda6e7fe515ec8c8ca8a4ca877"
+    },
+    {
+      "path": "src/Visindigo/Widgets/DragWidget.h",
+      "bytes": 659,
+      "sha256": "7cdbc92dcb4df13fb89482763dd7f5a34025bba963fd5bd1fc24ae679c5d9e91"
+    },
+    {
+      "path": "src/Visindigo/Widgets/IconFontRouter.h",
+      "bytes": 887,
+      "sha256": "bb29cffaf76c1f7eab47469497dcf4fce8a78533a50ff1c82e5ded7d9c0a3b23"
+    },
+    {
+      "path": "src/Visindigo/Widgets/LiquidGlassEffect.h",
+      "bytes": 3053,
+      "sha256": "b8fc0160f2f9282191c164ab774357e027b7ca690d0a4a63898d3902231f4e9f"
+    },
+    {
+      "path": "src/Visindigo/Widgets/MessageCenter.h",
+      "bytes": 1790,
+      "sha256": "f33dcb755c082cff96fc048da15d0b805f80c0dc82b1e30521d1473c593631c6"
+    },
+    {
+      "path": "src/Visindigo/Widgets/MultiButton.h",
+      "bytes": 1591,
+      "sha256": "b6ab671fd55ba7adde63cd3290b358d011dc41de8a025b8dd699bff4599671c0"
+    },
+    {
+      "path": "src/Visindigo/Widgets/MultiButtonGroup.h",
+      "bytes": 1262,
+      "sha256": "adccc4470ae77dc93fbf3bae2c2790bfe2360ba37543be8d77596aab2c7e192e"
+    },
+    {
+      "path": "src/Visindigo/Widgets/MultiLabel.h",
+      "bytes": 1195,
+      "sha256": "fc0801ca770bb8793343149391ba0121284c91a0bb46b5533bb1c9cc12e946b3"
+    },
+    {
+      "path": "src/Visindigo/Widgets/PixmapCacheHelper.h",
+      "bytes": 697,
+      "sha256": "476dee5804d85f1557aae3307ac8276be5e35d72a4770be1e271881407ef5f0c"
+    },
+    {
+      "path": "src/Visindigo/Widgets/PluginManageWidget.h",
+      "bytes": 604,
+      "sha256": "2dedc60aa3bcb6ed934ba929a75d9f76c226d31850980588dede338a4e721bf3"
+    },
+    {
+      "path": "src/Visindigo/Widgets/QuickMenu.h",
+      "bytes": 1089,
+      "sha256": "c25441f2b96ebcb8bb3790c5575121495ca4f63396344b9622fdf480a5d93373"
+    },
+    {
+      "path": "src/Visindigo/Widgets/ShortcutSet.h",
+      "bytes": 919,
+      "sha256": "92e12b41c87d41fc46a1c404c3f7fd8a57dde831e3fb114b196b626d2aca187d"
+    },
+    {
+      "path": "src/Visindigo/Widgets/StyleSheetTemplate.h",
+      "bytes": 1371,
+      "sha256": "67090d4b7a66999d9210c0ade4b064fe8e9810c5acf23efb1b77c4e21d4198fd"
+    },
+    {
+      "path": "src/Visindigo/Widgets/Terminal.h",
+      "bytes": 1964,
+      "sha256": "4c8e26626a509fd7c5c67e57ccc53e2344053ce33aca54372d325448bf9a62eb"
+    },
+    {
+      "path": "src/Visindigo/Widgets/ThemeManager.h",
+      "bytes": 3609,
+      "sha256": "758b39ffa623c8335176fc2ac9eb161d37fd203d7bafd6f95379ae933c6a638e"
+    },
+    {
+      "path": "src/Visindigo/Widgets/TitleWidget.h",
+      "bytes": 2264,
+      "sha256": "269c4da8708346637522551edc208529a050c7ed6b425b1a6ef0ae37b0e3fc40"
+    },
+    {
+      "path": "src/Visindigo/Widgets/WidgetResizeTool.h",
+      "bytes": 1103,
+      "sha256": "eb44d6337771e6e5859e554175b2c2b5e27ac34935f2d8547a0bc534d8733f6d"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/BorderFrame.cpp",
+      "bytes": 2185,
+      "sha256": "a366794d33979175a99c8f6a8bf63949d53099a0e54398a44aa970ba0070c75c"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/BorderLabel.cpp",
+      "bytes": 1930,
+      "sha256": "d76c3361b95c6fe44275dffbb937278c117e522c1753c6a72a6b78a898f6137f"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/ConfigWidget.cpp",
+      "bytes": 31762,
+      "sha256": "4d160e8901f083f8404a587a9b650b134e14ad7bbf9a8e840697e4d38f0cba08"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/DesktopHacker.cpp",
+      "bytes": 2319,
+      "sha256": "251d73a48bafbdbb542e173b6bc471fb02159edd52c7a0df55cbda6029519844"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/DragWidget.cpp",
+      "bytes": 4207,
+      "sha256": "36e6c6bb8c2eb0d582fa3a5547a56b1f5f53af6e55514a7cf34a9ab8eed87a15"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/IconFontRouter.cpp",
+      "bytes": 1865,
+      "sha256": "90f95ababc165e04bec3c189c36f0e00fcb139748223a45ea38ecb5d976c78f8"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/LiquidGlassEffect.cpp",
+      "bytes": 82307,
+      "sha256": "69f6630f4a68dcee43c88ebe91efa104c089788c32e631337e43e1d804856bef"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/MultiButton.cpp",
+      "bytes": 9631,
+      "sha256": "8eb8e8a663e5f6d2b627928d99b04208bd80389eab03cbe32aead0a7e16a15ae"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/MultiButtonGroup.cpp",
+      "bytes": 11326,
+      "sha256": "2e42eca32143cba5cdb69027dc097a6f7cf0533ff4de4883e98b0d4d1f6bc7ff"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/MultiLabel.cpp",
+      "bytes": 7179,
+      "sha256": "21cd39c9026daf65205801a6a002009d0cb1287b05456d6e543131fb99c380e7"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/PixmapCacheHelper.cpp",
+      "bytes": 14045,
+      "sha256": "df7e6cb539b8840c9e7a3f40f46cba6202c60d10d4b819ad53c28979381cd805"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/PluginManageWidget.cpp",
+      "bytes": 14237,
+      "sha256": "064667d205c41512cae18a5977acf92801775a1a231ccfbbc7f8e3c29f6a022b"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/QuickMenu.cpp",
+      "bytes": 5673,
+      "sha256": "f6e3554fcdb879477e37cb371a0dc89df2c9fe55dc50b2a99884b83a743e2385"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/ShortcutSet.cpp",
+      "bytes": 4924,
+      "sha256": "b91b7130c507fba47edff3c6b82815467357184e4ae9a722ed1f4af090369976"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/StyleSheetTemplate.cpp",
+      "bytes": 10376,
+      "sha256": "bf0b34d92d90b947bdcccca56ff25c541e01d5fe1a9699ac6aa2d0bdcc3136b5"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/Terminal.cpp",
+      "bytes": 43509,
+      "sha256": "7eea6498e58c4c758414590268478a45d498d982fd389282636c2e8e964d2ff2"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/ThemeManager.cpp",
+      "bytes": 49384,
+      "sha256": "3b7832418da2e9721a2ed3eb5726e610e2e1a4a253859a812200e0b58774ecfe"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/TitleWidget.cpp",
+      "bytes": 17655,
+      "sha256": "2200d06fbd059531ac8f873c5c8218aeef4e4321391aaf52a2cfa3d829deee9d"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/VIWidgets_p.cpp",
+      "bytes": 2093,
+      "sha256": "37fd1283468f1353835845a2aa287ebb69e623096f8ca215e18587b087882310"
+    },
+    {
+      "path": "src/Visindigo/Widgets/cpp/WidgetResizeTool.cpp",
+      "bytes": 8720,
+      "sha256": "a89e947aa7872ec249b5d71f3efeac9b9bbfe8d1879eeba726ed9b9ed8ccfccf"
+    },
+    {
+      "path": "src/Visindigo/Widgets/private/ConfigWidget_p.h",
+      "bytes": 2953,
+      "sha256": "cb4e1afa062cf90e09e8186fc34bdf4a2ccd6bb708e2adb8a7a30848b45f8bb8"
+    },
+    {
+      "path": "src/Visindigo/Widgets/private/DragWidget_p.h",
+      "bytes": 988,
+      "sha256": "4c50590ea3cf54a168769735809975824a74501cb36fc3d08e050784a545bd49"
+    },
+    {
+      "path": "src/Visindigo/Widgets/private/IconFontRouter_SegoeFluent_p.h",
+      "bytes": 595,
+      "sha256": "e6f94c371902541155828b96b8b1c1b11359bc45cff2263e70049a777a478750"
+    },
+    {
+      "path": "src/Visindigo/Widgets/private/IconNameEnum.hpp",
+      "bytes": 42270,
+      "sha256": "2a3954bacf67d094c81d28eba414d8b4bbdcdbb51b38655c9b66ef7e2f44c303"
+    },
+    {
+      "path": "src/Visindigo/Widgets/private/MultiButtonGroup_p.h",
+      "bytes": 1055,
+      "sha256": "efa95dea83a85ef97fabeba8fdefc37cc02a07f8c841ecc60a22514bfea37679"
+    },
+    {
+      "path": "src/Visindigo/Widgets/private/MultiButton_p.h",
+      "bytes": 852,
+      "sha256": "edf5739ac687ec684b48e95d4f3e7ca94eb69ed04293082365ff2c611632f3a7"
+    },
+    {
+      "path": "src/Visindigo/Widgets/private/PluginManageWidget_p.h",
+      "bytes": 1866,
+      "sha256": "dc427d0b18eba3c9e6c5ec3c579b4bfda824b812db081c5505a8301588c0ebd2"
+    },
+    {
+      "path": "src/Visindigo/Widgets/private/Terminal_p.h",
+      "bytes": 1971,
+      "sha256": "b8d9cc5c29bc54985a25fe24ff1086d79394d5cb93d88bc0e62c633bcedc2aaf"
+    },
+    {
+      "path": "src/Visindigo/Widgets/private/TitleWidget_p.h",
+      "bytes": 1999,
+      "sha256": "7b511d09c0ab16c7870bfa2d1809827873a4845039416fdf1c8dd30ff3dedd80"
+    },
+    {
+      "path": "src/Visindigo/Widgets/private/VIWidgets_p.h",
+      "bytes": 929,
+      "sha256": "cee410e0029c90164b4cab07e51cb26a3058866f584dbf532638b260082bfc4f"
+    },
+    {
+      "path": "src/Visindigo/main.cpp",
+      "bytes": 131,
+      "sha256": "5b9ba7a67f4ccbbc1edf0dc03ab086a41e01760d44fd7cc1a0824d1327ddb94d"
+    },
+    {
+      "path": "src/Visindigo/pytools/AutoVersionFromGIT.py",
+      "bytes": 2694,
+      "sha256": "9591ba45f482c718b63cc89a05966715895946674e9857d5490847bcd14708d6"
+    },
+    {
+      "path": "src/Visindigo/resource/cn.yxgeneral.visindigo/IWillFindU.txt",
+      "bytes": 8484,
+      "sha256": "93b2c841954ca0dca4c4cb2e7b02e51ab9e82d20288a8ed9088d8fb25a612ff9"
+    },
+    {
+      "path": "src/Visindigo/resource/cn.yxgeneral.visindigo/Segoe Fluent Icons.ttf",
+      "bytes": 408752,
+      "sha256": "82f5dc0e0cb9f41efad49e5423c76768ae0fc96e062a0893b6c729b863033013"
+    },
+    {
+      "path": "src/Visindigo/resource/cn.yxgeneral.visindigo/default/defaultTheme.json",
+      "bytes": 1233,
+      "sha256": "2895ce779fc285e27ab7c716d3aac855310cff28410b41814b33303889f2dc77"
+    },
+    {
+      "path": "src/Visindigo/resource/cn.yxgeneral.visindigo/i18n/de.json",
+      "bytes": 3264,
+      "sha256": "84b10742d34d30691af14c49c8043bd709c24b81508c6e587e5cee33b99c8733"
+    },
+    {
+      "path": "src/Visindigo/resource/cn.yxgeneral.visindigo/i18n/en.json",
+      "bytes": 2824,
+      "sha256": "7f8b85c63c2f1ea5486d937e5ab386cbc97f6d181e76f5b5a07af501cb910b18"
+    },
+    {
+      "path": "src/Visindigo/resource/cn.yxgeneral.visindigo/i18n/fr.json",
+      "bytes": 3241,
+      "sha256": "f4fa60accdb10eed57c2a97e3144ce53603a3f96aeab67fe0e2c43b98c08d757"
+    },
+    {
+      "path": "src/Visindigo/resource/cn.yxgeneral.visindigo/i18n/ja.json",
+      "bytes": 3580,
+      "sha256": "cd912e62f92eb4b6bd097bed306ddf71112e53198db8d609c6c2d3a999111628"
+    },
+    {
+      "path": "src/Visindigo/resource/cn.yxgeneral.visindigo/i18n/jp_less_loanword.json",
+      "bytes": 3520,
+      "sha256": "1683176d5257428fea17baeefc7856acf510609601c6cce3e6fd1a9db141d93d"
+    },
+    {
+      "path": "src/Visindigo/resource/cn.yxgeneral.visindigo/i18n/ko.json",
+      "bytes": 3418,
+      "sha256": "b4eb35400a31df35fba604bbb625c721f7e08f3499c94d334298e02d2ebb68ab"
+    },
+    {
+      "path": "src/Visindigo/resource/cn.yxgeneral.visindigo/i18n/ru.json",
+      "bytes": 4545,
+      "sha256": "2c1e45fffede4abb9bee47f630df14fd08a9513cea0d90409fcac63c96a6c053"
+    },
+    {
+      "path": "src/Visindigo/resource/cn.yxgeneral.visindigo/i18n/zh_CN.json",
+      "bytes": 2749,
+      "sha256": "3eb92b68dc54308f4bc0e6c7bbbf821071e03d1ec7f190acf6cf73a54f3feee4"
+    },
+    {
+      "path": "src/Visindigo/resource/cn.yxgeneral.visindigo/i18n/zh_TW.json",
+      "bytes": 2864,
+      "sha256": "de8493b813d86814fa8bb39826b608fb4f07c4269d1824ce5d93c2407e839da4"
+    },
+    {
+      "path": "src/Visindigo/resource/cn.yxgeneral.visindigo/icon.png",
+      "bytes": 115830,
+      "sha256": "5034d3db3d6b2aed73895f209bc8000299dd18fbce5ffe064209244f6ba18eb7"
+    },
+    {
+      "path": "src/Visindigo/resource/cn.yxgeneral.visindigo/icon/图标.ico",
+      "bytes": 45451,
+      "sha256": "553e58420039098f52abebcf8d150770493b159be5e674c5c14366a9069c832f"
+    },
+    {
+      "path": "src/YSSCore/Editor/CodeDiff.h",
+      "bytes": 2191,
+      "sha256": "5f94354d23b944ce1d10896ca037df16b84a2a6987fa06804d375dd73743abbc"
+    },
+    {
+      "path": "src/YSSCore/Editor/ColorThemeProvider.h",
+      "bytes": 3969,
+      "sha256": "2bcbff044ff723773a40951926a418389753db4720b728e9ad3dd4357a984794"
+    },
+    {
+      "path": "src/YSSCore/Editor/CustomDocumentData.h",
+      "bytes": 843,
+      "sha256": "36a3e4ddfe2e90e763377b3f5c5b1660f7b68ebbc20d88f1d0260f9f1ac7e0b3"
+    },
+    {
+      "path": "src/YSSCore/Editor/DebugServer.h",
+      "bytes": 2508,
+      "sha256": "3aff133c902053ea5365a0e6886a32bd2a84b681d8d1a636922233ad7ba7f01c"
+    },
+    {
+      "path": "src/YSSCore/Editor/DebugServerManager.h",
+      "bytes": 780,
+      "sha256": "b64f8b0a32a73743f0de6d4f5577a487002a9234a3988a1bb82d12aaaafad469"
+    },
+    {
+      "path": "src/YSSCore/Editor/DebugStepData.h",
+      "bytes": 736,
+      "sha256": "5cd260a2fcc8499aca8ea4d3ac90cca9d21f4c7c26c42796301f15c8aa88c813"
+    },
+    {
+      "path": "src/YSSCore/Editor/DocumentMessage.h",
+      "bytes": 1084,
+      "sha256": "9be674713e8909fe14fda6b34ffaca8d46b509c8aef304a3e64c1c484bcee405"
+    },
+    {
+      "path": "src/YSSCore/Editor/EditorPlugin.h",
+      "bytes": 2484,
+      "sha256": "5d026e113182a51cd32959fd40d26b8d77feb1acfff6e40f1ddbb5a922793d66"
+    },
+    {
+      "path": "src/YSSCore/Editor/EditorProjectHelper.h",
+      "bytes": 919,
+      "sha256": "1ae0e4684957edd97445bda6fd2241fa2c8fdbfe4544e343aff7fc6e61143d71"
+    },
+    {
+      "path": "src/YSSCore/Editor/EditorProjectHelperManager.h",
+      "bytes": 217,
+      "sha256": "4cf6324c27f2fa8553bf3f43a40fa741da9c6df01edc43d35f1ebd81dd7a92d4"
+    },
+    {
+      "path": "src/YSSCore/Editor/FileEditWidget.h",
+      "bytes": 3050,
+      "sha256": "9cf56e7f1f5fd649a8951adbf00592845af82b6158b3aa79f7cf52ad8942e68e"
+    },
+    {
+      "path": "src/YSSCore/Editor/FileServer.h",
+      "bytes": 1755,
+      "sha256": "89282323b3c801deafd6916962310ece27226b461929a19f226d52dbe5962dad"
+    },
+    {
+      "path": "src/YSSCore/Editor/FileServerManager.h",
+      "bytes": 3031,
+      "sha256": "b2e7defecc86c655d229b66c967be777b3c4d0db37f2360462fa0fc916d0a17d"
+    },
+    {
+      "path": "src/YSSCore/Editor/FileTemplateManager.h",
+      "bytes": 854,
+      "sha256": "e66124ace4e463f00043f06ee30afb07f29425b9afd00d8aaf0ef523a74baea6"
+    },
+    {
+      "path": "src/YSSCore/Editor/FileTemplateProvider.h",
+      "bytes": 1605,
+      "sha256": "c480232b05f9b2c1b5980aab29b701c96bb54f04ef4f9d6a88e48800aba6e4d0"
+    },
+    {
+      "path": "src/YSSCore/Editor/FormatNormalizer.h",
+      "bytes": 573,
+      "sha256": "c4dae5c4f29a710473b0de351fa3da07e49f601881ddcbfbe2907fa5f2512057"
+    },
+    {
+      "path": "src/YSSCore/Editor/HoverInfoProvider.h",
+      "bytes": 1098,
+      "sha256": "a8ceaa357dc2b44116b1b8285b310e163ffdb01f75a64e3767102e1a017085d2"
+    },
+    {
+      "path": "src/YSSCore/Editor/InlayHint.h",
+      "bytes": 889,
+      "sha256": "94ca5974138b90b256b23884acf2cd274a4b09c20f4d3644f394ec460ccd5487"
+    },
+    {
+      "path": "src/YSSCore/Editor/InlayHintHoverWidget.h",
+      "bytes": 1166,
+      "sha256": "3940189eb9c9a47f9676e9497cc03aef43d62b7f7c26bfead7f41d735da9c1bc"
+    },
+    {
+      "path": "src/YSSCore/Editor/InlayHintManager.h",
+      "bytes": 753,
+      "sha256": "1625034dd3b1e317b7d43ff5bc4fa209be12b9797a2df7c774c3faaaf9297fec"
+    },
+    {
+      "path": "src/YSSCore/Editor/InlayHintProvider.h",
+      "bytes": 959,
+      "sha256": "98feafb6e197ac6a1d623b7294c9678af3cf5db01ac266c1ed473d7362590afc"
+    },
+    {
+      "path": "src/YSSCore/Editor/InlineToolProvider.h",
+      "bytes": 563,
+      "sha256": "f3fed3440d7670c6e5150df03146296a088998501430a3cdafe54a67bcf0025e"
+    },
+    {
+      "path": "src/YSSCore/Editor/LangServer.h",
+      "bytes": 1202,
+      "sha256": "f35d964272d644d995a6aeaf07ecf75e151651df657cce05b59f91323d6e0a21"
+    },
+    {
+      "path": "src/YSSCore/Editor/LangServerManager.h",
+      "bytes": 730,
+      "sha256": "2a76b60f5cbf0be3b5c891758d5651e1fd32ad3d4f3fe8a46bdb7f4346ce068b"
+    },
+    {
+      "path": "src/YSSCore/Editor/ProjectTemplateManager.h",
+      "bytes": 899,
+      "sha256": "1fee34532761e778351ab4dd9412b2efd065ed1638155012c35b3526ba1c84d5"
+    },
+    {
+      "path": "src/YSSCore/Editor/ProjectTemplateProvider.h",
+      "bytes": 1439,
+      "sha256": "48baedbf5d052ff08d3f088daa4ff1745f199a968a6b2abe1b747a605833bbf8"
+    },
+    {
+      "path": "src/YSSCore/Editor/SyntaxHighlighter.h",
+      "bytes": 2433,
+      "sha256": "29418c27a57f21eeee8a3762f925a6605e9529191016df8a2a728ca1eeab115e"
+    },
+    {
+      "path": "src/YSSCore/Editor/TabCompleterProvider.h",
+      "bytes": 2662,
+      "sha256": "49d57da9c2fb89d988dafdce3388f5f7e851d16f8b0af73d0ab32f894f213805"
+    },
+    {
+      "path": "src/YSSCore/Editor/TextEdit.h",
+      "bytes": 6545,
+      "sha256": "cea00cb428b35eb09688e0dd1a5e4f401787fa89f3799d46e08efc73cd9dacb4"
+    },
+    {
+      "path": "src/YSSCore/Editor/VirtualFilePath.h",
+      "bytes": 1308,
+      "sha256": "667bc725f7d4fcf592976cce768ec2bb0ce310d0a77d280d93c479f84941696a"
+    },
+    {
+      "path": "src/YSSCore/Editor/YSSCoreBuiltinPlugin.h",
+      "bytes": 516,
+      "sha256": "dcd05cf8f0e3b625d8d9f1e4892b9a2c5675a7edc1509d398e05bcb8c6f1f3fc"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/CodeDiff.cpp",
+      "bytes": 28078,
+      "sha256": "810f1015199881a756ddf65a7d4e2381033988fa8f0526b7797ae8183598dbff"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/ColorThemeProvider.cpp",
+      "bytes": 17354,
+      "sha256": "8e855155bdcaf4f58dd6ad43fab2cf7f7337ef6725eb458beb6a84e4a65bbadb"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/CustomDocumentData.cpp",
+      "bytes": 11437,
+      "sha256": "d0d496466f3811ccac82901ead73ccaefd76e39372fc870d1c40d73a485a1959"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/DebugServer.cpp",
+      "bytes": 16152,
+      "sha256": "3b2024422d333e709f58f9502f6384d89009f399d27c179a28de7c270953cb1e"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/DebugServerManager.cpp",
+      "bytes": 2804,
+      "sha256": "e2e2a144970bfd4918e81ee5281e9ab488e40473dff8a3d906b58c6d76be114d"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/DebugStepData.cpp",
+      "bytes": 1195,
+      "sha256": "5162bbaf6e1114715cdd3a52a628b57a79c6048581946d4d3794aa282bb51a6f"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/DocumentMessage.cpp",
+      "bytes": 9096,
+      "sha256": "339398dd15c6172cdf39521e8c5982521f5361281619ac12b687642668ee27f8"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/EditorPlugin.cpp",
+      "bytes": 6187,
+      "sha256": "54cce98a7544b91c1703b811a923b816737d0029f22c3f94b11fda35e34bba3f"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/FileEditWidget.cpp",
+      "bytes": 23079,
+      "sha256": "22625b3f18ea3e8a526922e437670df5603ead60bf272894266dd86d9210f954"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/FileServer.cpp",
+      "bytes": 13575,
+      "sha256": "c5820a7c1162d5bb9f78347670ec0e6f1bec2bbed76aa473d16b6aba30e576a3"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/FileServerManager.cpp",
+      "bytes": 27355,
+      "sha256": "82652476f318b9835aaa4dad8fe2c51ab7701b2eb664f187fe2ff624999ea0b2"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/FileTemplateManager.cpp",
+      "bytes": 2620,
+      "sha256": "d7443de436fc89575eb306838f03402de4ca26c0eef2e1c42490051768357369"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/FileTemplateProvider.cpp",
+      "bytes": 6563,
+      "sha256": "9882f0570767efac90a3f59def0dbdba47d5c0622883df33e5b98826063492d0"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/FormatNormalizer.cpp",
+      "bytes": 557,
+      "sha256": "5396d5653e1d5f1f17f19174ecc33d24eda59f0f25d0a297022fc844d1ec4b7e"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/HoverInfoProvider.cpp",
+      "bytes": 3468,
+      "sha256": "7750684a94550d1edf6f622a1a12930a6da60b5fbc92076a22468e328de97858"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/HoverInfoProvider_p.cpp",
+      "bytes": 1329,
+      "sha256": "3d2e20283cf3262e8b8179afeecdd4abc7ef9f1251ca9e88a980807e0cd6d4c0"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/InlayHint.cpp",
+      "bytes": 6158,
+      "sha256": "29708c782fe9184ceb7c1ab3691404bd67224143e2e2a25cedaa7c38b7f9a9c0"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/InlayHintHoverWidget.cpp",
+      "bytes": 3336,
+      "sha256": "e454fc4e722571947dd3a68dba990e1318dc70fd6a4f0690d0be82f92da00d11"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/InlayHintManager.cpp",
+      "bytes": 2962,
+      "sha256": "d75d75b0402cdaebb9b9451d97372d8136d0807266b36672f9c6c17558430f32"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/InlayHintProvider.cpp",
+      "bytes": 2666,
+      "sha256": "b164bd620f67c5c42868b06387cb5f5f4a9f4f0afebca5eb403a9500583df499"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/LangServer.cpp",
+      "bytes": 8339,
+      "sha256": "5dc9665c0e9eb67a97caff53149d67a58981b5d498e0927ebf63a6efe4ecb718"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/LangServerManager.cpp",
+      "bytes": 3615,
+      "sha256": "a72aeb5a78b267a49dc86af144002f4662305e1a5988248a040e14860770396d"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/ProjectTemplateManager.cpp",
+      "bytes": 2748,
+      "sha256": "ec2c548477d099664dbf5403d7a1fb317e40e4234128c05fcfdbf1f065eb3637"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/ProjectTemplateProvider.cpp",
+      "bytes": 6317,
+      "sha256": "da116a7c7950bab7c155e73e8302ea68fc07e6c0c427aba9eac76484c7107b20"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/SyntaxHighlighter.cpp",
+      "bytes": 23696,
+      "sha256": "364481058ac68b61b196c8b956db988c54a0a10a35fd8799c399e2258e037bdc"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/TabCompleterProvider.cpp",
+      "bytes": 13027,
+      "sha256": "d3c89ef068eafaaf21cd6299900be278103494172d5ecfe3f356e7a234ff9f35"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/TabCompleterProvider_p.cpp",
+      "bytes": 13041,
+      "sha256": "cdacc29f8f2b5e2af46ba30831d03dc639140d1324c0df322090062f5f8dfd96"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/TextEdit.cpp",
+      "bytes": 43384,
+      "sha256": "9bfcb38977d5abe33c4c69c2fe429125d4b534b12659858e5c52bce5e058c9d0"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/TextEditPrivate.cpp",
+      "bytes": 59021,
+      "sha256": "8f21c798547f1fc2a88f3ff19076bd3b7d038b1572a52b11bdba56901dd39f48"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/TextEditPrivateWidget.cpp",
+      "bytes": 45930,
+      "sha256": "db2dc322e8a7430deab9a7c00d807819e176969902a7b94ee0487bef64faae1d"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/VirtualFilePath.cpp",
+      "bytes": 7720,
+      "sha256": "b4996312996ce46888dea5bc0b423849758db6435adb1d8cb5ee6351a4454b56"
+    },
+    {
+      "path": "src/YSSCore/Editor/cpp/YSSCoreBuiltinPlugin.cpp",
+      "bytes": 1816,
+      "sha256": "0404c60096afec0386335d445ed4a5b9c4d6c3264a1e79f86ac735bc62be0800"
+    },
+    {
+      "path": "src/YSSCore/Editor/private/CodeDiff_p.h",
+      "bytes": 5337,
+      "sha256": "94aeef7ae131bc9fca280727f5195b0f5ad342621bb0c7d77520697bad6531ff"
+    },
+    {
+      "path": "src/YSSCore/Editor/private/DocumentMessage_p.h",
+      "bytes": 709,
+      "sha256": "539956db9108f16d501973084bab5546e4376403a4b75f7b9eeed78614ae5d57"
+    },
+    {
+      "path": "src/YSSCore/Editor/private/EditorPlugin_p.h",
+      "bytes": 844,
+      "sha256": "9e26a9c2edb4fc525177ae143725130ccdabe68aab9a913e165711ae7fd91833"
+    },
+    {
+      "path": "src/YSSCore/Editor/private/HoverInfoProvider_p.h",
+      "bytes": 1406,
+      "sha256": "6026e2dd79a638c16d762552ffea077825d77b83d69126be4e168ad4091ff16c"
+    },
+    {
+      "path": "src/YSSCore/Editor/private/InlayHint_p.h",
+      "bytes": 1897,
+      "sha256": "9d4cb885a57f3a52b31df2cae972e09de8cb93d41ec253242324b650be704121"
+    },
+    {
+      "path": "src/YSSCore/Editor/private/TabCompleterProvider_p.h",
+      "bytes": 2812,
+      "sha256": "0492963b32203562d5e51a604486d4c078a7faed833919eccb601335f0b3df66"
+    },
+    {
+      "path": "src/YSSCore/Editor/private/TextEdit_p.h",
+      "bytes": 13923,
+      "sha256": "cf1b8b63bbaa4cf265c940a7c221a29050af8e3f948adc98ed2418179211b84a"
+    },
+    {
+      "path": "src/YSSCore/General/YSSLogger.h",
+      "bytes": 1127,
+      "sha256": "5601347f078909b35e3ebb675ea2114e0a3a76db1ffe67c56a3d6fd1d5d41e16"
+    },
+    {
+      "path": "src/YSSCore/General/YSSProject.h",
+      "bytes": 4802,
+      "sha256": "3594c97ef138fd8a9cd78f4768e78569d60c83ce0e621527f0593fd66e84fafe"
+    },
+    {
+      "path": "src/YSSCore/General/YSSURI.h",
+      "bytes": 2981,
+      "sha256": "0602b8138c9a3c2bcc996ba7a3ac3573c3d6092e931818f2479dccffb527fefe"
+    },
+    {
+      "path": "src/YSSCore/General/YSSUniqueFileSystem.h",
+      "bytes": 14979,
+      "sha256": "264a0bc2e21a51384e8d82695eedab3c9bc3e6de88e647c2d954418f5603b21f"
+    },
+    {
+      "path": "src/YSSCore/General/cpp/YSSLogger.cpp",
+      "bytes": 301,
+      "sha256": "18ca7304046ccb7601750143efbed748e91da8dba1149f62dbcc68ecdb45f3a0"
+    },
+    {
+      "path": "src/YSSCore/General/cpp/YSSProject.cpp",
+      "bytes": 51410,
+      "sha256": "5bb42c152dd2975e4785e9acd3f223d9928cd97f1f665cf267b44a372789abb8"
+    },
+    {
+      "path": "src/YSSCore/General/cpp/YSSURI.cpp",
+      "bytes": 25601,
+      "sha256": "bf200421812490d417f888d3dcf4ab16041a060cce9a1c177e0d6126fc826526"
+    },
+    {
+      "path": "src/YSSCore/General/cpp/YSSUniqueFileSystem.cpp",
+      "bytes": 76962,
+      "sha256": "982214b441eee3bc6712e4cbb03420273ce408ef4af06195a4822abfb4f6b269"
+    },
+    {
+      "path": "src/YSSCore/General/cpp/YSSUniqueFileSystemLocal.cpp",
+      "bytes": 15341,
+      "sha256": "81992d702a9560aa86ef92bd7ef6b00d840485e771c5655f540ac9dd7eaf3be4"
+    },
+    {
+      "path": "src/YSSCore/General/cpp/YSSUniqueFileSystemSsh.cpp",
+      "bytes": 12704,
+      "sha256": "89fe79e6d72f13dbdf18073ecec1b34ec6756a89276cd9fe0957689e789ebb5b"
+    },
+    {
+      "path": "src/YSSCore/General/private/YSSUniqueFileSystem_p.h",
+      "bytes": 4739,
+      "sha256": "1949e2565da861609824c54be290b27aab8ea798a154bad0aac7954cd0de7a16"
+    },
+    {
+      "path": "src/YSSCore/Mystery.cpp",
+      "bytes": 218,
+      "sha256": "62dc515acf4ca7a7e0c6a777a3d89ae69b7573025a55cc3dba70ac62d9ad5f96"
+    },
+    {
+      "path": "src/YSSCore/Mystery.h",
+      "bytes": 103,
+      "sha256": "efbc65716464a575000becf14482748132d9830ddff0faad7696b85658e6213a"
+    },
+    {
+      "path": "src/YSSCore/YSSCore.vcxproj",
+      "bytes": 11673,
+      "sha256": "8a51e62e181f18f8f119049e495c9b3e9a85408193b9da127e5872a7814bcf04"
+    },
+    {
+      "path": "src/YSSCore/YSSCore.vcxproj.filters",
+      "bytes": 10333,
+      "sha256": "622280b78a73262a23fc0e3e3078555eb79f68bdffdbeaffb65d261c08cbaba8"
+    },
+    {
+      "path": "src/YSSCore/YSSCoreCompileMacro.h",
+      "bytes": 414,
+      "sha256": "846044031b2cdc045e7e780b4ea332943464c58ed63af42ddc101e9e34c7d3fb"
+    },
+    {
+      "path": "src/YSSCore/main.cpp",
+      "bytes": 128,
+      "sha256": "721653a0da444b8d8bc0e22ed88dceb38fc8873c699a48185dbf63974df62745"
+    },
+    {
+      "path": "src/YSSInstaller/Installer/InstallerClientData.h",
+      "bytes": 1143,
+      "sha256": "d36b152188cad03d4fa6b44ace2bee6cb1c228f2a0d36c3f837f8a9b5071830a"
+    },
+    {
+      "path": "src/YSSInstaller/Installer/InstallerServer.h",
+      "bytes": 1255,
+      "sha256": "7f5d72d5501e0fca6d9a4e26e9b28e4bc483a77abee9e9a8435e46321f18e052"
+    },
+    {
+      "path": "src/YSSInstaller/Installer/LocalUpdateWizard.h",
+      "bytes": 856,
+      "sha256": "e17341ea48187e1a9f09ffa4be663df0562d86700e34b65d902bbed8d9a57123"
+    },
+    {
+      "path": "src/YSSInstaller/Installer/PSOD.h",
+      "bytes": 590,
+      "sha256": "729c7755afcfeccef77a2b8de3c6e0d010e27eab30a22a0a35b36a037a11e789"
+    },
+    {
+      "path": "src/YSSInstaller/Installer/TrayIcon.h",
+      "bytes": 418,
+      "sha256": "445c0bfa7c99e37b6d7cff657719a34ae7b38f1859c54c1c9b2f7163b4694818"
+    },
+    {
+      "path": "src/YSSInstaller/Installer/VersionManager.h",
+      "bytes": 836,
+      "sha256": "cdd102a3b71782bce4e6182c302dd4c06eef934f2575a992de5af7ec107c306d"
+    },
+    {
+      "path": "src/YSSInstaller/Installer/cpp/InstallerServer.cpp",
+      "bytes": 13914,
+      "sha256": "61b71d87ea13138fbac12232a7f39054293627e659d1b99e5c423757d42e5131"
+    },
+    {
+      "path": "src/YSSInstaller/Installer/cpp/LocalUpdateWizard.cpp",
+      "bytes": 23864,
+      "sha256": "14ab0393710bf09773449b88ada69d092a9be8b90aa9532d20e9bf320a89595a"
+    },
+    {
+      "path": "src/YSSInstaller/Installer/cpp/PSOD.cpp",
+      "bytes": 16304,
+      "sha256": "a10dc5a7bacc074bd39cef82872940b5c9f9772a4d6ffd1b8306bdec0b21b5a9"
+    },
+    {
+      "path": "src/YSSInstaller/Installer/cpp/TrayIcon.cpp",
+      "bytes": 1010,
+      "sha256": "792d8d03835ade731b3260bc0677be4f3d65e4799f3138105aa93c0c22003b84"
+    },
+    {
+      "path": "src/YSSInstaller/Installer/cpp/VersionManager.cpp",
+      "bytes": 6096,
+      "sha256": "09ff21a5034e046944c7fd9a4ff953b8b69fe42aad21a4ab0604c479db4bab6f"
+    },
+    {
+      "path": "src/YSSInstaller/VersionInfo.rc",
+      "bytes": 1393,
+      "sha256": "9db09c4dbf30df9026aea8ef6b2af3a35c139c30a417a1e183f2eb3c877d4b8f"
+    },
+    {
+      "path": "src/YSSInstaller/YSSInstaller.cpp",
+      "bytes": 4728,
+      "sha256": "f1bec6b2cda63f7e0a89bc3700674e51268b43f82ab9cac9daee69d45892ff8d"
+    },
+    {
+      "path": "src/YSSInstaller/YSSInstaller.h",
+      "bytes": 873,
+      "sha256": "6c2c3fb2cdc819baf28e0543fdfe1491128b0bc063e8ae577e0a86614641f33f"
+    },
+    {
+      "path": "src/YSSInstaller/YSSInstaller.qrc",
+      "bytes": 903,
+      "sha256": "2989ec3f3a9449ffb84537ed00b3c0caead439f036fd1711156be898841d5fc1"
+    },
+    {
+      "path": "src/YSSInstaller/YSSInstaller.vcxproj",
+      "bytes": 7906,
+      "sha256": "504eb56261b48ceeeddc47e9a2a157b97c56ae5fb1512f5cd49a61bb13c515a0"
+    },
+    {
+      "path": "src/YSSInstaller/YSSInstaller.vcxproj.filters",
+      "bytes": 2874,
+      "sha256": "235692e7487b23b1a07c6f36a743406be6961ed502e79acdda077288561f36d5"
+    },
+    {
+      "path": "src/YSSInstaller/main.cpp",
+      "bytes": 1105,
+      "sha256": "343a0db4eeb6a20cc0295a845d072656539ed703dfb152645ab0e61741aa223f"
+    },
+    {
+      "path": "src/YSSInstaller/resource/cn.yxgeneral.yayinstorystudio.installer/i18n/de.json",
+      "bytes": 4420,
+      "sha256": "d464b2031ede512bfdd0c6f123e7b2aac4ef04c815c2b44d3b4204c317c13d56"
+    },
+    {
+      "path": "src/YSSInstaller/resource/cn.yxgeneral.yayinstorystudio.installer/i18n/en.json",
+      "bytes": 3877,
+      "sha256": "bbb6077627310e318e63cc03979751243eda560698497976ff12eac75f89be83"
+    },
+    {
+      "path": "src/YSSInstaller/resource/cn.yxgeneral.yayinstorystudio.installer/i18n/fr.json",
+      "bytes": 4625,
+      "sha256": "f94016453845ecde813a562c5a8978e9d04b84162620dd9fe59aad22c423b570"
+    },
+    {
+      "path": "src/YSSInstaller/resource/cn.yxgeneral.yayinstorystudio.installer/i18n/ja.json",
+      "bytes": 5073,
+      "sha256": "9daaeb32861c7b415b0a9c40d202b0813b317cd922799d9d69fe42c3f11ec7a8"
+    },
+    {
+      "path": "src/YSSInstaller/resource/cn.yxgeneral.yayinstorystudio.installer/i18n/jp_less_loanword.json",
+      "bytes": 4878,
+      "sha256": "5bfaef774b109f8adff1dbe70de9464b1f13da7b8ef889814d9ec224e199e535"
+    },
+    {
+      "path": "src/YSSInstaller/resource/cn.yxgeneral.yayinstorystudio.installer/i18n/ko.json",
+      "bytes": 4532,
+      "sha256": "e48d72a91d46ed5c5a632bdda2dc5c02e99effa77ef2fe5001c5993909a2f00f"
+    },
+    {
+      "path": "src/YSSInstaller/resource/cn.yxgeneral.yayinstorystudio.installer/i18n/ru.json",
+      "bytes": 6244,
+      "sha256": "432221fc9980b53772f68d9796c37360104e9ac4a22b7c404dadb435c624c56d"
+    },
+    {
+      "path": "src/YSSInstaller/resource/cn.yxgeneral.yayinstorystudio.installer/i18n/zh_CN.json",
+      "bytes": 3496,
+      "sha256": "c02117d9bade1473b4b4843a14fc1a1dc76d4d16a6f12635d25eb475dc1553f3"
+    },
+    {
+      "path": "src/YSSInstaller/resource/cn.yxgeneral.yayinstorystudio.installer/i18n/zh_TW.json",
+      "bytes": 3513,
+      "sha256": "77c6eff571aedb7bc0fb0f7ad544ba033789f6bc363f27ab8fac6036a35f6ff8"
+    },
+    {
+      "path": "src/YSSInstaller/resource/cn.yxgeneral.yayinstorystudio.installer/icon.png",
+      "bytes": 122522,
+      "sha256": "b6811fa4a92ab4c501128814192e3df99e9504b933025bdca7e59f9b57c1b42a"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/InstallerClient.h",
+      "bytes": 953,
+      "sha256": "5376b39465c7e0a20badf580cca83b8e2a19933302431b2f4bf362edd69a912b"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/BottomInfoWidget.h",
+      "bytes": 1685,
+      "sha256": "70e1865847c25447cb6da6940ec2d9a82f83456307aebb4f3322f6eff0df646c"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/BottomInfoWidget_p.h",
+      "bytes": 2467,
+      "sha256": "235568e35b2bf685494eaf6d081644a99439c83fc951450913c89e12b5837809"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/ColorThemeSettings.h",
+      "bytes": 1150,
+      "sha256": "9361884c09ccd14ca135464847640484826a70449544fbe8d27ddccaf84e3d55"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/ConsumingOperationWidget.h",
+      "bytes": 683,
+      "sha256": "db378b6a429cd5b0826035167a26940ef9d03c98828368ac0c143d4d99dc6b22"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/DebugCommand.h",
+      "bytes": 676,
+      "sha256": "e618a4014f49cf02470590d6738a2b02606aab599c653c595e7d095c66b49b99"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/DebugServerRouter.h",
+      "bytes": 1890,
+      "sha256": "ff50627faa92c063fbf362e28869ce762e19041758ff969be76c2ef92a41a894"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/DocumentMessageTracer.h",
+      "bytes": 965,
+      "sha256": "962f9c2049ff3f9b62dde12107f416a3ebe5851b3eba05db9d7ac9e3a0cddce5"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/FileEditWidgetArea.h",
+      "bytes": 2852,
+      "sha256": "6869cbdfa2b7f40c631be2f62bf0543bf7ab9bbf0da07f4049ad11071918ac49"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/FileOperationCommands.h",
+      "bytes": 1474,
+      "sha256": "77b477b81439d1c4c385ebb325c3b0beec59ee03101d6c6da8dfbeb2a23af500"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/MainEditorBuiltinPlugin.h",
+      "bytes": 473,
+      "sha256": "06eaaa1a8322fc6ed337c9c2ba25199792d244a4881288f2bf58eebc4e0251c3"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/MainWin.h",
+      "bytes": 3961,
+      "sha256": "fb10d2ec1ae3a8adea33f2ffcc7fe70d097d287e60bfd324efd93942e11cff75"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/MainWinMenu.h",
+      "bytes": 2010,
+      "sha256": "e428618c9be85aa82be2f04b96bfb92f9e4e38d0c62f3cdcdc4852adef2d626c"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/MessageCenter.h",
+      "bytes": 1940,
+      "sha256": "0ae9fd3090a54197eec10a7c86a4c7bd046b14cd1231c8b6c0cfe4380e048fcc"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/MessageViewer.h",
+      "bytes": 1617,
+      "sha256": "8bdb792a438f875e03ee20e52b75126db9971f027ffc0792c9bf27fd9bfe02e6"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/MultiTerminal.h",
+      "bytes": 1308,
+      "sha256": "e60e897c8acb4f50cd4668e0e34b872ea5b5907deb779d39af307500dc8fa539"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/PreferenceEditWidget.h",
+      "bytes": 1082,
+      "sha256": "2f45729d411290aae54895ee202140e38124b3793c122178209d177068cf3af0"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/ResourceBrowser.h",
+      "bytes": 2634,
+      "sha256": "2d2a7de024fd64466c3a77f7fb5c03dfb72e8098e3d211dcb8d572962ad08c54"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/SimpleFileDialog.h",
+      "bytes": 1500,
+      "sha256": "0d0ccd218c32fe54dfdd58b38aa57cd51697499c57c8337649811cf422ee1cad"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/TextEditConfigOperator.h",
+      "bytes": 1283,
+      "sha256": "7f84156de1314862001ec8557eb4a28588a4ad1f454d3ef2ebd7915899df6c89"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/TreeLayoutWidget.h",
+      "bytes": 2526,
+      "sha256": "c6c3f6293a99861625ca4dd3dd8873bbc39f9ae7022ec05ea57c7515c0d9d625"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/BottomInfoWidget.cpp",
+      "bytes": 14686,
+      "sha256": "35ef2696e45fec85126f94db9fdf0488fe65f7e5a06af6c071c3a1acf8318a7b"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/BottomInfoWidget_p.cpp",
+      "bytes": 14035,
+      "sha256": "20a843fc6259a8aa5cdbf3fa448d83611ee002e258d99e5a0344fe0f4f2778dd"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/ColorThemeSettings.cpp",
+      "bytes": 23401,
+      "sha256": "83415350429ec7f9a945d62bb775e261e6db767051cb60a07f6a7e529bd73b34"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/ColorThemeSettings_p.cpp",
+      "bytes": 2701,
+      "sha256": "8077cf286d206bff127a8b8b88581f6df491b7e5171787c60a29e92bfc3ec8de"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/DebugCommand.cpp",
+      "bytes": 1056,
+      "sha256": "50977f6f5bc6558c9857b4b414756b7cb5ea9b4952799af29f11ea31d47ae91b"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/DebugServerRouter.cpp",
+      "bytes": 8738,
+      "sha256": "e514f8c1f156c185a116b11466ddebed20200098657ea25b8e9349a0165b3c3a"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/DocumentMessageTracer.cpp",
+      "bytes": 2905,
+      "sha256": "491225639c169a8e0067b77716e0a72b27567ef4bc62f40246f3b0c50eab34ba"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/FileEditWidgetArea.cpp",
+      "bytes": 18586,
+      "sha256": "2426a34957307a42ee090e9a1e48120eec96d429d3a1a5008df2a39b89b11ab0"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/FileOperationCommands.cpp",
+      "bytes": 1788,
+      "sha256": "5913823e0677cfefac234ce26a715feabaffa29f875b99d3645a48ea338581dd"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/MainEditorBuiltinPlugin.cpp",
+      "bytes": 2144,
+      "sha256": "08f073dd04ac66a4b1b4d0c047f5fe55bf53f9c39b15e039fcbcd7a93d891640"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/MainWin.cpp",
+      "bytes": 33337,
+      "sha256": "a1e09db9eb67b9f37ff9f666f2750bf08b91a2dafd61c55e6bfe0e91e4bf7662"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/MainWinMenu.cpp",
+      "bytes": 27914,
+      "sha256": "60598c73690762695c891b7a94cfacf5d8e340fca553d090508f6d431c6b600b"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/MessageCenter.cpp",
+      "bytes": 7128,
+      "sha256": "0bc5764d582250333f8b1d4b5644386853e7428c4503c685ca38fcb9c3a90500"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/MessageViewer.cpp",
+      "bytes": 8089,
+      "sha256": "ecfb62784dc69aa0668daaf20b8441509c5c42da30a6430269e989db502d7b9f"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/MultiTerminal.cpp",
+      "bytes": 11274,
+      "sha256": "86fe8671969caaf85c06e08b4bf360a12532ddc4d53b588f2304914b7395027f"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/PreferenceEditWidget.cpp",
+      "bytes": 1253,
+      "sha256": "fbc3b7a32dd14d1dfb153d2306503d5a174bfb06c6716f7d05f708c950bdb0b0"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/ResourceBrowser.cpp",
+      "bytes": 18993,
+      "sha256": "838c8e608120ad110b2c170ba1d4ffd906a202c0515208bde9686fb9fd34f3a5"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/SimpleFileDialog.cpp",
+      "bytes": 7611,
+      "sha256": "043f8931e58373bbde9675632230050f23aca8336c6c92ed3b889ff4cc72928e"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/StackComponents_p.cpp",
+      "bytes": 34095,
+      "sha256": "881ba28a4c36ddd74a3e8e15287478271682862498003fb5fab82d578d1fa383"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/TextEditConfigOperator.cpp",
+      "bytes": 6689,
+      "sha256": "b8772819507c8463da6a1cb765010f370450c59b99b27e75c74efbc774dafbbe"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/cpp/TreeLayoutWidget.cpp",
+      "bytes": 38620,
+      "sha256": "8858b93c2a939e48f546a71b676ef0f0b556419f398ff53677ac37db8dbd055a"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/private/ColorThemeSettings_p.h",
+      "bytes": 1076,
+      "sha256": "be35c7199c41d183a1f54517f7f074c6b6612fcbd47969a8f91bd20d08f02569"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/private/StackComponents_p.h",
+      "bytes": 7188,
+      "sha256": "ef66c233512aca27915502c7d35d5910e824444a63d41fbc7f1dd3832bd4e64c"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/MainEditor/private/TreeLayoutWidget_p.h",
+      "bytes": 1348,
+      "sha256": "f7868f135534a9f360f8005e72f903951a74066089a334f0d5a3b562cec41e7f"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/NewFilePage/NewFileWin.h",
+      "bytes": 1682,
+      "sha256": "be414186b160efbe16647ee10bd47deff2d90cc907dca5a16a5bf5386df363f3"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/NewFilePage/cpp/NewFileWin.cpp",
+      "bytes": 5477,
+      "sha256": "a190227ca937cba61243261555a1f255079df88f0eed9bf81d45c1c35f43aba5"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/NewProjectPage/NewProjectWin.h",
+      "bytes": 1697,
+      "sha256": "1f596dff6dc7e63992ba63d2708f4e149ec1c076fae331c27024df099929d7b0"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/NewProjectPage/cpp/NewProjectWin.cpp",
+      "bytes": 5652,
+      "sha256": "e31d8c60630a65d34e733154150933a35560f72771780eed761c38b486a54a6d"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/PluginLoadFaultDialog.h",
+      "bytes": 859,
+      "sha256": "162054ff3d98f748c03382794c190141d6b80977ae844d2d41455388f3859a58"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/ProjectPage/NewsArea.h",
+      "bytes": 329,
+      "sha256": "911fe83e5b371dd997b1ea4fa0e84fa2a48c23c55745afe8750ad99c2ae43006"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/ProjectPage/ProjectInfoWidget.h",
+      "bytes": 1287,
+      "sha256": "fac1281b2031594b612349d3c00c810305e3928c0aff8147fc7cc80ea87ee2f3"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/ProjectPage/ProjectInfoWidget_new.h",
+      "bytes": 1337,
+      "sha256": "4e758ed2c41b8cbef7ad6b545b4fdbae3505f0f38e08c8be580ec9f37efb60f9"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/ProjectPage/ProjectWin.h",
+      "bytes": 2538,
+      "sha256": "27482b6bc92d62afea04ae43f6c1a9e60646a6725071f4f5a85db17685728318"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/ProjectPage/ProjectWin_new.h",
+      "bytes": 2869,
+      "sha256": "6e3ceedf2391e59493a27ca0003e4d6d474dbaeb396893a5a2434bbb6e969344"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/ProjectPage/cpp/ProjectInfoWidget.cpp",
+      "bytes": 6005,
+      "sha256": "cd5290c8f56be5c696860f3696ba34a6b7f54c851ab03546b0bffd496716de52"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/ProjectPage/cpp/ProjectInfoWidget_new.cpp",
+      "bytes": 7002,
+      "sha256": "a528aa3174599df5e03d3db53a24ffed94a8f4de20dd89daf2bc99673f562410"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/ProjectPage/cpp/ProjectWin.cpp",
+      "bytes": 24677,
+      "sha256": "2449975c70d09415b073b03b37d0a14c88cfe5bf48ec28596c9409429a760a66"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/ProjectPage/cpp/ProjectWin_new.cpp",
+      "bytes": 45794,
+      "sha256": "218fb20aa8a0467bfc9fecb8c0f334d709a288bb37441d937b3c2a9180c1204b"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/SimpleWidget/EAWarningWidget.h",
+      "bytes": 549,
+      "sha256": "f0e531d26328d975d188945c26006b0a1d41a78beea4c1a611122f23bf0c23f6"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/SimpleWidget/cpp/EAWarningWidget.cpp",
+      "bytes": 577,
+      "sha256": "1f7557ae94a50a2b1727138f604ab3d0056e7e811a5ac86d7e0ff4ca51f2c9a7"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/TitlePage/TitlePage.h",
+      "bytes": 705,
+      "sha256": "295893a95f633054e0a2ad79a52448503f45aae90315d26e430ad48205f27c77"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/TitlePage/cpp/TitlePage.cpp",
+      "bytes": 1438,
+      "sha256": "02e0f0331acec1c9216ba617105484781643607042f5ea0862fec8a31b6e3757"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/YSSCommandHandler.h",
+      "bytes": 702,
+      "sha256": "6d5a23cf3d66f5968745bb882811799b6d148e784fd79f83a89ad18f5eb7f658"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/YSSTranslator.h",
+      "bytes": 333,
+      "sha256": "c0a22a634d703dba0b9717747e9dd3262eb2cd5f82c017a203faf7bb001d7f50"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/cpp/InstallerClient.cpp",
+      "bytes": 10706,
+      "sha256": "1f4abd912b668d99238fdf61ea7bfad921b3f1dce5c20810d475f07b55b32b1c"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/cpp/PluginLoadFaultDialog.cpp",
+      "bytes": 3785,
+      "sha256": "6a4caa416ea7f2a2612ba7360e9855bb5cef98b22e98cf706848a9c5ed1678ce"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/cpp/YSSCommandHandler.cpp",
+      "bytes": 949,
+      "sha256": "617cdb2ac3ba841546abe211e1ae83f962ec319f31b8a38dfbfe1385af00fdbb"
+    },
+    {
+      "path": "src/YayinStoryStudio/Editor/cpp/YSSTranslator.cpp",
+      "bytes": 862,
+      "sha256": "af190f958a14555e66da7d0470f7f7ce52eca52cfe9e0e89f1770ecdc745e54c"
+    },
+    {
+      "path": "src/YayinStoryStudio/Resource.rc",
+      "bytes": 3718,
+      "sha256": "82027c35001e7ce2ce919945aa18880733ce5914f1e3ebfcc586f2c09873ae82"
+    },
+    {
+      "path": "src/YayinStoryStudio/Test/LiquidGlassDragTestWidget.h",
+      "bytes": 363,
+      "sha256": "103e77ac19be6db886f85262d3cacbd75b870a72cd637ac95bb296eb924c473f"
+    },
+    {
+      "path": "src/YayinStoryStudio/Test/cpp/LiquidGlassDragTestWidget.cpp",
+      "bytes": 10509,
+      "sha256": "02c660ac45aa902dc19cfc925b9ea9f5953660162f12cb2c5c9932e56a71202a"
+    },
+    {
+      "path": "src/YayinStoryStudio/VersionInfo.rc",
+      "bytes": 1344,
+      "sha256": "e1f5d5c1026644b8f93c936bdcbdfbfbb4bbc29c528f9cba02b11787e926b5f2"
+    },
+    {
+      "path": "src/YayinStoryStudio/Widgets/UpToWin11.h",
+      "bytes": 810,
+      "sha256": "7ef1627eafd64cdfa383e8170be374f4790208d9e63cc2987d871f0526d45c71"
+    },
+    {
+      "path": "src/YayinStoryStudio/Widgets/YSSCrashHandler.h",
+      "bytes": 725,
+      "sha256": "a8f7a6470ff6ff62a56964357c9a8541e946142841ae1753d5ea539d827f2233"
+    },
+    {
+      "path": "src/YayinStoryStudio/Widgets/cpp/UpToWin11.cpp",
+      "bytes": 4210,
+      "sha256": "4138ff3c12fc3068fdffa9fba0fd5cba89bc57e2f2a8eadfde75246ddfdff291"
+    },
+    {
+      "path": "src/YayinStoryStudio/Widgets/cpp/YSSCrashHandler.cpp",
+      "bytes": 2971,
+      "sha256": "b5436b2c7d7e2b321bc473f0318f82902c472456bf056feffdac73fd7457d0d5"
+    },
+    {
+      "path": "src/YayinStoryStudio/YayinStoryEditor.qrc",
+      "bytes": 2689,
+      "sha256": "82f8b3e4563701fa3ef2f2d5c9fa0271dab45e64c26fc3eb5821b219df4e51ec"
+    },
+    {
+      "path": "src/YayinStoryStudio/YayinStoryStudio.cpp",
+      "bytes": 8740,
+      "sha256": "45056385511b367c612d70a5dba587c17e17f61e779606c89f2caff927f37a2b"
+    },
+    {
+      "path": "src/YayinStoryStudio/YayinStoryStudio.h",
+      "bytes": 1029,
+      "sha256": "dcfb7e4f411b449f0138f7361a3ca3355d5e4730fbdee3434510c0cdea4cf1ee"
+    },
+    {
+      "path": "src/YayinStoryStudio/YayinStoryStudio.vcxproj",
+      "bytes": 12296,
+      "sha256": "7c80661723d301e3857374f8f0d670460f8639074eb99a162d66ba746bff90d6"
+    },
+    {
+      "path": "src/YayinStoryStudio/YayinStoryStudio.vcxproj.filters",
+      "bytes": 10341,
+      "sha256": "799faeb0ae86383ff89d71eeb535cc6e35565c047a72348f1c0bc4dbb7be1174"
+    },
+    {
+      "path": "src/YayinStoryStudio/main.cpp",
+      "bytes": 5941,
+      "sha256": "a89af12a6e3a262f946f0871e3b65971d3d293cee40e9549f98072b9b2ca0f87"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource.h",
+      "bytes": 526,
+      "sha256": "c34211b2146d465aa4a3be809850371ffef52927e4cbeebf01c2d4917b2ac3d8"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio.builtin.maineditor/icon.png",
+      "bytes": 122522,
+      "sha256": "b6811fa4a92ab4c501128814192e3df99e9504b933025bdca7e59f9b57c1b42a"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/HarmonyOS_Sans_SC_Regular.ttf",
+      "bytes": 8261128,
+      "sha256": "297b088424be212207df2ce8b98e335468b782aa6b96832af0b8b773d711e2b1"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/config.json",
+      "bytes": 463,
+      "sha256": "9b3dcad2764dcde56dbb0aa3b7a3214ef89c20e77f291810d3c0594a1f36d4f0"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/configWidget/mainEditorMenu.json",
+      "bytes": 7706,
+      "sha256": "a8db14d7f6b3760b30486bfcd3e2343d7ec43d3d2140f92d91e36f2da3182811"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/configWidget/programConfig.json",
+      "bytes": 5276,
+      "sha256": "b3768041e037fcd4fb53a1d60e34111f064b218bdd52fa3e067df58cb2e31a4d"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/i18n/de.json",
+      "bytes": 21992,
+      "sha256": "af4039b768486723d282652a39e2b35ac33c940e59a3d9c36333b9938797453e"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/i18n/en.json",
+      "bytes": 20301,
+      "sha256": "1a555340eba325a5285d45002676a840c48d665c62496de190b506358bf8eb3c"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/i18n/fr.json",
+      "bytes": 21971,
+      "sha256": "fed775f799fdf73ea1cb77f0c2eefd5b4066bee903ea5d9b2c497acd9056e509"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/i18n/ja.json",
+      "bytes": 25036,
+      "sha256": "7f78a20440e202a1faaf797564e4aff30916e516c1a1be3c165bd74740a7c36e"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/i18n/jp_less_loanword.json",
+      "bytes": 23880,
+      "sha256": "d2193147d51ed9eefb80e79605012636e1fcd0f101124a6d6ffb0536ee8154f1"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/i18n/ko.json",
+      "bytes": 22793,
+      "sha256": "4564ec6ea800916089843e4ca78145c623e964bf5ae3c780f5b722746f5c33f1"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/i18n/ru.json",
+      "bytes": 29764,
+      "sha256": "b687edf8561cc1752132b34fc570f6b02abff788820a866ec56e3a30877664b7"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/i18n/zh_CN.json",
+      "bytes": 19268,
+      "sha256": "257c94e7f3fefcb3c60180b07b4f82d1bed3a8cca970c77942e4b6495bd593a6"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/i18n/zh_TW.json",
+      "bytes": 18636,
+      "sha256": "27254c054af2d188f03a6953bd3271f9fa0b73c6eeca14f6e82055bda8dc92ed"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon.png",
+      "bytes": 122522,
+      "sha256": "b6811fa4a92ab4c501128814192e3df99e9504b933025bdca7e59f9b57c1b42a"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/close.png",
+      "bytes": 3888,
+      "sha256": "2659ab96d080ec42ee9ab2d0c846f4df4bfb066201aa16fd1fb6f143516eb868"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/const.png",
+      "bytes": 9670,
+      "sha256": "069418d51b66b7e09fe35dd700970d60a35fe9a94f0ff5107e5bd081c34ceced"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/default.png",
+      "bytes": 32208,
+      "sha256": "e649310f76914f6a7639ee66119c7560671b9e4632bda13ae2ab2a988d127560"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/empty.png",
+      "bytes": 227,
+      "sha256": "1d2911876fcfe5bc894e0dca4afe4f832d8586c34a7bf027a97ded26c191c59d"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/enum.png",
+      "bytes": 6680,
+      "sha256": "9a6220915d41c6718da19154c6b9398cbacc34afda89944f91bb88a4d85833c9"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/expand.png",
+      "bytes": 1286,
+      "sha256": "97ad81e12be478ae0754eef913069c0af32f9ff3eecaab566dea39da0448cb3e"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/function.png",
+      "bytes": 13132,
+      "sha256": "6b5d750003b846960018e9ef36b7674cf89a2bd613899912200cf884d271947a"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/new.png",
+      "bytes": 1342,
+      "sha256": "d0a8414e9b636177ce1be473b4ff37606e03ddeefbe8296e8ac8af4b41f2cbbf"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/object.png",
+      "bytes": 13057,
+      "sha256": "e381cdb4b4f79baf09f19df7f15813532b02cd9ea839f956ceff9b3b78249c7d"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/operator.png",
+      "bytes": 26331,
+      "sha256": "53a7396b07882f9c1f3fd4831f38c265784e0c1420eff2293befc4d7d7b55050"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/pin.png",
+      "bytes": 1208,
+      "sha256": "9a1b63b2873aa8bab39b876abd6fade6152cb672f0f898422de087a04fdac33f"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/refresh.png",
+      "bytes": 1598,
+      "sha256": "33f77fa428280bbd5f62a12a7e31805bb56dc95eec581dee553df8225c431f99"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/shrink.png",
+      "bytes": 1293,
+      "sha256": "e56b826203b3e855d0377067de4c6ba6f20bc53a0ee633f7bebda992b23e17d9"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/up_to_win11.jpg",
+      "bytes": 180802,
+      "sha256": "73043216ae349beee1f5722a6d087ae84019375128783395a3e7ff27021227e9"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/value.png",
+      "bytes": 9685,
+      "sha256": "51f01f6f3314d494de625394551d335c05715369b557ec1bf3f786e60ac79d49"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/yss_icon.ico",
+      "bytes": 458870,
+      "sha256": "f92a9d571df5c6ad0955c3d1183f0cd7a4896a70beed9c7c61d2b2aab084e12b"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/yss_plugin.ico",
+      "bytes": 360414,
+      "sha256": "c7e12d524bc39abb2bcdefc529546fbfce423fb69f47505dfa57db14e0100dd9"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/icon/yss_project.ico",
+      "bytes": 360414,
+      "sha256": "0aa2cb70bbde77ed1fa97cb5b16d556193b449657e144796ebf24abee5918bb1"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/test_bg.png",
+      "bytes": 514691,
+      "sha256": "4884398ce8c50ac6dffca22a7d89133dabf716191f156f55b98b280ee1dfbc27"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/vst/editorTheme.json",
+      "bytes": 1482,
+      "sha256": "2d93c4978aa108c6703bf8be202f5577d18d2473690be5883893bb11515345f4"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/yayinstorystudio.png",
+      "bytes": 121294,
+      "sha256": "bbe3526c74b1c105c44eb17039e7ad3fdf7a5a681bdfb92213b91e975b76993f"
+    },
+    {
+      "path": "src/YayinStoryStudio/resource/cn.yxgeneral.yayinstorystudio/yssicon_alpha.png",
+      "bytes": 122522,
+      "sha256": "b6811fa4a92ab4c501128814192e3df99e9504b933025bdca7e59f9b57c1b42a"
+    },
+    {
+      "path": "third_party/libssh2/LICENSE",
+      "bytes": 1959,
+      "sha256": "f7f9633cf9ff2f1333f3d7ce46973a8716a4d2a2815ad56f30d437d5fea7bafe"
+    },
+    {
+      "path": "third_party/libssh2/README.vendored.md",
+      "bytes": 2455,
+      "sha256": "6800264405ea93d359cadb3ea29842eebcd4bec82dbb582e3a4e850be74002bb"
+    },
+    {
+      "path": "third_party/libssh2/libssh2.vcxproj",
+      "bytes": 5525,
+      "sha256": "5c8fbab680b9c6e036d1191ba2d799326f60a5dcb18273960b51cc9cf98ec7ce"
+    },
+    {
+      "path": "third_party/libssh2/libssh2.vcxproj.filters",
+      "bytes": 5504,
+      "sha256": "f087e9f3e41f5752dc56f81d458a29df298e44e2648791292556e2f5b3f5142c"
+    },
+    {
+      "path": "tools/ssh-test-server/README.md",
+      "bytes": 5724,
+      "sha256": "9af491839417a3a9eb30b849124a27c88db36e27a31fec47f1501f1d646bfc81"
+    },
+    {
+      "path": "tools/ssh-test-server/package-lock.json",
+      "bytes": 3196,
+      "sha256": "f96499359e9e0e400e07a681476fcdd93959bc6dabd9caf345311c31a8b3371d"
+    },
+    {
+      "path": "tools/ssh-test-server/package.json",
+      "bytes": 278,
+      "sha256": "4d4c3f2d9b75fada03f30fac03040b0effec86bdcdf06304628e87d3bb309814"
+    },
+    {
+      "path": "tools/ssh-test-server/server.js",
+      "bytes": 5691,
+      "sha256": "6796369f1178496d21d0958387389f3c97e743e28dea7f882979c4064e47970a"
+    },
+    {
+      "path": "tools/ssh-test-server/sftp-backend.js",
+      "bytes": 7246,
+      "sha256": "0796373fe6da19a368ccb6d2742416246feeb817911e883787e48354556d0c22"
+    }
+  ]
+}

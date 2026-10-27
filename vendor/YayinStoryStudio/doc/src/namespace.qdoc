@@ -1,0 +1,111 @@
+/*!
+	\inmodule Visindigo
+	\namespace Visindigo
+	\brief 内核模块根命名空间.
+
+	所有 Visindigo 组件均在此命名空间下。
+*/
+
+/*! 
+	\inmodule Visindigo
+	\namespace Visindigo::Utility
+	\brief 内核模块工具类命名空间.
+
+	所有 Visindigo 的工具类都在此命名空间下。
+*/
+
+/*! 
+	\inmodule Visindigo
+	\namespace Visindigo::General
+	\brief 内核模块适用编辑器和播放器的组件的命名空间.
+
+	所有 Visindigo 中的通用组件都在此命名空间下。
+*/
+
+/*!
+	\inmodule Visindigo
+	\namespace Visindigo::Widgets
+	\brief 内核模块中仅作QWidgets扩展的命名空间.
+
+	所有 Visindigo 内核模块中仅作QWidgets扩展的组件都在此命名空间下。
+*/
+
+/*!
+	\inmodule Visindigo
+	\namespace Visindigo::Agent
+	\brief 内核模块中面向AI代理的命名空间.
+
+	所有 Visindigo 内核模块中用于构建AI代理（模型、提示词、技能、MCP与对话）的组件都在此命名空间下。
+*/
+
+/*!
+	\inmodule Visindigo
+	\namespace Visindigo::Network
+	\brief 内核模块中面向网络请求的命名空间.
+
+	所有 Visindigo 内核模块中用于发起HTTP、SSE与WebSocket请求的组件都在此命名空间下。
+*/
+
+/*!
+	\inmodule YSSCore
+	\namespace YSSCore
+	\brief Yayin Story Studio 核心模块根命名空间.
+
+	所有 YSSCore 组件均在此命名空间下。
+*/
+
+/*!
+	\inmodule YSSCore
+	\namespace YSSCore::Editor
+	\brief Yayin Story Studio 核心模块中面向编辑器的组件命名空间.
+
+	所有 YSSCore 中面向编辑器的组件都在此命名空间下。
+*/
+
+/*!
+	\inmodule YSSCore
+	\namespace YSSCore::General
+	\brief Yayin Story Studio 核心模块中通用组件的命名空间.
+
+	所有 YSSCore 中的通用组件都在此命名空间下。
+*/
+
+/*!
+	\inmodule ASERStudio
+	\namespace ASERStudio
+	\brief ASER Studio 模块根命名空间.
+
+	所有 ASER Studio 插件的组件均在此命名空间下。
+*/
+
+/*!
+	\inmodule ASERStudio
+	\namespace ASERStudio::AStorySyntax
+	\brief ASER Studio 中有关AStoryX但无关ASE-Remake的组件命名空间.
+
+	所有 ASER Studio 中有关AStoryX但无关ASE-Remake的组件都在此命名空间下。
+*/
+
+/*!
+	\inmodule ASERStudio
+	\namespace ASERStudio::ASEREnv
+	\brief ASER Studio 中有关ASE-Remake但无关AStoryX的组件命名空间.
+
+	所有 ASER Studio 中有关ASE-Remake但无关AStoryX的组件都在此命名空间下。
+*/
+
+/*!
+	\inmodule YSSFileExt
+	\namespace YSSFileExt
+	\brief Yayin Story Studio 文件扩展插件（YSS File Extensions）的根命名空间.
+
+	所有 YSS File Extensions 插件的组件均在此命名空间下。
+*/
+
+/*!
+	\inmodule ASERStudio
+	\namespace ASERStudio::YSS
+	\brief ASER Studio 中与YayinStoryStudio API强相关的组件命名空间.
+
+	所有 ASER Studio 中与YayinStoryStudio API强相关的组件都在此命名空间下。
+*/

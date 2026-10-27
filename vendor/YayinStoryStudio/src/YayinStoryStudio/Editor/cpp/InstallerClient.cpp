@@ -1,0 +1,278 @@
+#include <QtCore/qelapsedtimer.h>
+#include <QtCore/qfile.h>
+#include <QtCore/qprocess.h>
+#include <QtCore/qstandardpaths.h>
+#include <QtCore/qstringlist.h>
+#include <QtCore/qthread.h>
+#include <QtCore/qtimer.h>
+#include <QtWidgets/qmessagebox.h>
+#include <General/Log.h>
+#include <General/Plugin.h>
+#include <General/TranslationHost.h>
+#include <General/VIApplication.h>
+#include <Utility/Console.h>
+#include <Utility/FileOperation.h>
+#include <Utility/FileUtility.h>
+#include "Editor/InstallerClient.h"
+namespace YSS::Editor {
+	// How long to wait for a running installer to exit and release its files before updating it.
+	static constexpr int InstallerCloseTimeoutMS = 10000;
+
+	class InstallerClientPrivate {
+		friend class InstallerClient;
+	protected:
+		QLocalSocket* socket;
+		QTimer* timer;
+		qint32 maxRetryCount = 5;
+		qint32 retryCount = 0;
+		QByteArray buffer;
+		static InstallerClient* Instance;
+
+		// A running installer holds its own executable, its loaded libraries and its plugin folders
+		// open, so replacing them would fail (and would leave a mix of old and new files behind).
+		static bool isFileInUse(const QString& filePath) {
+			if (not QFile::exists(filePath)) {
+				return false;
+			}
+			QFile probe(filePath);
+			if (probe.open(QIODevice::ReadWrite)) {
+				probe.close();
+				return false;
+			}
+			return true;
+		}
+
+		static bool waitForFileRelease(const QString& filePath, int timeoutMS) {
+			QElapsedTimer timer;
+			timer.start();
+			while (isFileInUse(filePath)) {
+				if (timer.elapsed() >= timeoutMS) {
+					return false;
+				}
+				QThread::msleep(50);
+			}
+			return true;
+		}
+
+		void handleReceivedData() {
+			// One readyRead() may deliver several packets, and handling a command can run a nested event
+			// loop (the installer update notification is a modal dialog), so keep draining the buffer
+			// until no complete packet is left.
+			while (true) {
+				if (buffer.size() < 6) { // start marker + 4-byte length + end marker
+					return;
+				}
+				if (buffer.constData()[0] != 0x03) {
+					socket->disconnectFromServer();
+					vgErrorF << "YSS Installer Client received unknown data packet. Disconnecting...";
+					return;
+				}
+				quint32 size = 0;
+				memcpy(&size, buffer.constData() + 1, sizeof(size));
+				const qsizetype packetSize = static_cast<qsizetype>(size) + 6;
+				if (packetSize > buffer.size()) {
+					return; // wait for the rest of the packet
+				}
+				if (buffer.constData()[packetSize - 1] != 0x02) { // End of packet
+					socket->disconnectFromServer();
+					vgErrorF << "YSS Installer Client received unknown data packet. Disconnecting...";
+					return;
+				}
+				// Take the packet out of the buffer before dispatching it: handleCommand() can spin a
+				// nested event loop in which a nested call would otherwise consume the buffer underneath us.
+				const QByteArray packet = buffer.left(packetSize);
+				buffer.remove(0, packetSize);
+				QString jsonData = QString::fromUtf8(packet.constData() + 5, size);
+				Visindigo::Utility::JsonConfig command = Visindigo::Utility::JsonConfig::fromJson(jsonData);
+				handleCommand(command);
+			}
+		}
+
+		void handleCommand(const Visindigo::Utility::JsonConfig& command) {
+			if (command.contains("type")) {
+				QString type = command.getString("type");
+				if (type == "program_close") {
+					emit InstallerClientPrivate::Instance->installerRequestProgramClose();
+				}
+				else if (type == "update_yss_installer") {
+					// releaseInstaller() asks the installer to close and waits for it to exit
+					// before replacing its files.
+					InstallerClient::releaseInstaller(true, true);
+				}
+			}
+		}
+	};
+
+	InstallerClient* InstallerClientPrivate::Instance = nullptr;
+
+	InstallerClient* InstallerClient::getInstance() {
+		return InstallerClientPrivate::Instance;
+	}
+
+	InstallerClient::InstallerClient(QObject* parent) : QObject(parent) {
+		d = new InstallerClientPrivate();
+		InstallerClientPrivate::Instance = this;
+		d->socket = new QLocalSocket(this);
+		d->timer = new QTimer(this);
+		d->timer->setInterval(5000);
+		connect(this, &YSS::Editor::InstallerClient::installerNotLaunched, this, [this]() {
+			QString installerPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) +
+				"/AppData/Local/TsingYayin/YayinStoryStudio/Installer/YSSInstaller.exe";
+			if (not QProcess::startDetached(installerPath)) {
+				vgErrorF << "Failed to launch installer: " << installerPath;
+			}
+			QTimer::singleShot(5000, this, [this]() {
+				YSS::Editor::InstallerClient::getInstance()->connectToInstaller();
+				});
+			});
+		connect(d->timer, &QTimer::timeout, this, [this]() {
+			if (d->socket->state() == QLocalSocket::ConnectedState) {
+				d->timer->stop();
+			}
+			else {
+				d->socket->abort();
+				d->socket->connectToServer("YSSInstaller");
+				d->retryCount++;
+				if (d->retryCount >= d->maxRetryCount) {
+					d->retryCount = 0;
+					vgError << "YSS Installer Client failed to connect to installer after" << d->maxRetryCount << "attempts.";
+					d->timer->stop();
+				}
+			}
+		});
+		connect(d->socket, &QLocalSocket::errorOccurred, this, [this](QLocalSocket::LocalSocketError socketError) {
+			if (socketError == QLocalSocket::ServerNotFoundError) {
+				emit installerNotLaunched();
+			}
+			else {
+				vgError << "InstallerClient socket error: " << socketError;
+			}
+			});
+		connect(d->socket, &QLocalSocket::disconnected, this, [this]() {
+			emit disconnected();
+			});
+		connect(d->socket, &QLocalSocket::readyRead, this, [this]() {
+			d->buffer.append(d->socket->readAll());
+			d->handleReceivedData();
+		});
+		connect(d->socket, &QLocalSocket::connected, this, [this]() {
+			d->retryCount = 0;
+			d->timer->stop();
+			emit connected();
+			Visindigo::Utility::JsonConfig command;
+			command.setString("type", "client_data");
+			command.setString("data.programPath", QCoreApplication::applicationFilePath());
+			command.setString("data.programVersion", VIApp->getMainPlugin()->getPluginVersion().toString());
+			command.setBool("data.autoUpdateEnabled", true);
+			sendCommand(command);
+			});
+	}
+
+	InstallerClient::~InstallerClient() {
+		delete d;
+		InstallerClientPrivate::Instance = nullptr;
+	}
+
+	void InstallerClient::connectToInstaller() {
+		d->socket->connectToServer("YSSInstaller");
+	}
+
+	void InstallerClient::requestInstallerClose() {
+		if (d->socket->state() != QLocalSocket::ConnectedState) {
+			return;
+		}
+		Visindigo::Utility::JsonConfig closeCommand;
+		closeCommand.setString("type", "program_close");
+		sendCommand(closeCommand);
+		d->socket->flush();
+	}
+
+	void InstallerClient::sendCommand(const Visindigo::Utility::JsonConfig& command) {
+		if (d->socket->state() != QLocalSocket::ConnectedState) {
+			vgErrorF << "YSS Installer Client is not connected to the installer. Cannot send command.";
+			return;
+		}
+		QByteArray jsonData = command.toString().toUtf8();
+		QByteArray dataPacket;
+		dataPacket.append(0x03); // Start of packet
+		quint32 size = jsonData.size();
+		dataPacket.append(reinterpret_cast<const char*>(&size), sizeof(size));
+		dataPacket.append(jsonData);
+		dataPacket.append(0x02); // End of packet
+		d->socket->write(dataPacket);
+	}
+
+	/*!
+		\since YayinStoryStudio 0.17.0
+		通知正在运行的安装程序把本次崩溃的相关文件打包到程序根目录下的 last_crash.zip。
+
+		只管发命令，不等回执：安装程序会读程序根目录下的 last_crash.txt，把其中记录且当前能读到的文件压进包里。
+		日志文件此刻还被本进程独占占用，安装程序读不到，会在本进程退出后再把它补进包里。
+		安装程序未运行时不发任何命令。
+	*/
+	void InstallerClient::requestCrashArchive() {
+		if (d->socket->state() != QLocalSocket::ConnectedState) {
+			vgWarning << "Installer is not connected, crash archive request is skipped.";
+			return;
+		}
+		Visindigo::Utility::JsonConfig command;
+		command.setString("type", "program_crashed");
+		sendCommand(command);
+	}
+
+	void InstallerClient::releaseInstaller(bool autoLaunch, bool showNotification) {
+		if (showNotification) {
+			QMessageBox::information(nullptr,
+				VITRL("YSS::update.installerUpdating"),
+				VITRL("YSS::update.installerUpdatingDesc"));
+		}
+		QString installerFolder = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) +
+			"/AppData/Local/TsingYayin/YayinStoryStudio/Installer";
+		// A running installer keeps its own executable, its loaded libraries and its plugin folders
+		// locked. Copying over them would fail for exactly those files and leave a mix of old and new
+		// files behind, so the installed installer would never look up to date.
+		// Ask an installer we are connected to close, then wait until it has released its files.
+		const QString installerExePath = installerFolder + "/YSSInstaller.exe";
+		if (InstallerClientPrivate::isFileInUse(installerExePath)) {
+			InstallerClient* client = getInstance();
+			bool released = false;
+			if (client != nullptr) {
+				client->requestInstallerClose();
+				released = InstallerClientPrivate::waitForFileRelease(installerExePath, InstallerCloseTimeoutMS);
+			}
+			if (not released) {
+				vgWarning << "YSS Installer is still running and holds its files open, skip releasing the installer."
+					<< "The running installer will request the update itself.";
+				return;
+			}
+		}
+		QStringList files = {
+			"Visindigo.dll", "Qt6Core.dll", "Qt6Gui.dll", "Qt6Widgets.dll", "Qt6Network.dll", "Qt6Sql.dll",
+			"Qt6WebSockets.dll", "Qt6Svg.dll", "icuuc.dll", "opengl32sw.dll", "7za.exe", "YSSInstaller.exe"
+		};
+		QStringList folders = {
+			"iconengines", "imageformats", "networkinformation", "platforms", "styles", "translations",
+			"sqldrivers", "generic", "tls"
+		};
+		Visindigo::Utility::FileUtility::createDir(installerFolder);
+		for (const QString& file : files) {
+			Visindigo::Utility::FileOperation::ErrorCode copyResult = Visindigo::Utility::FileOperation::copyFile(Visindigo::Utility::FileUtility::getProgramPath() +
+				"/" + file, installerFolder + "/" + file, false, true);
+			if (copyResult != Visindigo::Utility::FileOperation::Success) {
+				vgErrorF << "Failed to copy installer file: " << file
+					<< ", error: " << Visindigo::Utility::FileOperation::errorCodeName(copyResult);
+			}
+		}
+		for (const QString& folder : folders) {
+			Visindigo::Utility::FileOperation::ErrorCode copyResult = Visindigo::Utility::FileOperation::copyDir(Visindigo::Utility::FileUtility::getProgramPath() +
+				"/" + folder, installerFolder + "/" + folder, false, true);
+			if (copyResult != Visindigo::Utility::FileOperation::Success) {
+				vgErrorF << "Failed to copy installer folder: " << folder
+					<< ", error: " << Visindigo::Utility::FileOperation::errorCodeName(copyResult);
+			}
+		}
+		if (autoLaunch) {
+			getInstance()->connectToInstaller();
+		}
+	}
+}

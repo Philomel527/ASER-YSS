@@ -1,0 +1,15 @@
+#include "YSS/ImageViewer.h"
+#include "YSS/ImageViewerFileServer.h"
+namespace YSS::ImageViewer {
+	FS_ImageViewer::FS_ImageViewer(YSSCore::Editor::EditorPlugin* parent) :
+		YSSCore::Editor::FileServer("ImageViewer", "cn.yxgeneral.yayinstorystudio.plugin.imageviewer.fs", parent) {
+		setEditorType(EditorType::BuiltInEditor);
+		setSupportedFileExts({ "png", "jpg", "jpeg", "bmp", "gif", "tiff", "webp" });
+	}
+
+	FS_ImageViewer::~FS_ImageViewer() {}
+
+	YSSCore::Editor::FileEditWidget* FS_ImageViewer::onCreateFileEditWidget() {
+		return new ImageViewer();
+	}
+}

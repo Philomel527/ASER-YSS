@@ -1,0 +1,38 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resource/cn.yxgeneral.yayinstorystudio/yayinstorystudio.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/HarmonyOS_Sans_SC_Regular.ttf</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/i18n/zh_CN.json</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/i18n/zh_TW.json</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/configWidget/mainEditorMenu.json</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/test_bg.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/vst/editorTheme.json</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/configWidget/programConfig.json</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon/close.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon/pin.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon/expand.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon/new.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon/refresh.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon/shrink.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/i18n/en.json</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/i18n/ja.json</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/i18n/jp_less_loanword.json</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/i18n/ko.json</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/i18n/ru.json</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/i18n/de.json</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/i18n/fr.json</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/config.json</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon/const.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon/default.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon/enum.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon/function.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon/object.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon/operator.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon/value.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon/up_to_win11.jpg</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/yssicon_alpha.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio.builtin.maineditor/icon.png</file>
+        <file>resource/cn.yxgeneral.yayinstorystudio/icon/empty.png</file>
+    </qresource>
+</RCC>

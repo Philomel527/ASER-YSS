@@ -1,0 +1,77 @@
+/*!
+    \group VIDebug
+    \title VDebug日志系统子模块
+    \since Visindigo 0.13.0
+    \inmodule Visindigo
+    \brief VDebug是对Visindigo::General中的有关日志系统实现类的总称。
+
+    VDebug模块包含了Visindigo日志系统的核心实现类，包括Logger、LoggerManager和LoggerMsgHandler等。
+    这些类共同构成了一个功能强大且易于使用的日志系统，允许开发者在应用程序中方便地记录和管理日志消息。
+ 
+*/
+
+/*!
+    \group VIPlugin
+    \title VIPlugin插件系统子模块
+    \since Visindigo 0.13.0
+    \inmodule Visindigo
+    \brief VIPlugin是对Visindigo::General中的有关插件系统实现类的总称。
+
+    VIPlugin模块包含了Visindigo插件系统的核心实现类，包括Plugin、PluginManager等。
+    这些类共同构成了一个灵活且可扩展的插件系统，允许开发者为应用程序添加和管理插件，从而扩展应用程序的功能。
+*/
+
+/*!
+    \group VITheme
+    \title VITheme主题系统子模块
+    \since Visindigo 0.13.0
+    \inmodule Visindigo
+    \brief VITheme是对Visindigo::Widgets中的有关主题系统实现类的总称。
+
+    VITheme模块包含了Visindigo主题系统的核心实现类，包括StyleSheetTemplate、ThemeManager等。
+    这些类共同形成了一个灵活的样式模板+颜色主题系统，允许开发者为应用程序创建和管理不同的主题，从而提升用户界面的视觉效果和一致性。
+*/
+
+/*!
+    \group VICommand
+    \title VICommand命令系统子模块
+    \since Visindigo 0.13.0
+    \inmodule Visindigo
+    \brief VICommand是对Visindigo::General中的有关命令系统实现类的总称。
+
+    VICommand模块包含了Visindigo命令系统的核心实现类，包括CommandHost、CommandHandler等。
+    这些类为应用程序提供了一个命令解析与执行的框架，允许开发者通过命令与用户进行交互，从而实现更灵活的功能控制。
+*/
+
+/*!
+    \group FileService
+    \title 文件服务框架
+    \since YSS 0.13.0
+    \inmodule YSSCore
+    \brief FileService是对YSSCore::Editor中有关文件服务实现类的总称。
+
+    FileService模块包含了YSS文件服务框架的核心实现类，这些类共同构成了满足
+    不同文件打开需求的文件服务框架，允许开发者根据需要为不同文件类型提供不同的打开方式。
+*/
+
+/*!
+    \group LangService
+    \title 语言服务框架
+    \since YSS 0.13.0
+    \inmodule YSSCore
+    \brief LangService是对YSSCore::Editor中有关语言服务实现类的总称。
+
+    LangService模块包含了YSS语言服务框架的核心实现类，这些类使得开发者可以
+    自行根据需要为YSSCore::Editor::TextEdit提供不同的语言服务，从而实现对不同编程语言的支持。
+*/
+
+/*!
+    \group CreateService
+    \title 创建服务框架
+    \since YSS 0.13.0
+    \inmodule YSSCore
+    \brief CreateService是对YSSCore::Editor中有关创建服务实现类的总称。
+
+    CreateService模块包含了YSS创建服务框架的核心实现类，这些类使得开发者可以
+    自行根据需要注册不同的创建（创建项目、文件等）服务，从而实现对不同创建需求的支持。
+*/

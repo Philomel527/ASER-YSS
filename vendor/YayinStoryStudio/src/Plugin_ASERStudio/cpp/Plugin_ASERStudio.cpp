@@ -1,0 +1,198 @@
+#include <QtCore/qdir.h>
+#include <QtCore/qfileinfo.h>
+#include <QtWidgets/qmessagebox.h>
+#include <General/Log.h>
+#include <General/TranslationHost.h>
+#include <Utility/FileOperation.h>
+#include <Utility/FileUtility.h>
+#include <Utility/StringUtility.h>
+#include <Widgets/ConfigWidget.h>
+#include <Widgets/ThemeManager.h>
+#include "ASEREnv/ASERDebugIO.h"
+#include "ASEREnv/ASERProgram.h"
+#include "ASEREnv/ASERResourceMoniter.h"
+#include "ASEREnv/ASERWarpper.h"
+#include "Plugin_ASERStudio.h"
+#include "YSS/ASERFileServer.h"
+#include "YSS/ASERFileTemplate.h"
+#include "YSS/ASERProjectResourceBrowser.h"
+#include "YSS/ASERProjectTemplate.h"
+#include "YSS/DS_AStoryXDebugger.h"
+#include "YSS/ImageCacheHelper.h"
+#include "YSS/InlayColorProvider.h"
+#include "YSS/LangServer_AStoryX.h"
+namespace ASERStudio {
+	ASERStudioTranslator::ASERStudioTranslator(Visindigo::General::Plugin* parent) :
+		Visindigo::General::Translator(parent, "ASERStudio")
+	{
+		setDefaultLang(zh_CN);
+		addLangFilePath(zh_CN, ":/resource/cn.yxgeneral.aserstudio/i18n/zh_CN.json");
+		addLangFilePath(zh_TW, ":/resource/cn.yxgeneral.aserstudio/i18n/zh_TW.json");
+		addLangFilePath(en, ":/resource/cn.yxgeneral.aserstudio/i18n/en.json");
+		addLangFilePath(ja, ":/resource/cn.yxgeneral.aserstudio/i18n/ja.json");
+		addLangFilePath(jp_less_loanword, ":/resource/cn.yxgeneral.aserstudio/i18n/jp_less_loanword.json");
+		addLangFilePath(ko, ":/resource/cn.yxgeneral.aserstudio/i18n/ko.json");
+		addLangFilePath(ru, ":/resource/cn.yxgeneral.aserstudio/i18n/ru.json");
+		addLangFilePath(de, ":/resource/cn.yxgeneral.aserstudio/i18n/de.json");
+		addLangFilePath(fr, ":/resource/cn.yxgeneral.aserstudio/i18n/fr.json");
+	}
+
+	class MainPrivate {
+		friend class Main;
+	protected:
+		Visindigo::Widgets::ConfigWidget* ConfigWidget = nullptr;
+		ASERStudio::ASEREnv::ASERProgram* ASERProgram = nullptr;
+		ASERStudio::ASEREnv::ASERDebugIO* ASERDebugIO = nullptr;
+		static Main* Instance;
+	};
+
+	Main* MainPrivate::Instance = nullptr;
+
+	Main::Main() : YSSCore::Editor::EditorPlugin("cn.yxgeneral.aserstudio") {
+		d = new MainPrivate;
+		MainPrivate::Instance = this;
+		setPluginVersion(Visindigo::General::Version(Visindigo_VERSION_MAJOR + 2, Visindigo_VERSION_MINOR - 13, Visindigo_VERSION_PATCH));
+		setPluginName("ASER Studio");
+		setPluginAuthor({ "Gra_dus", "Tsing Yayin" });
+	}
+
+	Main* Main::getInstance() {
+		return MainPrivate::Instance;
+	}
+
+	Main::~Main() {
+		MainPrivate::Instance = nullptr;
+		delete d->ConfigWidget;
+		delete d;
+	}
+
+	void Main::onPluginEnable() {
+		Visindigo::Utility::JsonConfig config = VISTM->getMergedColorScheme();
+		//vgDebug << "Merged Color Scheme:" << config;
+		// not prepared.
+		//registerToolWidget("cn.yxgeneral.aserstudio.aser_warpper", "i18n:ASERStudio::toolWidget.aserWarpper.title");
+		registerPluginModule(new ASERStudioTranslator(this));
+		registerProjectTemplateProvider(new YSS::ProjectTemplate_AStoryX(this));
+		registerProjectTemplateProvider(new YSS::ProjectTemplate_AStoryX_3_6_7(this));
+		registerFileTemplateProvider(new YSS::FileTemplate_AStoryX(this));
+		registerLangServer(new YSS::AStoryXLanguageServer(this));
+		registerInlayHintProvider(new YSS::InlayColorProvider(QStringLiteral("Inlay Color"),
+			YSS::InlayColorProviderID, this));
+		registerFileServer(new YSS::FileServer_AStoryX(this));
+		registerFileServer(new YSS::FileServer_ASRuleJson(this));
+		registerFileServer(new YSS::FileServer_ASERProjectResourceBrowser(this));
+		registerDebugServer(new YSS::DS_AStoryXDebugger(this));
+		d->ConfigWidget = new Visindigo::Widgets::ConfigWidget();
+		Visindigo::Utility::FileOperation::Errorable<QString> cwJsonResult = Visindigo::Utility::FileOperation::readAll(":/resource/cn.yxgeneral.aserstudio/configWidget/pluginConfig.json");
+		if (cwJsonResult) {
+			d->ConfigWidget->loadCWJson(cwJsonResult.value());
+		}
+		else {
+			vgErrorF << "Failed to read plugin config widget json, error: " << Visindigo::Utility::FileOperation::errorCodeName(cwJsonResult.error());
+		}
+		d->ConfigWidget->setTargetConfig(getPluginFolder().filePath("config.json"));
+		vgDebug << getPluginFolder().filePath("config.json");
+		connect(d->ConfigWidget, &Visindigo::Widgets::ConfigWidget::saved, [this]() {
+			this->reloadPluginConfig();
+			this->onConfigLoaded();
+			});
+		connect(d->ConfigWidget, &Visindigo::Widgets::ConfigWidget::reseted, [this]() {
+			this->reloadPluginConfig();
+			this->onConfigLoaded();
+			});
+		d->ASERProgram = new ASERStudio::ASEREnv::ASERProgram();
+		d->ASERDebugIO = new ASERStudio::ASEREnv::ASERDebugIO();
+		d->ASERDebugIO->setProgram(d->ASERProgram);
+		onConfigLoaded();
+	}
+	void Main::onApplicationInit() {}
+	void Main::onPluginDisable() {
+		// 缩略图缓存的工作线程需要在这里收尾，否则插件被卸载后它仍然会持有数据库连接
+		YSS::ImageCacheHelper::getInstance()->shutdown();
+		if (d->ASERDebugIO) {
+			delete d->ASERDebugIO;
+			d->ASERDebugIO = nullptr;
+		}
+		if (d->ASERProgram) {
+			delete d->ASERProgram;
+			d->ASERProgram = nullptr;
+		}
+	}
+	void Main::onTest() {}
+
+	void Main::onProjectOpen(YSSCore::General::YSSProject* project) {
+		QString projectFolder = project->getProjectFolder().getLocalPath();
+		if (projectFolder.isEmpty()) {
+			vgWarning << "ASERStudio rule loading currently only supports local projects:"
+				<< project->getProjectPath().toString();
+			return;
+		}
+		vgDebug << projectFolder + "/Rules";
+		QStringList paths = Visindigo::Utility::FileUtility::fileFilter(projectFolder + "/Rules", { "*.json" });
+		vgDebug << paths;
+		for (auto path : paths) {
+			vgDebug << path;
+			Visindigo::Utility::FileOperation::Errorable<QString> contentResult = Visindigo::Utility::FileOperation::readAll(path);
+			if (not contentResult) {
+				vgError << "Failed to read rule file:" << path
+					<< ", error: " << Visindigo::Utility::FileOperation::errorCodeName(contentResult.error());
+				continue;
+			}
+			ASERStudio::AStorySyntax::AStoryXRule rule("default");
+			if (!rule.parseJson(contentResult.value())) {
+				vgError << "Failed to parse rule file:" << path;
+				continue;
+			}
+			QFileInfo fileInfo(path);
+			QString name = fileInfo.baseName();
+			rule.setName(name);
+			ASERStudio::AStorySyntax::AStoryXRule::registerRule(rule);
+		}
+		ASERRM->changeProjectPath(projectFolder);
+	}
+
+	void Main::onConfigLoaded() {
+		d->ASERProgram->setExecutablePath(getPluginConfig()->getString("ASERExeSettings.ExePath"));
+	}
+
+	void Main::onProjectClose(YSSCore::General::YSSProject* project) {
+		ASERStudio::AStorySyntax::AStoryXRule::clearRules();
+		if (d->ASERProgram->isRunning()) {
+			d->ASERProgram->stop();
+		}
+	}
+
+	bool Main::onProjectAboutToClose(YSSCore::General::YSSProject* project) {
+		if (d->ASERProgram->isRunning()) {
+			QMessageBox::StandardButton result = 
+				QMessageBox::question(nullptr, VITRL("ASERStudio::project.close.stillRunning.title"), VITRL("ASERStudio::project.close.stillRunning.message"),
+					QMessageBox::Yes | QMessageBox::No);
+			if (result == QMessageBox::Yes) {
+				return true; // allow to close, ASER program will be stopped in onProjectClose.
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	QWidget* Main::getConfigWidget() {
+		auto aser_programs = ASEREnv::ASERResourceMoniter::getInstance()->getASERProgramPaths();
+		QList<QPair<QString, QString>> items;
+		for (auto aser_info : aser_programs) {
+			QString elidedPath = Visindigo::Utility::StringUtility::autoElide(aser_info.first, 30);
+			QString text = "(" + aser_info.second + ") " + elidedPath;
+			items.append({text, aser_info.first});
+		}
+		d->ConfigWidget->setLineEditPrefabricatedItems("ASERExeSettings.ExePath", items);
+		return d->ConfigWidget;
+	}
+
+	ASERStudio::ASEREnv::ASERDebugIO* Main::getASERDebugIO() const {
+		return d->ASERDebugIO;
+	}
+
+	ASERStudio::ASEREnv::ASERProgram* Main::getASERProgram() const {
+		return d->ASERProgram;
+	}
+}

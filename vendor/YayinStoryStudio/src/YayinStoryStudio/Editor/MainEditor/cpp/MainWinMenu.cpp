@@ -1,0 +1,672 @@
+#include <QtCore/qmimedata.h>
+#ifdef Q_OS_ANDROID
+#include <QtCore/qcoreapplication.h>
+#include <QtCore/qjniobject.h>
+#endif
+#include <QtGui/qclipboard.h>
+#include <QtGui/qtextcursor.h>
+#include <QtWidgets/qapplication.h>
+#include <QtWidgets/qboxlayout.h>
+#include <QtWidgets/qlabel.h>
+#include <QtWidgets/qmenubar.h>
+#include <QtWidgets/qmessagebox.h>
+#include <Editor/FileEditWidget.h>
+#include <Editor/FileServer.h>
+#include <Editor/FileServerManager.h>
+#include <Editor/TextEdit.h>
+#include <Editor/VirtualFilePath.h>
+#include <General/Log.h>
+#include <General/Plugin.h>
+#include <General/TranslationHost.h>
+#include <General/VIApplication.h>
+#include <General/YSSProject.h>
+#include <Utility/FileUtility.h>
+#include <Utility/QtSSHelper.h>
+#include <Widgets/BorderLabel.h>
+#include "Editor/MainEditor/DebugServerRouter.h"
+#include "Editor/MainEditor/FileEditWidgetArea.h"
+#include "Editor/MainEditor/MainWin.h"
+#include "Editor/MainEditor/MainWinMenu.h"
+#include "Editor/MainEditor/ResourceBrowser.h"
+namespace YSS::Editor {
+#ifdef Q_OS_ANDROID
+	// Android 顶部安全区高度(px)：取系统状态栏(含刘海)高度。Qt for Android 默认让窗口
+	// 内容延伸到系统栏之下，若不垫高/下移，最顶部的交互(如本顶栏的菜单条)会被状态栏遮住、
+	// 点不到。此函数只在 Android 构建存在，桌面构建为零影响。
+	static int androidTopSafeInsetPx() {
+		QJniObject context = QNativeInterface::QAndroidApplication::context();
+		if (!context.isValid()) {
+			return 0;
+		}
+		QJniObject resources = context.callObjectMethod("getResources", "()Landroid/content/res/Resources;");
+		if (!resources.isValid()) {
+			return 0;
+		}
+		const jint id = resources.callMethod<jint>("getIdentifier",
+			"(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I",
+			QJniObject::fromString("status_bar_height").object(),
+			QJniObject::fromString("dimen").object(),
+			QJniObject::fromString("android").object());
+		if (id <= 0) {
+			return 0;
+		}
+		return static_cast<int>(resources.callMethod<jint>("getDimensionPixelSize", "(I)I", id));
+	}
+#endif
+
+	class MainWinMenuPrivate {
+		friend class MainWinMenu;
+	protected:
+		MainWinMenu* q;
+		MainWin* Parent;
+		QHBoxLayout* Layout;
+		QLabel* ProjectNameLabel;
+		QMenuBar* MenuBar;
+		QMenu* FileMenu;
+		QAction* File_File_New;
+		QAction* File_File_Open;
+		QAction* File_File_Save;
+		QAction* File_File_SaveAll;
+		QAction* File_File_SaveAs;
+		QAction* File_File_ProjectConfig;
+		QAction* File_File_ShowInExplorer;
+		QAction* File_Program_BackToHome;
+		QAction* File_Program_PluginAndPreferences;
+		QAction* File_Program_ColorThemeSettings;
+		QAction* File_Program_About;
+		QAction* File_Program_Documentation;
+		QAction* File_Program_Exit;
+
+		QMenu* EditMenu;
+		QAction* Edit_Undo;
+		QAction* Edit_Redo;
+		QAction* Edit_Cut;
+		QAction* Edit_Copy;
+		QAction* Edit_Paste;
+		QAction* Edit_SelectAll;
+		QAction* Edit_FindAndReplace;
+
+		QMenu* RunMenu;
+		QAction* Run_Run_Debug;
+		QAction* Run_Run_Run;
+		QAction* Run_Run_Stop;
+		QAction* Run_Run_Restart;
+		QAction* Run_Build_Build;
+		QAction* Run_Build_Rebuild;
+		QAction* Run_Build_Clean;
+		QAction* Run_Action_StepInto;
+		QAction* Run_Action_StepOver;
+		QAction* Run_Action_Suspend;
+		QAction* Run_Action_Resume;
+
+		QMenu* ViewMenu;
+		QAction* View_FullScreenToggle;
+		QAction* View_NothingToShow;
+		QList<YSSCore::Editor::FileServer*> PluginToolsList;
+		QMap<QAction*, YSSCore::Editor::FileServer*> PluginToolsActionMap;
+		//QMap<QAction*, QString> PluginToolsActionIDMap;
+
+		QColor MenuTextColor;
+		void initFileMenu() {
+			FileMenu = MenuBar->addMenu(VITRL("YSS::menu.file.title"));
+			auto font = FileMenu->font();
+			font.setPointSizeF(font.pointSizeF() * 0.9);
+			FileMenu->setFont(font);
+			FileMenu->setObjectName("file");
+			File_File_New = FileMenu->addAction(VITRL("YSS::menu.file.new"));
+			File_File_New->setObjectName("new");
+			File_File_New->setShortcut(QKeySequence("Ctrl+N"));
+			File_File_Open = FileMenu->addAction(VITRL("YSS::menu.file.open"));
+			File_File_Open->setObjectName("open");
+			File_File_Open->setShortcut(QKeySequence("Ctrl+O"));
+			File_File_Save = FileMenu->addAction(VITRL("YSS::menu.file.save"));
+			File_File_Save->setObjectName("save");
+			File_File_Save->setShortcut(QKeySequence("Ctrl+S"));
+			File_File_SaveAll = FileMenu->addAction(VITRL("YSS::menu.file.saveAll"));
+			File_File_SaveAll->setObjectName("saveAll");
+			File_File_SaveAll->setShortcut(QKeySequence("Ctrl+Shift+S"));
+			File_File_SaveAs = FileMenu->addAction(VITRL("YSS::menu.file.saveAs"));
+			File_File_SaveAs->setObjectName("saveAs");
+			File_File_SaveAs->setShortcut(QKeySequence("Ctrl+Alt+S"));
+			FileMenu->addSeparator();
+			File_File_ProjectConfig = FileMenu->addAction(VITRL("YSS::menu.file.projectConfig"));
+			File_File_ProjectConfig->setObjectName("projectConfig");
+			File_File_ShowInExplorer = FileMenu->addAction(VITRL("YSS::menu.file.showInExplorer"));
+			File_File_ShowInExplorer->setObjectName("showInExplorer");
+			FileMenu->addSeparator();
+			File_Program_BackToHome = FileMenu->addAction(VITRL("YSS::menu.file.backToHome"));
+			File_Program_BackToHome->setObjectName("backToHome");
+			File_Program_PluginAndPreferences = FileMenu->addAction(VITRL("YSS::menu.file.pluginAndPreferences"));
+			File_Program_PluginAndPreferences->setObjectName("pluginAndPreferences");
+			File_Program_ColorThemeSettings = FileMenu->addAction(VITRL("YSS::menu.file.colorThemeSettings"));
+			File_Program_ColorThemeSettings->setObjectName("colorThemeSettings");
+			File_Program_About = FileMenu->addAction(VITRL("YSS::menu.file.about"));
+			File_Program_About->setObjectName("about");
+			File_Program_Documentation = FileMenu->addAction(VITRL("YSS::menu.file.documentation"));
+			File_Program_Documentation->setObjectName("documentation");
+			File_Program_Documentation->setShortcut(QKeySequence("F1"));
+			FileMenu->addSeparator();
+			File_Program_Exit = FileMenu->addAction(VITRL("YSS::menu.file.exit"));
+			File_Program_Exit->setObjectName("exit");
+			File_Program_Exit->setShortcut(QKeySequence("Alt+F4"));
+
+			QObject::connect(File_File_New, &QAction::triggered, q, &MainWinMenu::file_file_new);
+			QObject::connect(File_File_Open, &QAction::triggered, q, &MainWinMenu::file_file_open);
+			QObject::connect(File_File_Save, &QAction::triggered, q, &MainWinMenu::file_file_save);
+			QObject::connect(File_File_SaveAll, &QAction::triggered, q, &MainWinMenu::file_file_saveAll);
+			QObject::connect(File_File_SaveAs, &QAction::triggered, q, &MainWinMenu::file_file_saveAs);
+			QObject::connect(File_File_ProjectConfig, &QAction::triggered, q, &MainWinMenu::file_file_projectConfig);
+			QObject::connect(File_File_ShowInExplorer, &QAction::triggered, q, &MainWinMenu::file_file_showInExplorer);
+			QObject::connect(File_Program_BackToHome, &QAction::triggered, q, &MainWinMenu::file_program_backToHome);
+			QObject::connect(File_Program_PluginAndPreferences, &QAction::triggered, q, &MainWinMenu::file_program_pluginAndPreferences);
+			QObject::connect(File_Program_ColorThemeSettings, &QAction::triggered, q, &MainWinMenu::file_program_colorThemeSettings);
+			QObject::connect(File_Program_About, &QAction::triggered, q, &MainWinMenu::file_program_about);
+			QObject::connect(File_Program_Documentation, &QAction::triggered, q, &MainWinMenu::file_program_documentation);
+			QObject::connect(File_Program_Exit, &QAction::triggered, q, &MainWinMenu::file_program_exit);
+		}
+
+		void initEditMenu() {
+			EditMenu = MenuBar->addMenu(VITRL("YSS::menu.edit.title"));
+			auto font = EditMenu->font();
+			font.setPointSizeF(font.pointSizeF() * 0.9);
+			EditMenu->setFont(font);
+			EditMenu->setObjectName("edit");
+			Edit_Undo = EditMenu->addAction(VITRL("YSS::menu.edit.undo"));
+			Edit_Undo->setObjectName("undo");
+			Edit_Redo = EditMenu->addAction(VITRL("YSS::menu.edit.redo"));
+			Edit_Redo->setObjectName("redo");
+			EditMenu->addSeparator();
+			Edit_Cut = EditMenu->addAction(VITRL("YSS::menu.edit.cut"));
+			Edit_Cut->setObjectName("cut");
+			Edit_Copy = EditMenu->addAction(VITRL("YSS::menu.edit.copy"));
+			Edit_Copy->setObjectName("copy");
+			Edit_Paste = EditMenu->addAction(VITRL("YSS::menu.edit.paste"));
+			Edit_Paste->setObjectName("paste");
+			Edit_SelectAll = EditMenu->addAction(VITRL("YSS::menu.edit.selectAll"));
+			Edit_SelectAll->setObjectName("selectAll");
+			EditMenu->addSeparator();
+			Edit_FindAndReplace = EditMenu->addAction(VITRL("YSS::menu.edit.findAndReplace"));
+			Edit_FindAndReplace->setObjectName("findAndReplace");
+
+			QObject::connect(Edit_Undo, &QAction::triggered, q, &MainWinMenu::edit_undo);
+			QObject::connect(Edit_Redo, &QAction::triggered, q, &MainWinMenu::edit_redo);
+			QObject::connect(Edit_Cut, &QAction::triggered, q, &MainWinMenu::edit_cut);
+			QObject::connect(Edit_Copy, &QAction::triggered, q, &MainWinMenu::edit_copy);
+			QObject::connect(Edit_Paste, &QAction::triggered, q, &MainWinMenu::edit_paste);
+			QObject::connect(Edit_SelectAll, &QAction::triggered, q, &MainWinMenu::edit_selectAll);
+			QObject::connect(Edit_FindAndReplace, &QAction::triggered, q, &MainWinMenu::edit_findAndReplace);
+		}
+
+		void initRunMenu() {
+			RunMenu = MenuBar->addMenu(VITRL("YSS::menu.run.title"));
+			auto font = RunMenu->font();
+			font.setPointSizeF(font.pointSizeF() * 0.9);
+			RunMenu->setFont(font);
+			RunMenu->setObjectName("run");
+			Run_Run_Debug = RunMenu->addAction(VITRL("YSS::menu.run.debug"));
+			Run_Run_Debug->setObjectName("debug");
+			Run_Run_Debug->setShortcut(QKeySequence("F5"));
+			Run_Run_Run = RunMenu->addAction(VITRL("YSS::menu.run.run"));
+			Run_Run_Run->setObjectName("run");
+			Run_Run_Run->setShortcut(QKeySequence("Ctrl+F5"));
+			Run_Run_Stop = RunMenu->addAction(VITRL("YSS::menu.run.stop"));
+			Run_Run_Stop->setObjectName("stop");
+			Run_Run_Stop->setShortcut(QKeySequence("Shift+F5"));
+			Run_Run_Restart = RunMenu->addAction(VITRL("YSS::menu.run.restart"));
+			Run_Run_Restart->setObjectName("restart");
+			Run_Run_Restart->setShortcut(QKeySequence("Ctrl+Shift+F5"));
+			RunMenu->addSeparator();
+			Run_Build_Build = RunMenu->addAction(VITRL("YSS::menu.run.build"));
+			Run_Build_Build->setObjectName("build");
+			Run_Build_Rebuild = RunMenu->addAction(VITRL("YSS::menu.run.rebuild"));
+			Run_Build_Rebuild->setObjectName("rebuild");
+			Run_Build_Clean = RunMenu->addAction(VITRL("YSS::menu.run.clean"));
+			Run_Build_Clean->setObjectName("clean");
+			RunMenu->addSeparator();
+			Run_Action_StepInto = RunMenu->addAction(VITRL("YSS::menu.run.stepInto"));
+			Run_Action_StepInto->setObjectName("stepInto");
+			Run_Action_StepOver = RunMenu->addAction(VITRL("YSS::menu.run.stepOver"));
+			Run_Action_StepOver->setObjectName("stepOver");
+			Run_Action_Suspend = RunMenu->addAction(VITRL("YSS::menu.run.suspend"));
+			Run_Action_Suspend->setObjectName("suspend");
+			Run_Action_Resume = RunMenu->addAction(VITRL("YSS::menu.run.resume"));
+			Run_Action_Resume->setObjectName("resume");
+
+			QObject::connect(Run_Run_Debug, &QAction::triggered, q, &MainWinMenu::run_run_debug);
+			QObject::connect(Run_Run_Run, &QAction::triggered, q, &MainWinMenu::run_run_run);
+			QObject::connect(Run_Run_Stop, &QAction::triggered, q, &MainWinMenu::run_run_stop);
+			QObject::connect(Run_Run_Restart, &QAction::triggered, q, &MainWinMenu::run_run_restart);
+			QObject::connect(Run_Build_Build, &QAction::triggered, q, &MainWinMenu::run_build_build);
+			QObject::connect(Run_Build_Rebuild, &QAction::triggered, q, &MainWinMenu::run_build_rebuild);
+			QObject::connect(Run_Build_Clean, &QAction::triggered, q, &MainWinMenu::run_build_clean);
+			QObject::connect(Run_Action_StepInto, &QAction::triggered, q, &MainWinMenu::run_action_stepInto);
+			QObject::connect(Run_Action_StepOver, &QAction::triggered, q, &MainWinMenu::run_action_stepOver);
+			QObject::connect(Run_Action_Suspend, &QAction::triggered, q, &MainWinMenu::run_action_suspend);
+			QObject::connect(Run_Action_Resume, &QAction::triggered, q, &MainWinMenu::run_action_resume);
+		}
+
+		void initViewMenu() {
+			ViewMenu = MenuBar->addMenu(VITRL("YSS::menu.view.title"));
+			auto font = ViewMenu->font();
+			font.setPointSizeF(font.pointSizeF() * 0.9);
+			ViewMenu->setFont(font);
+			ViewMenu->setObjectName("view");
+			View_FullScreenToggle = ViewMenu->addAction(VITRL("YSS::menu.view.fullScreenToggle"));
+			View_FullScreenToggle->setObjectName("fullScreenToggle");
+			View_FullScreenToggle->setCheckable(true);
+			View_FullScreenToggle->setChecked(false);
+			View_FullScreenToggle->setShortcut(QKeySequence("F11"));
+			ViewMenu->addSeparator();
+			View_NothingToShow = ViewMenu->addAction(VITRL("YSS::menu.view.noTools"));
+			View_NothingToShow->setObjectName("noTools");
+			View_NothingToShow->setEnabled(false);
+			View_NothingToShow->setVisible(false);
+
+			QObject::connect(View_FullScreenToggle, &QAction::triggered, q, &MainWinMenu::view_fullScreenToggle);
+			QObject::connect(ViewMenu, &QMenu::aboutToShow, q, &MainWinMenu::onPluginToolMenuAboutToShow);
+		}
+	};
+
+	MainWinMenu::MainWinMenu(MainWin* parent) {
+		d = new MainWinMenuPrivate();
+		d->q = this;
+		d->Parent = parent;
+		this->setFixedHeight(38);
+
+		d->Layout = new QHBoxLayout(this);
+		d->Layout->setContentsMargins(10, 0, 10, 0);
+#ifdef Q_OS_ANDROID
+		// 安卓：把状态栏高度并入本栏高度并把内容整体下移到安全区之下；
+		// 本栏背景会填满安全区，菜单条不再被系统状态栏遮住。
+		const int topInset = androidTopSafeInsetPx();
+		if (topInset > 0) {
+			this->setFixedHeight(38 + topInset);
+			d->Layout->setContentsMargins(10, topInset, 10, 0);
+		}
+#endif
+		d->MenuBar = new QMenuBar(this);
+#ifdef Q_OS_ANDROID
+		d->MenuBar->setNativeMenuBar(false);
+#endif
+		d->Layout->addWidget(d->MenuBar);
+		d->ProjectNameLabel = new QLabel(this);
+		d->ProjectNameLabel->setContentsMargins(10, 0, 10, 0);
+		d->ProjectNameLabel->setText(YSSCore::General::YSSProject::getCurrentProject()->getProjectName());
+		d->Layout->addItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
+		d->Layout->addWidget(d->ProjectNameLabel);
+
+		d->initFileMenu();
+		d->initEditMenu();
+		d->initRunMenu();
+		d->initViewMenu();
+
+		connect(DebugServerRouter::getInstance(), &DebugServerRouter::debugServerChanged,
+			this, &MainWinMenu::onDebugServerChanged);
+		connect(d->EditMenu, &QMenu::aboutToShow, this, &MainWinMenu::onEditMenuAboutToShow);
+		refreshToolMenu();
+		setColorfulEnable(true);
+		onThemeChanged();
+		onDebugServerChanged();
+	}
+
+	MainWinMenu::~MainWinMenu() {
+		delete d;
+	}
+
+	void MainWinMenu::refreshToolMenu() {
+		onPluginToolMenuAboutToShow();
+	}
+
+	void MainWinMenu::setShortcutTip(const QString& actionObjectName, const QString& tip) {
+		QObject* child = Visindigo::Utility::QtSSHelper::findChildObject(d->MenuBar, actionObjectName);
+		if (child) {
+			QString rawText;
+			QAction* action = qobject_cast<QAction*>(child);
+			if (action) {
+				rawText = action->text();
+			}
+			else {
+				QMenu* menu = qobject_cast<QMenu*>(child);
+				if (menu) {
+					rawText = menu->title();
+				}
+				else {
+					return;
+				}
+			}
+			qint32 leftParenIndex = rawText.lastIndexOf('(');
+			qint32 rightParenIndex = rawText.lastIndexOf(')');
+			if (leftParenIndex != -1 && rightParenIndex != -1 && rightParenIndex > leftParenIndex) {
+				rawText = rawText.left(leftParenIndex).trimmed();
+			}
+			rawText += QString(" (%1)").arg(tip);
+			if (action) {
+				action->setText(rawText);
+			}
+			else {
+				QMenu* menu = qobject_cast<QMenu*>(child);
+				menu->setTitle(rawText); // menu has been checked previously.
+			}
+		}
+	}
+
+	void MainWinMenu::setShortcutTips(const QMap<QString, QString>& tips) {
+		for (auto it = tips.begin(); it != tips.end(); ++it) {
+			setShortcutTip(it.key(), it.value());
+		}
+	}
+
+	void MainWinMenu::file_file_new() {
+		d->Parent->openNewFileWindow();
+	}
+
+	void MainWinMenu::file_file_open() {
+		d->Parent->openFileDialog();
+	}
+
+	void MainWinMenu::file_file_save() {
+		d->Parent->saveCurrentFocusedFile();
+	}
+
+	void MainWinMenu::file_file_saveAs() {
+		d->Parent->saveCurrentFocusedFileAs();
+	}
+
+	void MainWinMenu::file_file_saveAll() {
+		// 「全部保存」的语义即保存项目（saveProject = 保存全部文件 + 项目配置/窗口尺寸等）。
+		d->Parent->saveProject();
+	}
+
+	void MainWinMenu::file_file_projectConfig() {
+		QString ysspFilePath = YSSCore::General::YSSProject::getCurrentProject()->getProjectPath().getLocalPath();
+		QDir projectDir(ysspFilePath);
+		YSSFSM->openFile(projectDir.absoluteFilePath(""));
+	}
+
+	void MainWinMenu::file_file_showInExplorer() {
+		QString projectFolder = YSSCore::General::YSSProject::getCurrentProject()->getProjectFolder().getLocalPath();
+		Visindigo::Utility::FileUtility::openExplorer(projectFolder);
+	}
+
+	void MainWinMenu::file_program_backToHome() {
+		d->Parent->backToHome();
+	}
+
+	void MainWinMenu::file_program_pluginAndPreferences() {
+		YSSFSM->openFile(QString("@YSS.MainEditor.Preferences!%1?").arg(VITRL("YSS::menu.file.pluginAndPreferences")));
+	}
+
+	void MainWinMenu::file_program_colorThemeSettings() {
+		YSSFSM->openFile(QString("@YSS.MainEditor.ColorThemeSettings!%1?").arg(VITRL("YSS::menu.file.colorThemeSettings")));
+	}
+
+	void MainWinMenu::file_program_about() {
+		QMessageBox::about(YSS::Editor::MainWin::getInstance(),
+			VITRL("YSS::editor.about.title"),
+			VITRL("YSS::editor.about.message").arg(VIApp->getMainPlugin()->getPluginVersion().toString()));
+	}
+
+	void MainWinMenu::file_program_documentation() {
+		d->Parent->help();
+	}
+
+	void MainWinMenu::file_program_exit() {
+		d->Parent->close();
+	}
+
+	void MainWinMenu::edit_undo() {
+		auto currentWidget = d->Parent->getCurrentFocusedFileEditWidget();
+		if (currentWidget) {
+			currentWidget->undo();
+		}
+	}
+
+	void MainWinMenu::edit_redo() {
+		auto currentWidget = d->Parent->getCurrentFocusedFileEditWidget();
+		if (currentWidget) {
+			currentWidget->redo();
+		}
+	}
+
+	void MainWinMenu::edit_cut() {
+		auto currentWidget = d->Parent->getCurrentFocusedFileEditWidget();
+		if (currentWidget) {
+			currentWidget->cut();
+		}
+	}
+
+	void MainWinMenu::edit_copy() {
+		auto currentWidget = d->Parent->getCurrentFocusedFileEditWidget();
+		if (currentWidget) {
+			currentWidget->copy();
+		}
+	}
+
+	void MainWinMenu::edit_paste() {
+		auto currentWidget = d->Parent->getCurrentFocusedFileEditWidget();
+		if (currentWidget) {
+			currentWidget->paste();
+		}
+	}
+
+	void MainWinMenu::edit_selectAll() {
+		auto currentWidget = d->Parent->getCurrentFocusedFileEditWidget();
+		if (currentWidget) {
+			currentWidget->selectAll();
+		}
+	}
+
+	void MainWinMenu::edit_findAndReplace() {
+		auto currentWidget = d->Parent->getCurrentFocusedFileEditWidget();
+		auto textEdit = qobject_cast<YSSCore::Editor::TextEdit*>(currentWidget);
+		if (textEdit) {
+			textEdit->showFindAndReplace();
+		}
+	}
+
+	void MainWinMenu::run_run_run() {
+		d->Parent->saveAllFiles();
+		YSSDSR->run(false);
+	}
+
+	void MainWinMenu::run_run_debug() {
+		d->Parent->saveAllFiles();
+		YSSDSR->run(true);
+	}
+
+	void MainWinMenu::run_run_stop() {
+		YSSDSR->stop();
+	}
+
+	void MainWinMenu::run_run_restart() {
+		d->Parent->saveAllFiles();
+		YSSDSR->restart();
+	}
+
+	void MainWinMenu::run_build_build() {
+		YSSDSR->build(false);
+	}
+
+	void MainWinMenu::run_build_rebuild() {
+		YSSDSR->build(true);
+	}
+
+	void MainWinMenu::run_build_clean() {
+		YSSDSR->clean();
+	}
+
+	void MainWinMenu::run_action_stepInto() {
+		YSSDSR->stepInto();
+	}
+
+	void MainWinMenu::run_action_stepOver() {
+		YSSDSR->stepOver();
+	}
+
+	void MainWinMenu::run_action_suspend() {
+		YSSDSR->suspend();
+	}
+
+	void MainWinMenu::run_action_resume() {
+		YSSDSR->contiune();
+	}
+
+	void MainWinMenu::view_resourceBrowser(bool checked) {
+		//if (checked && d->Parent->getResourceBrowser()->isHidden()) {
+		//	d->Parent->getResourceBrowser()->show();
+		//}else if (checked && d->Parent->getResourceBrowser()->width() == 0) {
+		//	d->Parent->getResourceBrowser()->show();
+		//	d->Parent->getResourceBrowser()->resize(300, d->Parent->getResourceBrowser()->height());
+		//}
+		//d->Parent->getResourceBrowser()->setVisible(checked);
+	}
+
+	void MainWinMenu::view_fullScreenToggle(bool checked) {
+		if (d->View_FullScreenToggle->isChecked() != checked) {
+			d->View_FullScreenToggle->setChecked(checked);
+		}
+		if (checked) {
+			d->Parent->showFullScreen();
+		}
+		else {
+			d->Parent->showNormal();
+		}
+	}
+
+	void MainWinMenu::view_pluginTools(YSSCore::Editor::FileServer* asToolServer, bool checked) {
+		auto vfp = YSSCore::Editor::VirtualFilePath(asToolServer->getSupportedFileExts().first(),
+			VI18N(asToolServer->getToolNickname()), "");
+		if (checked) {
+			YSSFSM->openFile(vfp.toString());
+			auto widget = YSSFSM->getFileEditWidget(vfp.toString());
+			if (widget) {
+				for (auto action : d->PluginToolsActionMap.keys()) {
+					if (d->PluginToolsActionMap[action] == asToolServer) {
+						action->setChecked(true);
+						break;
+					}
+				}
+				connect(widget, &YSSCore::Editor::FileEditWidget::destroyed, this, [this, asToolServer]() {
+					for (auto action : d->PluginToolsActionMap.keys()) {
+						if (d->PluginToolsActionMap[action] == asToolServer) {
+							action->setChecked(false);
+							break;
+						}
+					}
+					});
+			}
+		}
+		else {
+			auto widget = YSSFSM->getFileEditWidget(vfp.toString());
+			if (widget) {
+				widget->close();
+			}
+		}
+	}
+
+	void MainWinMenu::syncPluginToolMenu() {
+		for (auto it = d->PluginToolsActionMap.begin(); it != d->PluginToolsActionMap.end(); ++it) {
+			auto toolServer = it.value();
+			auto vfp = YSSCore::Editor::VirtualFilePath(toolServer->getSupportedFileExts().first(),
+				VI18N(toolServer->getToolNickname()), "");
+			it.key()->setChecked(YSSFSM->getFileEditWidget(vfp.toString()) != nullptr);
+		}
+	}
+
+	void MainWinMenu::onPluginToolMenuAboutToShow() {
+		auto asToolServers = YSSFSM->getAsToolFileServers();
+		if (asToolServers.isEmpty()) {
+			d->View_NothingToShow->setVisible(true);
+			d->PluginToolsList.clear();
+			d->PluginToolsActionMap.clear();
+			return;
+		}
+		if (asToolServers != d->PluginToolsList) {
+			for (auto action : d->PluginToolsActionMap.keys()) {
+				d->ViewMenu->removeAction(action);
+			}
+			d->PluginToolsList = asToolServers;
+			d->View_NothingToShow->setVisible(false);
+			d->PluginToolsActionMap.clear();
+			for (auto toolServer : asToolServers) {
+				auto action = d->ViewMenu->addAction(VI18N(toolServer->getToolNickname()));
+				action->setCheckable(true);
+				d->PluginToolsActionMap[action] = toolServer;
+				QObject::connect(action, &QAction::triggered, this, [this, action]() {
+					auto toolServer = d->PluginToolsActionMap[action];
+					bool checked = action->isChecked();
+					view_pluginTools(toolServer, checked);
+					});
+			}
+		}
+		syncPluginToolMenu();
+	}
+	
+	void MainWinMenu::onEditMenuAboutToShow() {
+		auto currentWidget = d->Parent->getCurrentFocusedFileEditWidget();
+		auto textEdit = qobject_cast<YSSCore::Editor::TextEdit*>(currentWidget);
+		bool hasTextEdit = (textEdit != nullptr);
+		d->Edit_Undo->setEnabled(hasTextEdit && textEdit->getDocument()->isUndoAvailable());
+		d->Edit_Redo->setEnabled(hasTextEdit && textEdit->getDocument()->isRedoAvailable());
+		d->Edit_Cut->setEnabled(hasTextEdit && textEdit->getTextCursor().hasSelection());
+		d->Edit_Copy->setEnabled(hasTextEdit && textEdit->getTextCursor().hasSelection());
+		d->Edit_Paste->setEnabled(hasTextEdit && QApplication::clipboard()->mimeData()->hasText());
+		d->Edit_SelectAll->setEnabled(hasTextEdit && !textEdit->getDocument()->isEmpty());
+		d->Edit_FindAndReplace->setEnabled(hasTextEdit);
+	}
+
+	void MainWinMenu::onDebugServerChanged() {
+		d->Run_Run_Debug->setEnabled(DebugServerRouter::getInstance()->testDebugFeature(YSSCore::Editor::DebugServer::DebugRun));
+		d->Run_Run_Run->setEnabled(DebugServerRouter::getInstance()->testDebugFeature(YSSCore::Editor::DebugServer::Run));
+		d->Run_Run_Stop->setEnabled(DebugServerRouter::getInstance()->testDebugFeature(YSSCore::Editor::DebugServer::Stop));
+		d->Run_Run_Restart->setEnabled(DebugServerRouter::getInstance()->testDebugFeature(YSSCore::Editor::DebugServer::Run | YSSCore::Editor::DebugServer::Stop));
+		d->Run_Build_Build->setEnabled(DebugServerRouter::getInstance()->testDebugFeature(YSSCore::Editor::DebugServer::Build));
+		d->Run_Build_Rebuild->setEnabled(DebugServerRouter::getInstance()->testDebugFeature(YSSCore::Editor::DebugServer::Build));
+		d->Run_Build_Clean->setEnabled(DebugServerRouter::getInstance()->testDebugFeature(YSSCore::Editor::DebugServer::Clean));
+		d->Run_Action_StepInto->setEnabled(DebugServerRouter::getInstance()->testDebugFeature(YSSCore::Editor::DebugServer::StepInto));
+		d->Run_Action_StepOver->setEnabled(DebugServerRouter::getInstance()->testDebugFeature(YSSCore::Editor::DebugServer::StepOver));
+		d->Run_Action_Suspend->setEnabled(DebugServerRouter::getInstance()->testDebugFeature(YSSCore::Editor::DebugServer::Suspend));
+		d->Run_Action_Resume->setEnabled(DebugServerRouter::getInstance()->testDebugFeature(YSSCore::Editor::DebugServer::Continue));
+	}
+
+	void MainWinMenu::onThemeChanged() {
+		if (d->MenuTextColor != VISTM->getPaletteTextColor()) {
+			d->MenuTextColor = VISTM->getPaletteTextColor();
+			d->File_File_New->setIcon(VIApp->getNamedFontIcon("SubscriptionAdd", 64, { d->MenuTextColor }));
+			d->File_File_Open->setIcon(VIApp->getNamedFontIcon("OpenFile", 64, { d->MenuTextColor }));
+			d->File_File_Save->setIcon(VIApp->getNamedFontIcon("Save", 64, { d->MenuTextColor }));
+			d->File_File_SaveAll->setIcon(VIApp->getNamedFontIcon("SaveCopy", 64, { d->MenuTextColor }));
+			d->File_File_SaveAs->setIcon(VIApp->getNamedFontIcon("SaveAs", 64, { d->MenuTextColor }));
+			d->File_File_ProjectConfig->setIcon(VIApp->getFontIcon("\uF259", 64, { d->MenuTextColor }));
+			d->File_File_ShowInExplorer->setIcon(VIApp->getFontIcon("\uE8A7", 64, { d->MenuTextColor }));
+			d->File_Program_BackToHome->setIcon(VIApp->getFontIcon("\uE80F", 64, { d->MenuTextColor }));
+			d->File_Program_PluginAndPreferences->setIcon(VIApp->getFontIcon("\uE713", 64, { d->MenuTextColor }));
+			d->File_Program_ColorThemeSettings->setIcon(VIApp->getNamedFontIcon("Color", 64, { d->MenuTextColor }));
+			d->File_Program_About->setIcon(VIApp->getFontIcon("\uE946", 64, { d->MenuTextColor }));
+			d->File_Program_Documentation->setIcon(VIApp->getFontIcon("\uE897", 64, { d->MenuTextColor }));
+			d->File_Program_Exit->setIcon(VIApp->getFontIcon("\uE711", 64, { d->MenuTextColor }));
+			
+			d->Edit_Undo->setIcon(VIApp->getFontIcon("\uE7A7", 64, { d->MenuTextColor }));
+			d->Edit_Redo->setIcon(VIApp->getFontIcon("\uE7A6", 64, { d->MenuTextColor }));
+			d->Edit_Cut->setIcon(VIApp->getFontIcon("\uE8C6", 64, { d->MenuTextColor }));
+			d->Edit_Copy->setIcon(VIApp->getFontIcon("\uE8C8", 64, { d->MenuTextColor }));
+			d->Edit_Paste->setIcon(VIApp->getFontIcon("\uE77F", 64, { d->MenuTextColor }));
+			d->Edit_SelectAll->setIcon(VIApp->getFontIcon("\uE8B3", 64, { d->MenuTextColor }));
+			d->Edit_FindAndReplace->setIcon(VIApp->getFontIcon("\uE721", 64, { d->MenuTextColor }));
+
+			d->Run_Run_Debug->setIcon(VIApp->getFontIcon("\uE9D9", 64, { d->MenuTextColor }));
+			d->Run_Run_Run->setIcon(VIApp->getFontIcon("\uE768", 64, { d->MenuTextColor }));
+			d->Run_Run_Stop->setIcon(VIApp->getFontIcon("\uE71A", 64, { d->MenuTextColor }));
+			d->Run_Run_Restart->setIcon(VIApp->getFontIcon("\uF83F\uF83E", 64, { d->MenuTextColor, d->MenuTextColor }));
+			d->Run_Build_Build->setIcon(VIApp->getFontIcon("\uEC7A", 64, { d->MenuTextColor }));
+			d->Run_Build_Rebuild->setIcon(VIApp->getFontIcon("\uEB97", 64, { d->MenuTextColor, d->MenuTextColor }));
+			d->Run_Build_Clean->setIcon(VIApp->getFontIcon("\uE75C", 64, { d->MenuTextColor }));
+			d->Run_Action_StepInto->setIcon(VIApp->getFontIcon("\uE8B5", 64, { d->MenuTextColor }));
+			d->Run_Action_StepOver->setIcon(VIApp->getFontIcon("\uE8B6", 64, { d->MenuTextColor }));
+			d->Run_Action_Suspend->setIcon(VIApp->getFontIcon("\uE769", 64, { d->MenuTextColor }));
+			d->Run_Action_Resume->setIcon(VIApp->getFontIcon("\uE893", 64, { d->MenuTextColor }));
+
+			d->View_FullScreenToggle->setIcon(VIApp->getNamedFontIcon("FullScreen", 64, { d->MenuTextColor }));
+		}
+	}
+}

@@ -1,0 +1,94 @@
+#ifndef Visindigo_General_VIApplication_h
+#define Visindigo_General_VIApplication_h
+#include <QtCore/qcoreapplication.h>
+#include <QtGui/qguiapplication.h>
+#include <QtGui/qcolor.h>
+#include <QtWidgets/qapplication.h>
+#include "General/Exception.h"
+#include "VICompileMacro.h"
+#include "Widgets/IconFontRouter.h"
+namespace Visindigo::Widgets {
+	class Terminal;
+	class IconFontRouter;
+}
+namespace Visindigo::General {
+	class VIApplicationPrivate;
+	class Plugin;
+
+	class VisindigoAPI ApplicationLoadingMessageHandler {
+	public:
+		virtual ~ApplicationLoadingMessageHandler();
+		virtual void onLoadingMessage(const QString& msg) = 0;
+		virtual void enableHandler() = 0;
+		virtual void disableHandler() = 0;
+	};
+
+	class VisindigoAPI ApplicationExceptionMessageHandler {
+	public:
+		virtual ~ApplicationExceptionMessageHandler();
+		virtual void onExceptionMessage(const Exception& ex) = 0;
+		virtual void enableHandler() = 0;
+		virtual void exec() = 0;
+		virtual void disableHandler() = 0;
+	};
+
+	class VisindigoAPI VIApplication :public QObject {
+		Q_OBJECT;
+	public:
+		enum AppType {
+			CoreApp,
+			GuiApp,
+			WidgetApp,
+		};
+		Q_ENUM(AppType);
+		enum EnvKey {
+			LogFolderPath,
+			LogFileNameTimeFormat,
+			LogTimeFormat,
+			PluginFolderPath,
+			ConfigPath,
+			MinimumLoadingTimeMS,
+			UseVirtualTerminal,
+			TerminalAutoShow,
+			ThemeFolderPath,
+			SaveCommandHistory,
+			DefaultColorTheme,
+		};
+		Q_ENUM(EnvKey);
+	public:
+		static VIApplication* getInstance();
+		static void setEnvConfig(EnvKey key, const QVariant& value);
+		static QVariant getEnvConfig(EnvKey key);
+		static bool isWindows11();
+		static bool isWindows();
+	public:
+		VIApplication(int& argc, char** argv, AppType appType = WidgetApp, bool changeWorkingDirToExeDir = true);
+		~VIApplication();
+		void setMainPlugin(Plugin* plugin);
+		Plugin* getMainPlugin() const;
+		void addDependencyPlugin(Plugin* plugin);
+		QList<Plugin*> getDependencyPlugins() const;
+		void onException(const Exception& ex);
+		void setLoadingMessageHandler(ApplicationLoadingMessageHandler* handler);
+		void setExceptionMessageHandler(ApplicationExceptionMessageHandler* handler);
+		void setGlobalFont(const QString& fontPath, int fontID = 0);
+		void setIconFont(const QString& fontPath, int fontID = 0, Visindigo::Widgets::IconFontRouter* iconFontRouter = nullptr);
+		void setIconFontRouter(Visindigo::Widgets::IconFontRouter* iconFontRouter);
+		Visindigo::Widgets::IconFontRouter* getIconFontRouter() const;
+		QFont getGlobalFont() const;
+		QFont getIconFont() const;
+		QIcon getFontIcon(QString unicode, int iconSize = 64, QList<QColor> layerColors = { QColor("#000000") }) const;
+		QIcon getNamedFontIcon(QString iconNames, int iconSize = 64, QList<QColor> layerColors = { QColor("#000000") }) const;
+		QIcon getNamedFontIcon(QList<Visindigo::Widgets::IconFontRouter::IconName> iconName, int iconSize = 64, QList<QColor> layerColors = { QColor("#000000") }) const;
+		int start();
+		bool applicationStarted() const;
+		Widgets::Terminal* getVirtualTerminal() const;
+		QString getProgramPath() const;
+	private:
+		VIApplicationPrivate* d;
+	};
+}
+#define VISetEnv(key, value) Visindigo::General::VIApplication::setEnvConfig(key, value)
+#define VIApp Visindigo::General::VIApplication::getInstance()
+
+#endif // Visindigo_General_VIApplication_h

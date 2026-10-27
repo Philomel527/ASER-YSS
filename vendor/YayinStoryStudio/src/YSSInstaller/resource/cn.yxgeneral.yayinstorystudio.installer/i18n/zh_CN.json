@@ -1,0 +1,53 @@
+{
+    "AutoUpdate":{
+        "Title": "YSS 更新与遥测服务 - 有自动更新可用",
+        "Desc_CanUpdate": "当前启动的 Yayin Story Studio 程序（版本%1，位于%2）看上去是本计算机中最新的YSS应用程序。然而，我们发现您计算机上还安装了一个或多个旧版YSS应用程序。\nYSS 更新包自动部署服务可以将此新版本%1作为更新包自动升级这些旧版。\n您接下来希望怎么做？",
+        "Option_AutoUpdate": "我希望将此新版本%1作为更新包自动升级旧版程序。",
+        "Option_Keep": "我希望保留旧版程序，并独立使用这个新版本%1。",
+        "Desc_UpdateOption": "请选择要在更新时应用的选项",
+        "Option_AutoDelete": "更新后自动删除这个作为安装包的文件夹（user_data中的repos、third_party会被保留）",
+        "Option_AutoLaunch": "更新后自动启动新版程序",
+        "Desc_MultiOldVersion": "我们在您计算机上发现了多个旧版YSS应用，请在下面勾选您希望升级的旧版YSS应用程序。",
+        "Path": "路径",
+        "Version": "版本",
+        "IWantToUpdate": "我希望升级",
+        "Desc_CloseProgram": "升级过程需要关闭所有受到影响的YSS应用程序，请在升级前保存好所有工作并关闭这些程序。",
+        "StillRunning": "仍在运行的YSS应用程序",
+        "Option_Retry": "已经关闭，请重试",
+        "BackwardStep": "上一步",
+        "Desc_Ready": "所有旧版程序的更新准备工作已经完成，更新过程即将开始。\n请确认是否继续。",
+        "Option_Next": "下一步",
+        "Option_Cancel": "取消",
+        "Option_OK": "确定",
+        "Step_Confirm": "确认更新",
+        "Step_Select": "选择版本",
+        "Step_Option": "更新配置",
+        "Step_Check": "检查运行情况",
+        "Step_Update": "执行更新",
+        "Desc_Finished": "更新完成",
+        "Desc_ChooseAutoLaunch": "已更新多个旧版程序，请选择稍后自动启动的程序：",
+        "Option_Confirm": "确认"
+    },
+    "Monitor": {
+        "Title": "YSS 更新与遥测服务 - 程序已启动",
+        "Launched": "版本%1的YSS程序已启动"
+    },
+    "TrayIcon": {
+        "About": "关于"
+    },
+    "About": {
+        "Title": "YSS 更新与遥测服务 - 关于",
+        "Desc": "YSS 更新与遥测服务是 Yayin Story Studio 的一个辅助程序，负责在计算机上安装、更新YSS应用程序。未来的版本中，它还将提供遥测服务，帮助开发者收集程序使用情况和崩溃报告，以便更好地改进YSS。\n\n本程序在启动YSS时自动启动并在后台静默运行，无需用户干预。当YSS退出时，本程序也会自动退出。"
+    },
+    "CrashScreen": {
+        "Headline": "Yayin Story Studio遇到了问题，已经崩溃。我们已应急保存了项目，并收集了一些错误信息。",
+        "Message": "错误信息：",
+        "StopCode": "停止代码：%1",
+        "Location": "出错位置：%1",
+        "Stacktrace": "调用堆栈",
+        "ReportFolder": "崩溃报告目录：%1",
+        "ReportHint": "详细信息已经保存到last_crash.zip文件中，可以向他人发送此压缩包以寻求帮助，或至少提供此崩溃页面的截图",
+        "NoReport": "没有读到本次崩溃的详细信息，请将上面的目录提供给开发者以便进一步排查。",
+        "Dismiss": "确定"
+    }
+}

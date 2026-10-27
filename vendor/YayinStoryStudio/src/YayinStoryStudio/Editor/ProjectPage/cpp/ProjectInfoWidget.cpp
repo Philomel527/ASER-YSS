@@ -1,0 +1,165 @@
+#include <QtCore/qdatetime.h>
+#include <QtWidgets/qApplication.h>
+#include <QtWidgets/qgridlayout.h>
+#include <QtWidgets/qlabel.h>
+#include <QtWidgets/qmessagebox.h>
+#include <QtWidgets/qpushbutton.h>
+#include <General/Log.h>
+#include <General/TranslationHost.h>
+#include <General/YSSLogger.h>
+#include <General/YSSProject.h>
+#include <Utility/AsyncFunction.h>
+#include <Utility/FileUtility.h>
+#include "Editor/ProjectPage/ProjectInfoWidget.h"
+namespace YSS::ProjectPage {
+	ProjectInfoWidget::ProjectInfoWidget(QWidget* parent) :Visindigo::Widgets::BorderFrame(parent) {
+		this->setObjectName("ProjectInfoWidget");
+		CoverLabel = new QLabel(this);
+		CoverLabel->setAlignment(Qt::AlignCenter);
+		CoverLabel->setObjectName("ProjectCoverLabel");
+		TitleLabel = new QLabel(this);
+		TitleLabel->setObjectName("ProjectTitleLabel");
+		auto font = qApp->font();
+		font.setPointSizeF(font.pointSizeF() * 1.5);
+		//font.setBold(true);
+		TitleLabel->setFont(font);
+		CreateTimeLabel = new QLabel(this);
+		LastModifiedTimeLabel = new QLabel(this);
+		SizeLabel = new QLabel(this);
+		ShowInBrowserButton = new QPushButton(this);
+		ShowInBrowserButton->setToolTip(VITRL("YSS::tooltips.projectWin.showInBrowser"));
+		DeleteButton = new QPushButton(this);
+		DeleteButton->setToolTip(VITRL("YSS::tooltips.projectWin.delete"));
+		Layout = new QGridLayout(this);
+		DeleteButton->setObjectName("DeleteButton");
+		this->setLayout(Layout);
+		Layout->addWidget(CoverLabel, 0, 0, 4, 1);
+		Layout->addWidget(TitleLabel, 0, 1, 1, 3);
+		Layout->addWidget(SizeLabel, 1, 1, 1, 1);
+		Layout->addWidget(CreateTimeLabel, 2, 1, 1, 1);
+		Layout->addWidget(LastModifiedTimeLabel, 3, 1, 1, 1);
+		Layout->addWidget(ShowInBrowserButton, 2, 3, 1, 1);
+		Layout->addWidget(DeleteButton, 3, 3, 1, 1);
+
+		connect(DeleteButton, &QPushButton::clicked, this, &ProjectInfoWidget::onDeleteButtonClicked);
+		connect(ShowInBrowserButton, &QPushButton::clicked, this, &ProjectInfoWidget::onShowInBrowserButtonClicked);
+		initWidget();
+		setColorfulEnable(true);
+		onThemeChanged();
+	}
+
+	void ProjectInfoWidget::initWidget() {
+		SizeRequestId++;
+		Project = nullptr;
+		CoverLabel->setText(VITRL("YSS::project.noCover"));
+		CoverLabel->setStyleSheet("QLabel{border-image:url()}");
+		TitleLabel->setText(VITRL("YSS::project.selectToShow"));
+		CreateTimeLabel->setText(VITRL("YSS::project.createTime") + ": ");
+		LastModifiedTimeLabel->setText(VITRL("YSS::project.lastModifiedTime") + ": ");
+		SizeLabel->setText(VITRL("YSS::project.size") + ": ");
+		ShowInBrowserButton->setText(VITRL("YSS::project.showInBrowser"));
+		DeleteButton->setText(VITRL("YSS::project.delete"));
+	}
+
+	void ProjectInfoWidget::showProject(YSSCore::General::YSSProject* project) {
+		if (project == nullptr) {
+			initWidget();
+			return;
+		}
+		
+		Project = project;
+		QString path = project->getProjectFolder().getLocalPath();
+		int requestId = ++SizeRequestId;
+		if (path.isEmpty()) {
+			SizeLabel->setText(VITRL("YSS::project.size") + ": " + VITRL("YSS::project.calculating"));
+		}
+		else {
+			YSSAsync<qint64, QString>(
+				{ QString(path) },
+				[](QString path)->qint64 {
+					return Visindigo::Utility::FileUtility::sizeBytes(path);
+				},
+				// 传入this作为上下文：本控件在求值完成前被销毁时，这段回调不会再执行。
+				[this, requestId](qint64 size) {
+					if (requestId != SizeRequestId) {
+						// 用户已经切到别的项目，这个结果是过期的。
+						return;
+					}
+					QString readable = Visindigo::Utility::FileUtility::readableSize(size);
+					SizeLabel->setText(VITRL("YSS::project.size") + ": " + readable);
+				},
+				this
+			);
+			SizeLabel->setText(VITRL("YSS::project.size") + ": " + VITRL("YSS::project.calculating"));
+		}
+		CoverLabel->setText("");
+		const QString coverPath = project->getProjectIconPath().getLocalPath();
+		if (coverPath.isEmpty()) {
+			CoverLabel->setStyleSheet("");
+			CoverLabel->setText(VITRL("YSS::project.noCover"));
+		}
+		else {
+			CoverLabel->setStyleSheet("QLabel{border-image:url(" + coverPath + ")}");
+		}
+		TitleLabel->setText(project->getProjectName());
+		CreateTimeLabel->setText(VITRL("YSS::project.createTime") + ": " + project->getProjectCreateTime().toString("yyyy-MM-dd hh:mm:ss"));
+		LastModifiedTimeLabel->setText(VITRL("YSS::project.lastModifiedTime") + ": " + project->getProjectLastModifyTime().toString("yyyy-MM-dd hh:mm:ss"));
+	}
+
+	void ProjectInfoWidget::onDeleteButtonClicked() {
+		if (Project == nullptr) {
+			return;
+		}
+		QMessageBox msgBox;
+		msgBox.setWindowTitle(VITRL("YSS::project.delete"));
+		msgBox.setText(VITRL("YSS::project.deleteConfirm"));
+		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+		msgBox.setDefaultButton(QMessageBox::Cancel);
+		int ret = msgBox.exec();
+		switch (ret) {
+		case QMessageBox::Yes:
+			emit removeConfirmed(Project);
+			return;
+		case QMessageBox::Cancel:
+			return;
+		}
+	}
+
+	void ProjectInfoWidget::onRemoveFromListButtonClicked() {
+		if (Project == nullptr) {
+			return;
+		}
+		QMessageBox msgBox;
+		msgBox.setWindowTitle(VITRL("YSS::project.delete"));
+		msgBox.setText(VITRL("YSS::project.deleteConfirm"));
+		msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+		msgBox.setDefaultButton(QMessageBox::Cancel);
+		int ret = msgBox.exec();
+		switch (ret) {
+		case QMessageBox::Yes:
+			emit removeConfirmed(Project);
+			return;
+		case QMessageBox::Cancel:
+			return;
+		}
+	}
+
+	void ProjectInfoWidget::onShowInBrowserButtonClicked() {
+		if (Project != nullptr) {
+			QString dir = Project->getProjectFolder().getLocalPath();
+			//yDebugF << dir;
+			Visindigo::Utility::FileUtility::openExplorer(dir);
+		}
+	}
+
+	void ProjectInfoWidget::resizeEvent(QResizeEvent* event) {
+		QFrame::resizeEvent(event);
+		//this->CoverLabel->setFixedHeight((float)this->CoverLabel->width() / 16 * 9); // 16:9 aspect ratio
+		this->CoverLabel->setFixedWidth(this->CoverLabel->height() / 9 * 16);
+	}
+
+	void ProjectInfoWidget::onThemeChanged() {
+		//vgDebugF << "ProjectInfo";
+		//this->applyVIStyleTemplate("YSS::ProjectInfo");
+	}
+}

@@ -1,0 +1,997 @@
+#include <QtCore/qfileinfo.h>
+#include <QtCore/qmimedata.h>
+#include <QtGui/qcursor.h>
+#include <QtGui/qevent.h>
+#include <QtGui/qdrag.h>
+#include <QtGui/qpainter.h>
+#include <QtWidgets/qapplication.h>
+#include <QtWidgets/qheaderview.h>
+#include <QtWidgets/qscrollbar.h>
+#include <QtWidgets/qstyle.h>
+#include <Editor/FileEditWidget.h>
+#include <Editor/FileServerManager.h>
+#include <Editor/SyntaxHighlighter.h>
+#include <Editor/VirtualFilePath.h>
+#include <General/Log.h>
+#include <General/TranslationHost.h>
+#include <General/VIApplication.h>
+#include <Utility/FileUtility.h>
+#include <Utility/JsonConfig.h>
+#include "Editor/MainEditor/FileEditWidgetArea.h"
+#include "Editor/MainEditor/MainWin.h"
+#include "Editor/MainEditor/private/StackComponents_p.h"
+#include "Editor/MainEditor/TreeLayoutWidget.h"
+namespace YSS::Editor {
+	const QString StackTag::stackTagDragMimeType = QString("application/x-yss-stacktag");
+
+	bool StackTag::canAcceptDrag(const QMimeData* mimeData) {
+		return mimeData && mimeData->hasFormat(stackTagDragMimeType);
+	}
+
+	static quint64 dragAddress(const QString& hexAddress) {
+		if (hexAddress.isEmpty()) {
+			return 0;
+		}
+		bool ok = false;
+		quint64 address = hexAddress.toULongLong(&ok, 16);
+		return ok ? address : 0;
+	}
+
+	StackTag* StackTag::draggedTag(const QMimeData* mimeData) {
+		if (not canAcceptDrag(mimeData)) {
+			return nullptr;
+		}
+		Visindigo::Utility::JsonConfig json(QString::fromUtf8(mimeData->data(stackTagDragMimeType)));
+		return reinterpret_cast<StackTag*>(dragAddress(json.getString("self")));
+	}
+
+	StackTagWidget* StackTag::draggedTagArea(const QMimeData* mimeData) {
+		if (not canAcceptDrag(mimeData)) {
+			return nullptr;
+		}
+		Visindigo::Utility::JsonConfig json(QString::fromUtf8(mimeData->data(stackTagDragMimeType)));
+		return reinterpret_cast<StackTagWidget*>(dragAddress(json.getString("area")));
+	}
+
+	StackTagDrag::StackTagDrag(StackTag* source, QWidget* dragSource) :QDrag(dragSource), Source(source) {
+	}
+
+	StackTagDrag::~StackTagDrag() {
+		if (not Source) {
+			return;
+		}
+		QPoint globalPos = QCursor::pos();
+		bool insideWindow = false;
+		for (QWidget* topLevel : QApplication::topLevelWidgets()) {
+			if (topLevel->isVisible() && topLevel->geometry().contains(globalPos)) {
+				insideWindow = true;
+				break;
+			}
+		}
+		if (insideWindow) {
+			return;
+		}
+		TreeLayoutWidget* newLayout = new TreeLayoutWidget();
+		newLayout->resize(800, 600);
+		newLayout->show();
+		newLayout->raise();
+		newLayout->activateWindow();
+		FileEditWidgetArea* targetArea = newLayout->getFileEditAreaAt(0);
+		StackTagWidget* sourceTagArea = Source->getStayInWidget();
+		FileEditWidgetArea* sourceArea = sourceTagArea ? sourceTagArea->getArea() : nullptr;
+		if (sourceArea && targetArea && sourceArea != targetArea) {
+			sourceArea->moveWidgetTo(Source->getUri(), targetArea);
+		}
+	}
+
+	StackTag::StackTag(QWidget* parent, Qt::Orientation orientation) :QFrame(parent) {
+		Orientation = orientation;
+		this->setFixedWidth(200);
+		TitleLabel = new QLabel(this);
+		TitleLabel->setContentsMargins(5, 0, 5, 0);
+		ModifiedLabel = new QLabel(this);
+		ModifiedLabel->setAlignment(Qt::AlignCenter);
+		ModifiedLabel->setFixedSize(0, 0);
+		ModifiedLabel->hide();
+		PinLabel = new QToolButton(this);
+		//PinLabel->setIcon(QIcon(":/resource/cn.yxgeneral.yayinstorystudio/icon/pin.png"));
+		CloseLabel = new QToolButton(this);
+		//CloseLabel->setIcon(QIcon(":/resource/cn.yxgeneral.yayinstorystudio/icon/close.png"));
+		this->setContentsMargins(0, 0, 0, 0);
+		Layout = new QHBoxLayout(this);
+		Layout->setContentsMargins(0, 0, 0, 0);
+		Layout->setSpacing(0);
+		Layout->addWidget(ModifiedLabel);
+		Layout->addWidget(TitleLabel);
+		Layout->addWidget(PinLabel);
+		Layout->addWidget(CloseLabel);
+		PinLabel->hide();
+		CloseLabel->hide();
+
+		connect(PinLabel, &QToolButton::clicked, this, [this]() {
+			setPinned(!isPinned());
+			emit pinClicked(Uri);
+			});
+
+		connect(CloseLabel, &QToolButton::clicked, this, [this]() {
+			emit closeClicked(Uri);
+			});
+
+		setContextMenuPolicy(Qt::ActionsContextMenu);
+		ActionClose = new QAction(VITRL("Visindigo::general.close"), this);
+		ActionPin = new QAction(VITRL("Visindigo::general.pin"), this);
+		ActionCloseAll = new QAction(VITRL("YSS::menu.file.closeAll"), this);
+
+		connect(ActionClose, &QAction::triggered, this, [this]() {
+			emit closeClicked(Uri);
+			});
+		connect(ActionPin, &QAction::triggered, this, [this]() {
+			setPinned(!isPinned());
+			emit pinClicked(Uri);
+			});
+		connect(ActionCloseAll, &QAction::triggered, this, [this]() {
+			emit closeAllRequested();
+			});
+
+		ActionReload = new QAction(VITRL("Visindigo::general.reload"), this);
+		ActionRename = new QAction(VITRL("Visindigo::general.rename"), this);
+		ActionSave = new QAction(VITRL("Visindigo::general.save"), this);
+		ActionSaveAs = new QAction(VITRL("Visindigo::general.saveAs"), this);
+		ActionShowInExplorer = new QAction(VITRL("YSS::menu.file.showInExplorer"), this);
+		ActionCloseSaved = new QAction(VITRL("YSS::menu.file.closeSaved"), this);
+		connect(ActionReload, &QAction::triggered, this, [this]() {
+			YSSCore::Editor::FileEditWidget* editor = YSSFSM->getFileEditWidget(Uri);
+			if (editor) {
+				editor->reloadFile();
+			}
+			});
+		connect(ActionRename, &QAction::triggered, this, [this]() {
+			emit renameRequested(Uri);
+			});
+		connect(ActionSave, &QAction::triggered, this, [this]() {
+			emit saveRequested(Uri);
+			});
+		connect(ActionSaveAs, &QAction::triggered, this, [this]() {
+			emit saveAsRequested(Uri);
+			});
+		connect(ActionShowInExplorer, &QAction::triggered, this, [this]() {
+			Visindigo::Utility::FileUtility::openExplorer(Uri.getLocalPath());
+			});
+		connect(ActionCloseSaved, &QAction::triggered, this, [this]() {
+			emit closeSavedRequested();
+			});
+
+		ActionCompareAsOld = new QAction(VITRL("YSS::menu.file.compareAsOld"), this);
+		ActionCompareAsNew = new QAction(VITRL("YSS::menu.file.compareAsNew"), this);
+		connect(ActionCompareAsOld, &QAction::triggered, this, [this]() {
+			MainWin::getInstance()->setCompareFileAsOld(Uri);
+			});
+		connect(ActionCompareAsNew, &QAction::triggered, this, [this]() {
+			MainWin::getInstance()->setCompareFileAsNew(Uri);
+			});
+
+		this->addActions({ ActionClose, ActionPin, ActionReload,
+			ActionRename, ActionSave, ActionSaveAs, ActionShowInExplorer,
+			ActionCloseAll, ActionCloseSaved, ActionCompareAsOld, ActionCompareAsNew });
+	}
+
+	void StackTag::setStayInWidget(StackTagWidget* widget) {
+		StayInWidget = widget; // not parent. StackTag`s parent should be a scrollArea in StackTagWidget, not StackTagWidget itself.
+	}
+
+	StackTagWidget* StackTag::getStayInWidget() const {
+		return StayInWidget;
+	}
+
+	void StackTag::setText(const QString& text) {
+		TitleLabel->setText(text);
+		updateFixedWidth();
+	}
+
+	void StackTag::setModified(bool modified) {
+		if (Modified == modified) {
+			return;
+		}
+		Modified = modified;
+		ModifiedLabel->setVisible(modified);
+		updateModifiedIndicator();
+		updateFixedWidth();
+	}
+
+	bool StackTag::isModified() const {
+		return Modified;
+	}
+
+	void StackTag::updateFixedWidth() {
+		if (Orientation != Qt::Horizontal) {
+			return;
+		}
+		// Mirror the fixed size the buttons receive in resizeEvent(); fall back
+		// to the default tag height before the first layout pass.
+		const qint32 buttonWidth = (this->height() > 2 ? this->height() : 32) - 2;
+		// A tag always keeps room for one trailing button next to the title.
+		// A pinned tag keeps its pin button visible permanently, and the close
+		// button stays visible too whenever the tag is current or hovered, so it
+		// has to reserve room for both or the text ends up covered.
+		qint32 buttonCount = 1;
+		if (Pinned) {
+			buttonCount = 2;
+		}
+		qint32 fixedWidth = TitleLabel->fontMetrics().horizontalAdvance(TitleLabel->text())
+			+ 10 /* TitleLabel left + right padding */
+			+ buttonCount * buttonWidth;
+		if (Modified) {
+			fixedWidth += ModifiedLabel->width();
+		}
+		if (fixedWidth < 100) {
+			fixedWidth = 100;
+		}
+		if (fixedWidth == AppliedFixedWidth) {
+			return;
+		}
+		AppliedFixedWidth = fixedWidth;
+		this->setFixedWidth(fixedWidth);
+		if (StayInWidget) {
+			StayInWidget->adjustScrollArea();
+		}
+	}
+
+	void StackTag::updateModifiedIndicator() {
+		if (ModifiedIcon.isNull()) {
+			return;
+		}
+		QSize iconSize = PinLabel->iconSize();
+		if (not iconSize.isValid()) {
+			const qint32 metric = PinLabel->style()->pixelMetric(QStyle::PM_ToolBarIconSize);
+			iconSize = QSize(metric, metric);
+		}
+		// The title label carries its own left padding, so the icon only needs
+		// padding on the top, bottom and left to match its vertical gaps.
+		const qint32 height = this->height();
+		qint32 margin = 0;
+		if (height > iconSize.height()) {
+			margin = (height - iconSize.height()) / 2;
+		}
+		ModifiedLabel->setContentsMargins(margin, margin, 0, margin);
+		ModifiedLabel->setFixedSize(iconSize.width() + margin, iconSize.height() + 2 * margin);
+		ModifiedLabel->setPixmap(ModifiedIcon.pixmap(iconSize));
+	}
+
+	void StackTag::setUri(const YSSCore::General::YSSURI& uri) {
+		Uri = uri;
+		// Virtual files have a virtual save but no virtual "save as", so disable
+		// the actions that don't apply to them.
+		const bool virtualFile = uri.isVirtual();
+		ActionRename->setEnabled(!virtualFile);
+		ActionSaveAs->setEnabled(!virtualFile);
+		ActionShowInExplorer->setEnabled(!virtualFile);
+	}
+
+	YSSCore::General::YSSURI StackTag::getUri() const {
+		return Uri;
+	}
+
+	QString StackTag::getText() const {
+		return TitleLabel->text();
+	}
+
+	void StackTag::setFileEditWidget(YSSCore::Editor::FileEditWidget* widget) {
+		FileEditWidget = widget;
+	}
+
+	YSSCore::Editor::FileEditWidget* StackTag::getFileEditWidget() const {
+		return FileEditWidget;
+	}
+
+	void StackTag::setFocusOn(bool focus) {
+		Focused = focus;
+		updateButtonVisibility();
+		repaint();
+	}
+
+	bool StackTag::isFocusOn() const {
+		return Focused;
+	}
+
+	void StackTag::setAreaCurrent(bool areaCurrent) {
+		if (AreaCurrent == areaCurrent) {
+			return;
+		}
+		AreaCurrent = areaCurrent;
+		repaint();
+	}
+
+	bool StackTag::isAreaCurrent() const {
+		return AreaCurrent;
+	}
+
+	void StackTag::updateToolTip() {
+		const int textWidth = QFontMetrics(TitleLabel->font()).horizontalAdvance(TitleLabel->text());
+		setToolTip(textWidth > TitleLabel->width() ? TitleLabel->text() : QString());
+	}
+
+	void StackTag::updateButtonVisibility() {
+		// The current tag always shows its close button; the pin button only
+		// appears while hovering, or stays visible while the tag is pinned.
+		CloseLabel->setVisible(Focused || Hovering);
+		PinLabel->setVisible(Hovering || Pinned);
+	}
+
+	void StackTag::setPinned(bool pinned) {
+		if (Pinned == pinned) {
+			return;
+		}
+		Pinned = pinned;
+		if (Pinned) {
+			PinLabel->setIcon(VIApp->getFontIcon("\uE841\uE840", 64, { VISTM->getPaletteAccentColor(), 
+				VISTM->getPaletteTextColor() }));
+		}
+		else {
+			PinLabel->setIcon(VIApp->getFontIcon("\uE840", 64, { VISTM->getPaletteTextColor() }));
+		}
+		updateButtonVisibility();
+		updateFixedWidth();
+	}
+
+	bool StackTag::isPinned() const {
+		return Pinned;
+	}
+
+	void StackTag::mousePressEvent(QMouseEvent* event) {
+		QFrame::mousePressEvent(event);
+		if (event->button() == Qt::LeftButton) {
+			Pressed = true;
+			PressedPos = event->pos();
+		}
+	}
+
+	void StackTag::mouseReleaseEvent(QMouseEvent* event) {
+		QFrame::mouseReleaseEvent(event);
+		if (Pressed && event->button() == Qt::LeftButton) {
+			Pressed = false;
+			emit clicked(Uri);
+		}
+	}
+	
+	void StackTag::mouseMoveEvent(QMouseEvent* event) {
+		QFrame::mouseMoveEvent(event);
+		if (Pressed) {
+			QPoint currentPos = event->pos();
+			if ((currentPos - PressedPos).manhattanLength() > QApplication::startDragDistance()) {
+				Pressed = false;
+				StackTagDrag* drag = new StackTagDrag(this, this);
+				QImage dragImage = this->grab().toImage();
+				drag->setPixmap(QPixmap::fromImage(dragImage));
+				QMimeData* mimeData = new QMimeData;
+				quint64 self = reinterpret_cast<quint64>(this);
+				QString selfPtr = QString::number(self, 16);
+				quint64 area = reinterpret_cast<quint64>(StayInWidget);
+				QString areaPtr = QString::number(area, 16);
+				Visindigo::Utility::JsonConfig json;
+				json.setString("self", selfPtr);
+				json.setString("area", areaPtr);
+				mimeData->setData(StackTag::stackTagDragMimeType, json.toString().toUtf8());
+				drag->setMimeData(mimeData);
+				drag->exec(Qt::MoveAction);
+				delete drag;
+			}
+		}
+	}
+
+	void StackTag::resizeEvent(QResizeEvent* event) {
+		QFrame::resizeEvent(event);
+		PinLabel->setFixedHeight(this->height() - 2);
+		CloseLabel->setFixedHeight(this->height() - 2);
+		PinLabel->setFixedWidth(PinLabel->height());
+		CloseLabel->setFixedWidth(CloseLabel->height());
+		updateModifiedIndicator();
+		updateFixedWidth();
+		updateToolTip();
+	}
+
+	void StackTag::enterEvent(QEnterEvent* event) {
+		QFrame::enterEvent(event);
+		Hovering = true;
+		updateButtonVisibility();
+		updateToolTip();
+	}
+
+	void StackTag::leaveEvent(QEvent* event) {
+		QFrame::leaveEvent(event);
+		Hovering = false;
+		updateButtonVisibility();
+		updateToolTip();
+	}
+
+	void StackTag::contextMenuEvent(QContextMenuEvent* event) {
+		// 虚拟文件（设置页等）不参与比较；目录不能作为比较对象。
+		const bool canCompare = Uri.isValid() && !Uri.isVirtual() && !Uri.isDir();
+		ActionCompareAsOld->setEnabled(canCompare);
+		ActionCompareAsNew->setEnabled(canCompare);
+		QFrame::contextMenuEvent(event);
+	}
+
+	void StackTag::paintEvent(QPaintEvent* event) {
+		QFrame::paintEvent(event);
+		QStyleOptionButton option;
+		option.initFrom(this);
+		if (Pressed || Focused) {
+			option.state |= QStyle::State_MouseOver;
+		}else if (Hovering) {
+			option.state |= QStyle::State_Raised;
+		}
+		else {
+			option.state |= QStyle::State_Sunken;
+		}
+		QPainter painter(this);
+		QStyle* style = this->style();
+		style->drawControl(QStyle::CE_PushButton, &option, &painter, this);
+		// The globally focused tag draws a full accent underline; the current tag
+		// of a non-focused area draws a much fainter one so each area can still
+		// advertise its own current widget.
+		bool drawUnderline = false;
+		QColor underlineColor = VISTM->getPaletteAccentColor();
+		if (Pressed || Focused) {
+			drawUnderline = true;
+		}
+		else if (AreaCurrent) {
+			drawUnderline = true;
+			underlineColor.setAlpha(80);
+		}
+		if (drawUnderline) {
+			QPen pen(underlineColor);
+			pen.setWidth(2);
+			pen.setCapStyle(Qt::RoundCap);
+			painter.setPen(pen);
+			if (Orientation == Qt::Horizontal) {
+				painter.drawLine(6, this->height() - 3, this->width() - 6, this->height() - 3); // bottom line
+			}
+			else {
+				painter.drawLine(3, 6, 3, this->height() - 6); // left line
+			}
+		}
+		TitleLabel->setPalette(qApp->palette());
+	}
+
+	StackTagWidget::StackTagWidget(QWidget* parent, Qt::Orientation orientation) :QFrame(parent) {
+		// NOTE: must use setAcceptDrops(true); acceptDrops() is only a getter
+		// (returns bool) and does NOT enable drop acceptance.
+		this->setAcceptDrops(true);
+		Orientation = orientation;
+		ScrollContent = new QWidget(this);
+		ScrollContent->setObjectName("StackTagScrollContent");
+		ScrollContent->setStyleSheet("QWidget#StackTagScrollContent { background: transparent; }");
+		if (orientation == Qt::Horizontal) {
+			ContentLayout = new QHBoxLayout(ScrollContent);
+		}
+		else {
+			ContentLayout = new QVBoxLayout(ScrollContent);
+		}
+		ContentLayout->setContentsMargins(0, 0, 0, 0);
+		ContentLayout->setSpacing(0);
+		ScrollContent->setLayout(ContentLayout);
+		ScrollArea = new QScrollArea(this);
+		ScrollArea->setStyleSheet("QScrollArea { background: transparent; border: none; }");
+		ScrollArea->setContentsMargins(0, 0, 0, 0);
+		ScrollArea->setWidget(ScrollContent);
+		ScrollArea->setWidgetResizable(true);
+		ScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+		ScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+		adjustScrollArea();
+		WidgetSelector = new QToolButton(this);
+		WidgetSelector->setAutoRaise(true);
+		WidgetSelector->setIcon(VIApp->getNamedFontIcon("More", 64, { VISTM->getPaletteTextColor() }));
+
+		WidgetSelectorPopup = new QFrame(nullptr, Qt::Popup | Qt::FramelessWindowHint);
+		WidgetSelectorPopup->setObjectName("StackTagSelectorPopup");
+		WidgetSelectorModel = new QStandardItemModel(this);
+		WidgetSelectorList = new QListView(WidgetSelectorPopup);
+		WidgetSelectorList->setModel(WidgetSelectorModel);
+		WidgetSelectorList->setFrameShape(QFrame::NoFrame);
+		WidgetSelectorList->setEditTriggers(QAbstractItemView::NoEditTriggers);
+		WidgetSelectorList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+		WidgetSelectorList->setSelectionMode(QAbstractItemView::SingleSelection);
+		QVBoxLayout* selectorPopupLayout = new QVBoxLayout(WidgetSelectorPopup);
+		selectorPopupLayout->setContentsMargins(1, 1, 1, 1);
+		selectorPopupLayout->setSpacing(0);
+		selectorPopupLayout->addWidget(WidgetSelectorList);
+
+		if (orientation == Qt::Horizontal) {
+			WidgetSelector->setFixedWidth(32);
+			Layout = new QHBoxLayout(this);
+			WidgetSelector->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+		}
+		else {
+			WidgetSelector->setFixedHeight(32);
+			Layout = new QVBoxLayout(this);
+			WidgetSelector->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+		}
+		Layout->setContentsMargins(0, 0, 0, 0);
+		Layout->addWidget(ScrollArea);
+		Layout->addWidget(WidgetSelector);
+		connect(WidgetSelector, &QToolButton::clicked, this, [this]() {
+			showWidgetSelectorPopup();
+			});
+		connect(WidgetSelectorList, &QListView::clicked, this, [this](const QModelIndex& index) {
+			WidgetSelectorPopup->hide();
+			const YSSCore::General::YSSURI uri = index.data(Qt::UserRole).value<YSSCore::General::YSSURI>();
+			setCurrentStackLabel(uri);
+			emit switchToFile(uri);
+			});
+		connect(VISTM, &Visindigo::Widgets::ThemeManager::programThemeChanged, this, [this](const QString& themeID) {
+			auto textColor = VISTM->getPaletteTextColor();
+			auto accentColor = VISTM->getPaletteAccentColor();
+			applyIcon(nullptr, textColor, accentColor);
+			WidgetSelector->setIcon(VIApp->getNamedFontIcon("More", 64, { textColor }));
+			});
+		setColorfulEnable(true);
+		onThemeChanged();
+	}
+
+	StackTagWidget::~StackTagWidget() {}
+
+	void StackTagWidget::setArea(FileEditWidgetArea* area) {
+		Area = area;
+	}
+
+	FileEditWidgetArea* StackTagWidget::getArea() const {
+		return Area;
+	}
+
+	QList<YSSCore::Editor::FileEditWidget*> StackTagWidget::getFileEditWidgets() const {
+		QList<YSSCore::Editor::FileEditWidget*> result;
+		for (StackTag* label : Labels) {
+			if (label->getFileEditWidget()) {
+				result.append(label->getFileEditWidget());
+			}
+		}
+		return result;
+	}
+
+	void StackTagWidget::applyIcon(StackTag* label, const QColor& textColor, const QColor& accentColor) {
+		QIcon pinIcon = VIApp->getFontIcon("\uE840", 64, { textColor });
+		QIcon pinnedIcon = VIApp->getFontIcon("\uE841\uE840", 64, { accentColor, textColor });
+		QIcon closeIcon = VIApp->getFontIcon("\uE711", 64, { textColor });
+		QIcon reloadIcon = VIApp->getFontIcon("\uE895", 64, { textColor });
+		QIcon renameIcon = VIApp->getFontIcon("\uE8AC", 64, { textColor });
+		QIcon saveIcon = VIApp->getNamedFontIcon("Save", 64, { textColor });
+		QIcon saveAsIcon = VIApp->getFontIcon("\uE792", 64, { textColor });
+		QIcon showInExplorerIcon = VIApp->getFontIcon("\uE8A7", 64, { textColor });
+		QIcon closeAllIcon = VIApp->getFontIcon("\uEA39", 64, { textColor});
+		QIcon closeSavedIcon = VIApp->getFontIcon("\uE711", 64, { textColor });
+		QIcon modifiedIcon = VIApp->getNamedFontIcon("Edit", 64, { accentColor });
+		QList<StackTag*> targets;
+		if (not label) {
+			targets = Labels;
+		}
+		else {
+			targets.append(label);
+		}
+		for (auto label : targets) {
+			label->CloseLabel->setIcon(closeIcon);
+			label->PinLabel->setIcon(label->isPinned() ? pinnedIcon : pinIcon);
+			label->ActionClose->setIcon(closeIcon);
+			label->ActionPin->setIcon(label->isPinned() ? pinnedIcon : pinIcon);
+			label->ActionReload->setIcon(reloadIcon);
+			label->ActionRename->setIcon(renameIcon);
+			label->ActionSave->setIcon(saveIcon);
+			label->ActionSaveAs->setIcon(saveAsIcon);
+			label->ActionShowInExplorer->setIcon(showInExplorerIcon);
+			label->ActionCloseAll->setIcon(closeAllIcon);
+			label->ActionCloseSaved->setIcon(closeSavedIcon); 
+			label->ModifiedIcon = modifiedIcon;
+			label->updateModifiedIndicator();
+		}
+	}
+
+	void StackTagWidget::addStackLabel(const YSSCore::General::YSSURI& uri, const QString& displayName, YSSCore::Editor::FileEditWidget* widget) {
+		StackTag* tagLabel = new StackTag(ScrollContent, Orientation);
+		tagLabel->setUri(uri);
+		tagLabel->setStayInWidget(this);
+		tagLabel->setFileEditWidget(widget);
+		const QString text = displayName.isEmpty() ? uri.getFileName() : displayName;
+		tagLabel->setText(text);
+		QStandardItem* selectorItem = new QStandardItem(text);
+		selectorItem->setData(QVariant::fromValue(uri), Qt::UserRole);
+		WidgetSelectorModel->appendRow(selectorItem);
+		ContentLayout->addWidget(tagLabel);
+		Labels.append(tagLabel);
+		if (UseGlobalFocus) {
+			tagLabel->setFocusOn(uri.toString() == GlobalCurrentUri.toString());
+		}
+
+		connect(tagLabel, &StackTag::pinClicked, this, [this](const YSSCore::General::YSSURI& uri) {
+			pinStackLabel(uri);
+			});
+		connect(tagLabel, &StackTag::closeClicked, this, [this](const YSSCore::General::YSSURI& uri) {
+			emit closeFile(uri); // NOTICE: close should be handled by some dialog, cannot directly do any other operation here.
+			});
+		connect(tagLabel, &StackTag::clicked, this, [this](const YSSCore::General::YSSURI& uri) {
+			emit switchToFile(uri);
+			});
+		connect(tagLabel, &StackTag::renameRequested, this, [this](const YSSCore::General::YSSURI& uri) {
+			emit renameRequested(uri);
+			});
+		connect(tagLabel, &StackTag::saveAsRequested, this, [this](const YSSCore::General::YSSURI& uri) {
+			emit saveAsRequested(uri);
+			});
+		connect(tagLabel, &StackTag::closeAllRequested, this, [this]() {
+			emit closeAllRequested();
+			});
+		connect(tagLabel, &StackTag::closeSavedRequested, this, [this]() {
+			emit closeSavedRequested();
+			});
+		connect(tagLabel, &StackTag::saveRequested, this, [this](const YSSCore::General::YSSURI& uri) {
+			emit saveRequested(uri);
+			});
+		/*tagLabel->setStyleSheet(VISTMGT("YSS::Editor.StackTag.Normal"),
+			VISTMGT("YSS::Editor.StackTag.Hover"),
+			VISTMGT("YSS::Editor.StackTag.Pressed"));*/
+		auto textColor = VISTM->getPaletteTextColor();
+		auto accentColor = VISTM->getPaletteAccentColor();
+		applyIcon(tagLabel, textColor, accentColor);
+		adjustScrollArea();
+		
+	}
+
+	void StackTagWidget::changeStackLabel(const YSSCore::General::YSSURI& oldUri, const YSSCore::General::YSSURI& newUri, const QString& newDisplayName) {
+		StackTag* label = findLabel(oldUri);
+		if (not label) {
+			return;
+		}
+		const QString text = newDisplayName.isEmpty() ? newUri.getFileName() : newDisplayName;
+		label->setText(text);
+		label->setUri(newUri);
+		if (GlobalCurrentUri.toString() == oldUri.toString()) {
+			GlobalCurrentUri = newUri;
+		}
+		const QString oldKey = oldUri.toString();
+		for (int i = 0; i < WidgetSelectorModel->rowCount(); ++i) {
+			QStandardItem* item = WidgetSelectorModel->item(i);
+			if (item->data(Qt::UserRole).value<YSSCore::General::YSSURI>().toString() == oldKey) {
+				item->setText(text);
+				item->setData(QVariant::fromValue(newUri), Qt::UserRole);
+				break;
+			}
+		}
+	}
+
+	void StackTagWidget::pinStackLabel(const YSSCore::General::YSSURI& uri) {
+		StackTag* targetLabel = findLabel(uri);
+		// NOTICE:
+		// This move-afterward operation working in two situations:
+		// 1. When pinning, it will move the label to the leftmost of all unpinned labels,
+		// which is the most intuitive way to do it.
+		// 2. When unpinning, it will move the label to the rightmost of all pinned labels,
+		// Fortunately, these two situations are actually the same operation,
+		// which is to move the label to the boundary of pinned and unpinned labels.
+		if (targetLabel) {
+			Labels.removeAll(targetLabel);
+			ContentLayout->removeWidget(targetLabel);
+			for (int i = 0; i < Labels.size(); ++i) {
+				if (not Labels[i]->isPinned()) {
+					Labels.insert(i, targetLabel);
+					ContentLayout->insertWidget(i, targetLabel);
+					return;
+				}
+			}
+			// All pinned.
+			Labels.append(targetLabel);
+			ContentLayout->addWidget(targetLabel);
+		}
+	}
+
+	void StackTagWidget::setStackLabelPinned(const YSSCore::General::YSSURI& uri, bool pinned) {
+		StackTag* targetLabel = findLabel(uri);
+		if (not targetLabel) {
+			return;
+		}
+		targetLabel->setPinned(pinned);
+		pinStackLabel(uri);
+	}
+
+	void StackTagWidget::removeStackLabel(const YSSCore::General::YSSURI& uri) {
+		StackTag* targetLabel = findLabel(uri);
+		int index = -1;
+		vgDebug << "Attempting to remove stack label with uri: " << uri.toString();
+		if (targetLabel) {
+			index = Labels.indexOf(targetLabel);
+			vgDebug << targetLabel;
+			Labels.removeAll(targetLabel);
+			ContentLayout->removeWidget(targetLabel);
+			targetLabel->deleteLater();
+			const QString key = uri.toString();
+			for (int i = 0; i < WidgetSelectorModel->rowCount(); ++i) {
+				if (WidgetSelectorModel->item(i)->data(Qt::UserRole).value<YSSCore::General::YSSURI>()
+					.toString() == key) {
+					WidgetSelectorModel->removeRow(i);
+					break;
+				}
+			}
+		}
+		if (CurrentSelected.toString() == uri.toString()) {
+			// Prefer the label that slid into the removed slot (its successor);
+			// if none exists, fall back to the first remaining label.
+			StackTag* next = nullptr;
+			if (index >= 1 && index < Labels.size()) {
+				next = Labels[index];
+			}
+			else if (not Labels.isEmpty()) {
+				next = Labels.first();
+			}
+			if (next) {
+				setCurrentStackLabel(next->getUri());
+				emit switchToFile(next->getUri());
+			}
+			else {
+				CurrentSelected = YSSCore::General::YSSURI();
+				emit switchToFile(YSSCore::General::YSSURI());
+			}
+		}
+		adjustScrollArea();
+	}
+
+	void StackTagWidget::setCurrentStackLabel(const YSSCore::General::YSSURI& uri) {
+		const QString key = uri.toString();
+		if (key == CurrentSelected.toString()) {
+			return;
+		}
+		bool finded = false;
+		int i = 0;
+		int cache = i;
+		for (StackTag* label : Labels) {
+			const bool isCurrent = (label->getUri().toString() == key);
+			// AreaCurrent marks this area's own current widget (faint underline),
+			// independent of which area holds the global focus.
+			label->setAreaCurrent(isCurrent);
+			if (not UseGlobalFocus) {
+				label->setFocusOn(isCurrent);
+			}
+			if (isCurrent) {
+				finded = true;
+				CurrentSelected = uri;
+				cache = i;
+			}
+			i++;
+		}
+		if (finded) {
+			for (int i = 0; i < WidgetSelectorModel->rowCount(); ++i) {
+				if (WidgetSelectorModel->item(i)->data(Qt::UserRole).value<YSSCore::General::YSSURI>()
+					.toString() == key) {
+					WidgetSelectorList->setCurrentIndex(WidgetSelectorModel->index(i, 0));
+					break;
+				}
+			}
+			if (StackTag* current = Labels.value(cache, nullptr)) {
+				ScrollArea->ensureWidgetVisible(current, 0, 0);
+			}
+		}
+	}
+
+	void StackTagWidget::setUseGlobalFocus(bool use) {
+		UseGlobalFocus = use;
+	}
+
+	void StackTagWidget::setGlobalCurrentUri(const YSSCore::General::YSSURI& uri) {
+		GlobalCurrentUri = uri;
+		const QString key = uri.toString();
+		for (StackTag* label : Labels) {
+			label->setFocusOn(label->getUri().toString() == key);
+		}
+	}
+
+	YSSCore::General::YSSURI StackTagWidget::getCurrentSelected() const {
+		return CurrentSelected;
+	}
+
+	void StackTagWidget::adjustScrollArea() {
+		if (Orientation == Qt::Horizontal) {
+			if (Labels.size() == 0) {
+				ScrollContent->setFixedWidth(0);
+				return;
+			}
+			int totalWidth = 0;
+			for (StackTag* label : Labels) {
+				label->setFixedHeight(this->height());
+				totalWidth += label->width() + ContentLayout->spacing();
+			}
+			totalWidth -= ContentLayout->spacing();
+			ScrollContent->setFixedWidth(totalWidth);
+		}
+		else {
+			if (Labels.size() == 0) {
+				ScrollContent->setFixedHeight(0);
+				return;
+			}
+			int totalHeight = 0;
+			for (StackTag* label : Labels) {
+				label->setFixedWidth(this->width());
+				totalHeight += label->height() + ContentLayout->spacing();
+			}
+			totalHeight -= ContentLayout->spacing();
+			ScrollContent->setFixedHeight(totalHeight);
+		}
+	}
+
+	void StackTagWidget::setFileChanged(const YSSCore::General::YSSURI& uri) {
+		StackTag* label = findLabel(uri);
+		if (not label) {
+			return;
+		}
+		label->setModified(true);
+	}
+
+	void StackTagWidget::cancelFileChanged(const YSSCore::General::YSSURI& uri) {
+		StackTag* label = findLabel(uri);
+		if (not label) {
+			return;
+		}
+		label->setModified(false);
+	}
+
+	bool StackTagWidget::containsStackLabel(const YSSCore::General::YSSURI& uri) const {
+		return findLabel(uri) != nullptr;
+	}
+
+	bool StackTagWidget::isStackLabelPinned(const YSSCore::General::YSSURI& uri) const {
+		StackTag* label = findLabel(uri);
+		return label ? label->isPinned() : false;
+	}
+
+	StackTag* StackTagWidget::findLabel(const YSSCore::General::YSSURI& uri) const {
+		const QString key = uri.toString();
+		if (key.isEmpty()) {
+			return nullptr;
+		}
+		for (StackTag* label : Labels) {
+			if (label->getUri().toString() == key) {
+				return label;
+			}
+		}
+		return nullptr;
+	}
+
+	void StackTagWidget::showWidgetSelectorPopup() {
+		if (WidgetSelectorModel->rowCount() <= 0) {
+			return;
+		}
+		int itemHeight = WidgetSelectorList->sizeHintForRow(0);
+		if (itemHeight < 20) {
+			itemHeight = 20;
+		}
+		int popupHeight = WidgetSelectorModel->rowCount() * itemHeight + 6;
+		if (popupHeight > 320) {
+			popupHeight = 320;
+		}
+		int popupWidth = 160;
+		WidgetSelectorPopup->setFixedSize(popupWidth, popupHeight);
+		QPoint buttonGlobalPos = WidgetSelector->mapToGlobal(QPoint(0, 0));
+		QPoint popupPos;
+		if (Orientation == Qt::Horizontal) {
+			popupPos = QPoint(buttonGlobalPos.x() + WidgetSelector->width() - popupWidth,
+				buttonGlobalPos.y() + WidgetSelector->height());
+		}
+		else {
+			popupPos = QPoint(buttonGlobalPos.x(), buttonGlobalPos.y() - popupHeight);
+		}
+		WidgetSelectorPopup->move(popupPos);
+		WidgetSelectorPopup->show();
+		WidgetSelectorPopup->raise();
+		WidgetSelectorPopup->setFocus();
+	}
+
+	void StackTagWidget::wheelEvent(QWheelEvent* event) {
+		QFrame::wheelEvent(event);
+		int numDegrees = event->angleDelta().y() / 8;
+		int numSteps = numDegrees / 15;
+		if (Orientation == Qt::Vertical) {
+			int stepSize = Labels.size() > 0 ? Labels[0]->height() + ContentLayout->spacing() : 32;
+			ScrollArea->verticalScrollBar()->setValue(ScrollArea->verticalScrollBar()->value() - numSteps * stepSize);
+		}
+		else {
+			int stepSize = Labels.size() > 0 ? Labels[0]->width() + ContentLayout->spacing() : 100;
+			ScrollArea->horizontalScrollBar()->setValue(ScrollArea->horizontalScrollBar()->value() - numSteps * stepSize);
+		}
+	}
+
+	void StackTagWidget::onThemeChanged() {
+
+	}
+
+	void StackTagWidget::resizeEvent(QResizeEvent* event) {
+		QFrame::resizeEvent(event);
+		if (Orientation == Qt::Horizontal) {
+			WidgetSelector->setFixedSize(this->height(), this->height());
+		}else{
+			WidgetSelector->setFixedSize(this->width(), this->width());
+		}
+		adjustScrollArea();
+	}
+
+	void StackTagWidget::dragEnterEvent(QDragEnterEvent* event) {
+		if (event->mimeData()->hasFormat(StackTag::stackTagDragMimeType)) {
+			event->acceptProposedAction();
+		}
+	}
+
+	void StackTagWidget::dragMoveEvent(QDragMoveEvent* event) {
+		if (event->mimeData()->hasFormat(StackTag::stackTagDragMimeType)) {
+			event->acceptProposedAction();
+		}
+	}
+
+	void StackTagWidget::dropEvent(QDropEvent* event) {
+		if (StackTag::canAcceptDrag(event->mimeData())) {
+			event->acceptProposedAction();
+			StackTag* selfLabel = StackTag::draggedTag(event->mimeData());
+			if (selfLabel and Labels.contains(selfLabel)) {
+				int index = ContentLayout->indexOf(selfLabel);
+				if (index != -1) {
+					// event->position() is relative to this widget; map it into
+					// ScrollContent's coordinate space, where every label's geometry()
+					// lives, so all comparisons below share one consistent system.
+					QPoint dropPos = ScrollContent->mapFrom(this, event->position().toPoint());
+					// Dropped inside the dragged label's own area -> no reorder.
+					if (selfLabel->geometry().contains(dropPos)) {
+						event->accept();
+						return;
+					}
+					
+					int newIndex = Labels.size();
+					for (int i = 0; i < Labels.size(); ++i) {
+						const QPoint center = Labels[i]->geometry().center();
+						const int dropCoord = Orientation == Qt::Horizontal ? dropPos.x() : dropPos.y();
+						const int centerCoord = Orientation == Qt::Horizontal ? center.x() : center.y();
+						if (dropCoord < centerCoord) {
+							newIndex = i;
+							break;
+						}
+					}
+					StackTag* labelAtNewIndex = Labels.value(newIndex, nullptr);
+					if (labelAtNewIndex) {
+						if (labelAtNewIndex->isPinned() != selfLabel->isPinned()) {
+							event->accept();
+							return; // Don't allow moving a pinned label to an unpinned position or vice versa.
+						}
+						ContentLayout->removeWidget(selfLabel);
+						Labels.removeAll(selfLabel);
+						ContentLayout->insertWidget(newIndex, selfLabel);
+						Labels.insert(newIndex, selfLabel);
+					}
+					else {
+						if (Labels.last()->isPinned() != selfLabel->isPinned()) {
+							event->accept();
+							return; // Don't allow moving a pinned label to an unpinned position or vice versa.
+						}
+						ContentLayout->removeWidget(selfLabel);
+						Labels.removeAll(selfLabel);
+						ContentLayout->addWidget(selfLabel);
+						Labels.append(selfLabel);
+					}
+				}
+			}
+			else if (selfLabel) {
+				// Cross-area: a tag dragged from another StackTagWidget is dropped
+				// on this tag bar -> move it from its source area into this area.
+				StackTagWidget* sourceTagArea = StackTag::draggedTagArea(event->mimeData());
+				FileEditWidgetArea* sourceArea = sourceTagArea ? sourceTagArea->getArea() : nullptr;
+				if (sourceArea && Area && sourceArea != Area) {
+					sourceArea->moveWidgetTo(selfLabel->getUri(), Area);
+				}
+			}
+			event->accept();
+		}
+	}
+
+	DefaultStackWidgetCentralArea::DefaultStackWidgetCentralArea(QWidget* parent) :QFrame(parent) {
+		ContentLabel = new QLabel(this);
+		Layout = new QGridLayout(this);
+		this->setLayout(Layout);
+		Layout->addWidget(ContentLabel, 0, 0, Qt::AlignCenter);
+		ContentLabel->setAlignment(Qt::AlignCenter);
+	}
+
+	void DefaultStackWidgetCentralArea::setText(const QString& text) {
+		ContentLabel->setText(text);
+	}
+}

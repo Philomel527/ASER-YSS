@@ -1,0 +1,135 @@
+#include <QtCore/qlist.h>
+#include <QtGui/qicon.h>
+#include <QtWidgets/qboxlayout.h>
+#include <QtWidgets/qlabel.h>
+#include <QtWidgets/qlineedit.h>
+#include <QtWidgets/qscrollarea.h>
+#include <QtWidgets/qscrollbar.h>
+#include <Editor/ProjectTemplateManager.h>
+#include <Editor/ProjectTemplateProvider.h>
+#include <General/Log.h>
+#include <General/TranslationHost.h>
+#include <General/YSSLogger.h>
+#include <Widgets/BorderLabel.h>
+#include <Widgets/MultiButton.h>
+#include <Widgets/ThemeManager.h>
+#include "Editor/NewProjectPage/NewProjectWin.h"
+
+namespace YSS::NewProjectPage {
+	NewProjectWin::NewProjectWin() :QWidget() {
+		this->setMinimumSize(900, 600);
+		this->setWindowIcon(QIcon(":/resource/cn.yxgeneral.yayinstorystudio/icon.png"));
+		this->setWindowTitle(VITRL("YSS::project.createNewProject"));
+		TitleLabel = new Visindigo::Widgets::BorderLabel(this);
+		TitleLabel->setObjectName("ProgramTitleLabel");
+		TitleLabel->setFixedHeight(80);
+		auto font = TitleLabel->font();
+		font.setPointSizeF(font.pointSizeF() * 2);
+		TitleLabel->setFont(font);
+		RecentTemplateTitle = new Visindigo::Widgets::BorderLabel(this);
+		SearchLineEdit = new QLineEdit(this);
+
+		ProjectTemplateArea = new QScrollArea(this);
+		ProjectTemplateArea->setStyleSheet("QScrollArea { background: transparent; border: none; }");
+		ProjectTemplateWidget = new QWidget(ProjectTemplateArea);
+		ProjectTemplateWidget->setObjectName("ProjectTemplateWidget");
+		ProjectTemplateWidget->setStyleSheet("QWidget#ProjectTemplateWidget { background: transparent; }");
+		ProjectTemplateArea->setWidget(ProjectTemplateWidget);
+		ProjectTemplateArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+		ProjectTemplateArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+		ProjectTemplateLayout = new QVBoxLayout(ProjectTemplateWidget);
+		ProjectTemplateWidget->setLayout(ProjectTemplateLayout);
+		ProjectTemplateLayout->setContentsMargins(0, 0, 0, 0);
+		ProjectTemplateLayout->setSpacing(0);
+
+		RecentTemplateArea = new QScrollArea(this);
+		RecentTemplateWidget = new QWidget(RecentTemplateArea);
+		RecentTemplateArea->setWidget(RecentTemplateWidget);
+		RecentTemplateLayout = new QVBoxLayout(RecentTemplateWidget);
+		RecentTemplateWidget->setLayout(RecentTemplateLayout);
+
+		Layout = new QGridLayout(this);
+		Layout->addWidget(TitleLabel, 0, 0, 1, 2);
+		Layout->addWidget(SearchLineEdit, 1, 0, 1, 1);
+		Layout->addWidget(ProjectTemplateArea, 2, 0, 1, 1);
+		Layout->addWidget(RecentTemplateTitle, 1, 1, 1, 1);
+		Layout->addWidget(RecentTemplateArea, 2, 1, 1, 1);
+
+		Layout->setSpacing(0);
+		Layout->setContentsMargins(0, 0, 0, 0);
+		Layout->setColumnStretch(0, 3);
+		Layout->setColumnStretch(1, 2);
+
+		TitleLabel->setText(" " + VITRL("YSS::project.createFromTemplate"));
+		SearchLineEdit->setPlaceholderText(VITRL("YSS::project.searchWithTags"));
+		SearchLineEdit->setFixedHeight(30);
+		RecentTemplateTitle->setText(VITRL("YSS::project.recentUsed"));
+
+		setColorfulEnable(true);
+		onThemeChanged();
+		this->loadProjectTemplate();
+	}
+
+	void NewProjectWin::loadProjectTemplate() {
+		for (Visindigo::Widgets::MultiButton* button : ProjectList) {
+			ProjectTemplateLayout->removeWidget(button);
+			ProviderMap.remove(button);
+			button->deleteLater();
+		}
+		ProjectList.clear();
+		QList<YSSCore::Editor::ProjectTemplateProvider*> providers = YSSPTM->getProviders();
+		for (YSSCore::Editor::ProjectTemplateProvider* provider : providers) {
+			yDebugF << provider->getTemplateID();
+			yDebugF << provider->getTemplateName();
+			yDebugF << provider->getTemplateDescription();
+			Visindigo::Widgets::MultiButton* ProviderButton = new Visindigo::Widgets::MultiButton(ProjectTemplateWidget);
+			ProviderButton->setTitle(provider->getTemplateName());
+			ProviderButton->setDescription(provider->getTemplateDescription());
+			ProviderButton->setPixmapPath(provider->getTemplateIconPath());
+			QLabel* tags = new QLabel(ProviderButton);
+			tags->setText(provider->getTemplateTags().join("; "));
+			ProviderButton->setCustomWidgetOrientation(Qt::Vertical);
+			ProviderButton->addCustomWidget(tags);
+			ProjectList.append(ProviderButton);
+			ProjectTemplateLayout->addWidget(ProviderButton);
+			ProviderMap.insert(ProviderButton, provider);
+			ProviderButton->setSpacing(5);
+			ProviderButton->setContentsMargins(10, 10, 10, 10);
+			ProviderButton->show();
+			yDebugF << ProviderButton->isHidden();
+			connect(ProviderButton, &Visindigo::Widgets::MultiButton::clicked, this,
+				&NewProjectWin::onTemplateButtonClicked);
+		}
+		ProjectTemplateWidget->setFixedHeight(providers.size() * 100);
+	}
+	void NewProjectWin::onTemplateButtonClicked() {
+		Visindigo::Widgets::MultiButton* Button = static_cast<Visindigo::Widgets::MultiButton*>(sender());
+		if (Button == nullptr) {
+			return;
+		}
+		YSSCore::Editor::ProjectTemplateProvider* provider = ProviderMap[Button];
+		YSSCore::Editor::ProjectTemplateInitWidget* initWidget = provider->projectInitWidget();
+		if (initWidget != nullptr) {
+			initWidget->setAttribute(Qt::WA_DeleteOnClose);
+			connect(initWidget, &YSSCore::Editor::ProjectTemplateInitWidget::projectPrepared,
+				this, &NewProjectWin::onProjectPrepared);
+			initWidget->setWindowModality(Qt::ApplicationModal);
+			initWidget->show();
+		}
+	}
+	void NewProjectWin::onThemeChanged() {
+		for (Visindigo::Widgets::MultiButton* button : ProjectList) {
+
+		}
+	}
+	void NewProjectWin::closeEvent(QCloseEvent* event) {
+		this->deleteLater();
+	}
+	void NewProjectWin::resizeEvent(QResizeEvent* event) {
+		ProjectTemplateWidget->setFixedWidth(ProjectTemplateArea->width() - 12);
+	}
+	void NewProjectWin::onProjectPrepared(QString projectPath) {
+		emit projectPrepared(projectPath);
+		this->close();
+	}
+}

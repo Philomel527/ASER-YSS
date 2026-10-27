@@ -1,0 +1,495 @@
+﻿{
+	"config":{
+		"title": "Yayin Story Studio 程序设置",
+		"general":{
+			"title":"常规",
+			"text":"一些常规的程序设置",
+			"language":{
+				"title":"语言",
+				"text":"选择应用程序语言",
+				"zh_CN":"简体中文",
+				"zh_TW":"繁體中文",
+				"en":"English",
+				"ja":"日本語",
+				"jp_less_loanword":"日本語（外来語控えめ）",
+				"ko":"한국어",
+				"ru":"Русский",
+				"de":"Deutsch",
+				"fr":"Français"
+			},
+			"theme":{
+				"title": "颜色主题",
+				"text":"选择应用程序颜色主题",
+				"dark":"深色",
+				"light":"浅色",
+				"auto": "自动（跟随系统）"
+			},
+			"updateChannel":{
+				"title": "更新通道",
+				"text":"选择应用程序使用的更新通道，正式版只接受正式版的更新消息，Beta版会同时接受正式版和Beta版的更新消息，技术预览版会接受三种版本的全部更新消息。",
+				"release": "正式版",
+				"beta": "测试版",
+				"tp": "技术预览版"
+			}
+		 },
+		 "editor":{
+			"title":"编辑器",
+			"text":"编辑器相关设置",
+			"reloadtab":{
+				"title":"重载TAB行为",
+				"text":"控制编辑器是否应该在行首出现TAB时将其替换为空格（这个选项暂时无效）"
+			}
+		}
+	},
+	"update": {
+		"newVersionAvailable": "有新版本可用！",
+		"newVersionAvailableDesc": "版本%1现已发布，您当前使用的版本是%2。\n请参阅发布日志了解新版本的更新内容，并访问官方网站下载最新版本。",
+		"newsLoadFailed": "未能从服务器同步到新闻，请检查您的网络连接并稍后再试。",
+		"installerUpdating": "正在更新 YSS 安装程序",
+		"installerUpdatingDesc": "检测到新版本的 YSS 安装程序，正在更新并重新连接，请稍候..."
+	},
+	"tooltips": {
+		"projectWin":{
+			"project": "单击查看详情，双击打开该项目",
+			"showInBrowser": "从系统资源管理器中打开项目所在文件夹",
+			"delete": "从列表中移除项目",
+			"createNewProject": "从项目模板创建一个新项目",
+			"openFolder": "打开一个Yayin Story Studio 项目",
+			"cloneFromGit": "从给定的Git仓库地址克隆一个项目"
+		}
+	},
+	"project":{
+		"author":"作者",
+		"description":"描述",
+		"debugServer":"调试服务器",
+		"projectManager":"项目管理器",
+		"selectToShow": "选择项目以查看详情...",
+		"noCover":"无封面",
+		"lastModifiedTime":"上次修改时间",
+		"createTime":"创建时间",
+		"size":"大小",
+		"calculating":"计算中...",
+		"showInBrowser":"在资源管理器中显示",
+		"delete":"删除项目",
+		"deleteConfirm": "Yayin Story Studio 当前不支持安全删除项目到回收站。\n因此安全起见，按下确定后，只会将项目从列表中移除。\n您稍后可以在资源浏览器中自行删除项目。\n\n是否继续？",
+		"removeFromList":"从列表中移除",
+		"createNewProject":"创建新项目",
+		"createNewFile":"创建新文件",
+		"openFolder":"打开项目",
+		"openYSSProject": "打开YSS项目",
+		"cloneFromGit":"从Git克隆",
+		"createFromTemplate":"从模板新建",
+		"searchWithTags": "按标签搜索模板",
+		"recentUsed":"最近使用",
+		"openProjectFailed":{
+			"message":"打开项目失败",
+			"NotFound":"找不到项目配置文件，它可能已被移动或删除。",
+			"ReadFailed":"无法读取项目配置文件，请检查访问权限或远端连接状态。",
+			"ParseError":"项目文件解析失败，可能是因为项目文件存在语法错误或已经损坏。",
+			"InvalidConfig":"项目配置无效，缺少必要的字段或字段类型不正确。",
+			"InvaildConfig":"项目配置无效，缺少必要的字段或字段类型不正确。",
+			"UnknownError":"发生未知错误，无法打开项目。"
+		},
+		"requiredPluginsNotAvailable":{
+			"title":"缺少必要的插件",
+			"message":"项目\"%1\"需要具有以下ID的各插件才能正常运行。推荐补齐这些插件后再尝试打开项目。您仍然可以继续强制打开项目，但可能造成数据丢失。\n\n您确定要继续强制打开项目吗？"
+		},
+		"projectVersionTooOld": {
+			"title": "项目需要升级",
+			"message": "项目\"%1\"是来自旧的兼容版本的项目（项目版本 %2，兼容 %3 至 %4），如果在新版本中打开，则将永久向新版本升级，并且无法再在旧版本中打开。请确认您已经备份了项目数据。\n\n您确定要继续打开项目吗？"
+		},
+		"projectVersionTooNew": {
+			"title": "项目太新",
+			"message": "项目\"%1\"是来自未知的新版本的项目，如果在当前版本中打开，可能导致数据丢失或无法正常使用。请确认您已经备份了项目数据。\n\n您确定要继续打开项目吗？"
+		},
+		"saveQuestion": {
+			"title": "要关闭程序吗？",
+			"text": "您的项目\"%1\"已经发生修改，且还未保存。是否要保存项目？"
+		}
+	},
+	"menu": {
+		"file": {
+			"title": "文件",
+			"new": "新建文件",
+			"newFile": "新建文件",
+      		"newFolder": "新建文件夹",
+			"open": "打开",
+			"save": "保存",
+			"saveAll": "全部保存",
+			"saveAs": "另存为",
+			"backToHome": "返回首页",
+			"terminal": "终端",
+			"pluginAndPreferences": "插件和首选项",
+			"colorThemeSettings": "代码语法着色设置",
+			"exit": "退出",
+			"documentation": "文档",
+			"about": "关于 Yayin Story Studio",
+			"projectConfig": "项目设置",
+			"showInExplorer": "在资源管理器中显示",
+			"closeAll": "关闭所有",
+			"closeSaved": "关闭已保存",
+			"compareAsOld": "将其列为旧文件进行比较",
+			"compareAsNew": "将其列为新文件进行比较"
+		},
+		"edit": {
+			"title": "编辑",
+			"undo": "撤销",
+			"redo": "重做",
+			"cut": "剪切",
+			"copy": "复制",
+			"copyPath": "复制文件路径",
+			"copyName": "复制文件名",
+			"paste": "粘贴",
+			"selectAll": "全选",
+			"findAndReplace": "查找和替换"
+		},
+		"run": {
+			"title": "运行",
+			"run": "开始执行（不调试）",
+			"debug": "开始执行（调试）",
+			"stop": "停止",
+			"restart": "重启",
+			"build": "构建项目",
+			"rebuild": "强制重新构建",
+			"clean": "清理构建",
+			"stepInto": "逐步",
+			"stepOver": "逐过程",
+			"suspend": "暂停",
+			"resume": "恢复"
+		},
+		"view": {
+			"title": "视图",
+			"resourceBrowser": "资源浏览器",
+			"messageViewer": "消息查看器",
+			"pluginTools": "插件工具",
+			"fullScreenToggle": "切换全屏",
+			"noTools": "没有工具可显示"
+		}
+	},
+	"editor":{
+		"messageViewer": {
+			"title": "消息查看器",
+			"error": "错误",
+			"warning": "警告",
+			"info": "信息",
+			"code": "代码",
+			"message": "说明",
+			"file": "文件",
+			"line": "行",
+			"column": "列"
+		},
+		"multiTerminal": {
+			"title": "终端",
+			"newTerminal": "新建终端",
+			"closeTerminal": "关闭终端",
+			"closeOtherTerminals": "关闭其他终端",
+			"closeAllTerminals": "关闭所有终端",
+			"terminalName": "终端 %1"
+		},
+		"codeDiff": {
+			"takeOld": "取左侧",
+			"takeNew": "取右侧",
+			"progress": "第 %1/%2 处差异（已处理 %3 处）",
+			"progressSimple": "已处理 %1/%2 处差异",
+			"allResolved": "已处理完全部 %1 处差异",
+			"noDifference": "两侧内容相同",
+			"loading": "正在读取文件…",
+			"readFailed": "无法读取文件：%1"
+		},
+		"far":{
+			"title": "查找和替换",
+			"find": "查找",
+			"findNext": "查找下个",
+			"replace": "替换",
+			"replaceNext": "替换下个",
+			"replaceAll": "全部替换",
+			"matchCase": "区分大小写",
+			"wholeWord": "全字匹配",
+			"useRegExp": "正则模式",
+			"notFound": "没有找到下一项",
+			"notFoundDesc": "目标文本“%1”没有找到",
+			"replaced": "替换完成",
+			"replacedDesc": "已替换 %1 项",
+			"matchCount": "共 %1"
+		},
+		"stackWidgetArea": {
+			"noFileOpened": "没有打开的文件",
+			"dragInFile": "释放标签以转移到此区域"
+		},
+		"toolWidgetArea": {
+			"noToolWidget": "没有工具可显示"
+		},
+		"bottomInfoWidget":{
+			"debugMessage": {
+				"prepared": "就绪"
+			},
+			"transfer": {
+				"title": "总计",
+				"tooltip": "统一文件系统读写统计（↑ 写出 / ↓ 读入）",
+				"local": "本地",
+				"current": "正在对 %1 进行 %2",
+				"idle": "没有进行中的操作",
+				"queued": "还有 %1 个任务在排队",
+				"queuedNone": "没有排队的任务"
+			},
+			"cursorInfo_s": "行 %1，列 %2（已选中 %3）",
+			"cursorInfo": "行 %1，列 %2",
+			"totalLines": "总行数 %1",
+			"statistic": {
+				"tooltip": "单击查看详细统计数据",
+				"title": "文档统计",
+				"titleWithName": "文档统计 - %1",
+				"wordCount": "字数：%1",
+				"charCountIncludeWhitespace": "字符数（含空白）：%1",
+				"charCountExcludeWhitespace": "字符数（不含空白）：%1",
+				"cjkvCharCount": "CJKV 字符数：%1",
+				"nonCJKVCharCount": "非 CJKV 字符数：%1",
+				"paragraphCount": "段落数：%1",
+				"noEditor": "当前没有打开的编辑器"
+			}
+		},
+		"textEdit":{
+			"readOnly": {
+				"title": "这个文件是只读的",
+				"message": "您希望保存的文件 %1 是只读的，你不能在这个文件上进行保存操作。请检查文件权限，或者选择另存为来保存到其他位置。"
+			},
+			"unsupportedEncoding": {
+				"title": "无法按原编码保存",
+				"message": "文件 %1 不是 UTF-8 或 UTF-16 编码。YSS 只能把它读出来显示，按当前编码写回会破坏文件里原有的内容，因此已阻止保存到原文件。如果你想留下这次的修改，请使用“另存为”另存一份。"
+			},
+			"notSuitable": {
+				"title": "没有找到支持此文件的服务",
+				"message": "没有为文件扩展名%1找到适合它的打开服务。YSS仍然可以尝试使用默认的内置文本编辑器打开文件，但这会损坏一些二进制数据，你确定要使用内置文本编辑器继续尝试打开吗？（强烈不建议）"
+			},
+			"ready": "就绪",
+			"tabCompleter":{
+				"top": "%1 插件根据上下文推荐的置顶选项",
+				"viewDescription": "(单击或悬浮在补全项上查看描述)",
+				"value": "值 类型",
+				"const": "常量 类型",
+				"enum": "枚举 类型",
+				"function": "函数 类型",
+				"object": "对象 类型",
+				"operator": "运算符 类型"
+			},
+			"tabCompleterLevel":{
+				"none": "无提示",
+				"few": "少量提示",
+				"some": "适量提示",
+				"many": "大量提示",
+				"all": "全部提示"
+			},
+			"suggestion":{
+				"inlineEdit": "替换整行建议",
+				"pureAdd": "追加内容建议",
+				"multiLineEdit": "多行插入建议",
+				"blockRemove": "行删除建议",
+				"scrollUp": "向上滚动到行 %1",
+				"scrollDown": "向下滚动到行 %1",
+				"accept": "接受",
+				"reject": "拒绝"
+			},
+			"inlayHintVisible": "内联提示",
+			"hintSettings": "提示设置",
+			"completerLevel": "补全级别"
+		},
+		"debug": {
+			"notFound": {
+				"title": "哎呀！没有找到调试器",
+				"message": "这个项目指定的调试器%1没有找到。您是否禁用或删除了提供该调试器的插件？请重新启用或添加它们，然后重启程序再试。"
+			},
+			"notSelect": {
+				"title": "调试器未配置！",
+				"message": "这个项目没有配置调试器选项，请打开项目设置，在调试器选项中选择一个调试器，然后重试。"
+			}
+		},
+		"saveWarning": {
+			"title": "文件已修改",
+			"message": "文件 %1 已经被修改了，是否要保存更改？"
+		},
+		"saveAsConflict": {
+			"title": "即将被覆盖的文件已打开，且存在未保存的修改",
+			"message": "请先保存或关闭文件 %1，然后再尝试另存为覆盖操作。"
+		},
+		"reloadWarning": {
+			"title": "现在重新加载吗？",
+			"message": "文件 %1 已经被修改过了，如果直接重新加载，你对这个文件的修改将会丢失。是否要重新加载？"
+		},
+		"renameDialog": {
+			"title": "重命名",
+			"rename": "正在重命名文件 %1",
+			"request": "请输入新名称",
+			"warning": {
+				"empty": "名称不能为空，请输入一个名称",
+				"same": "新名称与旧名称相同，请输入一个不同的名称",
+				"exists": "同级目录下已经存在拥有这个名称的文件了，请换一个名称",
+				"invalid": "文件名无效，不能包含以下字符：\\ / : * ? \" < > |",
+				"extNotSame": {
+					"normal": "新名称的扩展名和原有的不同，这可能会导致问题",
+					"title": "你确定要变更扩展名吗？",
+					"message": "新名称中给定的扩展名 %1 和原有的扩展名 %2 不同，这可能会导致一些问题，比如无法被正确识别和打开。你确定要继续重命名吗？"
+				}
+			}
+		},
+		"newFolderDialog": {
+			"title": "新建文件夹",
+			"desc": "正在文件夹 %1 中创建新文件夹。请输入新文件夹的名称：",
+			"warning": {
+				"empty": "名称不能为空，请输入一个名称",
+				"exists": "同级目录下已经存在同名文件夹，请换一个名称",
+				"invalid": "文件夹名称无效，不能包含以下字符：\\ / : * ? \" < > |"
+			}
+		},
+		"about": {
+			"title": "关于 Yayin Story Studio",
+			"message": "版本%1，Tsing Yayin作品。Yayin Story Studio是Project Visindigo（流清计划）的一部分，是从Yayin Story Player发展而来的一个全新的项目，旨在为ASE用户提供一个易用的开发环境。"
+		},
+		"deleteProjectFile": {
+			"title": "项目元文件不可删除",
+			"message": "不能删除正在打开项目的元信息文件。如果你要删除项目，请回到项目选择页面，选择删除项目。"
+		},
+		"fileOperation": {
+			"failed": {
+				"title": "操作失败",
+				"message": "对 %1 的这项操作未能完成。请确认该文件没有被其他程序占用、权限足够，并且磁盘还有剩余空间。"
+			}
+		},
+		"deleteFile": {
+			"title": "删除确认",
+			"message": "你确定要删除文件或文件夹 %1 吗？它们会被移动到系统回收站中，你可以从回收站中恢复它们。"
+		}
+	},
+	"colorThemeSettings": {
+		"langServer": "语言服务器",
+		"theme": "主题",
+		"duplicate": "复制",
+		"delete": "删除",
+		"duplicateDialog": {
+			"title": "复制主题",
+			"desc": "正在复制主题“%1”。请输入新主题的名称：",
+			"warning": {
+				"empty": "名称不能为空，请输入一个名称",
+				"same": "新名称与源主题相同，请输入一个不同的名称",
+				"exists": "已经存在同名主题，请换一个名称"
+			}
+		},
+		"deleteConfirm": {
+			"title": "删除主题",
+			"message": "你确定要删除主题“%1”吗？此操作无法撤销。"
+		},
+		"font": "字体",
+		"preview": "预览",
+		"textColor": "文本颜色",
+		"bgColor": "背景颜色",
+		"bgColorEnabled": "使用背景颜色",
+		"lineColor": "线条颜色",
+		"lineType": "线条类型",
+		"bold": "粗体",
+		"italic": "斜体",
+		"save": "保存",
+		"reset": "重置",
+		"underlineType": {
+			"NoUnderline": "无",
+			"SingleUnderline": "单实线",
+			"DashUnderline": "虚线",
+			"DotLine": "点线",
+			"DashDotLine": "点划线",
+			"DashDotDotLine": "双点划线",
+			"WaveUnderline": "波浪线",
+			"SpellCheckUnderline": "拼写检查线"
+		},
+		"unsavedChanges": {
+			"title": "有未保存的更改",
+			"message": "您有未保存的更改，是否要保存？如果不保存，所有更改将会丢失。"
+		},
+		"staticThemeWarning": "！注意：这是个固有主题，对其的更改永远不会生效。请复制后再修改。"
+	},
+	"agent": {
+		"title": "Visindigo Agent 对话",
+		"placeholder": "输入消息，Enter 发送，Shift+Enter 换行",
+		"send": "发送",
+		"ready": "已就绪，当前模型：%1",
+		"generating": "正在生成…",
+		"reasoning": "思考过程",
+		"runError": "执行失败：%1",
+		"configError": "无法加载桌面上的模型配置：%1"
+	},
+	"pluginLoadFaultDialog": {
+		"title": "有插件加载失败",
+		"message": "以下插件未能正确加载，其ID和错误原因已罗列如下。您要继续使用程序吗？",
+		"pluginID": "插件ID",
+		"reason": "失败原因",
+		"continue": "继续使用",
+		"quit": "退出程序"
+	},
+	"pluginLoadResult": {
+		"Unknown": {
+			"title": "未知错误",
+			"message": "插件加载时发生了未预期的错误。请尝试重新启动程序，如果问题持续存在，请联系插件作者。"
+		},
+		"Success": {
+			"title": "加载成功",
+			"message": "插件已正确加载。"
+		},
+		"Deactivated": {
+			"title": "已被禁用",
+			"message": "该插件已被您在插件设置中禁用，因此不会加载。如需使用，请在插件设置中重新启用它。"
+		},
+		"PlatformNotSupported": {
+			"title": "平台不受支持",
+			"message": "该插件不支持当前的操作系统或处理器架构。请联系插件作者获取适用于当前平台的版本。"
+		},
+		"InvalidPluginBinary": {
+			"title": "插件二进制无效",
+			"message": "插件文件无法正确识别为 Visindigo 插件，可能是太旧导致完全无法加载，或因其他原因损坏。请重新安装此插件。"
+		},
+		"InvalidDependLib": {
+			"title": "依赖库无效",
+			"message": "该插件所需的依赖库缺失或已损坏。请重新安装该插件及其依赖。"
+		},
+		"DependLibConflict": {
+			"title": "依赖库冲突",
+			"message": "该插件所需的依赖库与已加载的其他版本冲突。请移除或更新引发冲突的插件。"
+		},
+		"EntryPointNotFound": {
+			"title": "找不到入口点",
+			"message": "该插件中找不到正确的入口函数，可能不是有效的 Visindigo 插件。"
+		},
+		"ConstructorError": {
+			"title": "构造函数错误",
+			"message": "该插件在创建时发生异常或返回了空对象。请联系插件作者。"
+		},
+		"IncompatibleABI": {
+			"title": "ABI 不兼容",
+			"message": "该插件与当前程序的核心二进制接口版本不兼容，需要更新插件或程序。"
+		},
+		"IncompatibleAPI": {
+			"title": "API 不兼容",
+			"message": "该插件与当前程序的接口版本不兼容，需要更新插件或程序。"
+		},
+		"AlreadyLoaded": {
+			"title": "插件重复加载",
+			"message": "已经加载了具有相同ID的插件，本次加载被跳过。请检查是否存在重复的插件文件。"
+		},
+		"DependencyNotFound": {
+			"title": "找不到依赖插件",
+			"message": "该插件依赖的其他插件不存在。请安装缺少的插件后重试。"
+		},
+		"DependencyLoadFailed": {
+			"title": "依赖插件加载失败",
+			"message": "该插件依赖的其他插件加载失败。请先解决被依赖插件的加载问题。"
+		},
+		"DependencyDeactivated": {
+			"title": "依赖插件已被禁用",
+			"message": "该插件依赖的其他插件已被禁用。请启用被依赖的插件，或同时禁用本插件。"
+		},
+		"MetadataNotFound": {
+			"title": "找不到元数据",
+			"message": "没有找到该插件的元数据文件，插件无法被识别。请重新安装该插件。"
+		},
+		"MetadataNotSame": {
+			"title": "元数据不一致",
+			"message": "该插件的元数据与实际二进制文件不匹配。请重新安装该插件。"
+		}
+	}
+}

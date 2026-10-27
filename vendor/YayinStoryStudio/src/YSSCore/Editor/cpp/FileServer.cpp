@@ -1,0 +1,323 @@
+#include <QtWidgets/qwidget.h>
+#include <General/Plugin.h>
+#include "Editor/EditorPlugin.h"
+#include "Editor/FileServer.h"
+namespace YSSCore::Editor {
+	class FileServerPrivate {
+		friend class FileServer;
+	protected:
+		FileServer::EditorType Type = FileServer::EditorType::BuiltInEditor;
+		QStringList SupportedFileExts;
+		bool asVirtualFileServer = false;
+		FileServer::PreferredOrientation PreferredOrientation = FileServer::PreferredOrientation::Any;
+		bool listAsTool = false;
+		QString toolNickname;
+		QIcon fileServerIcon;
+	};
+	/*!
+		\class YSSCore::Editor::FileServer
+		\inmodule YSSCore
+		\brief 此类提供文件打开服务.
+		\since YSS 0.13.0
+		\ingroup FileService
+
+		由于YSSCore::Editor被设计为一个通用的编辑器框架，因此对于“打开文件”这样的需求提供了通用框架，
+		即用户通过派生此类，并将其注册到YSSCore::Editor::FileServerManager中来实现对某类文件的打开支持。
+
+		这里的打开，指的就是通过YSSCore::Editor::FileServer::EditorType枚举中定义的几种方式的任意一种方式打开文件。
+		用户应该将自己实现的FileServer通过YSSCore::Editor::EditorPlugin::registerFileServer函数注册到YSSCore::Editor::FileServerManager中。
+		稍后，在调用YSSCore::Editor::FileServerManager::openFile函数时，Yayin Story Studio会根据文件扩展名选择合适的FileServer来打开文件。
+
+		主要指出的是，FileServer本质上只是提供打开文件的路由，它不负责处理具体文件的保存、编辑等操作。虽然
+		CodeEditor和BuiltInEditor类型确实通过标准文件编辑框架（FileEditWidget）来打开文件，其中提供标准化的
+		存储行为语义，但其余类型的编辑器类型需要完全由用户自己实现打开、保存等相关功能。
+
+		FileServer的职责仅限于根据文件扩展名和编辑器类型来路由文件打开请求。
+
+		\note 一旦将FileServer注册到YSSCore::Editor::FileServerManager中，任何对FileServer属性的设置都不再有效。
+		在注册后再通过set函数设置任何属性都为明确的错误行为。
+
+		\section1 编辑器类型
+		\list
+		\li CodeEditor 使用内置代码编辑器打开文件。
+		\li BuiltInEditor 使用内置编辑器打开文件，但不是代码编辑器。这个编辑器必须是派生自YSSCore::Editor::FileEditWidget的类。
+				需要同时实现onCreateFileEditWidget函数。
+		\endlist
+
+		\section1 虚拟文件服务器
+		从0.15.0开始，引入虚拟文件概念，以便在文件编辑区域打开一些并非真实存在的文件进行编辑。
+
+		在虚拟文件服务器模式下，文件路径使用虚拟文件路径格式，具体格式和解析方式请参考
+		YSSCore::Editor::VirtualFilePath 类的文档。
+
+		虚拟文件服务器的 \c file_ext 作为ID使用，不能有多个FileServer同时注册同一个 \c file_ext，否则后来者无效。
+
+		\section1 作为工具的文件服务器
+		从0.17.0开始，将原有的ToolWidget概念合并到FileServer中。通过设置FileServer的listAsTool属性为true，可以将其作为工具在顶栏中列出，
+		并与普通文件一样在文件编辑区域显示。
+
+		请注意，如果设置了listAsTool属性为true，则virtualFileServer属性也自动拨到true，但反之不成立。因此，如果一个FileServer被
+		列作工具，则应该使用虚拟文件路径访问它。
+
+		\section1 编辑器的首选方向
+		\note 此属性仅对标记为工具的FileServer有效。
+
+		从0.17.0开始，可以通过setPreferredOrientation设置首选的编辑器方向，以便在文件编辑区域中打开时，能够根据首选方向来决定将
+		FileEditWidget安排在哪一个区域中。
+
+		总的来说，遵循这样的逻辑：
+		\list
+		1. 如果为Any，则安排在任意区域中。
+		2. 如果为Vertical，则优先考虑高度大于宽度的区域。
+		3. 如果为Horizontal，则优先考虑宽度大于高度的区域。
+		4. 如果为Vertical_Wide，则将在所有高度大于宽度的区域中，优先选择长宽比小于2:1的区域。Horizontally_Wide同理。
+		5. 如果为Vertical_Narrow，则将在所有高度大于宽度的区域中，优先选择长宽比大于2:1的区域。Horizontally_Narrow同理。
+		\endlist
+
+		请注意，不要对PreferredOrientation的值进行位运算。YSS会根据上述逻辑来选择合适的区域，而不是根据位运算的结果来选择。
+
+		\section1 主区域与副区域的安排
+		YSS的主区域只有一个。即第一个被创建的编辑区域实例，其他均为副区域。所有不作为工具的FileServer都永远直接安排在主区域
+		（且不考虑用户当前的焦点区域），而作为工具的FileServer永远不会安排在主区域中，而是从副区域中选择一个合适的区域来安排FileEditWidget。
+
+		如果不存在合适的副区域，将尝试在主区域的左侧或下侧创建一个新的副区域来安排FileEditWidget。
+
+		上述有关首选方向的逻辑仅仅是YSS在安排FileEditWidget时的首选逻辑，用户可以自由将FileEditWidget在不同区域中
+		拖放。而不同区域的长宽比均可自由设置。因此，即使编辑器具有首选方向，也应当尽可能尝试兼容不同的长宽比和不同的区域，
+		以便在用户拖放时能够正常显示。
+	*/
+
+	/*!
+		\enum YSSCore::Editor::FileServer::EditorType
+		\since YSS 0.13.0
+		\value CodeEditor 使用内置代码编辑器打开文件。
+		\value BuiltInEditor 使用内置编辑器打开文件，但不是代码编辑器。
+
+		请注意，为了实现一些更深入的编辑器功能（如重命名），YSS必须有办法将资源管理器的重命名
+		操作通知到正在打开的文件，因此我们决定从0.15开始，只保留CodeEditor和BuiltInEditor两种编辑器类型，
+		以确保所有的编辑器都必须使用内置的编辑器框架来打开文件。
+	*/
+
+	/*!
+		\enum YSSCore::Editor::FileServer::PreferredOrientation
+		\since YSS 0.17.0
+		\value Vertical_Narrow 首选竖直方向，且长宽比大于2:1。
+		\value Vertical_Wide 首选竖直方向，且长宽比小于2:1。
+		\value Vertical 首选竖直方向。
+		\value Horizontal_Narrow 首选水平方向，且长宽比大于2:1。
+		\value Horizontal_Wide 首选水平方向，且长宽比小于2:1。
+		\value Horizontal 首选水平方向。
+		\value Any 不指定首选方向，优先考虑主区域。
+
+		虽然此枚举中有三个值是按位或得到的，但请不要再进行其他位运算。
+		YSS会根据首选方向的逻辑来选择合适的区域，而不是根据位运算的结果来选择。
+	*/
+
+	/*!
+		\since YSS 0.13.0
+		\a name 为文件服务的名称。
+		\a id 为文件服务的唯一标识符。
+		\a plugin 为此文件服务所属的插件。
+		构造FileServer对象。
+	*/
+	FileServer::FileServer(const QString& name, const QString& id, EditorPlugin* plugin) :
+		Visindigo::General::PluginModule((Visindigo::General::Plugin*)plugin, id, YSSPluginModule_FileServer, name) {
+		d = new FileServerPrivate();
+	}
+
+	/*!
+		\since YSS 0.13.0
+		析构FileServer对象。一般来说，没有任何情况需要手动析构此对象。FileServer应该与使用它的插件有一致的生命周期。
+	*/
+	FileServer::~FileServer() {
+		delete d;
+	}
+
+	/*!
+		\since YSS 0.13.0
+		return 此文件服务的编辑器类型。
+	*/
+	FileServer::EditorType FileServer::getEditorType() {
+		return d->Type;
+	}
+
+	/*!
+		\since YSS 0.13.0
+		return 此文件服务支持的文件扩展名列表。
+
+		对于虚拟文件，这就是@file_ext!file_name?param中的file_ext部分。对于普通文件，这就是文件的后缀名。
+	*/
+	QStringList FileServer::getSupportedFileExts() {
+		return d->SupportedFileExts;
+	}
+
+	/*!
+		\since YSS 0.17.0
+		return 此文件服务的首选编辑器方向。
+	*/
+	FileServer::PreferredOrientation FileServer::getPreferredOrientation() {
+		return d->PreferredOrientation;
+	}
+
+	/*!
+		\since YSS 0.17.0
+		return 此文件服务器的图标
+	*/
+	QIcon FileServer::getFileServerIcon() {
+		return d->fileServerIcon;
+	}
+
+	/*!
+		\since YSS 0.17.0
+		return 此文件服务是否作为工具列出。
+	*/
+	bool FileServer::isListAsTool() {
+		return d->listAsTool;
+	}
+
+	/*!
+		\since YSS 0.17.0
+		return 此文件服务器作为工具时的昵称。
+
+		\note 这里可能是VI18N字符串
+	*/
+	QString FileServer::getToolNickname() {
+		return d->toolNickname;
+	}
+
+	/*!
+		\since YSS 0.13.0
+		\a filePath 要打开的文件路径。
+
+		这是个有意思的函数，允许你在一定程度上影响文件打开时使用的文件服务的优先级。
+
+		如果你有一个文件服务A和一个文件服务B，它们都支持打开.txt文件。
+		默认情况下，Visindigo会根据它们被注册的先后顺序来决定使用哪个服务打开.txt文件
+		（如果通过调用YSSCore::FileServerManager::setPriorityForFileExt函数设置了优先级，则会根据优先级来决定）。
+
+		不过在根据先后顺序决定使用哪个服务之前，Visindigo会调用每个支持该文件扩展名的服务的especiallyFocusFile函数，
+		看看是否有哪个服务特别关注这个文件。并在所有关注度中选取最高的那个服务来打开这个文件。
+		如果所有服务的关注度都小于或等于0，则再根据注册的先后顺序（或特别设置的优先级）来决定使用哪个服务。
+
+		这对那些复用现有文件后缀名但用于特殊用途的文件特别有用。譬如，你有一个json文件是作为
+		某种配置使用，且你希望为这个配置文件实现可视化的操作功能，那么你就可以在注册json后缀的文件服务里
+		通过这个函数感知当前打开的json文件是否为你的这一种特殊用途的文件，
+		并通过返回一个较高的关注度来让YSS优先使用你的文件服务来打开这个文件。
+
+		需要指出的是，特别关注功能只关注最大值，不在乎最大值之下的其他数值的情况，
+		因此特别关注功能不能用于在多个文件服务之间进行优先级排序。
+
+		这个函数默认返回-1。虽然不提倡，但如果你需要对某个文件拥有绝对优先权，请直接返回int64的最大值。
+
+		此外，如果需要为某个文件扩展名关闭特别关注功能，可以在FileServerManager::setEspeciallyFocusEnable函数里设置。
+
+		\note 从0.15.0开始引入虚拟文件概念。在虚拟文件服务器模式时，该功能无效
+	*/
+	qint64 FileServer::especiallyFocusFile(const YSSCore::General::YSSURI& uri) {
+		return -1;
+	}
+
+	/*!
+		\since YSS 0.13.0
+		当需要创建内置编辑器时调用。默认实现返回nullptr。
+		此函数没有参数。因为设计上要求派生直接返回一个新创建的YSSCore::Editor::FileEditWidget派生类对象即可。
+
+		FileServerManager::openFile函数内部会自动对这个新的派生类对象调用openFile函数打开指定文件。
+
+		一旦成功，FileServerManager会调用FileWidgetHandler::handleBuiltinEditor函数将这个新的编辑器对象的指针传递给外部，
+		以便外部可以将它添加到UI中。
+
+		/warning 该函数返回指针的所有权问题在0.15之前和0.15及之后有不同的处理方式。请务必注意。
+
+		在0.15之前，如果Handler返回true，该指针所有权会被转移到该FileWidgetHandler。
+		在0.15及之后，如果Handler返回true，该指针所有权会被转移到FileServerManager，并且FileServerManager会负责在
+		closed()信号发出时删除这个对象。
+	*/
+	FileEditWidget* FileServer::onCreateFileEditWidget() {
+		return nullptr;
+	}
+
+	/*!
+		\since YSS 0.15.0
+		return 此文件服务是否为虚拟文件服务器。
+	*/
+	bool FileServer::isVirtualFileServer() {
+		return d->asVirtualFileServer;
+	}
+
+	/*!
+		\since YSS 0.13.0
+		设置此文件服务的编辑器类型。
+		\a type 为新的编辑器类型。
+	*/
+	void FileServer::setEditorType(FileServer::EditorType type) {
+		d->Type = type;
+	}
+
+	/*!
+		\since YSS 0.13.0
+		\a exts 为新的文件扩展名列表。
+
+		设置此文件服务支持的文件扩展名列表。
+	*/
+	void FileServer::setSupportedFileExts(const QStringList& exts) {
+		d->SupportedFileExts = exts;
+	}
+
+	/*!
+		\since YSS 0.15.0
+		\a isVirtual 是否设置为虚拟文件服务器。
+
+		设置此文件服务器作为虚拟文件服务器。
+		在虚拟文件模式时，特别关注功能不可用。
+	*/
+	void FileServer::setAsVitrualFileServer(bool isVirtual) {
+		d->asVirtualFileServer = isVirtual;
+	}
+
+	/*!
+		\since YSS 0.17.0
+		\a orientation 为新的首选编辑器方向。
+
+		设置此文件服务的首选编辑器方向。
+	*/
+	void FileServer::setPreferredOrientation(FileServer::PreferredOrientation orientation) {
+		d->PreferredOrientation = orientation;
+	}
+
+	/*!
+		\since YSS 0.17.0
+		\a icon 为新的文件服务器图标。
+
+		设置此文件服务的图标。
+	*/
+	void FileServer::setFileServerIcon(const QIcon& icon) {
+		d->fileServerIcon = icon;
+	}
+
+	/*!
+		\since YSS 0.17.0
+		\a isTool 是否设置为作为工具列出。
+
+		设置此文件服务是否作为工具列出。作为工具列出的FileSever也被
+		自动视为虚拟文件服务器。
+	*/
+	void FileServer::setListAsTool(bool isTool) {
+		d->listAsTool = isTool;
+		if (isTool) {
+			d->asVirtualFileServer = true;
+		}
+	}
+
+	/*!
+		\since YSS 0.17.0
+		\a vi18n_name 为新的工具昵称。
+
+		设置此文件服务作为工具时的昵称。
+
+		\note 这里可以是VI18N字符串
+	*/
+	void FileServer::setToolNickname(const QString& vi18n_name) {
+		d->toolNickname = vi18n_name;
+	}
+}

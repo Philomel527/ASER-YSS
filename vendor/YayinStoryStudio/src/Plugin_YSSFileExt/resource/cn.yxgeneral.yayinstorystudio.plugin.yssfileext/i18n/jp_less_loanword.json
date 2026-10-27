@@ -1,0 +1,62 @@
+{
+	"syntaxColorTheme": {
+		"PlainText": "素の文章",
+		"String": "文字列",
+		"Number": "数字",
+		"Boolean": "真偽値",
+		"Comment": "コメント",
+		"Keyword": "キーワード",
+		"Key": "キー",
+		"Anchor": "錨 / 別名",
+		"YamlTag": "YAML 印",
+		"XmlTag": "XML 印",
+		"Attribute": "属性名",
+		"CData": "CDATA 資料",
+		"Entity": "実体",
+		"Header": "見出し",
+		"Section": "節"
+	},
+	"fileProvider": {
+		"window": {
+			"title": "YSS ファイル雛形 初期化案内",
+			"create": "作成",
+			"where": "\"%1\" として作られます。",
+			"exists": "\"%1\" は既にあります！新しく作ることはできません。"
+		},
+		"failed": {
+			"title": "作成に失敗",
+			"text": "ファイルを作れませんでした。対象の資料入れが存在するか、その資料入れに新しいファイルを作る権限があるかを確認してください。"
+		},
+		"file": {
+			"name": {
+				"title": "名前",
+				"text": "名前（拡張子なし）。\".%1\" が自動的に付け加えられます。"
+			}
+		},
+		"json": {
+			"name": "JSON 情報ファイル",
+			"description": "空の JSON 情報（.json）を作ります。",
+			"tags": "情報; 設定; JSON"
+		},
+		"yaml": {
+			"name": "YAML 情報ファイル",
+			"description": "空の YAML 情報（.yaml）を作ります。",
+			"tags": "情報; 設定; YAML"
+		},
+		"xml": {
+			"name": "XML 標記ファイル",
+			"description": "空の XML 標記（.xml）を作ります。",
+			"tags": "標記; 情報; XML"
+		},
+		"toml": {
+			"name": "TOML 設定ファイル",
+			"description": "空の TOML 設定（.toml）を作ります。",
+			"tags": "設定; 情報; TOML"
+		},
+		"ini": {
+			"name": "INI 設定ファイル",
+			"description": "空の INI 設定（.ini）を作ります。",
+			"tags": "設定; 情報; INI"
+		}
+	}
+}

@@ -1,0 +1,471 @@
+﻿{
+	"config": {
+		"title": "Einstellungen von Yayin Story Studio",
+		"general": {
+			"title": "Allgemein",
+			"text": "Allgemeine Programmeinstellungen",
+			"language": {
+				"title": "Sprache",
+				"text": "Anwendungssprache auswählen",
+				"zh_CN": "Chinesisch (vereinfacht)",
+				"zh_TW": "Chinesisch (traditionell)",
+				"en": "Englisch",
+				"ja": "Japanisch",
+				"jp_less_loanword": "Japanisch (weniger Fremdwörter)",
+				"ko": "Koreanisch",
+				"ru": "Russisch",
+				"de": "Deutsch",
+				"fr": "Französisch"
+			},
+			"theme": {
+				"title": "Farbschema",
+				"text": "Farbschema der Anwendung auswählen",
+				"dark": "Dunkel",
+				"light": "Hell",
+				"auto": "Automatisch (System folgen)"
+			},
+			"updateChannel": {
+				"title": "Update-Kanal",
+				"text": "Wählen Sie den von der Anwendung verwendeten Update-Kanal. Die stabile Version akzeptiert nur stabile Update-Meldungen; die Beta-Version akzeptiert sowohl stabile als auch Beta-Update-Meldungen; die technische Vorschauversion akzeptiert alle Update-Meldungen der drei Versionen.",
+				"release": "Stable",
+				"beta": "Beta",
+				"tp": "Technische Vorschau"
+			}
+		},
+		"editor": {
+			"title": "Editor",
+			"text": "Editorbezogene Einstellungen",
+			"reloadtab": {
+				"title": "TAB-Verhalten neu laden",
+				"text": "Steuert, ob der Editor Tabulatoren am Zeilenanfang durch Leerzeichen ersetzen soll (diese Option ist vorübergehend wirkungslos)"
+			}
+		}
+	},
+	"update": {
+		"newVersionAvailable": "Eine neue Version ist verfügbar!",
+		"newVersionAvailableDesc": "Version %1 ist jetzt veröffentlicht, und Sie verwenden derzeit Version %2.\nBitte lesen Sie die Versionshinweise für die Änderungen der neuen Version und besuchen Sie die offizielle Website, um die neueste Version herunterzuladen.",
+		"newsLoadFailed": "Die Neuigkeiten konnten nicht vom Server synchronisiert werden. Überprüfen Sie Ihre Netzwerkverbindung und versuchen Sie es später erneut.",
+		"installerUpdating": "YSS Installer wird aktualisiert",
+		"installerUpdatingDesc": "Eine neue Version des YSS Installers wurde erkannt. Die Aktualisierung und Neuverbindung wird durchgeführt, bitte warten..."
+	},
+	"tooltips": {
+		"projectWin": {
+			"project": "Klicken, um Details anzuzeigen, doppelklicken, um das Projekt zu öffnen",
+			"showInBrowser": "Projektordner im Datei-Explorer öffnen",
+			"delete": "Projekt aus der Liste entfernen",
+			"createNewProject": "Neues Projekt aus Vorlage erstellen",
+			"openFolder": "Ein Yayin Story Studio-Projekt öffnen",
+			"cloneFromGit": "Ein Projekt aus einer Git-Repository-URL klonen"
+		}
+	},
+	"project": {
+		"author": "Autor",
+		"description": "Beschreibung",
+		"debugServer": "Debug-Server",
+		"projectManager": "Projektmanager",
+		"selectToShow": "Wählen Sie ein Projekt aus, um Details anzuzeigen...",
+		"noCover": "Kein Cover",
+		"lastModifiedTime": "Zuletzt geändert",
+		"createTime": "Erstellt",
+		"size": "Größe",
+		"calculating": "Wird berechnet...",
+		"showInBrowser": "Im Datei-Explorer anzeigen",
+		"delete": "Projekt löschen",
+		"deleteConfirm": "Yayin Story Studio unterstützt derzeit kein sicheres Löschen von Projekten in den Papierkorb.\nAus Sicherheitsgründen wird durch Klicken auf OK das Projekt nur aus der Liste entfernt.\nSie können das Projekt später manuell im Datei-Explorer löschen.\n\nFortfahren?",
+		"removeFromList": "Aus der Liste entfernen",
+		"createNewProject": "Neues Projekt erstellen",
+		"createNewFile": "Neue Datei erstellen",
+		"openFolder": "Projekt öffnen",
+		"openYSSProject": "YSS-Projekt öffnen",
+		"cloneFromGit": "Von Git klonen",
+		"createFromTemplate": "Aus Vorlage erstellen",
+		"searchWithTags": "Vorlagen nach Tags durchsuchen",
+		"projectVersionTooNew": {
+			"title": "Projekt ist zu neu",
+			"message": "Das Projekt \"%1\" stammt aus einer unbekannten neueren Version. Beim Öffnen in der aktuellen Version kann es zu Datenverlust kommen oder das Projekt funktioniert nicht mehr ordnungsgemäß. Vergewissern Sie sich, dass Sie Ihre Projektdaten gesichert haben.\n\nMöchten Sie das Projekt trotzdem öffnen?"
+		},
+		"projectVersionTooOld": {
+			"title": "Projekt muss aktualisiert werden",
+			"message": "Das Projekt \"%1\" stammt aus einer älteren kompatiblen Version (Projektversion %2, kompatibel mit %3 bis %4). Beim Öffnen in der neuen Version wird es dauerhaft aktualisiert und lässt sich danach nicht mehr in älteren Versionen öffnen. Vergewissern Sie sich, dass Sie Ihre Projektdaten gesichert haben.\n\nMöchten Sie das Projekt trotzdem öffnen?"
+		},
+		"recentUsed": "Zuletzt verwendet",
+		"openProjectFailed": {
+			"message": "Projekt konnte nicht geöffnet werden",
+			"ParseError": "Die Projektdatei konnte nicht analysiert werden. Möglicherweise enthält sie Syntaxfehler oder ist beschädigt.",
+			"InvaildConfig": "Ungültige Projektkonfiguration: Pflichtfelder fehlen oder Feldtypen sind falsch.",
+			"UnknownError": "Ein unbekannter Fehler ist aufgetreten. Das Projekt konnte nicht geöffnet werden."
+		},
+		"requiredPluginsNotAvailable": {
+			"title": "Erforderliche Plugins fehlen",
+			"message": "Das Projekt \"%1\" benötigt die folgenden Plugins (anhand der ID), um ordnungsgemäß zu funktionieren. Wir empfehlen, diese Plugins zu ergänzen, bevor Sie das Projekt öffnen. Sie können das Projekt weiterhin erzwingen, was jedoch zu Datenverlust führen kann.\n\nMöchten Sie das Projekt erzwingen?"
+		},
+		"saveQuestion": {
+			"title": "Programm schließen?",
+			"text": "Ihr Projekt \"%1\" wurde geändert und noch nicht gespeichert. Möchten Sie das Projekt speichern?"
+		}
+	},
+	"menu": {
+		"file": {
+			"title": "Datei",
+			"new": "Neue Datei",
+			"newFile": "Neue Datei",
+			"newFolder": "Neuer Ordner",
+			"open": "Öffnen",
+			"save": "Speichern",
+			"saveAll": "Alle speichern",
+			"saveAs": "Speichern unter",
+			"backToHome": "Zurück zur Startseite",
+			"terminal": "Terminal",
+			"pluginAndPreferences": "Plugins und Einstellungen",
+			"colorThemeSettings": "Syntaxhervorhebungseinstellungen",
+			"exit": "Beenden",
+			"documentation": "Dokumentation",
+			"about": "Über Yayin Story Studio",
+			"projectConfig": "Projekteinstellungen",
+			"showInExplorer": "Im Datei-Explorer anzeigen",
+			"closeAll": "Alle schließen",
+			"closeSaved": "Gespeicherte schließen"
+		},
+		"edit": {
+			"title": "Bearbeiten",
+			"undo": "Rückgängig",
+			"redo": "Wiederholen",
+			"cut": "Ausschneiden",
+			"copy": "Kopieren",
+			"copyPath": "Dateipfad kopieren",
+			"copyName": "Dateinamen kopieren",
+			"paste": "Einfügen",
+			"selectAll": "Alles auswählen",
+			"findAndReplace": "Suchen und Ersetzen"
+		},
+		"run": {
+			"title": "Ausführen",
+			"run": "Starten (ohne Debugging)",
+			"debug": "Starten (mit Debugging)",
+			"stop": "Stoppen",
+			"restart": "Neu starten",
+			"build": "Projekt erstellen",
+			"rebuild": "Neu erstellen (erzwungen)",
+			"clean": "Build bereinigen",
+			"stepInto": "Einzelsschritt",
+			"stepOver": "Prozedurschritt",
+			"suspend": "Anhalten",
+			"resume": "Fortsetzen"
+		},
+		"view": {
+			"title": "Ansicht",
+			"resourceBrowser": "Ressourcen-Browser",
+			"messageViewer": "Nachrichtenanzeige",
+			"pluginTools": "Plugin-Werkzeuge",
+			"fullScreenToggle": "Vollbild umschalten",
+			"noTools": "Keine Werkzeuge anzeigbar"
+		}
+	},
+	"editor": {
+		"messageViewer": {
+			"title": "Nachrichtenanzeige",
+			"error": "Fehler",
+			"warning": "Warnung",
+			"info": "Info",
+			"code": "Code",
+			"message": "Beschreibung",
+			"file": "Datei",
+			"line": "Zeile",
+			"column": "Spalte"
+		},
+		"multiTerminal": {
+			"title": "Terminal",
+			"newTerminal": "Neues Terminal",
+			"closeTerminal": "Terminal schließen",
+			"closeOtherTerminals": "Andere Terminals schließen",
+			"closeAllTerminals": "Alle Terminals schließen",
+			"terminalName": "Terminal %1"
+		},
+		"far": {
+			"title": "Suchen und Ersetzen",
+			"find": "Suchen",
+			"findNext": "Nächstes suchen",
+			"replace": "Ersetzen",
+			"replaceNext": "Nächstes ersetzen",
+			"replaceAll": "Alle ersetzen",
+			"matchCase": "Groß-/Kleinschreibung beachten",
+			"wholeWord": "Ganzes Wort",
+			"useRegExp": "Regulärer Ausdruck",
+			"notFound": "Keine weiteren Einträge gefunden",
+			"notFoundDesc": "Zieltext \"%1\" nicht gefunden",
+			"replaced": "Ersetzung abgeschlossen",
+			"replacedDesc": "%1 Vorkommen ersetzt",
+			"matchCount": "Gesamt %1"
+		},
+		"stackWidgetArea": {
+			"noFileOpened": "Keine Dateien geöffnet",
+			"dragInFile": "Registerkarte loslassen, um sie hierher zu verschieben"
+		},
+		"toolWidgetArea": {
+			"noToolWidget": "Keine Werkzeuge anzeigbar"
+		},
+		"bottomInfoWidget": {
+			"debugMessage": {
+				"prepared": "Bereit"
+			},
+			"cursorInfo_s": "Zeile %1, Spalte %2 (ausgewählt %3)",
+			"cursorInfo": "Zeile %1, Spalte %2",
+			"totalLines": "Gesamtzahl der Zeilen: %1",
+			"statistic": {
+				"tooltip": "Klicken Sie, um detaillierte Statistiken anzuzeigen",
+				"title": "Dokumentstatistik",
+				"titleWithName": "Dokumentstatistik - %1",
+				"wordCount": "Wörter: %1",
+				"charCountIncludeWhitespace": "Zeichen (mit Leerzeichen): %1",
+				"charCountExcludeWhitespace": "Zeichen (ohne Leerzeichen): %1",
+				"cjkvCharCount": "CJKV-Zeichen: %1",
+				"nonCJKVCharCount": "Nicht-CJKV-Zeichen: %1",
+				"paragraphCount": "Absätze: %1",
+				"noEditor": "Derzeit ist kein Editor geöffnet"
+			}
+		},
+		"textEdit": {
+			"readOnly": {
+				"title": "Diese Datei ist schreibgeschützt",
+				"message": "Die Datei %1, die Sie speichern möchten, ist schreibgeschützt. Sie können in dieser Datei nicht speichern. Überprüfen Sie die Dateiberechtigungen oder verwenden Sie \"Speichern unter\", um an einem anderen Ort zu speichern."
+			},
+			"unsupportedEncoding": {
+				"title": "Speichern in der ursprünglichen Kodierung nicht möglich",
+				"message": "Die Datei %1 ist nicht UTF-8- oder UTF-16-kodiert. YSS kann sie nur zur Anzeige einlesen, und ein Zurückschreiben in der aktuellen Kodierung würde den tatsächlichen Inhalt der Datei zerstören. Deshalb wurde das Speichern über die Originaldatei blockiert. Wenn Sie Ihre Änderungen behalten möchten, verwenden Sie \"Speichern unter\", um sie in eine andere Datei zu schreiben."
+			},
+			"notSuitable": {
+				"title": "Kein Dienst gefunden, der diese Datei unterstützt",
+				"message": "Für die Dateierweiterung %1 wurde kein geeigneter Öffnungsdienst gefunden. YSS kann dennoch versuchen, die Datei mit dem eingebauten Texteditor zu öffnen, aber dies kann einige Binärdaten beschädigen. Möchten Sie wirklich mit dem eingebauten Texteditor fortfahren? (Stark nicht empfohlen)"
+			},
+			"ready": "Bereit",
+			"tabCompleter": {
+				"top": "Beste Vorschläge, vom Plugin %1 basierend auf dem Kontext empfohlen",
+				"viewDescription": "(Klicken oder fahren Sie mit der Maus über ein Vervollständigungselement, um die Beschreibung anzuzeigen)",
+				"value": "Wert. Typ",
+				"const": "Konstante. Typ",
+				"enum": "Enum. Typ",
+				"function": "Funktion. Typ",
+				"object": "Objekt. Typ",
+				"operator": "Operator. Typ"
+			},
+			"tabCompleterLevel": {
+				"none": "Keine Vorschläge",
+				"few": "Wenige Vorschläge",
+				"some": "Einige Vorschläge",
+				"many": "Viele Vorschläge",
+				"all": "Alle Vorschläge"
+			},
+			"suggestion":{
+				"inlineEdit": "Vorschlag zum Ersetzen der Zeile",
+				"pureAdd": "Vorschlag zum Anhängen von Inhalt",
+				"multiLineEdit": "Vorschlag zum Einfügen mehrerer Zeilen",
+				"blockRemove": "Zeilenlöschungsvorschlag",
+				"scrollUp": "Nach oben zu Zeile %1 scrollen",
+				"scrollDown": "Nach unten zu Zeile %1 scrollen",
+				"accept": "Annehmen",
+				"reject": "Ablehnen"
+			},
+			"inlayHintVisible": "Inline-Hinweise",
+			"hintSettings": "Hinweis-Einstellungen",
+			"completerLevel": "Vervollständigungsstufe"
+		},
+		"debug": {
+			"notFound": {
+				"title": "Hoppla! Debugger nicht gefunden",
+				"message": "Der für dieses Projekt angegebene Debugger %1 wurde nicht gefunden. Haben Sie das Plugin, das diesen Debugger bereitstellt, deaktiviert oder entfernt? Bitte aktivieren oder fügen Sie es wieder hinzu, starten Sie das Programm neu und versuchen Sie es erneut."
+			},
+			"notSelect": {
+				"title": "Debugger nicht konfiguriert!",
+				"message": "Für dieses Projekt ist kein Debugger konfiguriert. Öffnen Sie die Projekteinstellungen, wählen Sie einen Debugger aus und versuchen Sie es erneut."
+			}
+		},
+		"saveWarning": {
+			"title": "Datei geändert",
+			"message": "Die Datei %1 wurde geändert. Möchten Sie die Änderungen speichern?"
+		},
+		"saveAsConflict": {
+			"title": "Die zu überschreibende Datei ist geöffnet und enthält nicht gespeicherte Änderungen",
+			"message": "Bitte speichern oder schließen Sie zuerst die Datei %1 und versuchen Sie dann erneut, die Überschreibung über \"Speichern unter\" durchzuführen."
+		},
+		"reloadWarning": {
+			"title": "Jetzt neu laden?",
+			"message": "Die Datei %1 wurde geändert. Wenn Sie jetzt neu laden, gehen Ihre Änderungen an dieser Datei verloren. Möchten Sie neu laden?"
+		},
+		"renameDialog": {
+			"title": "Umbenennen",
+			"rename": "Datei %1 wird umbenannt",
+			"request": "Bitte geben Sie einen neuen Namen ein",
+			"warning": {
+				"empty": "Der Name darf nicht leer sein. Bitte geben Sie einen Namen ein.",
+				"same": "Der neue Name ist identisch mit dem alten. Bitte geben Sie einen anderen Namen ein.",
+				"exists": "Im selben Verzeichnis existiert bereits eine Datei mit diesem Namen. Bitte wählen Sie einen anderen Namen.",
+				"invalid": "Ungültiger Dateiname. Er darf die folgenden Zeichen nicht enthalten: \\ / : * ? \" < > |",
+				"extNotSame": {
+					"normal": "Die Erweiterung des neuen Namens unterscheidet sich von der ursprünglichen, was Probleme verursachen kann.",
+					"title": "Möchten Sie die Erweiterung wirklich ändern?",
+					"message": "Die im neuen Namen angegebene Erweiterung %1 unterscheidet sich von der ursprünglichen Erweiterung %2. Dies kann zu Problemen führen, z. B. dass die Datei nicht korrekt erkannt und geöffnet wird. Möchten Sie die Umbenennung wirklich fortsetzen?"
+				}
+			}
+		},
+		"newFolderDialog": {
+			"title": "Neuer Ordner",
+			"desc": "Ein neuer Ordner wird im Ordner %1 erstellt. Bitte geben Sie einen Namen für den neuen Ordner ein:",
+			"warning": {
+				"empty": "Der Name darf nicht leer sein. Bitte geben Sie einen Namen ein.",
+				"exists": "Im selben Verzeichnis existiert bereits ein Ordner mit diesem Namen. Bitte wählen Sie einen anderen Namen.",
+				"invalid": "Ungültiger Ordnername. Er darf die folgenden Zeichen nicht enthalten: \\ / : * ? \" < > |"
+			}
+		},
+		"about": {
+			"title": "Über Yayin Story Studio",
+			"message": "Version %1, ein Werk von Tsing Yayin. Yayin Story Studio ist Teil von Project Visindigo, ein völlig neues Projekt, das aus Yayin Story Player hervorgegangen ist und darauf abzielt, ASE-Benutzern eine benutzerfreundliche Entwicklungsumgebung zu bieten."
+		},
+		"deleteProjectFile": {
+			"title": "Projekt-Metadatei kann nicht gelöscht werden",
+			"message": "Die Metadatei des aktuell geöffneten Projekts kann nicht gelöscht werden. Wenn Sie das Projekt löschen möchten, kehren Sie zur Projektauswahlseite zurück und wählen Sie dort das Löschen des Projekts."
+		},
+		"fileOperation": {
+			"failed": {
+				"title": "Vorgang fehlgeschlagen",
+				"message": "Der Vorgang für %1 konnte nicht abgeschlossen werden. Prüfen Sie, ob die Datei von einem anderen Programm verwendet wird, ob Sie die nötigen Rechte haben und ob noch Speicherplatz frei ist."
+			}
+		},
+		"deleteFile": {
+			"title": "Löschen bestätigen",
+			"message": "Möchten Sie die Datei oder den Ordner %1 wirklich löschen? Sie wird in den System-Papierkorb verschoben, von wo aus Sie sie wiederherstellen können."
+		}
+	},
+	"colorThemeSettings": {
+		"langServer": "Sprachserver",
+		"theme": "Thema",
+		"duplicate": "Duplizieren",
+		"delete": "Löschen",
+		"duplicateDialog": {
+			"title": "Design duplizieren",
+			"desc": "Design „%1“ wird dupliziert. Bitte geben Sie einen Namen für das neue Design ein:",
+			"warning": {
+				"empty": "Der Name darf nicht leer sein. Bitte geben Sie einen Namen ein.",
+				"same": "Der neue Name ist mit dem Quelldesign identisch. Bitte geben Sie einen anderen Namen ein.",
+				"exists": "Ein Design mit diesem Namen ist bereits vorhanden. Bitte wählen Sie einen anderen Namen."
+			}
+		},
+		"deleteConfirm": {
+			"title": "Design löschen",
+			"message": "Möchten Sie das Design „%1“ wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden."
+		},
+		"font": "Schriftart",
+		"preview": "Vorschau",
+		"textColor": "Textfarbe",
+		"bgColor": "Hintergrundfarbe",
+		"bgColorEnabled": "Hintergrundfarbe verwenden",
+		"lineColor": "Linienfarbe",
+		"lineType": "Linientyp",
+		"bold": "Fett",
+		"italic": "Kursiv",
+		"save": "Speichern",
+		"reset": "Zurücksetzen",
+		"underlineType": {
+			"NoUnderline": "Keine",
+			"SingleUnderline": "Durchgezogen",
+			"DashUnderline": "Gestrichelt",
+			"DotLine": "Gepunktet",
+			"DashDotLine": "Strich-Punkt",
+			"DashDotDotLine": "Strich-Punkt-Punkt",
+			"WaveUnderline": "Wellenlinie",
+			"SpellCheckUnderline": "Rechtschreibprüfung"
+		},
+		"unsavedChanges": {
+			"title": "Nicht gespeicherte Änderungen",
+			"message": "Sie haben nicht gespeicherte Änderungen. Möchten Sie sie speichern? Wenn Sie nicht speichern, gehen alle Änderungen verloren."
+		},
+		"staticThemeWarning": "! Hinweis: Dies ist ein integriertes Design. Änderungen daran werden nie wirksam. Bitte duplizieren Sie es, bevor Sie es ändern."
+	},
+	"agent": {
+		"title": "Visindigo Agent Chat",
+		"placeholder": "Nachricht eingeben. Enter zum Senden, Shift+Enter für eine neue Zeile",
+		"send": "Senden",
+		"ready": "Bereit. Aktuelles Modell: %1",
+		"generating": "Wird generiert…",
+		"reasoning": "Gedankengang",
+		"runError": "Ausführung fehlgeschlagen: %1",
+		"configError": "Die Modellkonfiguration auf dem Desktop konnte nicht geladen werden: %1"
+	},
+	"pluginLoadFaultDialog": {
+		"title": "Plugin-Ladefehler",
+		"message": "Die folgenden Plugins konnten nicht korrekt geladen werden. Ihre IDs und die Gründe sind unten aufgeführt. Möchten Sie das Programm weiterhin verwenden?",
+		"pluginID": "Plugin-ID",
+		"reason": "Grund",
+		"continue": "Weiterverwenden",
+		"quit": "Programm beenden"
+	},
+	"pluginLoadResult": {
+		"Unknown": {
+			"title": "Unbekannter Fehler",
+			"message": "Beim Laden des Plugins ist ein unerwarteter Fehler aufgetreten. Starten Sie das Programm neu; besteht das Problem weiterhin, wenden Sie sich an den Plugin-Autor."
+		},
+		"Success": {
+			"title": "Erfolgreich geladen",
+			"message": "Das Plugin wurde erfolgreich geladen."
+		},
+		"Deactivated": {
+			"title": "Deaktiviert",
+			"message": "Dieses Plugin wurde in den Plugin-Einstellungen deaktiviert und daher nicht geladen. Aktivieren Sie es in den Plugin-Einstellungen, um es zu verwenden."
+		},
+		"PlatformNotSupported": {
+			"title": "Nicht unterstützte Plattform",
+			"message": "Dieses Plugin unterstützt das aktuelle Betriebssystem oder die aktuelle CPU-Architektur nicht. Bitten Sie den Plugin-Autor um eine Version für diese Plattform."
+		},
+		"InvalidPluginBinary": {
+			"title": "Ungültige Plugin-Datei",
+			"message": "Die Plugin-Datei kann nicht als Visindigo-Plugin erkannt werden. Möglicherweise ist sie zu alt, um überhaupt geladen zu werden, oder aus anderen Gründen beschädigt. Installieren Sie dieses Plugin neu."
+		},
+		"InvalidDependLib": {
+			"title": "Ungültige Abhängigkeitsbibliothek",
+			"message": "Eine von diesem Plugin benötigte Bibliothek fehlt oder ist beschädigt. Installieren Sie das Plugin samt Abhängigkeiten neu."
+		},
+		"DependLibConflict": {
+			"title": "Konflikt bei Abhängigkeitsbibliothek",
+			"message": "Eine von diesem Plugin benötigte Bibliothek steht im Konflikt mit einer bereits geladenen anderen Version. Entfernen oder aktualisieren Sie das Konflikt verursachende Plugin."
+		},
+		"EntryPointNotFound": {
+			"title": "Einstiegspunkt nicht gefunden",
+			"message": "Im Plugin wurde keine gültige Einstiegsfunktion gefunden; möglicherweise ist es kein gültiges Visindigo-Plugin."
+		},
+		"ConstructorError": {
+			"title": "Konstruktorfehler",
+			"message": "Beim Erstellen des Plugins ist eine Ausnahme aufgetreten oder es wurde ein leeres Objekt zurückgegeben. Wenden Sie sich an den Plugin-Autor."
+		},
+		"IncompatibleABI": {
+			"title": "Inkompatible ABI",
+			"message": "Das Plugin ist mit der ABI-Version des Programmkerns nicht kompatibel. Aktualisieren Sie das Plugin oder das Programm."
+		},
+		"IncompatibleAPI": {
+			"title": "Inkompatible API",
+			"message": "Das Plugin ist mit der API-Version dieses Programms nicht kompatibel. Aktualisieren Sie das Plugin oder das Programm."
+		},
+		"AlreadyLoaded": {
+			"title": "Bereits geladen",
+			"message": "Ein Plugin mit derselben ID ist bereits geladen, daher wurde dieses übersprungen. Prüfen Sie auf doppelte Plugin-Dateien."
+		},
+		"DependencyNotFound": {
+			"title": "Abhängigkeit nicht gefunden",
+			"message": "Ein anderes Plugin, von dem dieses Plugin abhängt, ist nicht vorhanden. Installieren Sie das fehlende Plugin und versuchen Sie es erneut."
+		},
+		"DependencyLoadFailed": {
+			"title": "Abhängigkeit konnte nicht geladen werden",
+			"message": "Ein anderes Plugin, von dem dieses Plugin abhängt, konnte nicht geladen werden. Beheben Sie zuerst das Ladeproblem jenes Plugins."
+		},
+		"DependencyDeactivated": {
+			"title": "Abhängigkeit deaktiviert",
+			"message": "Ein anderes Plugin, von dem dieses Plugin abhängt, ist deaktiviert. Aktivieren Sie die Abhängigkeit oder deaktivieren Sie auch dieses Plugin."
+		},
+		"MetadataNotFound": {
+			"title": "Metadaten nicht gefunden",
+			"message": "Die Metadatendatei des Plugins wurde nicht gefunden, daher kann das Plugin nicht erkannt werden. Installieren Sie das Plugin neu."
+		},
+		"MetadataNotSame": {
+			"title": "Metadaten stimmen nicht überein",
+			"message": "Die Metadaten des Plugins stimmen nicht mit der tatsächlichen Datei überein. Installieren Sie das Plugin neu."
+		}
+	}
+}

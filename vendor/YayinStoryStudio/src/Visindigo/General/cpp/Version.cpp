@@ -1,0 +1,427 @@
+#include <QtCore/qregularexpression.h>
+#include <QtCore/qstring.h>
+#include <QtCore/qstringlist.h>
+#include "General/private/AUTO_VERSION.h"
+#include "General/Version.h"
+
+namespace Visindigo::General {
+	class VersionPrivate
+	{
+		friend class Version;
+	protected:
+		quint32 major = 0;
+		quint32 minor = 0;
+		quint32 patch = 0;
+		bool useBuild = false;
+		quint32 build = 0;
+		QString nickName = "";
+		static Version APIVersion;
+		static Version ABIVersion;
+
+		static int compare(const VersionPrivate& a, const VersionPrivate& b) {
+			if (a.major != b.major) {
+				return a.major < b.major ? -1 : 1;
+			}
+			if (a.minor != b.minor) {
+				return a.minor < b.minor ? -1 : 1;
+			}
+			if (a.patch != b.patch) {
+				return a.patch < b.patch ? -1 : 1;
+			}
+			const quint32 aBuild = a.useBuild ? a.build : 0;
+			const quint32 bBuild = b.useBuild ? b.build : 0;
+			if (aBuild != bBuild) {
+				return aBuild < bBuild ? -1 : 1;
+			}
+			return 0;
+		}
+	};
+	Version VersionPrivate::APIVersion = Version(Visindigo_VERSION_MAJOR, Visindigo_VERSION_MINOR, Visindigo_VERSION_PATCH, true, Visindigo_VERSION_BUILD, Visindigo_VERSION_NICKNAME);
+	Version VersionPrivate::ABIVersion = Version(Visindigo_ABI_VERSION_MAJOR, Visindigo_ABI_VERSION_MINOR, 0);
+
+	/*!
+		\class Visindigo::General::Version
+		\brief 在现有主流版本号表示方法中找到的一个相对通用的方案.
+		\inmodule Visindigo
+		\inheaderfile General/Version.h
+		\since Visindigo 0.13.0
+
+		版本号类，表示软件的版本信息。版本号由主版本号、次版本号、修订号、可选的构建号和可选的昵称组成。
+
+		这个类支持复制和移动，并且提供了比较运算符来比较不同版本号的大小关系。
+
+		\section1 版本号格式
+		版本号的字符串表示格式为 "major.minor[.patch[.build]] [[nickname]]"。其中：
+		major：主版本号，必须存在。
+		minor：次版本号，必须存在。
+		patch：修订号，可选，默认为0。
+		build：构建号，可选，默认为未使用。
+		nickname：昵称，可选，默认为空字符串。
+
+		Visindigo Version版本号不支持 短杠 或 下划线 作为后缀补充部分，如需使用，请使用昵称字段，例如：
+		1.0.0-beta1 应表示为 1.0.0 [beta1]
+
+		比较版本号时昵称不参与比较，且未使用或未给出的构建号按0处理，
+		因此 0.17.0 与 0.17.0.0 相等，0.17.0.236 大于 0.17.0。
+	*/
+
+	/*!
+		\since Visindigo 0.13.0
+		默认构造函数，创建一个版本号为0.0.0的对象。默认不使用构建号，昵称为空。
+	*/
+	Version::Version()
+	{
+		d = new VersionPrivate;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		\a major 主版本号
+		\a minor 次版本号
+		\a patch 修订号
+		\a useBuild 是否使用构建号
+		\a build 构建号
+		\a nickName 昵称
+
+		构建号默认不使用且值为0，昵称默认为空字符串。
+	*/
+	Version::Version(quint32 major, quint32 minor, quint32 patch, bool useBuild, quint32 build, const QString& nickName)
+	{
+		d = new VersionPrivate;
+		setVersion(major, minor, patch, useBuild, build, nickName);
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		\a version 版本号字符串，格式为 "major.minor[.patch[.build]] [[nickname]]"。major、minor 为必需，patch 与 build 依次可选，缺省时分别视为 0 和未使用。
+
+		如果字符串格式不正确，则版本号保持为默认值0.0.0。
+	*/
+	Version::Version(const QString& version)
+	{
+		d = new VersionPrivate;
+		setVersion(version);
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		\a other 另一个版本号对象。
+
+		复制构造函数与复制赋值运算符，创建一个与 \a other 相同的版本号对象。
+	*/
+	VICopyable_Impl(Version);
+
+	/*!
+		\since Visindigo 0.13.0
+		\a other 另一个版本号对象。
+
+		移动构造函数与移动赋值运算符，转移 \a other 的资源到新对象中， \a other 变为空对象。
+	*/
+	VIMoveable_Impl(Version);
+
+	/*!
+		析构函数，释放资源。
+	*/
+	Version::~Version()
+	{
+		if (d)
+			delete d;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		\a other 另一个版本号对象。
+
+		大于运算符，比较当前对象与 \a other 的版本号大小。它依次比较主版本号、次版本号、修订号和构建号
+		（未使用的构建号视为0）。昵称不参与比较。
+		return 如果当前对象的版本号大于 \a other 的版本号，则返回 true；否则返回 false。
+	*/
+	bool Version::operator>(const Version& other) const
+	{
+		return VersionPrivate::compare(*d, *other.d) > 0;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		\a other 另一个版本号对象。
+
+		小于运算符，比较当前对象与 \a other 的版本号大小。它依次比较主版本号、次版本号、修订号和构建号
+		（未使用的构建号视为0）。昵称不参与比较。
+		return 如果当前对象的版本号小于 \a other 的版本号，则返回 true；否则返回 false。
+	*/
+	bool Version::operator<(const Version& other) const
+	{
+		return VersionPrivate::compare(*d, *other.d) < 0;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		\a other 另一个版本号对象。
+
+		等于运算符，比较当前对象与 \a other 的版本号是否相等。它比较主版本号、次版本号、修订号和构建号
+		（未使用的构建号视为0，因此 0.17.0 与 0.17.0.0 相等）。昵称不参与比较。
+		return 如果当前对象的版本号等于 \a other 的版本号，则返回 true；否则返回 false。
+	*/
+	bool Version::operator==(const Version& other) const
+	{
+		return VersionPrivate::compare(*d, *other.d) == 0;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		\a other 另一个版本号对象。
+
+		不等于运算符，是等于运算符的取反。
+		return 如果当前对象的版本号不等于 \a other 的版本号，则返回 true；否则返回 false。
+	*/
+	bool Version::operator!=(const Version& other) const {
+		return !(*this == other);
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		\a other 另一个版本号对象。
+
+		大于等于运算符，是大于运算符和等于运算符的取或。
+		return 如果当前对象的版本号大于或等于 \a other 的版本号，则返回 true；否则返回 false。
+	*/
+	bool Version::operator>=(const Version& other) const {
+		return *this > other || *this == other;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		\a other 另一个版本号对象。
+
+		小于等于运算符，是小于运算符和等于运算符的取或。
+		return 如果当前对象的版本号小于或等于 \a other 的版本号，则返回 true；否则返回 false。
+	*/
+	bool Version::operator<=(const Version& other) const {
+		return *this < other || *this == other;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		return 将版本号转换为字符串表示
+
+		格式为 "major.minor.patch[.build] [[nickname]]"。
+	*/
+	QString Version::toString() const {
+		QString version = QString("%1.%2.%3").arg(d->major).arg(d->minor).arg(d->patch);
+		if (d->useBuild) {
+			version += QString(".%1").arg(d->build);
+		}
+		if (!d->nickName.isEmpty()) {
+			version += QString(" [%1]").arg(d->nickName);
+		}
+		return version;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		\a version 版本号字符串，格式为 "major.minor[.patch[.build]] [[nickname]]"。major、minor 为必需，patch 与 build 依次可选，缺省时分别视为 0 和未使用。
+
+		如果字符串格式不正确，则版本号保持不变。
+	*/
+	void Version::setVersion(const QString& version)
+	{
+		QRegularExpression nickNameRE(R"((\d+)\.(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\s?\[([^\]]+)\])?)");
+		QRegularExpressionMatch match = nickNameRE.match(version);
+		QString majorStr = match.captured(1);
+		QString minorStr = match.captured(2);
+		QString patchStr = match.captured(3);
+		QString buildStr = match.captured(4);
+		QString nickName = match.captured(5);
+		bool ok = false;
+		quint32 major = majorStr.toUInt(&ok);
+		if (not ok) return;
+		quint32 minor = minorStr.toUInt(&ok);
+		if (not ok) return;
+		bool hasPatch = not patchStr.isEmpty();
+		quint32 patch = hasPatch ? patchStr.toUInt(&ok) : 0;
+		if (hasPatch and not ok) return;
+		bool useBuild = not buildStr.isEmpty();
+		quint32 build = useBuild ? buildStr.toUInt(&ok) : 0;
+		if (useBuild and not ok) return;
+		setVersion(major, minor, patch, useBuild, build, nickName);
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		\a major 主版本号
+		\a minor 次版本号
+		\a patch 修订号
+		\a useBuild 是否使用构建号
+		\a build 构建号
+		\a nickName 昵称
+	*/
+	void Version::setVersion(quint32 major, quint32 minor, quint32 patch, bool useBuild, quint32 build, const QString& nickName)
+	{
+		d->major = major;
+		d->minor = minor;
+		d->patch = patch;
+		d->useBuild = useBuild;
+		d->build = build;
+		d->nickName = nickName;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		\a name 昵称
+
+		 设置版本号的昵称。昵称可以是任何字符串，通常用于表示版本的特殊含义或状态，例如 "beta"、"alpha"、"release candidate" 等等。
+	*/
+	void Version::setNickName(const QString& name)
+	{
+		d->nickName = name;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		return 主版本号。
+	*/
+	quint32 Version::getMajor() const
+	{
+		return d->major;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		return 次版本号。
+	*/
+	quint32 Version::getMinor() const
+	{
+		return d->minor;
+	}
+	/*!
+		\since Visindigo 0.13.0
+		return 修订号。
+	*/
+	quint32 Version::getPatch() const
+	{
+		return d->patch;
+	}
+	/*!
+		\since Visindigo 0.13.0
+		return 是否使用构建号。
+	*/
+	bool Version::getUseBuild() const
+	{
+		return d->useBuild;
+	}
+	/*!
+		\since Visindigo 0.13.0
+		return 构建号。
+	*/
+	quint32 Version::getBuild() const
+	{
+		return d->build;
+	}
+	/*!
+		\since Visindigo 0.13.0
+		return 昵称。
+	*/
+	QString Version::getNickName() const
+	{
+		return d->nickName;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		return Visindigo在编译时的API版本号。这个版本号存储在动态链接库里，
+		表达Visindigo本身的版本号。需要查询插件（包）的版本号，请参见
+		Visindigo::General::Plugin自己的相关函数。
+	*/
+	Version Version::getAPIVersion() {
+		return VersionPrivate::APIVersion;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		return Visindigo在编译时的ABI版本号。这个版本号存储在动态链接库里，
+		表达Visindigo本身的版本号。需要查询插件（包）的版本号，请参见
+		Visindigo::General::Plugin自己的相关函数。
+	*/
+	Version Version::getABIVersion() {
+		return VersionPrivate::ABIVersion;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		\a env 运行环境的版本号
+		\a tar 目标版本号
+		检查运行环境的API版本号 \a env 是否兼容目标版本号 \a tar 。
+		只要环境版本号不小于目标版本号，就被认为兼容。因此必要时应该通过ABI作为兼容性检查的补充。
+
+		return 如果环境版本号兼容目标版本号，则返回 true；否则返回 false。
+	*/
+	bool Version::isCompatibleAPIVersion(const Version& env, const Version& tar) {
+		return env >= tar;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		\a env 运行环境的版本号
+		\a tar 目标版本号
+		检查运行环境的ABI版本号 \a env 是否兼容目标版本号 \a tar  。
+		兼容的条件是：主版本号相同，次版本号不小于目标版本号的次版本号。
+
+		return 如果环境版本号兼容目标版本号，则返回 true；否则返回 false。
+	*/
+	bool Version::isCompatibleABIVersion(const Version& env, const Version& tar) {
+		return env.getMajor() == tar.getMajor() && env.getMinor() >= tar.getMinor();
+	}
+}
+
+/*!
+	\macro Visindigo_VERSION_MAJOR
+	\relates Visindigo::General::Version
+
+	定义Visindigo的主版本号。
+*/
+
+/*!
+	\macro Visindigo_VERSION_MINOR
+	\relates Visindigo::General::Version
+
+	定义Visindigo的次版本号。
+*/
+
+/*!
+	\macro Visindigo_VERSION_PATCH
+	\relates Visindigo::General::Version
+
+	定义Visindigo的修订号。
+*/
+
+/*!
+	\macro Visindigo_ABI_VERSION_MAJOR
+	\relates Visindigo::General::Version
+
+	定义Visindigo的ABI主版本号。
+*/
+
+/*!
+	\macro Visindigo_ABI_VERSION_MINOR
+	\relates Visindigo::General::Version
+
+	定义Visindigo的ABI次版本号。
+*/
+
+/*!
+	\macro Compiled_VIABI_Version
+	\relates Visindigo::General::Version
+
+	定义编译时的Visindigo ABI版本号。
+
+	这和 Version::getABIVersion() 在使用上略有区别。
+
+	因为它是被定义在头文件里的，因此在编译期就被确定，可以静态的留存在程序中，
+	被用来保存编译时的ABI版本号信息。Visindigo::General::Plugin就使用此宏
+	来固定编译ABI版本号。
+
+	而 Version::getABIVersion() 则可在运行时调用，
+	更多的是用来在运行时查询所使用的Visindigo库的ABI版本号信息。
+
+	当编译版本与使用的库版本一致时，这两个版本号是相同的。
+*/

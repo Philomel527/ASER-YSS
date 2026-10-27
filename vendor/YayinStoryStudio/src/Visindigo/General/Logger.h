@@ -1,0 +1,124 @@
+#ifndef Visindigo_General_Logger_h
+#define Visindigo_General_Logger_h
+#include <QtCore/qstring.h>
+#include "VICompileMacro.h"
+// Forward declarations
+
+namespace Visindigo::General {
+	class LoggerMsgHandler;
+	class LoggerPrivate;
+}
+// Main
+namespace Visindigo::General {
+	class VisindigoAPI Logger {
+	public:
+		enum Level {
+			Debug = 1000,
+			Message = 2000,
+			Info = Message,
+			Log = Message,
+			Notice = 3000,
+			Success = 4000,
+			Warning = 5000,
+			Error = 6000,
+		};
+	public:
+		explicit Logger(const QString& nameSpace, Level threshold = Debug);
+		Logger(const Logger& other) = delete;
+		Logger(Logger&& other) = delete;
+		~Logger();
+		static Logger* global();
+		LoggerMsgHandler debug();
+		LoggerMsgHandler message();
+		LoggerMsgHandler info();
+		LoggerMsgHandler log();
+		LoggerMsgHandler notice();
+		LoggerMsgHandler success();
+		LoggerMsgHandler warning();
+		LoggerMsgHandler error();
+		QString getNamespace();
+		void setNamespace(const QString& nameSpace);
+		Level getThreshold() const;
+		void setThreshold(Level threshold);
+	private:
+		LoggerPrivate* d;
+	};
+}
+// Global Macros
+#define vDebug(getInstnaceFunction) getInstnaceFunction->debug()
+#define vMessage(getInstnaceFunction) getInstnaceFunction->message()
+#define vInfo(getInstnaceFunction) getInstnaceFunction->info()
+#define vLog(getInstnaceFunction) getInstnaceFunction->log()
+#define vNotice(getInstnaceFunction) getInstnaceFunction->notice()
+#define vSuccess(getInstnaceFunction) getInstnaceFunction->success()
+#define vWarning(getInstnaceFunction) getInstnaceFunction->warning()
+#define vError(getInstnaceFunction) getInstnaceFunction->error()
+
+#define vDebugF(getInstnaceFunction) getInstnaceFunction->debug()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)
+#define vMessageF(getInstnaceFunction) getInstnaceFunction->message()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)
+#define vInfoF(getInstnaceFunction) getInstnaceFunction->info()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)
+#define vLogF(getInstnaceFunction) getInstnaceFunction->log()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)
+#define vNoticeF(getInstnaceFunction) getInstnaceFunction->notice()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)
+#define vSuccessF(getInstnaceFunction) getInstnaceFunction->success()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)
+
+#ifdef VI_HAS_STD_STACKTRACE
+#define vWarningF(getInstnaceFunction) getInstnaceFunction->warning()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)<<Visindigo::General::StacktraceHelper::getStacktrace()
+#define vErrorF(getInstnaceFunction) getInstnaceFunction->error()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)<<Visindigo::General::StacktraceHelper::getStacktrace()
+
+#define vDebugST(getInstnaceFunction) getInstnaceFunction->debug()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)<<Visindigo::General::StacktraceHelper::getStacktrace()
+#define vMessageST(getInstnaceFunction) getInstnaceFunction->message()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)<<Visindigo::General::StacktraceHelper::getStacktrace()
+#define vInfoST(getInstnaceFunction) getInstnaceFunction->info()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)<<Visindigo::General::StacktraceHelper::getStacktrace()
+#define vLogST(getInstnaceFunction) getInstnaceFunction->log()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)<<Visindigo::General::StacktraceHelper::getStacktrace()
+#define vNoticeST(getInstnaceFunction) getInstnaceFunction->notice()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)<<Visindigo::General::StacktraceHelper::getStacktrace()
+#define vSuccessST(getInstnaceFunction) getInstnaceFunction->success()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)<<Visindigo::General::StacktraceHelper::getStacktrace()
+
+#else
+
+#define vWarningF(getInstnaceFunction) getInstnaceFunction->warning()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)
+#define vErrorF(getInstnaceFunction) getInstnaceFunction->error()<<Visindigo::General::LogMetaData(__FUNCTION__, (qint32)__LINE__)
+// 无 VI_HAS_STD_STACKTRACE 时，*ST 系列退化为对应的 *F（不含栈采集）。
+// 命名与上方 #ifdef 分支保持一致的小写形式，使 vg*ST 宏在两种构建下都可用。
+#define vDebugST(getInstnaceFunction) vDebugF(getInstnaceFunction)
+#define vMessageST(getInstnaceFunction) vMessageF(getInstnaceFunction)
+#define vInfoST(getInstnaceFunction) vInfoF(getInstnaceFunction)
+#define vLogST(getInstnaceFunction) vLogF(getInstnaceFunction)
+#define vNoticeST(getInstnaceFunction) vNoticeF(getInstnaceFunction)
+#define vSuccessST(getInstnaceFunction) vSuccessF(getInstnaceFunction)
+#endif
+
+#define VILoggerGlobal Visindigo::General::Logger::global()
+
+#define vgDebug vDebug(VILoggerGlobal)
+#define vgMessage vMessage(VILoggerGlobal)
+#define vgInfo vInfo(VILoggerGlobal)
+#define vgLog vLog(VILoggerGlobal)
+#define vgNotice vNotice(VILoggerGlobal)
+#define vgSuccess vSuccess(VILoggerGlobal)
+#define vgWarning vWarning(VILoggerGlobal)
+#define vgError vError(VILoggerGlobal)
+
+#define vgDebugF vDebugF(VILoggerGlobal)
+#define vgMessageF vMessageF(VILoggerGlobal)
+#define vgInfoF vInfoF(VILoggerGlobal)
+#define vgLogF vLogF(VILoggerGlobal)
+#define vgNoticeF vNoticeF(VILoggerGlobal)
+#define vgSuccessF vSuccessF(VILoggerGlobal)
+#define vgWarningF vWarningF(VILoggerGlobal)
+#define vgErrorF vErrorF(VILoggerGlobal)
+
+#define vgDebugST vDebugST(VILoggerGlobal)
+#define vgMessageST vMessageST(VILoggerGlobal)
+#define vgInfoST vInfoST(VILoggerGlobal)
+#define vgLogST vLogST(VILoggerGlobal)
+#define vgNoticeST vNoticeST(VILoggerGlobal)
+#define vgSuccessST vSuccessST(VILoggerGlobal)
+
+#define VI_DECLARE_LOGGER(loggerName, macroPrefix, ...)\
+namespace __VA_ARGS__ {\
+	class loggerName##Logger : public Visindigo::General::Logger {\
+	public:\
+		loggerName##Logger() : Visindigo::General::Logger(#loggerName) {}\
+	};\
+	static loggerName##Logger* macroPrefix = new loggerName##Logger();\
+}
+#endif // Visindigo_General_Logger_h

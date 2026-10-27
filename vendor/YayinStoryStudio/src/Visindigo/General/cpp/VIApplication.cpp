@@ -1,0 +1,959 @@
+#include <chrono>
+#include <QtCore/qdir.h>
+#include <QtCore/qthread.h>
+#include <QtGui/qfontdatabase.h>
+#include <QtGui/qpainter.h>
+#include "General/CommandHost.h"
+#include "General/CrashGateway.h"
+#include "General/Log.h"
+#include "General/Plugin.h"
+#include "General/PluginManager.h"
+#include "General/private/AUTO_VERSION.h"
+#include "General/private/Plugin_p.h"
+#include "General/private/VIApplication_p.h"
+#include "General/private/VIGeneral_p.h"
+#include "General/TranslationHost.h"
+#include "General/VIApplication.h"
+#include "Utility/Console.h"
+#include "Widgets/IconFontRouter.h"
+#include "Widgets/private/VIWidgets_p.h"
+#include "Widgets/Terminal.h"
+#include "Widgets/ThemeManager.h"
+namespace Visindigo::__Private__ {
+	void ApplicationLoadingMessageHandlerDefaultConsoleImpl::onLoadingMessage(const QString& message) {
+		vgNoticeF << "[Loading Message Handler] " << message;
+	}
+	void ApplicationLoadingMessageHandlerDefaultConsoleImpl::enableHandler() {
+		vgNoticeF << "[Loading Message Handler] Enabled default console handler.";
+	}
+	void ApplicationLoadingMessageHandlerDefaultConsoleImpl::disableHandler() {
+		vgNoticeF << "[Loading Message Handler] Disabled default console handler.";
+	}
+
+	CoreApplication::CoreApplication(int& argc, char** argv) :QCoreApplication(argc, argv) {}
+	bool CoreApplication::notify(QObject* receiver, QEvent* event) {
+		try {
+			return QCoreApplication::notify(receiver, event);
+		}
+		catch (const Visindigo::General::Exception& ex) {
+			Visindigo::General::VIApplication::getInstance()->onException(ex);
+		}
+		catch (const std::exception& e) {
+			Visindigo::General::VIApplication::getInstance()->onException(Visindigo::General::Exception::fromStdException(e));
+		}
+		catch (...) {
+			Visindigo::General::VIApplication::getInstance()->onException(Visindigo::General::Exception(Visindigo::General::Exception::Unknown, "Unknown exception caught in CoreApplication::notify", true));
+		}
+		return false;
+	}
+
+	GuiApplication::GuiApplication(int& argc, char** argv) :QGuiApplication(argc, argv) {}
+	bool GuiApplication::notify(QObject* receiver, QEvent* event) {
+		try {
+			return QGuiApplication::notify(receiver, event);
+		}
+		catch (const Visindigo::General::Exception& ex) {
+			Visindigo::General::VIApplication::getInstance()->onException(ex);
+		}
+		catch (const std::exception& e) {
+			Visindigo::General::VIApplication::getInstance()->onException(Visindigo::General::Exception::fromStdException(e));
+		}
+		catch (...) {
+			Visindigo::General::VIApplication::getInstance()->onException(Visindigo::General::Exception(Visindigo::General::Exception::Unknown, "Unknown exception caught in GuiApplication::notify", true));
+		}
+		return false;
+	}
+
+	Application::Application(int& argc, char** argv) :QApplication(argc, argv) {}
+	bool Application::notify(QObject* receiver, QEvent* event) {
+		try {
+			return QApplication::notify(receiver, event);
+		}
+		catch (const Visindigo::General::Exception& ex) {
+			Visindigo::General::VIApplication::getInstance()->onException(ex);
+		}
+		catch (const std::exception& e) {
+			Visindigo::General::VIApplication::getInstance()->onException(Visindigo::General::Exception::fromStdException(e));
+		}
+		catch (...) {
+			Visindigo::General::VIApplication::getInstance()->onException(Visindigo::General::Exception(Visindigo::General::Exception::Unknown, "Unknown exception caught in Application::notify", true));
+		}
+		return false;
+	}
+}
+
+namespace Visindigo::General {
+	/*!
+		\class Visindigo::General::ApplicationLoadingMessageHandler
+		\inheaderfile General/VIApplication.h
+		\brief Visindigo应用程序加载消息处理器接口类.
+		\since Visindigo 0.13.0
+		\inmodule Visindigo
+
+		\note 此类为接口类，用户可以继承此类以实现自定义的加载消息处理器。
+
+		这是一个抽象接口，用户可以任意实现，以处理应用程序加载过程中的消息，例如在GUI界面中或在控制台中显示加载进度等。
+	*/
+
+	/*！
+		\fn void Visindigo::General::ApplicationLoadingMessageHandler::onLoadingMessage(const QString& msg)
+		\since Visindigo 0.13.0
+		\a msg 加载消息内容
+
+		当应用程序在加载过程中产生消息时调用此函数。用户可以实现此函数以处理加载消息。
+	*/
+
+	/*!
+		\fn void Visindigo::General::ApplicationLoadingMessageHandler::enableHandler()
+		\since Visindigo 0.13.0
+
+		启用加载消息处理器时调用此函数。用户可以实现此函数以执行启用处理器时的操作。
+	*/
+
+	/*!
+		\fn void Visindigo::General::ApplicationLoadingMessageHandler::disableHandler()
+		\since Visindigo 0.13.0
+
+		禁用加载消息处理器时调用此函数。用户可以实现此函数以执行禁用处理器时的操作。
+	*/
+
+	/*!
+		\class Visindigo::General::ApplicationExceptionMessageHandler
+		\inheaderfile General/VIApplication.h
+		\brief Visindigo应用程序异常消息处理器接口类.
+		\since Visindigo 0.13.0
+		\inmodule Visindigo
+
+		\note 此类为接口类，用户可以继承此类以实现自定义的异常消息处理器。
+
+		这是一个抽象接口，用户可以任意实现，以处理应用程序运行过程中捕获的异常消息，例如在GUI界面中显示异常信息对话框等。
+	*/
+
+	/*!
+		\fn void Visindigo::General::ApplicationExceptionMessageHandler::onExceptionMessage(const Exception& ex)
+		\since Visindigo 0.13.0
+		\a ex 捕获的异常对象
+
+		当应用程序在运行过程中捕获到异常时调用此函数。用户可以实现此函数以处理异常消息。
+	*/
+
+	/*!
+		\fn void Visindigo::General::ApplicationExceptionMessageHandler::enableHandler()
+		\since Visindigo 0.13.0
+
+		启用异常消息处理器时调用此函数。用户可以实现此函数以执行启用处理器时的操作。
+	*/
+
+	/*!
+		\fn void Visindigo::General::ApplicationExceptionMessageHandler::exec()
+		\since Visindigo 0.13.0
+
+		执行异常消息处理器时调用此函数。用户可以实现此函数以执行处理异常消息的操作。
+	*/
+
+	/*!
+		\fn void Visindigo::General::ApplicationExceptionMessageHandler::disableHandler()
+		\since Visindigo 0.13.0
+
+		禁用异常消息处理器时调用此函数。用户可以实现此函数以执行禁用处理器时的操作。
+	*/
+
+	/*!
+		\fn Visindigo::General::ApplicationLoadingMessageHandler::~ApplicationLoadingMessageHandler()
+		\since Visindigo 0.17.0
+
+		析构函数。处理器由VIApplication通过基类指针释放，因此析构函数必须是虚函数。
+	*/
+	ApplicationLoadingMessageHandler::~ApplicationLoadingMessageHandler() {}
+
+	/*!
+		\fn Visindigo::General::ApplicationExceptionMessageHandler::~ApplicationExceptionMessageHandler()
+		\since Visindigo 0.17.0
+
+		析构函数。处理器由VIApplication通过基类指针释放，因此析构函数必须是虚函数。
+	*/
+	ApplicationExceptionMessageHandler::~ApplicationExceptionMessageHandler() {}
+
+	class VIApplicationPrivate {
+		friend class VIApplication;
+	protected:
+		static QMap<VIApplication::EnvKey, QVariant> EnvConfig;
+		static VIApplication* Instance;
+
+		void* AppInstance;
+		bool started = false;
+		VIApplication::AppType AppType;
+		Visindigo::__Private__::VisindigoCore* CorePlugin;
+		Visindigo::__Private__::VisindigoWidgets* WidgetsPlugin;
+		Plugin* MainPlugin;
+		ApplicationLoadingMessageHandler* LoadingMessageHandler = nullptr;
+		ApplicationExceptionMessageHandler* ExceptionMessageHandler = nullptr;
+		Widgets::Terminal* VirtualTerminal = nullptr;
+		QList<Plugin*> DependencyPlugins;
+		QFont GlobalFont;
+		QFont IconFont;
+		Visindigo::Widgets::IconFontRouter* IconFontRouter = nullptr;
+	};
+
+	VIApplication* VIApplicationPrivate::Instance = nullptr;
+
+	/*!
+		\enum Visindigo::General::VIApplication::EnvKey
+		\since Visindigo 0.13.0
+		此枚举定义了VIApplication支持的环境配置键。
+		\value LogFolderPath 日志文件夹路径，类型为QString，默认值为"./user_data/logs"。值得注意的是，这个文件夹也用于存放崩溃报告文件和命令行历史记录文件。
+		\value LogFileNameTimeFormat 日志文件名时间格式，类型为QString，默认值为"yyyy-MM-dd_hh_mm_ss"。
+		\value LogTimeFormat 日志时间格式，类型为QString，默认值为"yyyy-MM-dd hh:mm:ss.zzz"。
+		\value PluginFolderPath 插件文件夹路径，类型为QString，默认值为"./user_data/plugins"。
+		\value ConfigPath 存放各插件配置文件的文件夹根路径，类型为QString，默认值为"./user_data/config/plugins"。注意，
+			由于程序会扫描整个PluginFolderPath目录来加载插件，因此不建议把这个目录设为PluginFolderPath的子目录，可能会影响插件加载性能。
+		\value MinimumLoadingTimeMS 最小加载时间（毫秒），这个停留时间有助于显示一段时间的程序Logo。类型为qint, 默认值为3000。
+		\value UseVirtualTerminal 是否使用虚拟终端，类型为bool，默认值为false。
+		\value TerminalAutoShow 是否自动显示虚拟终端，类型为bool，默认值为false。仅当UseVirtualTerminal为true时有效。
+			如果为true，则在应用程序启动时会自动显示虚拟终端窗口；如果为false，则需要用户手动调用VIApplication::getVirtualTerminal()->show()来显示虚拟终端窗口。
+		\value ThemeFolderPath 主题文件夹路径，类型为QString，默认值为"./user_data/themes"。
+		\value SaveCommandHistory 是否保存命令历史，类型为bool，默认值为false。
+		\value DefaultColorTheme 默认颜色主题，类型为QString，默认值为"Auto"。Auto意味着程序会在
+		启动时感知当前系统的颜色主题。
+	*/
+	QMap<VIApplication::EnvKey, QVariant> VIApplicationPrivate::EnvConfig = {
+			{VIApplication::LogFolderPath, "./user_data/logs"},
+			{VIApplication::LogFileNameTimeFormat, "yyyy-MM-dd_hh_mm_ss"},
+			{VIApplication::LogTimeFormat, "yyyy-MM-dd hh:mm:ss.zzz"},
+			{VIApplication::PluginFolderPath, "./user_data/plugins"},
+			{VIApplication::ConfigPath, "./user_data/config"},
+			{VIApplication::MinimumLoadingTimeMS, 3000},
+			{VIApplication::UseVirtualTerminal, false},
+			{VIApplication::TerminalAutoShow, false},
+			{VIApplication::ThemeFolderPath, "./user_data/themes"},
+			{VIApplication::SaveCommandHistory, false},
+			{VIApplication::DefaultColorTheme, "Auto"},
+	};
+
+	/*!
+		\since Visindigo 0.13.0
+		return VIApplication单例对象的指针。
+		虽然VIApplication是一个单例类，但此函数不会在实例不存在时创建它。请确保在调用此函数前已正确初始化VIApplication。
+
+		这是Visindigo单例类getInstance()函数的一个特例。其他单例类的getInstance()函数均会在实例不存在时创建它们。请注意区分。
+	*/
+	VIApplication* VIApplication::getInstance() {
+		if (VIApplicationPrivate::Instance == nullptr) {
+			vgWarningF << "VIApplication instance not exists. Visindigo application needs to be initialized first.";
+			throw Exception(Exception::UnsupportedOperation, "VIApplication instance not exists. Visindigo application needs to be initialized first.");
+		}
+		return VIApplicationPrivate::Instance;
+	}
+
+	/*!
+		\class Visindigo::General::VIApplication
+		\inheaderfile General/VIApplication.h
+		\brief Visindigo应用程序的根基，使用部分Visindigo功能必须首先初始化此类.
+		\since Visindigo 0.13.0
+		\inmodule Visindigo
+
+		VIApplication类是Visindigo应用程序的基类，负责初始化和管理Visindigo的核心功能模块，如插件管理器和翻译管理器。
+
+		在使用Visindigo的任何功能之前，必须首先创建VIApplication的实例，并在start之前正确设置有效的MainPlugin。
+		如果MainPlugin无效，则应用程序将无法启动。
+		VIApplication类提供了多种应用程序类型的支持，包括控制台应用程序、GUI应用程序和Widget应用程序，分别
+		等同于Qt中的QCoreApplication、QGuiApplication和QApplication。
+
+		此外，VIApplication还提供了环境配置管理功能，允许用户自定义应用程序的日志文件路径、插件文件路径等参数。
+		但要注意的是，环境配置必须在创建VIApplication实例之前设置，否则可能无法生效。
+
+		通常来说，一个Visindigo应用程序的main.cpp文件应该是这样：
+		\code
+		#include <General/VIApplication.h>
+		#include "MyApplicationMainClass.h"
+		int main(int argc, char* argv[]) {
+			VIAppStatic::setEnvConfig(...); // 可选，如果需要变更相关配置
+
+			Visindigo::General::VIApplication app(argc, argv, Visindigo::General::VIApplication::WidgetApp); // 以Widget为例
+			app.setMainPlugin(new MyApplicationMainClass()); // 设置作为主插件的类
+			app.setLoadingMessageHandler(new MyLoadingMessageHandlerClass()); // 可选，设置加载消息处理器
+			int c = app.start(); // 启动应用程序
+			return c;
+		}
+		\endcode
+
+		至于MyApplicationMainClass，则是一个继承了Visindigo::General::Plugin类的派生类，在其中实现应用程序的主要逻辑。
+
+		\note VIApplication类是一个单例类，应用程序中只能存在一个VIApplication实例。如果尝试创建多个实例，将会抛出异常。
+
+		\section1 工作顺序
+		\list
+		\li 1. QApplication/QGuiApplication/QCoreApplication与VIApplication同时实例化，因此在
+		VIApplication实例化之前，也不能使用部分Qt的功能。Qt的环境变量设置函数也应该在VIApplication实例化之前调用。
+		\li 2. 调用Visindigo内部各模块对应内置插件的onPluginEnable()函数
+		\li 3. 启用LoadingMessageHandler（如果有设置）。
+		\li 4. 调用主插件的Plugin::onPluginEnable()函数。
+		\li 5. 按优先级顺序加载全部插件到内存，然后按优先级顺序调用它们的Plugin::onPluginEnable()函数。
+		\li 6. 按优先级顺序调用全部插件的Plugin::onApplicationInit()函数。
+		\li 7. 按优先级顺序调用全部插件的Plugin::onTest()函数（如果对应插件启用了测试功能）。
+		\li 8. 禁用LoadingMessageHandler（如果有设置）。
+		\li 9. 调用Visindigo内部各模块对应内置插件的onApplicationInit()函数
+		\li 10. 调用主插件的Plugin::onApplicationInit()函数和Plugin::onTest()函数（如果启用了测试功能）。
+		\li 11. 应用程序正式启动，进入事件循环。
+		\li 12. 当应用程序退出时，按优先级顺序逆序调用全部插件的Plugin::onPluginDisable()函数。
+		\li 13. 调用主插件的Plugin::onPluginDisable()函数
+		\li 14. 调用Visindigo内部各模块对应内置插件的onPluginDisable()函数。
+		\li 15. 保存日志文件并清理资源。
+		\endlist
+
+		\note 如您所见，此表没有给发出日志管理器的实例化时间，因为它是按需实例化的，即在第一次使用日志功能时才会实例化。
+		它甚至可以在VIApplication实例化之前被使用（但不推荐）。
+	*/
+
+	/*!
+		\enum Visindigo::General::VIApplication::AppType
+		\since Visindigo 0.13.0
+		此枚举定义了VIApplication支持的应用程序类型。
+		\value CoreApp 表示控制台应用程序，等同于Qt中的QCoreApplication。
+		\value GuiApp 表示GUI应用程序，等同于Qt中的QGuiApplication。
+		\value WidgetApp 表示Widget应用程序，等同于Qt中的QApplication。
+
+		提示：如果要创建QML应用程序，请使用GuiApp类型。
+	*/
+
+	/*!
+		\fn Visindigo::General::VIApplication::VIApplication(int& argc, char** argv, AppType appType, bool changeWorkingDirToExeDir)
+		\since Visindigo 0.13.0
+		创建VIApplication类的新实例。
+		\a argc 和 \a argv 参数与Qt的QCoreApplication、QGuiApplication和QApplication类的构造函数参数相同。
+		\a appType 参数指定应用程序的类型，默认为WidgetApp。
+		\a changeWorkingDirToExeDir 参数指定是否将当前工作目录更改为可执行文件所在目录，默认为true。
+	*/
+#ifdef Q_OS_WIN
+#include <windows.h>
+#include <winnt.h>
+#endif // Q_OS_WIN
+	VIApplication::VIApplication(int& argc, char** argv, AppType appType, bool changeWorkingDirToExeDir) :QObject(nullptr) {
+		if (VIApplicationPrivate::Instance != nullptr) {
+			vgWarningF << "VIApplication instance already exists.";
+			throw Exception(Exception::UnsupportedOperation, "VIApplication instance already exists");
+		}
+		VIApplicationPrivate::Instance = this;
+		d = new VIApplicationPrivate();
+		if (changeWorkingDirToExeDir) {
+			QDir::setCurrent(QFileInfo(argv[0]).absolutePath());
+		}
+		CrashGateway::install();
+		d->AppType = appType;
+		d->MainPlugin = nullptr;
+		switch (appType) {
+		case CoreApp:
+			d->AppInstance = new Visindigo::__Private__::CoreApplication(argc, argv);
+			break;
+		case GuiApp:
+			d->AppInstance = new Visindigo::__Private__::GuiApplication(argc, argv);
+			break;
+		case WidgetApp:
+			d->AppInstance = new Visindigo::__Private__::Application(argc, argv);
+			break;
+		default:
+			throw Exception(Exception::InvalidArgument, "Invalid AppType");
+		}
+		if (VIApplication::getEnvConfig(VIApplication::UseVirtualTerminal).toBool()) {
+			d->VirtualTerminal = new Widgets::Terminal();
+			connect(LogCenter::getInstance(), &LogCenter::logReceived, this,
+				[this](const QString& handlerName, Logger::Level level, const QString& message, const QString& consoleStr, const LogMetaData& metaData) {
+				if (d->VirtualTerminal) {
+					d->VirtualTerminal->addLine(consoleStr+"\n");
+				}
+				});
+			connect(d->VirtualTerminal, &Widgets::Terminal::inputPrepared, VISCH, &CommandHost::executeCommand);
+			//d->VirtualTerminal->show(); // for debug.
+			if (VIApplication::getEnvConfig(VIApplication::TerminalAutoShow).toBool()) {
+				d->VirtualTerminal->show();
+			}
+		}
+		vgDebug << ("\033[38;2;237;28;36m===================================================================\033[0m");
+		vgDebug << ("\033[38;2;234;54;128m╮ ╭\t─┬─\t╭──\t─┬─\t╭╮╭\t┌─╮\t─┬─\t╭─╮\t╭─╮\033[0m");
+		vgDebug << ("\033[38;2;234;63;247m╰╮│\t │ \t╰─╮\t │ \t│││\t│ │\t │ \t│ ┐\t│ │\033[0m");
+		vgDebug << ("\033[38;2;115;43;235m ╰╯\t─┴─\t──╯\t─┴─\t╯╰╯\t└─╯\t─┴─\t╰─╯\t╰─╯\033[0m");
+		vgDebug << ("   \t   \t———\t  流\t   \t清  \t———\t   \t   \t");
+		vgDebug << ("\033[38;2;50;130;246m===================================================================\033[0m");
+		vgMessage << "\033[38;2;234;54;128mABI" << General::Version::getABIVersion().toString() << "API"
+			<< General::Version::getAPIVersion().toString() <<
+#ifdef QT_DEBUG
+			"\033[38;2;255;253;85m[DEBUG compilation mode]\033[0m";
+#else
+			"\033[38;2;255;253;85m[RELEASE compilation mode]\033[0m";
+#endif
+		vgMessage << "\033[38;2;234;63;247mVersion Compilation Time \033[0m: \033[38;2;255;253;85m" << QString(Visindigo_VERSION_BUILD_DATE) <<
+			QString(Visindigo_VERSION_BUILD_TIME) << "[" << QSysInfo::buildCpuArchitecture() << "]\033[0m";
+		vgMessage << Utility::Console::inWarningStyle("Working Path: ") << Utility::Console::inNoticeStyle(QDir::currentPath());
+		vgDebug << "Hello," << QDir::home().dirName() << "! Welcome to Visindigo!";
+
+		CrashGateway::setProductInfo(QStringLiteral("Visindigo %1 (ABI %2)")
+			.arg(General::Version::getAPIVersion().toString())
+			.arg(General::Version::getABIVersion().toString()));
+		CrashGateway::setHardwareInfo(LogCenter::getInstance()->generateHardwareInfo(true, true));
+
+		PluginManager::getInstance(); // Initialize PluginManager
+		TranslationHost::getInstance(); // Initialize TranslationHost
+
+		d->LoadingMessageHandler = new __Private__::ApplicationLoadingMessageHandlerDefaultConsoleImpl();
+
+		connect(PluginManager::getInstance(), &PluginManager::pluginLoaded, this, [this](Plugin* plugin) {
+			if (d->LoadingMessageHandler) {
+				d->LoadingMessageHandler->onLoadingMessage(VITRL("Visindigo::plugin.loaded").arg(plugin->getPluginName()));
+				qApp->processEvents();
+			}
+			});
+
+		connect(PluginManager::getInstance(), &PluginManager::pluginEnabled, this, [this](Plugin* plugin) {
+			if (d->LoadingMessageHandler) {
+				d->LoadingMessageHandler->onLoadingMessage(VITRL("Visindigo::plugin.enabled").arg(plugin->getPluginName()));
+				qApp->processEvents();
+			}
+			});
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		销毁VIApplication实例并释放相关资源。
+	*/
+	VIApplication::~VIApplication() {
+		if (d->AppInstance) {
+			switch (d->AppType) {
+			case CoreApp:
+				delete static_cast<Visindigo::__Private__::CoreApplication*>(d->AppInstance);
+				break;
+			case GuiApp:
+				delete static_cast<Visindigo::__Private__::GuiApplication*>(d->AppInstance);
+				break;
+			case WidgetApp:
+				delete static_cast<Visindigo::__Private__::Application*>(d->AppInstance);
+				break;
+			}
+			d->AppInstance = nullptr;
+		}
+		VIApplicationPrivate::Instance = nullptr;
+		delete d;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		设置应用程序的主插件。
+		\a plugin 指向主插件对象的指针。主插件必须继承自Visindigo::General::Plugin类。
+
+		主插件是应用程序的核心逻辑所在，VIApplication会在启动过程中调用主插件的相关函数以初始化应用程序。
+		必须在调用start()函数之前设置主插件，如果在应用程序已经启动后调用此函数，将不会生效。
+
+		Visindigo不允许用户不使用主插件，因为部分程序配置和功能是通过主插件来实现的，
+		如果没有主插件，应用程序将无法正常运行。所以，也不建议在main函数中额外编写其他涉及
+		资源加载或初始化的代码，应该把这些逻辑放在主插件中实现，避免破坏逻辑封装。
+	*/
+	void VIApplication::setMainPlugin(Plugin* plugin) {
+		if (not d->started) {
+			d->MainPlugin = plugin;
+			d->MainPlugin->d->setPluginLoadType(Plugin::LoadType::MainPlugin);
+			d->MainPlugin->d->initializePluginFolder(PluginManager::getInstance()->getPluginFolder(d->MainPlugin->getPluginID(), Plugin::LoadType::MainPlugin));
+			PluginManager::getInstance()->setDeactivatePluginList(plugin->getPluginConfig()->getStringList("Plugins.Deactivated"));
+		}
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		return 当前设置的主插件对象的指针。
+		如果尚未设置主插件，则返回nullptr。
+	*/
+	Plugin* VIApplication::getMainPlugin() const {
+		return d->MainPlugin;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		添加一个依赖插件。
+		\a plugin 指向依赖插件对象的指针。依赖插件必须继承自Visindigo::General::Plugin类。
+		依赖插件是主插件依赖的插件，VIApplication会在启动过程中先加载并启用这些依赖插件，然后再加载和启用主插件。
+		必须在调用start()函数之前添加依赖插件，如果在应用程序已经启动后调用此函数，将不会生效。
+		注意，添加依赖插件并不会自动将它们添加到主插件的依赖列表中，用户需要手动在主插件中调用Plugin::addDependency()函数来添加这些依赖关系。
+	*/
+	void VIApplication::addDependencyPlugin(Plugin* plugin) {
+		if (not d->started) {
+			d->DependencyPlugins.append(plugin);
+		}
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		return 当前设置的全部依赖插件对象的指针列表。
+		如果尚未添加任何依赖插件，则返回一个空列表。
+	*/
+	QList<Plugin*> VIApplication::getDependencyPlugins() const {
+		return d->DependencyPlugins;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		设置应用程序的环境配置参数。
+		\a key 环境配置键，参见EnvKey枚举。
+		\a value 环境配置值，类型为QVariant。
+
+		此函数允许用户自定义应用程序的环境配置参数，如日志文件路径、插件文件路径等。
+		必须在创建VIApplication实例之前调用此函数，否则可能无法生效。
+
+		实际上在启动程序之后仍然会正确保存这些配置，但某些功能在启动后不会重新应用新的配置。
+	*/
+	void VIApplication::setEnvConfig(EnvKey key, const QVariant& value) {
+		VIApplicationPrivate::EnvConfig.insert(key, value);
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		设置应用程序的加载消息处理器。
+		\a handler 指向加载消息处理器对象的指针。加载消息处理器必须继承自Visindigo::General::ApplicationLoadingMessageHandler类。
+
+		加载消息处理器用于处理应用程序在启动过程中产生的加载消息，例如在GUI界面中或在控制台中显示加载进度等。
+		必须在调用start()函数之前设置加载消息处理器，如果在应用程序已经启动后调用此函数，将不会生效。
+	*/
+	void VIApplication::setLoadingMessageHandler(ApplicationLoadingMessageHandler* handler) {
+		if (not d->started) {
+			if (d->LoadingMessageHandler) {
+				delete d->LoadingMessageHandler;
+			}
+			d->LoadingMessageHandler = handler;
+		}
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		设置应用程序的异常消息处理器。
+		\a handler 指向异常消息处理器对象的指针。异常消息处理器必须继承自Visindigo::General::ApplicationExceptionMessageHandler类。
+
+		异常消息处理器用于处理应用程序在运行过程中捕获的异常消息，例如在GUI界面中显示异常信息对话框等。
+		必须在调用start()函数之前设置异常消息处理器，如果在应用程序已经启动后调用此函数，将不会生效。
+	*/
+	void VIApplication::setExceptionMessageHandler(ApplicationExceptionMessageHandler* handler) {
+		if (not d->started) {
+			// 原生崩溃路径也会通知同一个处理器，因此在释放旧对象之前先让网关忘掉它。
+			CrashGateway::setExceptionMessageHandler(nullptr);
+			if (d->ExceptionMessageHandler) {
+				delete d->ExceptionMessageHandler;
+			}
+			d->ExceptionMessageHandler = handler;
+			CrashGateway::setExceptionMessageHandler(handler);
+		}
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		设置应用程序的全局字体。
+		\a fontPath 字体文件的路径。
+		\a fontID 字体文件中字体的索引，默认为0。
+
+		此函数允许用户为整个应用程序设置统一的字体。字体文件可以是TTF、OTF等常见字体格式。
+		如果加载字体失败，将会抛出异常。
+
+		这是一个对Qt字体加载的简单封装。
+	*/
+	void VIApplication::setGlobalFont(const QString& fontPath, int fontID) {
+		int id = QFontDatabase::addApplicationFont(fontPath);
+		if (id == -1) {
+			throw Exception(Exception::InternalError, QString("Failed to load font from %1").arg(fontPath));
+		}
+		QString family = QFontDatabase::applicationFontFamilies(id).at(fontID);
+		QFont font(family);
+		d->GlobalFont = font;
+		qApp->setFont(font);
+		vgNoticeF << "Global font set to" << family;
+	}
+
+	/*!
+		\since Visindigo 0.16.0
+		\a fontPath 字体文件的路径。
+		\a fontID 字体文件中字体的索引，默认为0。
+		\a iconFontRouter 字体的命名路由，不设置默认采用Segoe Fluent UI的路由。
+
+		设置一个用于图标的字体。这个字体不会以任何方式和Qt直接发生交互，
+		在设置完毕后，在需要的地方调用getIconFont使用这个字体即可。
+
+		如果不设置iconFontRouter，则默认使用Segoe Fluent UI字体的命名路由，即
+		按微软的标准返回图标。如果需要重新路由字符，需要单独实现字体路由
+
+		另请参见 Visindigo::Widgets::IconFontRouter。
+	*/
+	void VIApplication::setIconFont(const QString& fontPath, int fontID, Visindigo::Widgets::IconFontRouter* iconFontRouter) {
+		int id = QFontDatabase::addApplicationFont(fontPath);
+		if (id == -1) {
+			throw Exception(Exception::InternalError, QString("Failed to load icon font from %1").arg(fontPath));
+		}
+		QString family = QFontDatabase::applicationFontFamilies(id).at(fontID);
+		QFont font(family);
+		d->IconFont = font;
+		d->IconFontRouter = iconFontRouter;
+		vgNoticeF << "Icon font set to" << family;
+	}
+
+	/*!
+		\since Visindigo 0.16.0
+		\a router 字体命名路由
+		
+		设置图标字体的命名路由。
+	*/
+	void VIApplication::setIconFontRouter(Visindigo::Widgets::IconFontRouter* router) {
+		d->IconFontRouter = router;
+	}
+
+	/*!
+		\since Visindigo 0.16.0
+
+		return 图标字体的命名路由。
+		这个指针可以是空的。
+	*/
+	Visindigo::Widgets::IconFontRouter* VIApplication::getIconFontRouter() const {
+		return d->IconFontRouter;
+	}
+
+	/*!
+		\since Visindigo 0.15.2
+		return 当前设置的全局字体对象。
+	*/
+	QFont VIApplication::getGlobalFont() const {
+		return d->GlobalFont;
+	}
+
+	/*!
+		\since Visindigo 0.15.2
+		return 当前设置的图标字体对象。
+	*/
+	QFont VIApplication::getIconFont() const {
+		return d->IconFont;
+	}
+
+	/*!
+		\since Visindigo 0.15.2
+		\a unicode 指定的图标的Unicode编码。
+		\a iconSize 图标的大小，默认为64像素。
+		\a layerColors 图表中各个层的颜色列表，默认为一个只有黑色的列表
+
+		return 一个QIcon对象，包含了渲染的结果。
+
+		这个函数用于获取一个图标字体中的特定图标字符。用户需要先使用setIconFont设置一个图标字体，
+		然后通过传入对应图标的Unicode编码来获取这个图标的字符。
+
+		\note 从0.16.0开始，由于引入了命名路由，考虑到多种图标字体下的程序兼容性，建议
+		改用getNamedFontIcon
+	*/
+	QIcon VIApplication::getFontIcon(QString unicode, int iconSize, QList<QColor> layerColors) const {
+		if (d->IconFont.family().isEmpty()) {
+			throw Exception(Exception::InternalError, "Icon font is not set");
+		}
+		QFont font = d->IconFont;
+		font.setPixelSize(iconSize);
+		QPixmap pixmap(64, 64);
+		pixmap.fill(Qt::transparent);
+		QPainter painter(&pixmap);
+		painter.setFont(font);
+		for (int i = layerColors.size(); i < unicode.size(); i++) {
+			layerColors.append(QColor::fromString("#888888"));
+		}
+		for (int i = 0; i < unicode.size(); i++) {
+			painter.setPen(layerColors[i]);
+			painter.drawText(pixmap.rect(), Qt::AlignCenter, unicode[i]);
+		}
+		
+		return QIcon(pixmap);
+	}
+
+	/*!
+		\since Visindigo 0.16.0
+		\a iconNames 字体图标的命名，可以是用字符;分割的多个名字
+		\a iconSize 图标的大小，默认为64像素。
+		\a layerColors 图表中各个层的颜色列表，默认为一个只有黑色的列表
+
+		return 一个QIcon对象，包含了渲染的结果。
+
+		这个函数用于获取一个图标字体中的特定图标字符。用户需要先使用setIconFont设置一个图标字体，
+		然后通过传入对应字体图标的命名来获取这个图标的字符。
+
+		有关这字体图标的命名，请参见Visindigo::Widgets::IconFontRouter::IconName的说明，
+		或者参考微软的Segoe Fluent UI Font页面的相关说明。
+	*/
+	QIcon VIApplication::getNamedFontIcon(QString iconNames, int iconSize, QList<QColor> layerColors) const {
+		if (d->IconFont.family().isEmpty()) {
+			throw Exception(Exception::InternalError, "Icon font is not set");
+		}
+		auto router = d->IconFontRouter;
+		if (not router) {
+			router = Widgets::IconFontRouter::getSegoeFluentRouter();
+		}
+		auto unicode = router->getChars(iconNames);
+		QFont font = d->IconFont;
+		font.setPixelSize(iconSize);
+		QPixmap pixmap(64, 64);
+		pixmap.fill(Qt::transparent);
+		QPainter painter(&pixmap);
+		painter.setFont(font);
+		for (int i = layerColors.size(); i < unicode.size(); i++) {
+			layerColors.append(QColor::fromString("#888888"));
+		}
+		for (int i = 0; i < unicode.size(); i++) {
+			painter.setPen(layerColors[i]);
+			painter.drawText(pixmap.rect(), Qt::AlignCenter, unicode[i]);
+		}
+		return QIcon(pixmap);
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		处理应用程序运行过程中捕获的异常。
+		\a ex 捕获的异常对象。
+
+		此函数由VIApplication内部调用，用于处理在应用程序运行过程中捕获的异常。
+		如果设置了异常消息处理器，将会调用其相关函数来处理异常消息。
+		如果异常是严重的且应用程序已经启动，将会退出应用程序。
+
+		如果用户有需要，也可以手动塞入一个异常对象来调用此函数，以便使用VIApplication的异常处理机制。
+	*/
+	void VIApplication::onException(const Exception& ex) {
+		// 统一先存证再通知：处理器多半要弹模态框、转事件循环，
+		// 先把现场落到磁盘上，免得界面代码破坏栈或堆之后再也拿不到可信的现场。
+		CrashGateway::onCaughtException(ex);
+		if (d->ExceptionMessageHandler) {
+			d->ExceptionMessageHandler->enableHandler();
+			d->ExceptionMessageHandler->onExceptionMessage(ex);
+			d->ExceptionMessageHandler->exec();
+			d->ExceptionMessageHandler->disableHandler();
+		}
+		else {
+			vgError << "No exception message handler set, exception message:" << ex.getMessage();
+		}
+		if (ex.isCritical() && d->started) {
+			vgError << "Critical exception caught, exiting application.";
+			Visindigo::General::LogCenter::getInstance()->finalSave();
+			switch (d->AppType) {
+			case CoreApp:
+				static_cast<Visindigo::__Private__::CoreApplication*>(d->AppInstance)->exit(-1);
+				break;
+			case GuiApp:
+				static_cast<Visindigo::__Private__::GuiApplication*>(d->AppInstance)->exit(-1);
+				break;
+			case WidgetApp:
+				static_cast<Visindigo::__Private__::Application*>(d->AppInstance)->exit(-1);
+				break;
+			}
+		}
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		启动应用程序的主事件循环。
+		此函数会加载并启用所有插件，初始化应用程序，并进入主事件循环。
+		return 为应用程序退出时的返回码。
+
+		在调用此函数之前，应该先设置主插件和加载消息处理器（如果有的话）。
+		如果应用程序已经启动，将会抛出异常。
+
+		此函数是VIApplication类的核心功能，负责管理应用程序的生命周期。
+	*/
+	int VIApplication::start() {
+		try {
+			if (d->started) {
+				VI_Throw(Exception::InternalError, "Application already started");
+			}
+			d->started = true;
+			if (d->LoadingMessageHandler) {
+				d->LoadingMessageHandler->enableHandler();
+				qApp->processEvents();
+			}
+			auto start = std::chrono::high_resolution_clock::now();
+			if (not d->MainPlugin) {
+				VI_Throw(Exception::NullPointer, "Main plugin is not set. Please set a valid main plugin before starting the application.");
+			}
+
+			__Private__::VisindigoCore* corePlugin = new __Private__::VisindigoCore();
+			corePlugin->onPluginEnable();
+			__Private__::VisindigoWidgets* widgetsPlugin = nullptr;
+			if (d->AppType == WidgetApp) {
+				widgetsPlugin = new __Private__::VisindigoWidgets();
+				widgetsPlugin->onPluginEnable();
+			}
+
+			for (auto dp : d->DependencyPlugins) {
+				dp->d->setPluginLoadType(Plugin::LoadType::FromMemory);
+				dp->d->initializePluginFolder(PluginManager::getInstance()->getPluginFolder(dp->getPluginID(), Plugin::LoadType::FromMemory));
+				dp->onPluginEnable();
+				d->LoadingMessageHandler->onLoadingMessage(QString("Dependency plugin %1 enabled").arg(dp->getPluginName()));
+			}
+			LogCenter::getInstance()->finalSave(); 
+
+			d->MainPlugin->onPluginEnable();
+			if (d->LoadingMessageHandler) {
+				d->LoadingMessageHandler->onLoadingMessage(QString("Main plugin %1 enabled").arg(d->MainPlugin->getPluginName()));
+			}
+			LogCenter::getInstance()->finalSave();
+
+			if (d->LoadingMessageHandler) {
+				d->LoadingMessageHandler->onLoadingMessage("Loading all plugins...");
+				qApp->processEvents();
+			}
+
+			PluginManager::getInstance()->loadAllPlugin();
+			LogCenter::getInstance()->finalSave();
+			if (d->AppType == WidgetApp) {
+				if (d->LoadingMessageHandler) {
+					d->LoadingMessageHandler->onLoadingMessage("Merging themes...");
+					qApp->processEvents();
+				}
+				Widgets::ThemeManager::getInstance()->mergeAndApply();
+			}
+			if (d->LoadingMessageHandler) {
+				d->LoadingMessageHandler->onLoadingMessage("Enabling all plugins...");
+				qApp->processEvents();
+			}
+			PluginManager::getInstance()->enableAllPlugin();
+			LogCenter::getInstance()->finalSave(); // 诊断：阶段边界强制落盘
+			if (d->LoadingMessageHandler) {
+				d->LoadingMessageHandler->onLoadingMessage("Initializing application...");
+				qApp->processEvents();
+			}
+			PluginManager::getInstance()->applicationInitAllPlugin();
+			LogCenter::getInstance()->finalSave(); // 诊断：阶段边界强制落盘
+			if (d->LoadingMessageHandler) {
+				d->LoadingMessageHandler->onLoadingMessage("Running tests...");
+				qApp->processEvents();
+			}
+			PluginManager::getInstance()->testAllPlugin();
+			LogCenter::getInstance()->finalSave(); // 诊断：阶段边界强制落盘
+			auto end = std::chrono::high_resolution_clock::now();
+			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+			qint32 minLoadingTime = d->EnvConfig.value(MinimumLoadingTimeMS, 3000).toInt();
+			if (duration < minLoadingTime) {
+				QThread::msleep(minLoadingTime - duration);
+			}
+			if (d->LoadingMessageHandler) {
+				d->LoadingMessageHandler->disableHandler();
+				qApp->processEvents();
+			}
+
+			//built-in plugin will never run test.
+			corePlugin->onApplicationInit();
+			if (widgetsPlugin) {
+				widgetsPlugin->onApplicationInit();
+			}
+
+			if (d->MainPlugin) {
+				d->MainPlugin->onApplicationInit();
+				if (d->MainPlugin->isTestEnable()) {
+					vgDebug << "Running main plugin test...";
+					d->MainPlugin->onTest();
+				}
+			}
+
+			int ret = 0;
+			switch (d->AppType) {
+			case CoreApp:
+				ret = static_cast<Visindigo::__Private__::CoreApplication*>(d->AppInstance)->exec();
+				break;
+			case GuiApp:
+				ret = static_cast<Visindigo::__Private__::GuiApplication*>(d->AppInstance)->exec();
+				break;
+			case WidgetApp:
+				ret = static_cast<Visindigo::__Private__::Application*>(d->AppInstance)->exec();
+				break;
+			default:
+				throw Exception(Exception::InvalidArgument, "Invalid AppType");
+			}
+
+			PluginManager::getInstance()->disableAllPlugin();
+			if (d->MainPlugin) {
+				d->MainPlugin->onPluginDisable();
+			}
+
+			for (auto it = d->DependencyPlugins.rbegin(); it != d->DependencyPlugins.rend(); ++it) {
+				(*it)->onPluginDisable();
+				(*it)->deleteLater();
+			}
+
+			if (widgetsPlugin) {
+				widgetsPlugin->onPluginDisable();
+				widgetsPlugin->deleteLater();
+			}
+
+			corePlugin->onPluginDisable();
+			corePlugin->deleteLater();
+
+			d->started = false;
+			vgNoticeF << "Application exited with code" << ret;
+
+			Visindigo::General::LogCenter::getInstance()->finalSave();
+			return ret;
+		}
+		catch (const Exception& ex) {
+			this->onException(ex);
+			return -1;
+		}
+		catch (const std::exception& e) {
+			this->onException(Exception::fromStdException(e));
+			return -1;
+		}
+		catch (...) {
+			this->onException(Exception(Exception::Unknown, "Unknown exception caught in VIApplication::start", true));
+			return -1;
+		}
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		return 应用程序的环境配置参数。
+		\a key 环境配置键，参见EnvKey枚举。
+		return 为对应的环境配置值，类型为QVariant。如果键不存在，则返回一个默认构造的QVariant对象。
+
+		此函数允许用户获取应用程序的环境配置参数，如日志文件路径、插件文件路径等。
+	*/
+	QVariant VIApplication::getEnvConfig(EnvKey key) {
+		return VIApplicationPrivate::EnvConfig.value(key, QVariant());
+	}
+
+	/*!
+		\since Visindigo 0.15.0
+		return 系统是否为Windows11。
+	*/
+	bool VIApplication::isWindows11() {
+		return QSysInfo::kernelType() == "winnt" && QSysInfo::productVersion() == "11";
+	}
+
+	/*!
+		\since Visindigo 0.15.0
+		return 系统是否为Windows。
+	*/
+	bool VIApplication::isWindows() {
+		return QSysInfo::kernelType() == "winnt";
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		检查应用程序是否已经启动。
+		return 为true表示应用程序已经启动，false表示尚未启动。
+
+		此函数允许用户检查应用程序的启动状态。
+	*/
+	bool VIApplication::applicationStarted() const {
+		return d->started;
+	}
+
+	/*!
+		\since Visindigo 0.13.0
+		return 应用程序的虚拟终端窗口。如果未启用虚拟终端功能，则返回nullptr。
+
+		此函数允许用户获取应用程序的虚拟终端窗口，以便在其中执行命令行操作。
+		请注意，这个虚拟终端实例固定为本程序的终端。如果用户需要执行其他程序，请新建其他终端实例。
+	*/
+	Widgets::Terminal* VIApplication::getVirtualTerminal() const {
+		return d->VirtualTerminal;
+	}
+
+	/*!
+		\since Visindigo 0.16.0
+		return 应用程序的路径。
+
+		返回当前应用程序的完整路径。
+	*/
+	QString VIApplication::getProgramPath() const {
+		return QCoreApplication::applicationFilePath();
+	}
+}
